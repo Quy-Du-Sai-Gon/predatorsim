@@ -8,11 +8,11 @@ public abstract class Component {
 
     }
 
-    public void Start(){
+    public void start(){
 
     }
 
-    public void Update(){
+    public void update(){
 
     }
 
@@ -20,7 +20,7 @@ public abstract class Component {
 
     }
 
-    public void onRemove() {
+    public void onRemoved() {
 
     }
 
