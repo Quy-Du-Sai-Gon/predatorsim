@@ -36,6 +36,7 @@ public class GameObject {
             return c;
 
         } catch (Exception e) {
+            System.out.println("Error instantiating `Component` of type " + type + " with the default constructor.");
             e.printStackTrace();
             return null;
         }
