@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,12 +19,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(new Group());
         stage.setScene(scene);
+
         GameObject a = new GameObject(Animal.class);
         a.start();
         a.getComponent(Animal.class)
                 .orElseThrow().stateConstructor.wanderingState.test();
+
         stage.show();
     }
 
