@@ -2,64 +2,70 @@ package org.quydusaigon.predatorsim.gameengine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GameObject {
 
-    public GameObject(Component ... a){
+    private final List<Component> components;
+
+    @SafeVarargs
+    public GameObject(Class<? extends Component>... types) {
         components = new ArrayList<>();
-        for(Component c : a){
-            addComponent(c);
+        for (var type : types) {
+            addComponent(type);
         }
     }
-    protected List<Component> components;
 
-    public <T extends Component> T getComponent(Class<T> componentClass){
-        for(Component c : components){
-            if(componentClass.isAssignableFrom(c.getClass())){
-                try{
-                    return componentClass.cast(c);
-                }
-                catch(ClassCastException e){
-                    e.printStackTrace();
-                    assert false : "GameObject does not have this component";
-                }
+    public <T extends Component> Optional<T> getComponent(Class<T> type) {
+        for (Component c : components) {
+            if (type.isAssignableFrom(c.getClass())) {
+                return Optional.of(type.cast(c));
             }
         }
-
-        return null;
+        return Optional.empty();
     }
 
-    public <T extends Component> T addComponent(Component c){
-        components.add(c);
-        c.setGameObject(this);
-        c.onAdded();
-        return (T) c;
+    public <T extends Component> T addComponent(Class<T> type) {
+        try {
+            var c = type.getConstructor().newInstance();
+            c.setGameObject(this);
+
+            components.add(c);
+            c.onAdded();
+
+            return c;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public <T extends Component> void removeComponent(Class<T> componentClass){
-        for(int i = 0; i < components.size(); i++){
-            if(componentClass.isAssignableFrom(components.get(i).getClass())){
-                components.get(i).onRemoved();
+    public <T extends Component> void removeComponent(Class<T> type) {
+        for (int i = 0; i < components.size(); i++) {
+            var c = components.get(i);
+            if (type.isAssignableFrom(c.getClass())) {
+                c.onRemoved();
                 components.remove(i);
                 return;
             }
         }
     }
 
-    public void awake(){
-        for(Component c : components){
-            c.Awake();
+    public void awake() {
+        for (Component c : components) {
+            c.awake();
         }
     }
 
-    public void start(){
-        for(Component c : components){
+    public void start() {
+        for (Component c : components) {
             c.start();
         }
     }
 
-    public void update(){
-        for(Component c : components){
+    public void update() {
+        for (Component c : components) {
             c.update();
         }
     }

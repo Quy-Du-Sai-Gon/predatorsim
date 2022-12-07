@@ -4,32 +4,26 @@ public abstract class Component {
 
     private GameObject gameObject;
 
-    public void Awake(){
-
+    public void awake() {
     }
 
-    public void start(){
-
+    public void start() {
     }
 
-    public void update(){
-
+    public void update() {
     }
 
-    public void onAdded(){
-
+    public void onAdded() {
     }
 
     public void onRemoved() {
-
     }
 
     public GameObject getGameObject() {
         return gameObject;
     }
 
-    public GameObject setGameObject(GameObject gameObject){
+    void setGameObject(GameObject gameObject) {
         this.gameObject = gameObject;
-        return gameObject;
     }
 }

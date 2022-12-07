@@ -20,9 +20,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
-        GameObject a = new GameObject(new Animal());
+        GameObject a = new GameObject(Animal.class);
         a.start();
-        a.getComponent(Animal.class).stateConstructor.wanderingState.test();
+        a.getComponent(Animal.class)
+                .orElseThrow().stateConstructor.wanderingState.test();
         stage.show();
     }
 
