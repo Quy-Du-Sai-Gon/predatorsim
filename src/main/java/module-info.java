@@ -4,4 +4,6 @@ module org.quydusaigon.predatorsim {
 
     opens org.quydusaigon.predatorsim to javafx.fxml;
     exports org.quydusaigon.predatorsim;
+    exports org.quydusaigon.predatorsim.gameengine;
+    opens org.quydusaigon.predatorsim.gameengine to javafx.fxml;
 }
