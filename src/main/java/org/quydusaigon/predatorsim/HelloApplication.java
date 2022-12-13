@@ -32,7 +32,7 @@ public class HelloApplication extends Application {
         primaryStage.setTitle("Testing");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
-        Image icon = new Image("D:\\demo\\src\\icon.jpg");
+        Image icon = new Image("D:\\demo\\src\\predator.jpg");
         primaryStage.getIcons().add(icon);
 
 
