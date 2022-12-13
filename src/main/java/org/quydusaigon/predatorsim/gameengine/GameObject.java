@@ -25,9 +25,8 @@ public class GameObject {
         return Optional.empty();
     }
 
-    public <T extends Component> T addComponent(Class<T> type) {
+    public <T extends Component> T addComponent(T c) {
         try {
-            var c = type.getConstructor().newInstance();
             c.setGameObject(this);
 
             components.add(c);
