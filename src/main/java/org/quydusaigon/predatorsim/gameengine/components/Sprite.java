@@ -7,8 +7,8 @@ import org.quydusaigon.predatorsim.gameengine.Component;
 import org.quydusaigon.predatorsim.App;
 
 public class Sprite extends Component {
-    Rectangle renderedBox;
-    Image renderedImage;
+    private Rectangle renderedBox;
+    private Image renderedImage;
 
     public Sprite(Image image) {
         this.renderedImage = image;
@@ -20,6 +20,10 @@ public class Sprite extends Component {
                                         ,tempApp.getWindowHeight()/30);
         ImagePattern pattern = new ImagePattern(this.renderedImage, 20, 20, 40, 40, false);
         this.renderedBox.setFill(pattern);
+    }
+
+    public Rectangle getRenderedBox() {
+        return renderedBox;
     }
     
 }
