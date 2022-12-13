@@ -16,6 +16,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private final int windowHeight = 600;
+    private final int windowWidth = 1000;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -37,6 +39,14 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+
+    public int getWindowHeight() {
+        return this.windowHeight;
+    }
+
+    public int getWindowWidth() {
+        return this.windowWidth;
     }
 
     public static void main(String[] args) {
