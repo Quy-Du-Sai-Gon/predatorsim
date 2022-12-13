@@ -2,22 +2,23 @@ package org.quydusaigon.predatorsim.gameengine.components.colliders;
 
 import org.quydusaigon.predatorsim.gameengine.components.Collider;
 
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.Bounds;
+import javafx.scene.shape.Rectangle;
 
 public class BoxCollider extends Collider {
 
-    private Rectangle2D box;
+    private Rectangle box;
 
     public BoxCollider(double x, double y, double w, double h) {
-        box = new Rectangle2D(x, y, w, h);
+        box = new Rectangle(x, y, w, h);
     }
 
     public double getX() {
-        return box.getMinX();
+        return box.getX();
     }
 
     public double getY() {
-        return box.getMinY();
+        return box.getY();
     }
 
     public double getWidth() {
@@ -26,5 +27,10 @@ public class BoxCollider extends Collider {
 
     public double getHeight() {
         return box.getHeight();
+    }
+
+    @Override
+    protected Bounds getBounds() {
+        return box.getBoundsInParent();
     }
 }
