@@ -24,7 +24,7 @@ public class App extends Application {
         scene = new Scene(new Group());
         stage.setScene(scene);
 
-        GameObject a = new GameObject(Animal.class);
+        GameObject a = new GameObject(new Animal());
         a.start();
         a.getComponent(Animal.class)
                 .orElseThrow().stateConstructor.wanderingState.test();
