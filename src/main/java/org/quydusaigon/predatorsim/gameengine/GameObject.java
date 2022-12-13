@@ -1,5 +1,7 @@
 package org.quydusaigon.predatorsim.gameengine;
 
+import org.quydusaigon.predatorsim.gameengine.components.Transform;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,13 +9,15 @@ import java.util.Optional;
 public class GameObject {
 
     private final List<Component> components;
+    private final Transform transform;
 
     @SafeVarargs
-    public GameObject(Class<? extends Component>... types) {
+    public GameObject(Transform newTransform,Class<? extends Component>... types) {
         components = new ArrayList<>();
         for (var type : types) {
             addComponent(type);
         }
+        this.transform = newTransform;
     }
 
     public <T extends Component> Optional<T> getComponent(Class<T> type) {
@@ -69,5 +73,9 @@ public class GameObject {
         for (Component c : components) {
             c.update();
         }
+    }
+
+    public Transform getTransform() {
+        return this.transform;
     }
 }
