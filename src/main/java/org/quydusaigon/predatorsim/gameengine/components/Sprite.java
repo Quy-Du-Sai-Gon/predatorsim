@@ -21,9 +21,5 @@ public class Sprite extends Component {
         ImagePattern pattern = new ImagePattern(this.renderedImage, 20, 20, 40, 40, false);
         this.renderedBox.setFill(pattern);
     }
-
-    @Override
-    public void update() {
-
-    }
+    
 }
