@@ -5,7 +5,11 @@ import java.util.List;
 
 public class Scene {
 
-    private final List<GameObject> gameObjects = new ArrayList<>();
+    private final List<GameObject> gameObjects;
+
+    public Scene() {
+        this.gameObjects = new ArrayList<>();
+    }
 
     public void start() {
         for (GameObject gameObject : gameObjects) {
