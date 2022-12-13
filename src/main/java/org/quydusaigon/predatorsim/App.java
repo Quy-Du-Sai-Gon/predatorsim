@@ -22,6 +22,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        GameObject a = new GameObject(new Animal());
+        a.start();
+        a.getComponent(Animal.class)
+                .orElseThrow().stateConstructor.wanderingState.test();
+
+        stage.show();
     }
 
     public static void setRoot(String fxml) throws IOException {
