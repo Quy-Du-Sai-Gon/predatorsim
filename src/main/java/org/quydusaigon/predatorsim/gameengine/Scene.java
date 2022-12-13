@@ -1,5 +1,10 @@
 package org.quydusaigon.predatorsim.gameengine;
 
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
+import org.quydusaigon.predatorsim.gameengine.components.Sprite;
+import org.quydusaigon.predatorsim.gameengine.components.Transform;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +23,24 @@ public class Scene {
     }
 
     public void update() {
+        // Render
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.getComponent(Sprite.class).isPresent()) {
+                Point2D position = gameObject.getTransform().getPosition();
+                Sprite sprite = gameObject.getComponent(Sprite.class).get();
+
+                Rectangle renderedBox = sprite.getRenderedBox();
+
+                renderedBox.setX(position.getX());
+                renderedBox.setY(position.getY());
+            }
+        }
+
         // Update
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
         }
-        // Render
+
 
         // Collision
     }
