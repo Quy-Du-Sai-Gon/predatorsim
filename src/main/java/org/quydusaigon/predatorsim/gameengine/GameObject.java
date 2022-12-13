@@ -9,10 +9,10 @@ public class GameObject {
     private final List<Component> components;
 
     @SafeVarargs
-    public GameObject(Class<? extends Component>... types) {
-        components = new ArrayList<>();
-        for (var type : types) {
-            addComponent(type);
+    public GameObject(Component... components) {
+        this.components = new ArrayList<>();
+        for (var c : components) {
+            addComponent(c);
         }
     }
 
@@ -25,21 +25,13 @@ public class GameObject {
         return Optional.empty();
     }
 
-    public <T extends Component> T addComponent(Class<T> type) {
-        try {
-            var c = type.getConstructor().newInstance();
-            c.setGameObject(this);
+    public <T extends Component> T addComponent(T c) {
+        c.setGameObject(this);
 
-            components.add(c);
-            c.onAdded();
+        components.add(c);
+        c.onAdded();
 
-            return c;
-
-        } catch (Exception e) {
-            System.out.println("Error instantiating `Component` of type " + type + " with the default constructor.");
-            e.printStackTrace();
-            return null;
-        }
+        return c;
     }
 
     public <T extends Component> void removeComponent(Class<T> type) {
