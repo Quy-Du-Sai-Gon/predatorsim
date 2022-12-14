@@ -6,6 +6,12 @@ public class WanderingState extends State {
         super(animalSM);
     }
 
+    @Override
+    public void update() {
+        super.update();
+        test();
+    }
+
     public void test() {
         System.out.println("I'm wandering");
     }

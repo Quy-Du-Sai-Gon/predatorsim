@@ -6,14 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GameObject {
+public class GameObject{
 
     private final List<Component> components;
     private final Transform transform;
 
+<<<<<<< HEAD
     public GameObject(Transform newTransform, Component... components) {
+=======
+    @SafeVarargs
+    public GameObject(Component... varComponent) {
+>>>>>>> main
         this.components = new ArrayList<>();
-        for (var c : components) {
+        for (Component c : varComponent) {
             addComponent(c);
         }
         this.transform = newTransform;
@@ -48,12 +53,6 @@ public class GameObject {
         }
     }
 
-    public void awake() {
-        for (Component c : components) {
-            c.awake();
-        }
-    }
-
     public void start() {
         for (Component c : components) {
             c.start();
@@ -65,8 +64,23 @@ public class GameObject {
             c.update();
         }
     }
+<<<<<<< HEAD
 
     public Transform getTransform() {
         return this.transform;
     }
 }
+=======
+    public GameObject clone() throws CloneNotSupportedException {
+        GameObject temp = new GameObject();
+
+        for( var c : components){
+            Component a = (Component)c.clone();
+            a.setGameObject(temp);
+            temp.components.add(a);
+            a.onAdded();
+        }
+
+        return temp;
+    }}
+>>>>>>> main
