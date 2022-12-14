@@ -11,10 +11,7 @@ import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.*;
 import org.quydusaigon.predatorsim.gameengine.components.Sprite;
 import org.quydusaigon.predatorsim.gameengine.components.Transform;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 import java.io.IOException;
 
 /**
@@ -27,9 +24,7 @@ public class App extends Application {
     private final int windowWidth = 1000;
 
     @Override
-<<<<<<< HEAD
     public void start(Stage stage) throws IOException {
-
         org.quydusaigon.predatorsim.gameengine.Scene scene1 = new org.quydusaigon.predatorsim.gameengine.Scene();
 
         Transform transform1 = new Transform(100, 100);
@@ -47,24 +42,7 @@ public class App extends Application {
         obj1.addComponent(sprite1);
         obj2.addComponent(sprite2);
 
-=======
-    public void start(Stage stage) throws CloneNotSupportedException {
-        scene = new Scene(new Group());
-        stage.setScene(scene);
-
-        GameObject a = new GameObject(new Animal() , new StateMachine());
-        a.start();
-        a.getComponent(StateMachine.class).orElseThrow().changeState(a.getComponent(Animal.class).orElseThrow().stateConstructor.survivalState);
-
-        GameObject b = Component.instantiate(a, new Point2D(1,1));
-
-        System.out.println(a.getComponent(Transform.class)
-                .orElseThrow().position);
-
-        System.out.println(b.getComponent(Transform.class)
-                .orElseThrow().position);
->>>>>>> main
-
+        stage.show();
     }
 
     public static void setRoot(String fxml) throws IOException {

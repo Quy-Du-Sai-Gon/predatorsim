@@ -11,14 +11,9 @@ public class GameObject{
     private final List<Component> components;
     private final Transform transform;
 
-<<<<<<< HEAD
     public GameObject(Transform newTransform, Component... components) {
-=======
-    @SafeVarargs
-    public GameObject(Component... varComponent) {
->>>>>>> main
         this.components = new ArrayList<>();
-        for (Component c : varComponent) {
+        for (Component c : components) {
             addComponent(c);
         }
         this.transform = newTransform;
@@ -64,15 +59,14 @@ public class GameObject{
             c.update();
         }
     }
-<<<<<<< HEAD
 
     public Transform getTransform() {
         return this.transform;
     }
-}
-=======
+
+
     public GameObject clone() throws CloneNotSupportedException {
-        GameObject temp = new GameObject();
+        GameObject temp = new GameObject(new Transform(0,0));
 
         for( var c : components){
             Component a = (Component)c.clone();
@@ -82,5 +76,5 @@ public class GameObject{
         }
 
         return temp;
-    }}
->>>>>>> main
+    }
+}

@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/components/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/quydusaigon/predatorsim/gameengine/components/Transform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

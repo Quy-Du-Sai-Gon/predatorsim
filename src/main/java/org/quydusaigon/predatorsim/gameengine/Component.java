@@ -36,10 +36,10 @@ public abstract class Component implements Cloneable {
         GameObject temp = prefab.clone();
 
         if(temp.getComponent(Transform.class).isPresent()){
-            temp.getComponent(Transform.class).orElseThrow().position = position;
+            temp.getComponent(Transform.class).orElseThrow().setPosition(position);
         }
         else{
-            temp.addComponent(new Transform()).position = position;
+            temp.addComponent(new Transform(0,0)).setPosition(position);
 
         }
 
