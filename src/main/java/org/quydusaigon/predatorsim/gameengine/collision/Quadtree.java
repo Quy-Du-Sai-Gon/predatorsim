@@ -30,14 +30,14 @@ public class Quadtree {
         double w = bound.getWidth() / 2;
         double h = bound.getHeight() / 2;
 
-        /*children = List.of(
+        children = List.of(
                 new BoxCollider(x, y, w, h),
                 new BoxCollider(x + w, y, w, h),
                 new BoxCollider(x + w, y + h, w, h),
                 new BoxCollider(x, y + h, w, h))
                 .stream()
                 .map(b -> new Quadtree(b, capacity))
-                .toList();*/
+                .toList();
     }
 
     public boolean insert(Collider collider) {
@@ -63,9 +63,9 @@ public class Quadtree {
             return;
         }
 
-        /*found.addAll(colliders.stream()
+        found.addAll(colliders.stream()
                 .filter(collider::collides)
-                .toList());*/
+                .toList());
 
         if (children != null) {
             children.forEach(q -> q.query(collider, found));
