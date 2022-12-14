@@ -1,16 +1,20 @@
 package org.quydusaigon.predatorsim;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.*;
 import org.quydusaigon.predatorsim.gameengine.components.Sprite;
 import org.quydusaigon.predatorsim.gameengine.components.Transform;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * JavaFX App
@@ -18,30 +22,65 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    private final int windowHeight = 600;
+    private final int windowHeight = 800;
     private final int windowWidth = 1000;
-
+    private final int numberOfAnimals = 100;
     @Override
     public void start(Stage stage) throws IOException {
+        // Initialize our stage
+        stage = new Stage();
+        stage.setTitle("Testing");
+        stage.setWidth(this.windowWidth);
+        stage.setHeight(this.windowHeight);
+        stage.setFullScreen(true);
 
+        // Initialize our gameengine.Scene
         org.quydusaigon.predatorsim.gameengine.Scene scene1 = new org.quydusaigon.predatorsim.gameengine.Scene();
 
-        Transform transform1 = new Transform(100, 100);
-        Transform transform2 = new Transform(200, 200);
+        for (int i = 0; i < this.numberOfAnimals; i++) {
 
-        GameObject obj1 = new GameObject(transform1);
-        GameObject obj2 = new GameObject(transform2);
+            int posX = (int) (Math.random() * (this.windowWidth - 0)) + 0;
+            int posY = (int) (Math.random() * (this.windowHeight - 0)) + 0;
+            // Initialize our Transform components
+            Transform transform = new Transform(posX, posY);
 
-        Image image1 = new Image("D:\\My CSE\\Programming\\Java OOP\\predatorsim\\src\\main\\resources\\org\\quydusaigon\\predatorsim\\images\\animal\\prey.jpg");
-        Image image2 = new Image("D:\\My CSE\\Programming\\Java OOP\\predatorsim\\src\\main\\resources\\org\\quydusaigon\\predatorsim\\images\\animal\\predator.jpg");
+            // Initialize our GameObjects with the given Transform components objects
+            GameObject obj = new GameObject(transform);
 
-        Sprite sprite1 = new Sprite(image1);
-        Sprite sprite2 = new Sprite(image2);
+            // Initialize images for GameObjects
+            Image image = new Image("D:\\My CSE\\Programming\\Java OOP\\predatorsim\\src\\main\\resources\\org\\quydusaigon\\predatorsim\\images\\animal\\prey.jpg");
 
-        obj1.addComponent(sprite1);
-        obj2.addComponent(sprite2);
+            // Initialize our Sprite components with the Images objects above
+            Sprite sprite = new Sprite(image);
 
+            // Add the corresponding Sprite component objects into the GameObject objects
+            obj.addComponent(sprite);
 
+            // Add the GameObject objects into the gameengine.Scene object
+            scene1.addGameObject(obj);
+        }
+        // Execute the start function of gameengine.Scene object
+        scene1.start();
+
+        // Begin our AnimationTimer for looping
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                // For each iteration of AnimationTimer, update function of gameengine.Scene is executed
+                scene1.update();
+            }
+        };
+        timer.start();
+
+        Pane pane = new Pane();
+        List<GameObject> objectList = scene1.getListGameObject();
+        for (GameObject gameobject : objectList) {
+            pane.getChildren().addAll(gameobject.getComponent(Sprite.class).get().getRenderedBox());
+        }
+
+        Scene scene = new Scene(pane, Color.BEIGE);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void setRoot(String fxml) throws IOException {
