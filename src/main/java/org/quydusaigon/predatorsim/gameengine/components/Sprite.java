@@ -7,8 +7,8 @@ import org.quydusaigon.predatorsim.gameengine.Component;
 import org.quydusaigon.predatorsim.App;
 
 public class Sprite extends Component {
-    Rectangle renderedBox;
-    Image renderedImage;
+    private Rectangle renderedBox;
+    private Image renderedImage;
 
     public Sprite(Image image) {
         this.renderedImage = image;
@@ -22,8 +22,8 @@ public class Sprite extends Component {
         this.renderedBox.setFill(pattern);
     }
 
-    @Override
-    public void update() {
-
+    public Rectangle getRenderedBox() {
+        return renderedBox;
     }
+    
 }
