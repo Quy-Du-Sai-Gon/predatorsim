@@ -48,5 +48,8 @@ public class Scene {
     public void addGameObject(GameObject newGameObject) {
         gameObjects.add(newGameObject);
     }
+    public List<GameObject> getListGameObject() {
+        return this.gameObjects;
+    }
 
 }
