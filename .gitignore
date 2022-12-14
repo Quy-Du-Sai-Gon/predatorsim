@@ -41,6 +41,11 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# IntelliJ
 .idea/
 predatorsim.iml
 src/main/java/org/quydusaigon/predatorsim/HelloApplication.java
+
+# MacOS files
+.DS_Store
