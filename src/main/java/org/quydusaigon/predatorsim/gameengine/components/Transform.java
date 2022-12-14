@@ -1,8 +1,6 @@
 package org.quydusaigon.predatorsim.gameengine.components;
 
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Light;
-import org.quydusaigon.predatorsim.Animal;
 import org.quydusaigon.predatorsim.gameengine.Component;
 
 public class Transform extends Component {

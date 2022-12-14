@@ -3,7 +3,6 @@ package org.quydusaigon.predatorsim.gameengine;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 import org.quydusaigon.predatorsim.gameengine.components.Sprite;
-import org.quydusaigon.predatorsim.gameengine.components.Transform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +40,13 @@ public class Scene {
             gameObject.update();
         }
 
-
         // Collision
     }
 
     public void addGameObject(GameObject newGameObject) {
         gameObjects.add(newGameObject);
     }
+
     public List<GameObject> getListGameObject() {
         return this.gameObjects;
     }

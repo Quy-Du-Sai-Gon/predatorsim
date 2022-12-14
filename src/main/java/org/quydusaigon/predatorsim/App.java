@@ -3,7 +3,6 @@ package org.quydusaigon.predatorsim;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -25,6 +24,7 @@ public class App extends Application {
     private final int windowHeight = 800;
     private final int windowWidth = 1000;
     private final int numberOfAnimals = 100;
+
     @Override
     public void start(Stage stage) throws IOException {
         // Initialize our stage
@@ -48,7 +48,8 @@ public class App extends Application {
             GameObject obj = new GameObject(transform);
 
             // Initialize images for GameObjects
-            Image image = new Image("D:\\My CSE\\Programming\\Java OOP\\predatorsim\\src\\main\\resources\\org\\quydusaigon\\predatorsim\\images\\animal\\prey.jpg");
+            Image image = new Image(
+                    "D:\\My CSE\\Programming\\Java OOP\\predatorsim\\src\\main\\resources\\org\\quydusaigon\\predatorsim\\images\\animal\\prey.jpg");
 
             // Initialize our Sprite components with the Images objects above
             Sprite sprite = new Sprite(image);
@@ -66,7 +67,8 @@ public class App extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                // For each iteration of AnimationTimer, update function of gameengine.Scene is executed
+                // For each iteration of AnimationTimer, update function of gameengine.Scene is
+                // executed
                 scene1.update();
             }
         };
