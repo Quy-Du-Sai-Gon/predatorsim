@@ -1,14 +1,16 @@
 package org.quydusaigon.predatorsim.gameengine;
 
+import javafx.scene.Group;
 import org.quydusaigon.predatorsim.gameengine.components.Transform;
+import org.quydusaigon.predatorsim.gameengine.components.TransformInit;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GameObject {
+public final class GameObject {
 
-    private final List<Component> components;
+    /*    private final List<Component> components;
     private final Transform transform;
 
     public GameObject(Transform newTransform, Component... components) {
@@ -68,5 +70,5 @@ public class GameObject {
 
     public Transform getTransform() {
         return this.transform;
-    }
+    }*/
 }

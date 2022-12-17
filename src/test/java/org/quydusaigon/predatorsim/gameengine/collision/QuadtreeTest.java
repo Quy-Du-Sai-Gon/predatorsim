@@ -20,7 +20,7 @@ public class QuadtreeTest {
 
     @BeforeEach
     void createQuadtreeAndResultSet() {
-        q = new Quadtree(new BoxCollider(0, 0, 200, 100));
+        //q = new Quadtree(new BoxCollider(0, 0, 200, 100));
         res = new HashSet<>();
     }
 

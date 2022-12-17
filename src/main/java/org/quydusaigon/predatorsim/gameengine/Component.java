@@ -1,8 +1,43 @@
 package org.quydusaigon.predatorsim.gameengine;
 
-public abstract class Component {
+import javafx.scene.Group;
+import org.quydusaigon.predatorsim.gameengine.components.TransformInit;
 
-    private GameObject gameObject;
+public class Component {
+
+    //
+    private Group gameObject;
+
+    public static void instantiate(Prefab prefab, TransformInit tf, Group parent) {
+        /*TO DO*/
+    }
+
+    public static void instantiate(Prefab prefab, TransformInit tf){
+        /*TO DO*/
+    }
+
+    public static void instantiate(Prefab prefab){
+        /*TO DO*/
+    }
+
+    public static void destroy(Group group){
+        /*TO DO*/
+    }
+
+    public static void destroy(Component component){
+        /*TO DO*/
+    }
+
+
+    protected void setGameObject(Group group){
+        /*TO DO*/
+    }
+
+    public Group getGameObject() {
+        return gameObject;
+    }
+
+    /*private GameObject gameObject;
 
     public void awake() {
     }
@@ -25,5 +60,5 @@ public abstract class Component {
 
     void setGameObject(GameObject gameObject) {
         this.gameObject = gameObject;
-    }
+    }*/
 }

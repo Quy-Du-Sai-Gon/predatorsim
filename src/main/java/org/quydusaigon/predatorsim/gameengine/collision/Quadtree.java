@@ -4,12 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import org.quydusaigon.predatorsim.gameengine.components.Collider;
 import org.quydusaigon.predatorsim.gameengine.components.colliders.BoxCollider;
 
 public class Quadtree {
 
-    private BoxCollider bound;
+    private BoundingBox area;
+    private int capacity;
+    private List<Collider> colliders;
+    private List<Quadtree> children;
+
+    public Quadtree(BoundingBox area, int capacity) {
+        this.area = area;
+        this.capacity = capacity;
+    }
+
+    public Quadtree(BoundingBox area) {
+        this.area = area;
+    }
+
+    public boolean insert(Collider collider){
+        return false;
+    }
+
+    public void query(Bounds area, Set<Collider> found){
+        /* TO DO */
+    }
+
+    public void query(Collider collider, Set<Collider> found){
+        /* TO DO */
+    }
+
+    /*   private BoxCollider bound;
     private int capacity;
     private List<Collider> colliders;
     private List<Quadtree> children;
@@ -70,6 +98,6 @@ public class Quadtree {
         if (children != null) {
             children.forEach(q -> q.query(collider, found));
         }
-    }
+    }*/
 
 }
