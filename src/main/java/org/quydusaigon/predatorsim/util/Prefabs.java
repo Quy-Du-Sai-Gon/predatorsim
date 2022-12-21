@@ -1,4 +1,4 @@
-package org.quydusaigon.predatorsim;
+package org.quydusaigon.predatorsim.util;
 
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
