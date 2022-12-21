@@ -1,8 +1,8 @@
 package org.quydusaigon.predatorsim;
 
-import org.quydusaigon.predatorsim.gameengine.Component;
+import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 
-public class StateMachine extends Component {
+public class StateMachine extends Behaviour {
     public State currentState;
 
     public void initialize(State startingState) {

@@ -9,49 +9,58 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.quydusaigon.predatorsim.gameengine.components.Collider;
-import org.quydusaigon.predatorsim.gameengine.components.colliders.BoxCollider;
-import org.quydusaigon.predatorsim.gameengine.components.colliders.CircleCollider;
+import org.quydusaigon.predatorsim.gameengine.component.Collider;
+import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
+import org.quydusaigon.predatorsim.gameengine.util.Quadtree;
+
+import javafx.geometry.BoundingBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 public class QuadtreeTest {
 
     Quadtree q;
-    Set<Collider> res;
+    Set<Collider<?>> res;
 
     @BeforeEach
     void createQuadtreeAndResultSet() {
-        //q = new Quadtree(new BoxCollider(0, 0, 200, 100));
+        q = new Quadtree(new BoundingBox(0, 0, 200, 100));
         res = new HashSet<>();
     }
 
     @Test
     void insertColliderAndQueryAreaContainingItShouldWork() {
-        Collider c = new BoxCollider(45, 50, 20, 20);
+        var c = new Collider<>(new NodeComponent<>(
+                new Rectangle(45, 50, 20, 20)));
         q.insert(c);
 
-        q.query(new CircleCollider(100, 50, 40), res);
+        q.query(new Circle(100, 50, 40).getBoundsInParent(), res);
         assertTrue(res.contains(c));
     }
 
     @Test
     void insertColliderAndQueryAreaNotContainingItShouldWork() {
-        Collider c = new BoxCollider(45, 50, 20, 20);
+        var c = new Collider<>(new NodeComponent<>(
+                new Rectangle(45, 50, 20, 20)));
         q.insert(c);
 
-        q.query(new CircleCollider(100, 50, 30), res);
+        q.query(new Circle(100, 50, 30).getBoundsInParent(), res);
         assertFalse(res.contains(c));
     }
 
     @Test
     void insertThreeCollidersAndQueryAreaContainingTwoShouldWork() {
-        Collider c1 = new BoxCollider(45, 50, 20, 20);
-        Collider c2 = new BoxCollider(105, 50, 30, 10);
-        Collider c3 = new CircleCollider(160, 20, 25);
+        var c1 = new Collider<>(new NodeComponent<>(
+                new Rectangle(45, 50, 20, 20)));
+        var c2 = new Collider<>(new NodeComponent<>(
+                new Rectangle(105, 50, 30, 10)));
+        var c3 = new Collider<>(new NodeComponent<>(
+                new Circle(160, 20, 25)));
         q.insert(c1);
         q.insert(c2);
         q.insert(c3);
 
-        q.query(new BoxCollider(80, 35, 90, 40), res);
+        q.query(new Rectangle(80, 35, 90, 40).getBoundsInParent(), res);
         assertFalse(res.contains(c1));
         assertTrue(res.containsAll(List.of(c2, c3)));
     }
