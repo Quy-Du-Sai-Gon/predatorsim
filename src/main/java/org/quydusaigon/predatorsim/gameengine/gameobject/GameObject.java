@@ -97,9 +97,14 @@ public final class GameObject {
                 : Optional.empty();
     }
 
-    public static List<Group> getChildren(Group gameObject) {
+    private static List<Group> _getChildren(Group gameObject) {
         var go = getGameObjectData(gameObject);
-        return Collections.unmodifiableList(go.children);
+        return go.children;
+    }
+
+    public static List<Group> getChildren(Group gameObject) {
+        return Collections.unmodifiableList(
+                _getChildren(gameObject));
     }
 
     public static void addChild(Group parent, Group child) {
