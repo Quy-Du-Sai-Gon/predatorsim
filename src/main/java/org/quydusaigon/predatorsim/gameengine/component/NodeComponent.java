@@ -7,6 +7,8 @@ public class NodeComponent<T extends Node> extends Component {
     private Collider<T> collider;
 
     public NodeComponent(T node) {
+        if (node == null)
+            throw new NullPointerException("Node cannot be null");
         this.node = node;
     }
 
