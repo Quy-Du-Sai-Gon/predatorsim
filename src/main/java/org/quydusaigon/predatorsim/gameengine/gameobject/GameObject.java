@@ -115,37 +115,6 @@ public final class GameObject {
     }
 
     /*
-     * Operations
-     */
-
-    public static void start(Group gameObject) {
-        var data = getGameObjectData(gameObject);
-
-        // start Behaviours
-        data.components.forEach(c -> {
-            if (c instanceof Behaviour)
-                ((Behaviour) c).start();
-        });
-        data.started = true;
-
-        // recursive call
-        data.children.forEach(GameObject::start);
-    }
-
-    public static void update(Group gameObject) {
-        var data = getGameObjectData(gameObject);
-
-        // update Behaviours
-        data.components.forEach(c -> {
-            if (c instanceof Behaviour)
-                ((Behaviour) c).update();
-        });
-
-        // recursive call
-        data.children.forEach(GameObject::update);
-    }
-
-    /*
      * Components access
      */
 
@@ -275,6 +244,27 @@ public final class GameObject {
             }
 
         };
+    }
+
+    /*
+     * Iterator operations
+     */
+
+    public static void start(Group root) {
+        for (var go : iter(root)) {
+            // start Behaviours
+            getComponents(go, Behaviour.class)
+                    .forEach(Behaviour::start);
+            getGameObjectData(go).started = true;
+        }
+    }
+
+    public static void update(Group root) {
+        for (var go : iter(root)) {
+            // update Behaviours
+            getComponents(go, Behaviour.class)
+                    .forEach(Behaviour::update);
+        }
     }
 
 }
