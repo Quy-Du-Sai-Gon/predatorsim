@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 import java.util.stream.Stream;
 
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
@@ -236,6 +237,44 @@ public final class GameObject {
 
     public static DoubleProperty scaleY(Group gameObject) {
         return gameObject.scaleYProperty();
+    }
+
+    /*
+     * Iterator for iterating through a GameObject's hierarchy, in a top-down,
+     * depth-first-search manner.
+     */
+    private static class Iterator implements java.util.Iterator<Group> {
+
+        private final Stack<Group> stack;
+
+        private Iterator(Group gameObject) {
+            stack = new Stack<>();
+            stack.push(gameObject);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        @Override
+        public Group next() {
+            var go = stack.pop();
+            stack.addAll(_getChildren(go));
+            return go;
+        }
+
+    }
+
+    public static Iterable<Group> iter(Group gameObject) {
+        return new Iterable<Group>() {
+
+            @Override
+            public java.util.Iterator<Group> iterator() {
+                return new Iterator(gameObject);
+            }
+
+        };
     }
 
 }
