@@ -11,18 +11,18 @@ import javafx.geometry.Bounds;
 
 public class Quadtree {
 
-    private BoundingBox area;
+    private Bounds area;
     private int capacity;
     private List<Collider<?>> colliders;
     private List<Quadtree> children;
 
-    public Quadtree(BoundingBox area, int capacity) {
+    public Quadtree(Bounds area, int capacity) {
         this.area = area;
         this.capacity = capacity;
         this.colliders = new ArrayList<>(capacity);
     }
 
-    public Quadtree(BoundingBox area) {
+    public Quadtree(Bounds area) {
         this(area, 4);
     }
 
