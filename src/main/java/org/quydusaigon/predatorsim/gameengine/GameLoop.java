@@ -12,6 +12,16 @@ import javafx.animation.AnimationTimer;
 public class GameLoop extends AnimationTimer {
 
     @Override
+    public void start() {
+        super.start();
+
+        /*
+         * start scene
+         */
+        GameObject.start(App.root);
+    }
+
+    @Override
     public void handle(long now) {
         /*
          * update scene
