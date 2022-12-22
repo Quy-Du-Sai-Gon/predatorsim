@@ -63,7 +63,7 @@ public final class GameObject {
 
         // add initial components
         for (var c : components) {
-            addComponent(go, data, c);
+            _addComponent(go, data, c);
         }
 
         return go;
@@ -162,7 +162,7 @@ public final class GameObject {
                 .map(type::cast);
     }
 
-    private static <T extends Component> T addComponent(Group gameObject, GameObject data, T component) {
+    private static <T extends Component> T _addComponent(Group gameObject, GameObject data, T component) {
         // add component to data list
         data.components.add(component);
         // set component's GameObject
@@ -183,7 +183,7 @@ public final class GameObject {
 
     public static <T extends Component> T addComponent(Group gameObject, T component) {
         var data = getGameObjectData(gameObject);
-        return addComponent(gameObject, data, component);
+        return _addComponent(gameObject, data, component);
     }
 
     public static void destroy(Component component) {
