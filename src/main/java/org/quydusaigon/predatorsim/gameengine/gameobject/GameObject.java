@@ -52,9 +52,11 @@ public final class GameObject {
         // whether the parent has been started
         boolean started = false;
         if (parent != null) {
-            started = getGameObjectData(parent).started;
+            var parentData = getGameObjectData(parent);
+            started = parentData.started;
 
             // add the newly created GameObject to the parent
+            parentData.children.add(go);
             parent.getChildren().add(go);
         }
 
@@ -108,11 +110,11 @@ public final class GameObject {
                 _getChildren(gameObject));
     }
 
-    public static void addChild(Group parent, Group child) {
-        var go = getGameObjectData(parent);
-        go.children.add(child);
-        parent.getChildren().add(child);
-    }
+    // public static void addChild(Group parent, Group child) {
+    // var go = getGameObjectData(parent);
+    // go.children.add(child);
+    // parent.getChildren().add(child);
+    // }
 
     /*
      * Components access
