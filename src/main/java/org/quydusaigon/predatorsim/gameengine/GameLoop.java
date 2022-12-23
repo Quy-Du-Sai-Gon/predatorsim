@@ -8,6 +8,7 @@ import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.Quadtree;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.Group;
 
 public class GameLoop extends AnimationTimer {
 
@@ -31,18 +32,21 @@ public class GameLoop extends AnimationTimer {
         /*
          * collision detection
          */
+        detectAndRaiseCollisionEvents(App.root);
+    }
 
+    private void detectAndRaiseCollisionEvents(Group root) {
         // quadtree for optimization
-        var q = new Quadtree(App.root.getBoundsInParent());
+        var q = new Quadtree(root.getBoundsInParent());
 
         // insert all colliders into the quadtree
-        for (var go : GameObject.iter(App.root)) {
+        for (var go : GameObject.iter(root)) {
             GameObject.getComponents(go, Collider.class)
                     .forEach(q::insert);
         }
 
         // collision detection
-        for (var go : GameObject.iter(App.root)) {
+        for (var go : GameObject.iter(root)) {
             GameObject.getComponents(go, Collider.class).forEach(collider -> {
                 // for each collider
                 // query for the colliders it collides with
