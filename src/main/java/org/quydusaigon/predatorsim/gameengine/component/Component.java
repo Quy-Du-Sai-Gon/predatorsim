@@ -3,7 +3,6 @@ package org.quydusaigon.predatorsim.gameengine.component;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.quydusaigon.predatorsim.App;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.Prefab;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
@@ -20,15 +19,15 @@ public class Component {
      */
 
     public static void instantiate(Prefab prefab, TransformInit tf, Group parent) {
-        prefab.instantiate(tf, parent);
+        GameObject.instantiate(prefab, tf, parent);
     }
 
     public static void instantiate(Prefab prefab, TransformInit tf) {
-        instantiate(prefab, tf, App.root);
+        GameObject.instantiate(prefab, tf);
     }
 
     public static void instantiate(Prefab prefab) {
-        instantiate(prefab, TransformInit.ZERO);
+        GameObject.instantiate(prefab);
     }
 
     /*

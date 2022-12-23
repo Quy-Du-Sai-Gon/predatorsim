@@ -10,9 +10,11 @@ import java.util.Optional;
 import java.util.Stack;
 import java.util.stream.Stream;
 
+import org.quydusaigon.predatorsim.App;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
+import org.quydusaigon.predatorsim.gameengine.util.Prefab;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
 
 public final class GameObject {
@@ -115,6 +117,22 @@ public final class GameObject {
     // go.children.add(child);
     // parent.getChildren().add(child);
     // }
+
+    /*
+     * Instantiation
+     */
+
+    public static void instantiate(Prefab prefab, TransformInit tf, Group parent) {
+        prefab.instantiate(tf, parent);
+    }
+
+    public static void instantiate(Prefab prefab, TransformInit tf) {
+        instantiate(prefab, tf, App.root);
+    }
+
+    public static void instantiate(Prefab prefab) {
+        instantiate(prefab, TransformInit.ZERO);
+    }
 
     /*
      * Components access
