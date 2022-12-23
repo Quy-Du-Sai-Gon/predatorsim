@@ -131,7 +131,7 @@ public final class GameObject {
     }
 
     public static void instantiate(Prefab prefab) {
-        instantiate(prefab, TransformInit.ZERO);
+        instantiate(prefab, TransformInit.DEFAULT);
     }
 
     /*

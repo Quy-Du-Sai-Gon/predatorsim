@@ -11,7 +11,7 @@ public final class Prefabs {
     }
 
     public static Group ROOT() {
-        return GameObject.create(TransformInit.ZERO, null);
+        return GameObject.create(TransformInit.DEFAULT, null);
     }
 
 }

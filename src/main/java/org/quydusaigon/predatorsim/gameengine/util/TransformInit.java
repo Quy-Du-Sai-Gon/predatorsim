@@ -7,7 +7,7 @@ public class TransformInit {
     public final double scaleX;
     public final double scaleY;
 
-    public static final TransformInit ZERO = new TransformInit(0, 0, 0, 0, 0);
+    public static final TransformInit DEFAULT = new TransformInit(0, 0);
 
     public TransformInit(double posX, double posY, double rotate, double scaleX, double scaleY) {
         this.posX = posX;
@@ -18,7 +18,7 @@ public class TransformInit {
     }
 
     public TransformInit(double posX, double posY, double rotate) {
-        this(posX, posY, rotate, 0, 0);
+        this(posX, posY, rotate, 1, 1);
     }
 
     public TransformInit(double posX, double posY) {
