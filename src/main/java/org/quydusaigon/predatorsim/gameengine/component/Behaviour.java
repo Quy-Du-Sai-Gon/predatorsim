@@ -7,4 +7,13 @@ public abstract class Behaviour extends Component {
 
     public void update() {
     }
+
+    public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
+    }
+
+    public void onCollisionStay(Collider<?> collider, Collider<?> other) {
+    }
+
+    public void onCollisionExit(Collider<?> collider, Collider<?> other) {
+    }
 }
