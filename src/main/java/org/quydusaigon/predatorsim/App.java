@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import org.quydusaigon.predatorsim.util.Prefabs;
+import org.quydusaigon.predatorsim.gameengine.GameLoop;
 
 /**
  * JavaFX App
@@ -20,10 +20,13 @@ public class App extends Application {
         stage.setWidth(1000);
         stage.setHeight(800);
 
-        root = Prefabs.ROOT();
+        root = Level.main.get();
         var scene = new Scene(root);
-
         stage.setScene(scene);
+
+        var loop = new GameLoop();
+        loop.start();
+
         stage.show();
     }
 
