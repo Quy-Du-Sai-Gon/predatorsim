@@ -45,11 +45,11 @@ public class GameLoop extends AnimationTimer {
 
     private Map<Group, Set<Pair<Collider<?>, Collider<?>>>> previousCollisions = Map.of();
 
-    private static final Set<Pair<Collider<?>, Collider<?>>> NO_PAIR = Set.of();
+    private static final Set<Pair<Collider<?>, Collider<?>>> NO_PAIR = new HashSet<>();
 
     private void detectAndRaiseCollisionEvents(Group root) {
         // quadtree for optimization
-        var q = new Quadtree(root.getBoundsInParent());
+        var q = new Quadtree(root.getLayoutBounds());
 
         // insert all colliders into the quadtree
         for (var go : GameObject.iter(root)) {
@@ -77,7 +77,11 @@ public class GameLoop extends AnimationTimer {
 
             // sets to store colliding pairs
             var prevPairs = previousCollisions.getOrDefault(go, NO_PAIR);
-            var currPairs = Helper.lazyValue(() -> currentCollisions.put(go, new HashSet<>()));
+            var currPairs = Helper.lazyValue(() -> {
+                Set<Pair<Collider<?>, Collider<?>>> pairs = new HashSet<>();
+                currentCollisions.put(go, pairs);
+                return pairs;
+            });
 
             // for each collider
             GameObject.getComponents(go, Collider.class).forEach(collider -> {
@@ -86,10 +90,6 @@ public class GameLoop extends AnimationTimer {
                 q.query(collider, others);
 
                 for (var other : others) {
-                    // self check
-                    if (collider == other)
-                        continue;
-
                     // for each colliding pair
                     var pair = new Pair<Collider<?>, Collider<?>>(collider, other);
                     currPairs.get().add(pair);

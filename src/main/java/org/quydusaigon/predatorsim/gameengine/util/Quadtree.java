@@ -60,21 +60,18 @@ public class Quadtree {
                 .anyMatch((quadrant) -> quadrant.insert(collider));
     }
 
-    public void query(Bounds area, Set<Collider<?>> found) {
-        if (!area.intersects(this.area)) {
+    public void query(Collider<?> collider, Set<Collider<?>> found) {
+        if (!collider.collides(area)) {
             return;
         }
 
         colliders.stream()
-                .filter(c -> c.collides(area))
+                .filter(c -> c != collider && c.collides(collider))
                 .forEach(found::add);
 
         if (children != null) {
-            children.forEach(q -> q.query(area, found));
+            children.forEach(q -> q.query(collider, found));
         }
     }
 
-    public void query(Collider<?> collider, Set<Collider<?>> found) {
-        query(collider.getBounds(), found);
-    }
 }
