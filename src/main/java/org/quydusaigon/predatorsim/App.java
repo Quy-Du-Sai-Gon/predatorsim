@@ -16,10 +16,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Collision detection demo");
-        stage.setWidth(1000);
-        stage.setHeight(800);
-
         root = Level.main.get();
         var scene = new Scene(root);
         stage.setScene(scene);
