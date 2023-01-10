@@ -11,27 +11,35 @@ public class Particle extends Behaviour {
 
     @Override
     public void start() {
+        // random position
+        posX().set(Math.random() * 1000);
+        posY().set(Math.random() * 800);
+
+        // random radius
         var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
         circle.setRadius(Math.random() * 10 + 10);
     }
 
     @Override
     public void update() {
+        // random movement
         var x = posX();
         var y = posY();
         x.set(x.get() + Math.random() * 10 - 5);
         y.set(y.get() + Math.random() * 10 - 5);
-    }
 
-    @Override
-    public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
-        var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
-        circle.setFill(Color.RED);
-    }
-
-    @Override
-    public void onCollisionExit(Collider<?> collider, Collider<?> other) {
+        // reset color
         var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
         circle.setFill(Color.GREEN);
+    }
+
+    @Override
+    public void onCollisionStay(Collider<?> collider, Collider<?> other) {
+        if (other.getComponent(Particle.class).isEmpty())
+            // not colliding with another particle
+            return;
+
+        var circle = (Circle) collider.getNode();
+        circle.setFill(Color.RED);
     }
 }
