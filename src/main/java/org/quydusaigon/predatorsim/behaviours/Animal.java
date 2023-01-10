@@ -8,7 +8,7 @@ public abstract class Animal {
     public AnimalStat animalStat;
 
     public Animal(AnimalStat animalStat) {
-
+        this.animalStat = animalStat;
     }
 
 }
