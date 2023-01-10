@@ -18,6 +18,8 @@ public class Particle extends Behaviour {
         // random radius
         var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
         circle.setRadius(Math.random() * 10 + 10);
+
+        circle.setStrokeWidth(5);
     }
 
     @Override
@@ -31,6 +33,7 @@ public class Particle extends Behaviour {
         // reset color
         var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
         circle.setFill(Color.GREEN);
+        circle.setStroke(null);
     }
 
     @Override
