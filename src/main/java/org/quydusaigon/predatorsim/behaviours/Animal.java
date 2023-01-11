@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim.behaviours;
 
+import org.quydusaigon.predatorsim.util.AnimalStat;
 import org.quydusaigon.predatorsim.util.StateConstructor;
 
 public abstract class Animal {

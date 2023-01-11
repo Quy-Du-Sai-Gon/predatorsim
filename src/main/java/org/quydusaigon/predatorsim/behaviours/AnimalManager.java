@@ -1,5 +1,5 @@
 package org.quydusaigon.predatorsim.behaviours;
-
+import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 
 public class AnimalManager extends Behaviour{

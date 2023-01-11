@@ -1,6 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours.animals;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.util.PreyStat;
 
 /**
  * Prey
