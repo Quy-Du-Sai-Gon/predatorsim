@@ -10,6 +10,7 @@ public abstract class Animal {
 
     public Animal(AnimalStat animalStat) {
         this.animalStat = animalStat;
+        stateConstructor = new StateConstructor(this);
     }
 
 }

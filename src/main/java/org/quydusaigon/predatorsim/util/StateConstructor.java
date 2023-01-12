@@ -10,7 +10,8 @@ public class StateConstructor {
     public SurvivalState survivalState;
 
     public StateConstructor(Animal animal) {
-
+        wanderingState = new WanderingState(animal);
+        survivalState = new SurvivalState(animal);
     }
 
 }
