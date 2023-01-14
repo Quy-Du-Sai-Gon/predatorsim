@@ -1,6 +1,7 @@
 package org.quydusaigon.predatorsim.util;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.Prefab;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
@@ -17,7 +18,7 @@ public final class Prefabs {
     }
 
     public static final Prefab PREDATOR = (tf, parent) -> {
-        return GameObject.create(tf,parent,new Animal());
-    }
+        return GameObject.create(tf,parent,new Predator(new PredatorStat(2,2,2,2,2)));
+    };
 
 }

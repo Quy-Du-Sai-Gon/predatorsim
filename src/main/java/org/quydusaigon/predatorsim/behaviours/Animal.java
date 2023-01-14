@@ -7,7 +7,7 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 import org.quydusaigon.predatorsim.util.AnimalStat;
 import org.quydusaigon.predatorsim.util.StateConstructor;
 
-public abstract class Animal {
+public abstract class Animal extends StateMachine {
 
     protected StateConstructor stateConstructor;
     public AnimalStat animalStat;
