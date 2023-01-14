@@ -31,6 +31,13 @@ public abstract class Animal extends StateMachine {
 
     public Animal(AnimalStat animalStat) {
         this.animalStat = animalStat;
+    }
+
+    @Override
+    public void start() {
         stateConstructor = new StateConstructor(this);
+        wanderBehaviour = getComponent(WanderBehaviour.class).orElseThrow();
+        System.out.println(wanderBehaviour);
+        initialize(this.stateConstructor.getWanderState());
     }
 }

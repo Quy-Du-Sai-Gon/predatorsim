@@ -13,7 +13,6 @@ public class Predator extends Animal {
 
     public Predator(PredatorStat stat) {
         super(stat);
-        wanderBehaviour = GameObject.addComponent(getGameObject(), new WanderBehaviour());
     }
 
 }

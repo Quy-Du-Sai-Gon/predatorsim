@@ -9,13 +9,12 @@ public class WanderState extends State {
 
     public WanderState(Animal animalSM) {
         super(animalSM);
-        wanderBehaviour = animalSM.getWanderBehaviour();
     }
 
     @Override
     public void enter() {
+        wanderBehaviour = animalSM.getWanderBehaviour();
         wanderBehaviour.setSeed();
-        super.enter();
     }
 
     @Override
