@@ -16,6 +16,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setTitle("hehe");
+        stage.setHeight(800);
+        stage.setWidth(1000);
+
         root = Level.main.get();
         var scene = new Scene(root);
         stage.setScene(scene);
