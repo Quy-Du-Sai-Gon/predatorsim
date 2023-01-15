@@ -13,12 +13,14 @@ import org.quydusaigon.predatorsim.gameengine.GameLoop;
 public class App extends Application {
 
     public static Group root;
+    public static int windowHeight = 800;
+    public static int windowWidth = 1000;
 
     @Override
     public void start(Stage stage) {
         stage.setTitle("hehe");
-        stage.setHeight(800);
-        stage.setWidth(1000);
+        stage.setHeight(windowHeight);
+        stage.setWidth(windowWidth);
 
         root = Level.main.get();
         var scene = new Scene(root);
