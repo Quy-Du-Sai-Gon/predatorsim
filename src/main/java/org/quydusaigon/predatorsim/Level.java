@@ -18,8 +18,12 @@ public final class Level {
     public static final Supplier<Group> main = Helper.lazyValue(() -> {
         var root = Prefabs.ROOT();
 
-        IntStream.range(0, 10).forEach((i) -> {
-            GameObject.instantiate(Prefabs.PREDATOR, TransformInit.DEFAULT, root);
+        IntStream.range(0, 5).forEach((i) -> {
+            GameObject.instantiate(Prefabs.PREDATOR, TransformInit.getRandomTransformInit(), root);
+            GameObject.instantiate(Prefabs.SMALL_PREY, TransformInit.getRandomTransformInit(), root);
+            GameObject.instantiate(Prefabs.MEDIUM_PREY, TransformInit.getRandomTransformInit(), root);
+            GameObject.instantiate(Prefabs.LARGE_PREY, TransformInit.getRandomTransformInit(), root);
+
         });
         
         return root;
