@@ -5,8 +5,10 @@ import org.quydusaigon.predatorsim.util.AnimalStat;
 
 public abstract class AnimalBehaviour extends Behaviour {
     protected AnimalStat animalStat;
-    public void setAnimalStat(AnimalStat animalStat){
+
+    public void setAnimalStat(AnimalStat animalStat) {
         this.animalStat = animalStat;
     }
+
     abstract void doAction();
 }
