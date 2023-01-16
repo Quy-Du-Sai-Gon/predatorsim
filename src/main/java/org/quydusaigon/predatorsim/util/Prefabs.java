@@ -3,6 +3,7 @@ package org.quydusaigon.predatorsim.util;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Vision;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -25,38 +26,46 @@ public final class Prefabs {
 
     public static final Prefab PREDATOR = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(10, Color.RED));
-        return GameObject.create(tf,parent,
+        PredatorStat predatorStat = new PredatorStat(4, 200, 2, 2, 2);
+
+        Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
-                new Predator(new PredatorStat(4,2,2,2,2))
-        );
+                new Predator(predatorStat));
+
+        var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
+        circle.setOpacity(0.2);
+
+        var visionNodeComp = new NodeComponent<>(circle);
+
+        GameObject.create(TransformInit.DEFAULT, newPredator,
+                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
+        return newPredator;
     };
 
     public static final Prefab SMALL_PREY = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(5, Color.GREEN));
-        return GameObject.create(tf,parent,
+        return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
-                new Prey(new PreyStat(3, 2, PreySize.SMALL,2))
-        );
+                new Prey(new PreyStat(3, 2, PreySize.SMALL, 2)));
     };
 
     public static final Prefab MEDIUM_PREY = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(10, Color.GREEN));
-        return GameObject.create(tf,parent,
+        return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
-                new Prey(new PreyStat(2, 2, PreySize.MEDIUM,2))
-        );
+                new Prey(new PreyStat(2, 2, PreySize.MEDIUM, 2)));
     };
-    
+
     public static final Prefab LARGE_PREY = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(20, Color.GREEN));
-        return GameObject.create(tf,parent,
+        return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
-                new Prey(new PreyStat(1, 2, PreySize.LARGE,2))
-        );
+                new Prey(new PreyStat(1, 2, PreySize.LARGE, 2)));
     };
 
 }
