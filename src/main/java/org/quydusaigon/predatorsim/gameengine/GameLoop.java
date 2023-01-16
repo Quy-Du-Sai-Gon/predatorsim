@@ -32,6 +32,9 @@ public class GameLoop extends AnimationTimer {
 
     @Override
     public void handle(long now) {
+        // Update Time
+        Time.update(now);
+
         /*
          * update scene
          */
