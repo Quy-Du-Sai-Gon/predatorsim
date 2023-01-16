@@ -40,7 +40,6 @@ public abstract class Animal extends StateMachine {
         wanderBehaviour = getComponent(WanderBehaviour.class).orElseThrow();
         wanderBehaviour.setAnimalStat(animalStat);
 
-        System.out.println(wanderBehaviour);
         initialize(this.stateConstructor.getWanderState());
     }
 }
