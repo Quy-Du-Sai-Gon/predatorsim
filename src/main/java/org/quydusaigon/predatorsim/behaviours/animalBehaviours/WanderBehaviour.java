@@ -21,8 +21,8 @@ public class WanderBehaviour extends AnimalBehaviour {
         double randomx = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * Time.getDeltaTime() * 100;
         double randomy = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * Time.getDeltaTime() * 100;
 
-        seedX += 0.01;
-        seedY += 0.01;
+        seedX += 0.005;
+        seedY += 0.005;
 
         x.set(x.get() + randomx);
         y.set(y.get() + randomy);
