@@ -24,6 +24,9 @@ public class GameLoop extends AnimationTimer {
     public void start() {
         super.start();
 
+        // Reset the Time system when restarting
+        Time.reset();
+
         /*
          * start scene
          */
