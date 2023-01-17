@@ -20,10 +20,6 @@ public final class Prefabs {
     private Prefabs() {
     }
 
-    public static Group ROOT() {
-        return GameObject.create(TransformInit.DEFAULT, null);
-    }
-
     public static final Prefab PREDATOR = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(10, Color.RED));
         PredatorStat predatorStat = new PredatorStat(4, 200, 2, 2, 2);
@@ -34,7 +30,7 @@ public final class Prefabs {
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
-        circle.setOpacity(0.2);
+        circle.setOpacity(0);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
