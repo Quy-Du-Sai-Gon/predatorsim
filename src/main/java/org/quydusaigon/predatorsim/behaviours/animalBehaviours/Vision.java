@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
 
+import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
@@ -18,6 +19,7 @@ import javafx.scene.shape.Circle;
 public class Vision extends Behaviour {
 
     HashSet<Group> detectedGameObject;
+    boolean showVision = false;
 
     @Override
     public void start() {
@@ -45,70 +47,36 @@ public class Vision extends Behaviour {
         }
     }
 
-    public HashSet<Group> getAllDetectedPredator() {
-        HashSet<Group> detectedPredator = new HashSet<Group>();
+    public HashSet<Group> getAllDetectedObject(Class animal) {
+        HashSet<Group> detectedObject = new HashSet<Group>();
         Iterator<Group> iter = detectedGameObject.iterator();
 
         while (iter.hasNext()) {
             Group current = iter.next();
-            if (GameObject.getComponent(current, Predator.class).isPresent()) {
-                detectedPredator.add(current);
+            if (GameObject.getComponent(current, animal).isPresent()) {
+                detectedObject.add(current);
             }
         }
-        return detectedPredator;
+        return detectedObject;
     }
 
-    public HashSet<Group> getAllDetectedPrey() {
-        HashSet<Group> detectedPrey = new HashSet<Group>();
-        Iterator<Group> iter = detectedGameObject.iterator();
+    public Optional<Group> getClosestObject(Class animal) {
+        HashSet<Group> detectedObject = getAllDetectedObject(animal);
+        Iterator<Group> iter = detectedObject.iterator();
 
-        while (iter.hasNext()) {
-            Group current = iter.next();
-            if (GameObject.getComponent(current, Prey.class).isPresent()) {
-                detectedPrey.add(current);
-            }
-        }
-        return detectedPrey;
-    }
-
-    public Optional<Group> getClosestPredator() {
-        HashSet<Group> detectedPredator = getAllDetectedPredator();
-        Iterator<Group> iter = detectedPredator.iterator();
-
-        if (!detectedPredator.isEmpty()) {
+        if (!detectedObject.isEmpty()) {
             double closestDistance = 0;
-            Group closestPredator = new Group();
+            Group closestObject = new Group();
 
             while (iter.hasNext()) {
                 Group current = iter.next();
                 if (Distance.calculateDistance(current,
                         GameObject.getParent(getGameObject()).get()) >= closestDistance) {
-                    closestPredator = current;
+                    closestObject = current;
                     closestDistance = Distance.calculateDistance(current, GameObject.getParent(getGameObject()).get());
                 }
             }
-            return Optional.of(closestPredator);
-        }
-        return Optional.empty();
-    }
-
-    public Optional<Group> getClosestPrey() {
-        HashSet<Group> detectedPrey = getAllDetectedPrey();
-        Iterator<Group> iter = detectedPrey.iterator();
-
-        if (!detectedPrey.isEmpty()) {
-            double closestDistance = 0;
-            Group closestPrey = new Group();
-
-            while (iter.hasNext()) {
-                Group current = iter.next();
-                if (Distance.calculateDistance(current,
-                        GameObject.getParent(getGameObject()).get()) >= closestDistance) {
-                    closestPrey = current;
-                    closestDistance = Distance.calculateDistance(current, GameObject.getParent(getGameObject()).get());
-                }
-            }
-            return Optional.of(closestPrey);
+            return Optional.of(closestObject);
         }
         return Optional.empty();
     }
