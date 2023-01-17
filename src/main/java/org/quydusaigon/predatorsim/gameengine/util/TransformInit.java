@@ -1,7 +1,7 @@
 package org.quydusaigon.predatorsim.gameengine.util;
 
-import java.util.Random;
 import org.quydusaigon.predatorsim.App;
+
 public class TransformInit {
     public final double posX;
     public final double posY;
@@ -27,7 +27,7 @@ public class TransformInit {
         this(posX, posY, 0);
     }
 
-    public static TransformInit getRandomTransformInit() {        
-        return new TransformInit(Math.random() * App.windowWidth , Math.random() * App.windowHeight);
+    public static TransformInit getRandomTransformInit() {
+        return new TransformInit(Math.random() * App.windowWidth, Math.random() * App.windowHeight);
     }
 }
