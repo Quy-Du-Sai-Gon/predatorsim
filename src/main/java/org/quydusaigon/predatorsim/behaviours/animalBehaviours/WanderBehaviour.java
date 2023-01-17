@@ -18,14 +18,14 @@ public class WanderBehaviour extends AnimalBehaviour {
         var x = posX();
         var y = posY();
 
-        double randomx = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * Time.getDeltaTime() * 100;
-        double randomy = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * Time.getDeltaTime() * 100;
+        double randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * Time.getDeltaTime() * 100;
+        double randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * Time.getDeltaTime() * 100;
 
         seedX += 0.005;
         seedY += 0.005;
 
-        x.set(x.get() + randomx);
-        y.set(y.get() + randomy);
+        x.set(x.get() + randomX);
+        y.set(y.get() + randomY);
 
     }
 
