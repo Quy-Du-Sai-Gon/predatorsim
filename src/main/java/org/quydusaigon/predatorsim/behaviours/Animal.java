@@ -11,15 +11,19 @@ public abstract class Animal extends StateMachine {
 
     protected StateConstructor stateConstructor;
     public AnimalStat animalStat;
-    public WanderBehaviour getWanderBehaviour(){
+
+    public WanderBehaviour getWanderBehaviour() {
         return wanderBehaviour;
     }
+
     public HowlBehaviour getHowlBehaviour() {
         return howlBehaviour;
     }
+
     public SurvivalBehaviour getSurvivalBehaviour() {
         return survivalBehaviour;
     }
+
     public DeadBehaviour getDeadBehaviour() {
         return deadBehaviour;
     }
