@@ -271,6 +271,9 @@ public final class GameObject {
      */
 
     public static void start(Group root) {
+        if (getGameObjectData(root).started)
+            return;
+
         for (var go : iter(root)) {
             // start Behaviours
             getComponents(go, Behaviour.class)
