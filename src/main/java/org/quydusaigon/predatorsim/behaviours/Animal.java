@@ -32,6 +32,7 @@ public abstract class Animal extends StateMachine {
     protected HowlBehaviour howlBehaviour;
     protected SurvivalBehaviour survivalBehaviour;
     protected DeadBehaviour deadBehaviour;
+    public StateConstructor getStateConstructor(){return stateConstructor;}
 
     public Animal(AnimalStat animalStat) {
         this.animalStat = animalStat;
