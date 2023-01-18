@@ -137,6 +137,9 @@ public class UI implements Initializable {
             LargePreyNumber = Integer.parseInt(preyCountTextField.getText());
             Level.changeAnimalNumber(PredatorNumber, LargePreyNumber);
             App.load(Level::main);
+            startButton.setDisable(false);
+            stopButton.setDisable(false);
+            nextButton.setDisable(true);
         } catch (NumberFormatException e) {
             System.out.println("Enter only number");
         }
@@ -151,7 +154,12 @@ public class UI implements Initializable {
     // Barchart
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startButton.setDisable(true);
+        stopButton.setDisable(true);
+        nextButton.setDisable(true);
+        clearButton.setDisable(true);
         loadData();
+
     }
 
     private void loadData() {
