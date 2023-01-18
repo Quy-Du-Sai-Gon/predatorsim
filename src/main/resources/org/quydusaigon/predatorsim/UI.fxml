@@ -432,7 +432,7 @@
                                             <children>
                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartButtonClicked" style="-fx-background-color: #264653; -fx-background-radius: 25;" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartButtonClicked" text="START" HBox.hgrow="ALWAYS">
                                                             <font>
                                                                 <Font name="System Bold Italic" size="12.0" />
                                                             </font></Button>

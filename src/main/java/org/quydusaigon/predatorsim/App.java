@@ -37,7 +37,7 @@ public class App extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent parent = fxmlLoader.load();
-        left = (AnchorPane)fxmlLoader.getNamespace().get("leftAnchorPane");
+        left = (AnchorPane) fxmlLoader.getNamespace().get("leftAnchorPane");
         var scene = new Scene(parent);
         stage.setScene(scene);
 

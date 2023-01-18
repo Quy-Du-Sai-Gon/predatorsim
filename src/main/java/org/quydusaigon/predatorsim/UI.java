@@ -92,12 +92,9 @@ public class UI implements Initializable {
     @FXML
     private BarChart<String, Double> barChart;
 
-
     int width = 100, height = 100;
 
-
-
-    //Button
+    // Button
     public void onPredatorColorChanged(ActionEvent actionEvent) {
     }
 
@@ -111,54 +108,59 @@ public class UI implements Initializable {
 
     public void onStartButtonClicked(ActionEvent actionEvent) {
         App.getLoop().start();
+        applyButton.setDisable(true);
+        nextButton.setDisable(true);
+        clearButton.setDisable(true);
     }
 
-    public TextField getPredatorCountTextField(){
+    public TextField getPredatorCountTextField() {
         return predatorCountTextField;
     }
 
     public void onStopButtonClicked(ActionEvent actionEvent) {
         App.getLoop().stop();
+        applyButton.setDisable(false);
+        nextButton.setDisable(false);
+        clearButton.setDisable(false);
+
     }
 
     public void onNextButtonClicked(ActionEvent actionEvent) {
-        // Call GameLoop update code with the special timestamp -1 for special setting of Time
+        // Call GameLoop update code with the special timestamp -1 for special setting
+        // of Time
         App.getLoop().handle(-1);
     }
 
     public void onApplyButtonClicked(ActionEvent actionEvent) {
-        try{
+        try {
             PredatorNumber = Integer.parseInt(predatorCountTextField.getText());
             LargePreyNumber = Integer.parseInt(preyCountTextField.getText());
             Level.changeAnimalNumber(PredatorNumber, LargePreyNumber);
             App.load(Level::main);
-
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Enter only number");
         }
     }
 
     public void onClearButtonClicked(ActionEvent actionEvent) {
         // load the level again without initializing anything
-        App.load(() -> {});
+        App.load(() -> {
+        });
     }
 
-
-
-    //Barchart
+    // Barchart
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2003");
         series1.getData().add(new XYChart.Data("Austraia", 10000));
         series1.getData().add(new XYChart.Data("Russia", 30000));
         series1.getData().add(new XYChart.Data("France", 8000));
         series1.getData().add(new XYChart.Data("Germany", 20000));
-
 
         XYChart.Series series2 = new XYChart.Series();
         series2.setName("2004");

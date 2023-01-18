@@ -10,13 +10,13 @@ import org.quydusaigon.predatorsim.gameengine.util.Helper;
 import org.quydusaigon.predatorsim.gameengine.util.Prefab;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
 import org.quydusaigon.predatorsim.util.Prefabs;
-import org.quydusaigon.predatorsim.UI;
 
 import javafx.scene.Group;
 
 public final class Level {
     private Level() {
     }
+
     public static int numberOfPredator = 0;
     public static int numberOfSmallPrey = 0;
     public static int numberOfMediumPrey = 0;
