@@ -6,6 +6,7 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 
 public class WanderState extends State {
     WanderBehaviour wanderBehaviour;
+    private boolean foundObject = false;
 
     public WanderState(Animal animalSM) {
         super(animalSM);
@@ -19,11 +20,21 @@ public class WanderState extends State {
 
     @Override
     public void update() {
+        if(foundObject){
+            animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
+            foundObject = false;
+            return;
+        }
+
         wanderBehaviour.doAction();
     }
 
     @Override
     public void exit() {
 
+    }
+
+    public void setFoundObject(boolean found) {
+        foundObject = found;
     }
 }
