@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
+import org.quydusaigon.predatorsim.behaviours.states.WanderState;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -28,12 +29,24 @@ public class Vision extends Behaviour {
 
     @Override
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
-        if (GameObject.getParent(getGameObject()).get() != other.getGameObject()
-                & GameObject.getComponent(other.getGameObject(), Vision.class).isEmpty()) {
+        Group thisGameObject = GameObject.getParent(getGameObject()).get();
+        Group otherGameObject = other.getGameObject();
+
+        if (thisGameObject != otherGameObject
+                & GameObject.getComponent(otherGameObject, Vision.class).isEmpty()) {
+
             var particle = (Circle) other.getNode();
             particle.setStroke(Color.BLACK);
             particle.setStrokeWidth(5);
-            detectedGameObject.add(other.getGameObject());
+
+            detectedGameObject.add(otherGameObject);
+
+            if(GameObject.getComponent(otherGameObject, Prey.class).isPresent()) {
+
+            }
+            else if(GameObject.getComponent(otherGameObject, Predator.class).isPresent()) {
+
+            }
         }
     }
 
