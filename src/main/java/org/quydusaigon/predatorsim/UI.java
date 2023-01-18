@@ -135,6 +135,7 @@ public class UI implements Initializable {
         try {
             PredatorNumber = Integer.parseInt(predatorCountTextField.getText());
             LargePreyNumber = Integer.parseInt(preyCountTextField.getText());
+
             Level.changeAnimalNumber(PredatorNumber, LargePreyNumber);
             App.load(Level::main);
             startButton.setDisable(false);
@@ -166,16 +167,5 @@ public class UI implements Initializable {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2003");
         series1.getData().add(new XYChart.Data("Austraia", 10000));
-        series1.getData().add(new XYChart.Data("Russia", 30000));
-        series1.getData().add(new XYChart.Data("France", 8000));
-        series1.getData().add(new XYChart.Data("Germany", 20000));
-
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("2004");
-        series2.getData().add(new XYChart.Data("Austraia", 9000));
-        series2.getData().add(new XYChart.Data("Russia", 35000));
-        series2.getData().add(new XYChart.Data("France", 100));
-        series2.getData().add(new XYChart.Data("Germany", 7000));
-        barChart.getData().addAll(series1, series2);
     }
 }
