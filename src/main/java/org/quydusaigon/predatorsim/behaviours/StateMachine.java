@@ -15,7 +15,6 @@ public class StateMachine extends Behaviour {
         currentState.exit();
 
         currentState = nextState;
-
         currentState.enter();
     }
 

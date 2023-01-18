@@ -42,7 +42,7 @@ public class Vision extends Behaviour {
             detectedGameObject.add(otherGameObject);
 
             if(GameObject.getComponent(otherGameObject, Prey.class).isPresent()) {
-
+                GameObject.getComponent(thisGameObject, Animal.class).get().getStateConstructor().getWanderState().setFoundObject(true);
             }
             else if(GameObject.getComponent(otherGameObject, Predator.class).isPresent()) {
 

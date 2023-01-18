@@ -3,6 +3,8 @@ package org.quydusaigon.predatorsim.util;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Evading;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Vision;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
@@ -22,15 +24,16 @@ public final class Prefabs {
 
     public static final Prefab PREDATOR = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(10, Color.RED));
-        PredatorStat predatorStat = new PredatorStat(4, 200, 2, 2, 2);
+        PredatorStat predatorStat = new PredatorStat(4, 100, 2, 2, 2);
 
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
+                new HuntingAlone(),
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
-        circle.setOpacity(0);
+        circle.setOpacity(0.2);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
@@ -45,6 +48,7 @@ public final class Prefabs {
         return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
+                new Evading(),
                 new Prey(new PreyStat(3, 2, PreySize.SMALL, 2)));
     };
 
@@ -53,6 +57,7 @@ public final class Prefabs {
         return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
+                new Evading(),
                 new Prey(new PreyStat(2, 2, PreySize.MEDIUM, 2)));
     };
 
@@ -61,6 +66,7 @@ public final class Prefabs {
         return GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
+                new Evading(),
                 new Prey(new PreyStat(1, 2, PreySize.LARGE, 2)));
     };
 

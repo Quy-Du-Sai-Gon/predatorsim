@@ -1,9 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours;
 
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.DeadBehaviour;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HowlBehaviour;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
+import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.util.AnimalStat;
 import org.quydusaigon.predatorsim.util.StateConstructor;
 
@@ -44,6 +42,9 @@ public abstract class Animal extends StateMachine {
 
         wanderBehaviour = getComponent(WanderBehaviour.class).orElseThrow();
         wanderBehaviour.setAnimalStat(animalStat);
+
+        survivalBehaviour = getComponent(SurvivalBehaviour.class).orElseThrow();
+        survivalBehaviour.setAnimalStat(animalStat);
 
         initialize(this.stateConstructor.getWanderState());
     }
