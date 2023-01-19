@@ -6,19 +6,18 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour;
 
 public class SurvivalState extends State {
-
-    SurvivalBehaviour huntingAlone;
+    SurvivalBehaviour survivalBehaviour;
     public SurvivalState(Animal animalSM) {
         super(animalSM);
     }
 
     @Override
     public void enter() {
-        huntingAlone = animalSM.getSurvivalBehaviour();
+        survivalBehaviour = animalSM.getSurvivalBehaviour();
     }
 
     @Override
     public void update() {
-        huntingAlone.doSurvival();
+        survivalBehaviour.doSurvival();
     }
 }

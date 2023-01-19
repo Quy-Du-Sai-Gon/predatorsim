@@ -6,7 +6,7 @@ public class HuntingAlone extends Hunting {
         var x = posX();
         var y = posY();
 
-        x.set(x.get() + Math.random());
-        y.set(y.get() + Math.random());
+//        x.set(x.get() + Math.random());
+//        y.set(y.get() + Math.random());
     }
 }
