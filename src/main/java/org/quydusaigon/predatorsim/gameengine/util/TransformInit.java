@@ -28,6 +28,6 @@ public class TransformInit {
     }
 
     public static TransformInit getRandomTransformInit() {
-        return new TransformInit(Math.random() * App.windowWidth, Math.random() * App.windowHeight);
+        return new TransformInit(Math.random() * App.simulationWindowHeight, Math.random() * App.simulationWindowHeight);
     }
 }
