@@ -45,9 +45,11 @@ public final class GameObject {
     }
 
     private static GameObject getGameObjectData(Group group) {
-        var obj = group.getUserData();
-        if (obj instanceof GameObject)
-            return (GameObject) obj;
+        if (group != null) {
+            var obj = group.getUserData();
+            if (obj instanceof GameObject)
+                return (GameObject) obj;
+        }
         throw new NotAGameObjectException();
     }
 
