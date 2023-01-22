@@ -112,12 +112,6 @@ public final class GameObject {
                 _getChildren(gameObject));
     }
 
-    // public static void addChild(Group parent, Group child) {
-    // var go = getGameObjectData(parent);
-    // go.children.add(child);
-    // parent.getChildren().add(child);
-    // }
-
     /*
      * Instantiation
      */
