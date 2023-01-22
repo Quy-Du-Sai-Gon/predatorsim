@@ -1,8 +1,23 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
-public class HuntingInGroup extends Hunting{
-    public void doSurvival(){
-        super.doSurvival();
+import java.util.ArrayList;
 
+import javafx.scene.Group;
+
+public class HuntingInGroup extends Hunting {
+    private ArrayList<Group> alliesObjects;
+
+    public void doSurvival() {
+        super.doSurvival();
+    }
+
+    @Override
+    public void setTargetObject(Group object) {
+        targetObject = object;
+    }
+
+    @Override
+    public void setAlliesObject(Group object) {
+        alliesObjects.add(object);
     }
 }
