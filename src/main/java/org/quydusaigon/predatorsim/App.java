@@ -23,8 +23,8 @@ import java.util.function.Consumer;
 public class App extends Application {
 
     public static Group root;
-    public static final int windowHeight = 800;
-    public static final int windowWidth = 1000;
+    public static final int simulationWindowHeight = 800;
+    public static final int simulationWindowWidth = 1000;
     private static GameLoop loop;
 
     private static float timeStep = 0.5f;
