@@ -7,6 +7,7 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour
 
 public class SurvivalState extends State {
     SurvivalBehaviour survivalBehaviour;
+
     public SurvivalState(Animal animalSM) {
         super(animalSM);
     }
