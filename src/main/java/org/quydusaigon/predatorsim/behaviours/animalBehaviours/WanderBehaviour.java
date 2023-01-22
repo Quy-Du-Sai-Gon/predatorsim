@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.PerlinNoise;
+import org.quydusaigon.predatorsim.util.Map;
 
 public class WanderBehaviour extends AnimalBehaviour {
 
@@ -24,9 +25,8 @@ public class WanderBehaviour extends AnimalBehaviour {
         seedX += 0.005;
         seedY += 0.005;
 
-        x.set(x.get() + randomX);
-        y.set(y.get() + randomY);
-
+        x.set(Map.checkBoundX(posX().get() + randomX));
+        y.set(Map.checkBoundY(posY().get() + randomY));
     }
 
 }
