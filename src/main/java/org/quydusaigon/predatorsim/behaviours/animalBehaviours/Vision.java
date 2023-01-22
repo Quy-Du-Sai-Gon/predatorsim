@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
-import org.quydusaigon.predatorsim.behaviours.states.WanderState;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -40,12 +39,14 @@ public class Vision extends Behaviour {
             particle.setStrokeWidth(5);
 
             detectedGameObject.add(otherGameObject);
+            
+            if ((GameObject.getComponent(thisGameObject, Predator.class).isPresent() &
+                    GameObject.getComponent(otherGameObject, Prey.class).isPresent()) ||
+                GameObject.getComponent(thisGameObject, Prey.class).isPresent() &
+                        GameObject.getComponent(otherGameObject, Predator.class).isPresent()) {
 
-            if(GameObject.getComponent(otherGameObject, Prey.class).isPresent()) {
-                GameObject.getComponent(thisGameObject, Animal.class).get().getStateConstructor().getWanderState().setFoundObject(true);
-            }
-            else if(GameObject.getComponent(otherGameObject, Predator.class).isPresent()) {
-
+                GameObject.getComponent(thisGameObject, Animal.class).get().getStateConstructor()
+                        .getWanderState().setFoundObject(otherGameObject);
             }
         }
     }
