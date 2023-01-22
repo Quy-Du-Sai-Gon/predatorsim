@@ -1,12 +1,21 @@
 package org.quydusaigon.predatorsim.behaviours.states;
 
+import java.util.Optional;
+
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Evading;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Hunting;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
+import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
+
+import javafx.scene.Group;
 
 public class WanderState extends State {
     WanderBehaviour wanderBehaviour;
-    private boolean foundObject = false;
+    private Optional<Group> foundObject;
 
     public WanderState(Animal animalSM) {
         super(animalSM);
@@ -16,13 +25,13 @@ public class WanderState extends State {
     public void enter() {
         wanderBehaviour = animalSM.getWanderBehaviour();
         wanderBehaviour.setSeed();
+        foundObject = Optional.empty();
     }
 
     @Override
     public void update() {
-        if(foundObject){
+        if (foundObject.isPresent()) {
             animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
-            foundObject = false;
             return;
         }
 
@@ -31,10 +40,16 @@ public class WanderState extends State {
 
     @Override
     public void exit() {
-
+        SurvivalBehaviour survivalBehavior = animalSM.getSurvivalBehaviour();
+        if (survivalBehavior instanceof Hunting)
+            survivalBehavior.setTargetObject(foundObject.get());
+        else if (survivalBehavior instanceof Evading) {
+            
+        }
+        foundObject = Optional.empty();
     }
 
-    public void setFoundObject(boolean found) {
-        foundObject = found;
+    public void setFoundObject(Group Object) {
+        foundObject = Optional.of(Object);
     }
 }
