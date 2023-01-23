@@ -37,8 +37,8 @@ public class Evading extends SurvivalBehaviour {
 
             Vector.normalize();
                 
-            x.set(Map.checkBoundX(x.get() + Vector.getX() * animalStat.runSpeed*2 * Time.getDeltaTime()));
-            y.set(Map.checkBoundY(y.get() + Vector.getY() * animalStat.runSpeed*2 * Time.getDeltaTime()));
+            x.set(Map.checkBoundX(x.get() + Vector.getX() * animalStat.runSpeed * Time.getDeltaTime()));
+            y.set(Map.checkBoundY(y.get() + Vector.getY() * animalStat.runSpeed * Time.getDeltaTime()));
         }
         
     }
