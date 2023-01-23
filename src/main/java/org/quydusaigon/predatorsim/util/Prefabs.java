@@ -8,6 +8,7 @@ import java.util.Random;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Evading;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingInGroup;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Vision;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
@@ -79,6 +80,7 @@ public final class Prefabs {
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new HuntingAlone(),
+                new HuntingInGroup(),
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
@@ -93,8 +95,7 @@ public final class Prefabs {
         if (showObjectStat) {
             StatDisplay stat = new StatDisplay(predatorStat, newPredator);
             var statNodeComp = new NodeComponent<>(stat.pane);
-            GameObject.create(TransformInit.DEFAULT, newPredator,
-                    statNodeComp);
+            GameObject.addComponent(newPredator, statNodeComp);
         }
 
         return newPredator;
