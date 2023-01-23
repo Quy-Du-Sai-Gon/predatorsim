@@ -38,15 +38,6 @@ public class Vision extends Behaviour {
             particle.setStroke(Color.BLACK);
             particle.setStrokeWidth(5);
             detectedGameObject.add(otherGameObject);
-            
-            if ((GameObject.getComponent(thisGameObject, Predator.class).isPresent() &
-                    GameObject.getComponent(otherGameObject, Prey.class).isPresent()) ||
-                GameObject.getComponent(thisGameObject, Prey.class).isPresent() &
-                        GameObject.getComponent(otherGameObject, Predator.class).isPresent()) {
-
-                GameObject.getComponent(thisGameObject, Animal.class).get().getStateConstructor()
-                        .getWanderState().setFoundObject(otherGameObject);
-            }
         }
     }
 
