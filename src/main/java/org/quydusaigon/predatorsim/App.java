@@ -1,21 +1,21 @@
 package org.quydusaigon.predatorsim;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
-import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 
 /**
  * JavaFX App
@@ -29,26 +29,40 @@ public class App extends Application {
 
     private static float timeStep = 0.5f;
 
-    private static AnchorPane left;
-
+    private static VBox left;
+    private static AnchorPane inLeftAnchorPane;
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Predatorsim");
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent parent = fxmlLoader.load();
-        left = (AnchorPane) fxmlLoader.getNamespace().get("leftAnchorPane");
+
+
+        left = (VBox) fxmlLoader.getNamespace().get("leftVBox");
+        left.setBorder(new Border(new BorderStroke(Color.BLUE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));;
+
+        inLeftAnchorPane = new AnchorPane();
+
+
+        inLeftAnchorPane.setBorder(new Border(new BorderStroke(Color.RED,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+        left.getChildren().add(inLeftAnchorPane);
+        VBox.setVgrow(inLeftAnchorPane, Priority.NEVER);
+
         var scene = new Scene(parent);
         stage.setScene(scene);
 
         load(Level::main);
         loop = new GameLoop();
-
+        stage.setResizable(true);
         stage.show();
     }
 
     private static void setRoot(Group root) {
-        var children = left.getChildren();
+        var children = inLeftAnchorPane.getChildren();
         children.remove(App.root);
         children.add(root);
         App.root = root;

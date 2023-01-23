@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.util.Prefabs;
@@ -28,7 +25,16 @@ public class UI implements Initializable {
     private Slider simulationSpeedSlider;
 
     @FXML
-    private ColorPicker preyColorPicker;
+    private ColorPicker smallPreyColorPicker;
+
+    @FXML
+    private ColorPicker mediumPreyColorPicker;
+
+    @FXML
+    private ColorPicker largePreyColorPicker;
+
+
+
 
     @FXML
     private ColorPicker predatorColorPicker;
@@ -47,6 +53,12 @@ public class UI implements Initializable {
 
     @FXML
     private TextField predatorRunSpeedMinTextField;
+
+    @FXML
+    private TextField predatorEnduranceMinTextField;
+
+    @FXML
+    private TextField predatorEnduranceMaxTextField;
 
     @FXML
     private TextField predatorRunSpeedMaxTextField;
@@ -159,29 +171,66 @@ public class UI implements Initializable {
     @FXML
     private BarChart<String, Double> barChart;
 
-    int width = 100, height = 100;
+    TextField[] inputTextFields;
+    ColorPicker[] colorPickers;
 
-    // Button
+    private Control[] widgets;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        startButton.setDisable(true);
+        stopButton.setDisable(true);
+        nextButton.setDisable(true);
+
+
+
+        inputTextFields = new TextField[]{
+                widthTextField, heightTextField,
+                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField, predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField, predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
+                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField, smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField, smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
+                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField, mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField, mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
+                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField, largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField, largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
+        };
+
+        colorPickers = new ColorPicker[]{
+                predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
+        };
+
+        widgets = new Control[]{
+                widthTextField, heightTextField,
+                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField, predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField, predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
+                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField, smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField, smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
+                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField, mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField, mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
+                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField, largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField, largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
+                simulationSpeedSlider, predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
+        };
+
+        simulationSpeedSlider.setValue(1);
+
+        for( final TextField field: inputTextFields){
+            field.textProperty().addListener(
+                    (observable, oldValue, newValue) -> {
+                        if (newValue.matches(".*[^\\d.]+.*")) {
+                            field.setText(newValue.replaceAll("[^\\d.]", ""));
+                        }
+                    }
+            );
+        }
+    }
+
+    Alert a = new Alert(Alert.AlertType.NONE);
+
     public void onPredatorColorChanged(ActionEvent actionEvent) {
     }
 
     public void onPreyColorChanged(ActionEvent actionEvent) {
     }
 
-    public int PredatorNumber;
-    public int SmallPreyNumber;
-    public int MediumPreyNumber;
-    public int LargePreyNumber;
-
     public void onStartButtonClicked(ActionEvent actionEvent) {
         App.getLoop().start();
         applyButton.setDisable(true);
         nextButton.setDisable(true);
         clearButton.setDisable(true);
-    }
-
-    public TextField getPredatorCountTextField() {
-        return predatorCountTextField;
     }
 
     public void onStopButtonClicked(ActionEvent actionEvent) {
@@ -193,46 +242,31 @@ public class UI implements Initializable {
     }
 
     public void onNextButtonClicked(ActionEvent actionEvent) {
-        // Call GameLoop update code with the special timestamp -1 for special setting
-        // of Time
         App.getLoop().handle(-1);
     }
 
     public void onApplyButtonClicked(ActionEvent actionEvent) {
         try {
-            PredatorNumber = Integer.parseInt(predatorCountTextField.getText());
-            //LargePreyNumber = Integer.parseInt(largePreyCountTextField.getText());
+            Level.changeAnimalNumber(
+                    Integer.parseInt(predatorCountTextField.getText()),
+                    Integer.parseInt(smallPreyCountTextField.getText()),
+                    Integer.parseInt(mediumPreyCountTextField.getText()),
+                    Integer.parseInt(largePreyCountTextField.getText())
+            );
 
-            //Level.changeAnimalNumber(PredatorNumber, 0, 0, 0);
             App.load(Level::main);
             startButton.setDisable(false);
             stopButton.setDisable(false);
             nextButton.setDisable(true);
-        } catch (NumberFormatException e) {
-            System.out.println("Enter only number");
+        } catch (Exception e){
+            a.setAlertType(Alert.AlertType.WARNING);
+            a.setContentText("ENTER INTEGER ONLY");
+            a.show();
         }
     }
 
     public void onClearButtonClicked(ActionEvent actionEvent) {
-        // load the level again without initializing anything
         App.load(() -> {
         });
-    }
-
-    // Barchart
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        startButton.setDisable(true);
-        stopButton.setDisable(true);
-        nextButton.setDisable(true);
-        clearButton.setDisable(true);
-        loadData();
-
-    }
-
-    private void loadData() {
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("2003");
-        series1.getData().add(new XYChart.Data("Austraia", 10000));
     }
 }
