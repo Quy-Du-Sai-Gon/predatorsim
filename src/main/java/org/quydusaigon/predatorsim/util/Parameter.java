@@ -2,7 +2,7 @@ package org.quydusaigon.predatorsim.util;
 
 public class Parameter {
     public static final boolean DEFAULT_SHOW_VISION = true;
-    public static final boolean DEFAULT_SHOW_OBJECT_STAT = false;
+    public static final boolean DEFAULT_SHOW_OBJECT_STAT = true;
 
     public static final double DEFAULT_PREDATOR_SPEED_MINIMUM_RANGE = 5;
     public static final double DEFAULT_PREDATOR_SPEED_MAXIMUM_RANGE = 6;
