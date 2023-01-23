@@ -26,6 +26,22 @@ public abstract class Animal extends StateMachine {
         return deadBehaviour;
     }
 
+    public void setWanderBehaviour(WanderBehaviour wanderBehaviour) {
+        this.wanderBehaviour = wanderBehaviour;
+    }
+
+    public void setHowlBehaviour(HowlBehaviour howlBehaviour) {
+        this.howlBehaviour = howlBehaviour;
+    }
+
+    public void setSurvivalBehaviour(SurvivalBehaviour survivalBehaviour) {
+        this.survivalBehaviour = survivalBehaviour;
+    }
+
+    public void setDeadBehaviour(DeadBehaviour deadBehaviour) {
+        this.deadBehaviour = deadBehaviour;
+    }
+
     protected WanderBehaviour wanderBehaviour;
     protected HowlBehaviour howlBehaviour;
     protected SurvivalBehaviour survivalBehaviour;
