@@ -33,6 +33,5 @@ public class HuntingAlone extends Hunting {
 
                 x.set(x.get() + Vector.getX() * animalStat.runSpeed * Time.getDeltaTime());
                 y.set(y.get() + Vector.getY() * animalStat.runSpeed * Time.getDeltaTime());
-
         }
 }
