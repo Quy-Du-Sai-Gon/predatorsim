@@ -18,10 +18,10 @@ public final class Level {
     private Level() {
     }
 
-    private static int numberOfPredator;
-    private static int numberOfSmallPrey;
-    private static int numberOfMediumPrey;
-    private static int numberOfLargePrey;
+    private static int numberOfPredator = Parameter.DEFAULT_PREDATOR_COUNT;
+    private static int numberOfSmallPrey = Parameter.DEFAULT_SMALL_PREY_COUNT;
+    private static int numberOfMediumPrey = Parameter.DEFAULT_MEDIUM_PREY_COUNT;
+    private static int numberOfLargePrey = Parameter.DEFAULT_LARGE_PREY_COUNT;
     
     public static void main() {
         IntStream.range(0, numberOfPredator).forEach((i) -> {

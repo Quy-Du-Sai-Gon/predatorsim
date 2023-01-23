@@ -4,6 +4,11 @@ public class Parameter {
     public static final boolean DEFAULT_SHOW_VISION = true;
     public static final boolean DEFAULT_SHOW_OBJECT_STAT = true;
 
+    public static final int DEFAULT_PREDATOR_COUNT = 0;
+    public static final int DEFAULT_SMALL_PREY_COUNT = 0;
+    public static final int DEFAULT_MEDIUM_PREY_COUNT = 0;
+    public static final int DEFAULT_LARGE_PREY_COUNT = 0;
+
     public static final double DEFAULT_PREDATOR_SPEED_MINIMUM_RANGE = 5;
     public static final double DEFAULT_PREDATOR_SPEED_MAXIMUM_RANGE = 6;
     public static final double DEFAULT_SMALL_PREY_SPEED_MINIMUM_RANGE = 4;
