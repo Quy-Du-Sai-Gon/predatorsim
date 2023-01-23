@@ -31,6 +31,7 @@ public class WanderState extends State {
     @Override
     public void update() {
         if (foundObject.isPresent()) {
+            animalSM.getStateConstructor().getSurvivalState().setNoTarget(false);
             animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
             return;
         }

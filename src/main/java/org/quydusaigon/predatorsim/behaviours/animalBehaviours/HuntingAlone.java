@@ -17,17 +17,12 @@ public class HuntingAlone extends Hunting {
 
                 Group thisObject = getGameObject();
 
-                double thisX = GameObject.getComponent(thisObject,
-                                Component.class).get().posX().get();
-                double thisY = GameObject.getComponent(thisObject,
-                                Component.class).get().posY().get();
-
                 double targetX = GameObject.getComponent(targetObject,
                                 Component.class).get().posX().get();
                 double targetY = GameObject.getComponent(targetObject,
                                 Component.class).get().posY().get();
 
-                Point2D Vector = new Point2D(targetX - thisX, targetY - thisY);
+                Point2D Vector = new Point2D(targetX - x.get(), targetY - y.get());
 
                 Vector.normalize();
 

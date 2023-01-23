@@ -7,6 +7,7 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour
 
 public class SurvivalState extends State {
     SurvivalBehaviour survivalBehaviour;
+    private boolean noTarget;
 
     public SurvivalState(Animal animalSM) {
         super(animalSM);
@@ -15,10 +16,20 @@ public class SurvivalState extends State {
     @Override
     public void enter() {
         survivalBehaviour = animalSM.getSurvivalBehaviour();
+        noTarget = false;
     }
 
     @Override
     public void update() {
-        survivalBehaviour.doSurvival();
+        if (!noTarget) {
+            survivalBehaviour.doSurvival();
+        }
+        else {
+            animalSM.changeState(animalSM.getStateConstructor().getWanderState());
+        }
+    }
+
+    public void setNoTarget(boolean value) {
+        noTarget = value;
     }
 }
