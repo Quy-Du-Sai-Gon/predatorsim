@@ -23,9 +23,9 @@
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" />
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                     <children>
-                        <SplitPane dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="rightSplitPane">
                             <items>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
@@ -110,7 +110,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorCountTextField" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorCountTextField" promptText="Enter the number of predators" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -130,7 +130,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum speed of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -140,7 +140,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum speed of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -160,7 +160,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum vision range of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -170,7 +170,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum vision range of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -190,7 +190,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorEnduranceMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum endurance of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorEnduranceMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -200,7 +200,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorEnduranceMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum endurance of predator" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorEnduranceMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -220,7 +220,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorGroupRadiusTextField" promptText="Enter the group radius of predators" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorGroupRadiusTextField" promptText="Enter the group radius of predators" text="2" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -256,7 +256,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Small Prey">
+                                                <Tab text="Min. Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
@@ -272,7 +272,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyCountTextField" promptText="Enter the number of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyCountTextField" promptText="Enter the number of predators" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -292,7 +292,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum speed of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -302,7 +302,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum speed of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -322,7 +322,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum vision range of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -332,7 +332,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum vision range of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -352,7 +352,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum nutrition of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -362,7 +362,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum nutrition of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -374,7 +374,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defense">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defence">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -382,7 +382,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum defense of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -392,7 +392,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum defense of small prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -428,7 +428,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Medium Prey">
+                                                <Tab text="Med. Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
@@ -444,7 +444,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyCountTextField" promptText="Enter the number of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyCountTextField" promptText="Enter the number of predators" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -464,7 +464,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum speed of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -474,7 +474,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum speed of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -494,7 +494,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum vision range of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -504,7 +504,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum vision range of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -524,7 +524,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum nutrition of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -534,7 +534,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum nutrition of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -546,7 +546,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defense">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defence">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -554,7 +554,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum defense of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -564,7 +564,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="mediumPreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the minimum defense of medium prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="mediumPreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -600,7 +600,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Large Prey">
+                                                <Tab text="Max. Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
@@ -616,7 +616,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyCountTextField" promptText="Enter the number of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyCountTextField" promptText="Enter the number of predators" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -636,7 +636,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum speed of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -646,7 +646,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum speed of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -666,7 +666,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum vision range of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -676,7 +676,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum vision range of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -696,7 +696,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum nutrition of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -706,7 +706,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the maximum nutrition of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -718,7 +718,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defense">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defence">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -726,7 +726,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the minimum defense of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -736,7 +736,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the defense of large prey" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>

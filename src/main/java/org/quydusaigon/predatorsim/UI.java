@@ -11,15 +11,19 @@ import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class UI implements Initializable {
 
     @FXML
     private TextField widthTextField;
+    private static TextField staticWidthTextField;
 
     @FXML
     private TextField heightTextField;
+    private static TextField staticHeightTextField;
 
     @FXML
     private Slider simulationSpeedSlider;
@@ -32,8 +36,6 @@ public class UI implements Initializable {
 
     @FXML
     private ColorPicker largePreyColorPicker;
-
-
 
 
     @FXML
@@ -171,26 +173,81 @@ public class UI implements Initializable {
     @FXML
     private BarChart<String, Double> barChart;
 
-    TextField[] inputTextFields;
+    @FXML
+    private SplitPane rightSplitPane;
+    private static SplitPane staticRightSplitPane;
     ColorPicker[] colorPickers;
 
     private Control[] widgets;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        staticWidthTextField = widthTextField;
+        staticHeightTextField = heightTextField;
+        staticRightSplitPane = rightSplitPane;
+
+        final Map<TextField, String> DEFAULT_VALUES = Map.ofEntries(
+                Map.entry(widthTextField, "700"),
+                Map.entry(heightTextField, "700"),
+                Map.entry(predatorCountTextField, "10"),
+                Map.entry(predatorRunSpeedMinTextField, ""),
+                Map.entry(predatorRunSpeedMaxTextField, ""),
+                Map.entry(predatorVisionMinTextField, ""),
+                Map.entry(predatorVisionMaxTextField, ""),
+                Map.entry(predatorEnduranceMinTextField, ""),
+                Map.entry(predatorEnduranceMaxTextField, ""),
+                Map.entry(predatorGroupRadiusTextField, ""),
+                Map.entry(smallPreyCountTextField, "10"),
+                Map.entry(smallPreyRunSpeedMinTextField, ""),
+                Map.entry(smallPreyRunSpeedMaxTextField, ""),
+                Map.entry(smallPreyVisionMinTextField, ""),
+                Map.entry(smallPreyVisionMaxTextField, ""),
+                Map.entry(smallPreyNutritionMinTextField, ""),
+                Map.entry(smallPreyNutritionMaxTextField, ""),
+                Map.entry(smallPreyDefenseMinTextField, ""),
+                Map.entry(smallPreyDefenseMaxTextField, ""),
+                Map.entry(mediumPreyCountTextField, "10"),
+                Map.entry(mediumPreyRunSpeedMinTextField, ""),
+                Map.entry(mediumPreyRunSpeedMaxTextField, ""),
+                Map.entry(mediumPreyVisionMinTextField, ""),
+                Map.entry(mediumPreyVisionMaxTextField, ""),
+                Map.entry(mediumPreyNutritionMinTextField, ""),
+                Map.entry(mediumPreyNutritionMaxTextField, ""),
+                Map.entry(mediumPreyDefenseMinTextField, ""),
+                Map.entry(mediumPreyDefenseMaxTextField, ""),
+                Map.entry(largePreyCountTextField, "10"),
+                Map.entry(largePreyRunSpeedMinTextField, ""),
+                Map.entry(largePreyRunSpeedMaxTextField, ""),
+                Map.entry(largePreyVisionMinTextField, ""),
+                Map.entry(largePreyVisionMaxTextField, ""),
+                Map.entry(largePreyNutritionMinTextField, ""),
+                Map.entry(largePreyNutritionMaxTextField, ""),
+                Map.entry(largePreyDefenseMinTextField, ""),
+                Map.entry(largePreyDefenseMaxTextField, "")
+        );
+
+        for (final Map.Entry<TextField, String> entry : DEFAULT_VALUES.entrySet()) {
+            var field = entry.getKey();
+            var defaultValue = entry.getValue();
+
+            field.setText(defaultValue);
+            field.textProperty().addListener(
+                    (observable, oldValue, newValue) -> {
+                        if (newValue.matches(".*[^\\d.]+.*")) {
+                            field.setText(newValue.replaceAll("[^\\d.]", ""));
+                        }
+                        if (field.getText().isEmpty()) {
+                            field.setText(defaultValue);
+                        }
+                    }
+            );
+        }
+
+        updateSimulationWindowSize();
+
         startButton.setDisable(true);
         stopButton.setDisable(true);
         nextButton.setDisable(true);
-
-
-
-        inputTextFields = new TextField[]{
-                widthTextField, heightTextField,
-                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField, predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField, predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
-                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField, smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField, smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
-                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField, mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField, mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
-                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField, largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField, largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
-        };
 
         colorPickers = new ColorPicker[]{
                 predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
@@ -207,15 +264,6 @@ public class UI implements Initializable {
 
         simulationSpeedSlider.setValue(1);
 
-        for( final TextField field: inputTextFields){
-            field.textProperty().addListener(
-                    (observable, oldValue, newValue) -> {
-                        if (newValue.matches(".*[^\\d.]+.*")) {
-                            field.setText(newValue.replaceAll("[^\\d.]", ""));
-                        }
-                    }
-            );
-        }
     }
 
     Alert a = new Alert(Alert.AlertType.NONE);
@@ -245,7 +293,17 @@ public class UI implements Initializable {
         App.getLoop().handle(-1);
     }
 
+    public static void updateSimulationWindowSize() {
+        double width = Double.parseDouble(staticWidthTextField.getText());
+        double height = Double.parseDouble(staticHeightTextField.getText());
+
+        App.setSimulationWindowSize(width, height);
+        App.setStageSize(width + staticRightSplitPane.getWidth(), height);
+    }
+
     public void onApplyButtonClicked(ActionEvent actionEvent) {
+        updateSimulationWindowSize();
+
         try {
             Level.changeAnimalNumber(
                     Integer.parseInt(predatorCountTextField.getText()),
@@ -258,7 +316,7 @@ public class UI implements Initializable {
             startButton.setDisable(false);
             stopButton.setDisable(false);
             nextButton.setDisable(true);
-        } catch (Exception e){
+        } catch (Exception e) {
             a.setAlertType(Alert.AlertType.WARNING);
             a.setContentText("ENTER INTEGER ONLY");
             a.show();

@@ -22,15 +22,19 @@ import java.io.IOException;
 public class App extends Application {
 
     public static Group root;
-    public static final int simulationWindowHeight = 800;
-    public static final int simulationWindowWidth = 1000;
+    public static double simulationWindowHeight;
+    public static double simulationWindowWidth;
     private static GameLoop loop;
 
     private static float timeStep = 0.5f;
 
     private static BorderPane left;
+    private static Stage stage;
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage mainStage) throws IOException {
+        stage = mainStage;
+
         stage.setTitle("Predatorsim");
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
@@ -50,8 +54,19 @@ public class App extends Application {
 
         load(Level::main);
         loop = new GameLoop();
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
+        UI.updateSimulationWindowSize();
+    }
+
+    public static void setStageSize(double width, double height) {
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }
+
+    public static void setSimulationWindowSize(double width, double height) {
+        simulationWindowWidth = width;
+        simulationWindowHeight = height;
     }
 
     private static void setRoot(Group root) {
