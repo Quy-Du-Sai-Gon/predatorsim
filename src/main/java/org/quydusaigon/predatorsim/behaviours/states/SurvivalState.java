@@ -26,6 +26,7 @@ public class SurvivalState extends State {
         }
         else {
             animalSM.changeState(animalSM.getStateConstructor().getWanderState());
+            return;
         }
     }
 

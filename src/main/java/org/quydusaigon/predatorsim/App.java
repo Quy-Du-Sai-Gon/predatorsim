@@ -22,8 +22,8 @@ import java.io.IOException;
 public class App extends Application {
 
     public static Group root;
-    public static final int simulationWindowHeight = 500;
-    public static final int simulationWindowWidth = 500;
+    public static final int simulationWindowHeight = 800;
+    public static final int simulationWindowWidth = 1000;
     private static GameLoop loop;
 
     private static float timeStep = 0.5f;
