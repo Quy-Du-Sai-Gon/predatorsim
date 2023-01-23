@@ -18,8 +18,16 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.util.Pair;
 
+/**
+ * This class extends {@link AnimationTimer} and implements custom
+ * {@link AnimationTimer#start() start} and {@link AnimationTimer#handle(long)
+ * handle} methods to act as the game loop that updates our application.
+ */
 public class GameLoop extends AnimationTimer {
 
+    /**
+     * Initializes and starts the game loop.
+     */
     @Override
     public void start() {
         super.start();
@@ -33,6 +41,17 @@ public class GameLoop extends AnimationTimer {
         GameObject.start(App.root);
     }
 
+    /**
+     * Handles updates and collision detection for our {@link App} when called. This
+     * method is called every frame after the game loop has been
+     * {@linkplain #start() started}.
+     * 
+     * @param now the timestamp of the current frame given in nanoseconds. This
+     *            value will be the same for all {@code GameLoop} called during one
+     *            frame. The value passed in can be {@code -1} to indicate a move in
+     *            {@linkplain App#getTimeStep() time step}, meaning this would
+     *            update the next iteration of the game loop.
+     */
     @Override
     public void handle(long now) {
         // Update Time
