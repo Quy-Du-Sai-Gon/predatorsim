@@ -11,6 +11,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
+import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,52 +28,118 @@ public class UI implements Initializable {
     private Slider simulationSpeedSlider;
 
     @FXML
-    private TextField predatorCountTextField;
-
-    @FXML
-    private TextField predatorHealthTextField;
-
-    @FXML
-    private TextField predatorAttackPowerTextField;
-
-    @FXML
-    private TextField predatorRunSpeedTextField;
-
-    @FXML
-    private TextField predatorEnduranceTextField;
-
-    @FXML
-    private TextField predatorDefenceTextField;
-
-    @FXML
-    private TextField predatorGroupRadiusTextField;
+    private ColorPicker preyColorPicker;
 
     @FXML
     private ColorPicker predatorColorPicker;
 
     @FXML
-    private TextField preyCountTextField;
+    private TextField predatorCountTextField;
 
     @FXML
-    private TextField preyHealthTextField;
+    private TextField smallPreyCountTextField;
 
     @FXML
-    private TextField preyAttackPowerTextField;
+    private TextField mediumPreyCountTextField;
 
     @FXML
-    private TextField preyMinSizeTextField;
+    private TextField largePreyCountTextField;
 
     @FXML
-    private TextField preyMaxSizeTextField;
+    private TextField predatorRunSpeedMinTextField;
 
     @FXML
-    private TextField preyNutritionTextField;
+    private TextField predatorRunSpeedMaxTextField;
+
+    @FXML
+    private TextField smallPreyRunSpeedMinTextField;
+
+    @FXML
+    private TextField smallPreyRunSpeedMaxTextField;
+
+    @FXML
+    private TextField mediumPreyRunSpeedMinTextField;
+
+    @FXML
+    private TextField mediumPreyRunSpeedMaxTextField;
+
+    @FXML
+    private TextField largePreyRunSpeedMinTextField;
+
+    @FXML
+    private TextField largePreyRunSpeedMaxTextField;
+
+    @FXML
+    private TextField predatorVisionMinTextField;
+
+    @FXML
+    private TextField predatorVisionMaxTextField;
+
+    @FXML
+    private TextField smallPreyVisionMinTextField;
+
+    @FXML
+    private TextField smallPreyVisionMaxTextField;
+
+    @FXML
+    private TextField mediumPreyVisionMinTextField;
+
+    @FXML
+    private TextField mediumPreyVisionMaxTextField;
+
+    @FXML
+    private TextField largePreyVisionMinTextField;
+
+    @FXML
+    private TextField largePreyVisionMaxTextField;
+
+    @FXML
+    private TextField smallPreyNutritionMinTextField;
+
+    @FXML
+    private TextField smallPreyNutritionMaxTextField;
+
+    @FXML
+    private TextField mediumPreyNutritionMinTextField;
+
+    @FXML
+    private TextField mediumPreyNutritionMaxTextField;
+
+    @FXML
+    private TextField largePreyNutritionMinTextField;
+
+    @FXML
+    private TextField largePreyNutritionMaxTextField;
+
+    @FXML
+    private TextField smallPreyDefenseMinTextField;
+
+    @FXML
+    private TextField smallPreyDefenseMaxTextField;
+
+    @FXML
+    private TextField mediumPreyDefenseMinTextField;
+
+    @FXML
+    private TextField mediumPreyDefenseMaxTextField;
+
+    @FXML
+    private TextField largePreyDefenseMinTextField;
+
+    @FXML
+    private TextField largePreyDefenseMaxTextField;
+
+    @FXML
+    private TextField predatorStarvationEduranceMinTextField;
+
+    @FXML
+    private TextField predatorStarvationEduranceMaxTextField;
+
+    @FXML
+    private TextField predatorGroupRadiusTextField;
 
     @FXML
     private TextField preyRebornTextField;
-
-    @FXML
-    private ColorPicker preyColorPicker;
 
     @FXML
     private Button startButton;
@@ -134,9 +201,9 @@ public class UI implements Initializable {
     public void onApplyButtonClicked(ActionEvent actionEvent) {
         try {
             PredatorNumber = Integer.parseInt(predatorCountTextField.getText());
-            LargePreyNumber = Integer.parseInt(preyCountTextField.getText());
+            //LargePreyNumber = Integer.parseInt(largePreyCountTextField.getText());
 
-            Level.changeAnimalNumber(PredatorNumber, LargePreyNumber);
+            //Level.changeAnimalNumber(PredatorNumber, 0, 0, 0);
             App.load(Level::main);
             startButton.setDisable(false);
             stopButton.setDisable(false);
