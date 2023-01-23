@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -23,14 +22,13 @@ import java.io.IOException;
 public class App extends Application {
 
     public static Group root;
-    public static final int simulationWindowHeight = 800;
-    public static final int simulationWindowWidth = 1000;
+    public static final int simulationWindowHeight = 500;
+    public static final int simulationWindowWidth = 500;
     private static GameLoop loop;
 
     private static float timeStep = 0.5f;
 
-    private static VBox left;
-    private static AnchorPane inLeftAnchorPane;
+    private static BorderPane left;
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Predatorsim");
@@ -38,19 +36,14 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent parent = fxmlLoader.load();
 
+        Rectangle myRect = new Rectangle(simulationWindowWidth, simulationWindowHeight,Color.TRANSPARENT);
+        myRect.setX(0.0);
+        myRect.setY(0.0);
+        myRect.setStroke(Color.RED);
 
-        left = (VBox) fxmlLoader.getNamespace().get("leftVBox");
-        left.setBorder(new Border(new BorderStroke(Color.BLUE,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));;
-
-        inLeftAnchorPane = new AnchorPane();
-
-
-        inLeftAnchorPane.setBorder(new Border(new BorderStroke(Color.RED,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
-        left.getChildren().add(inLeftAnchorPane);
-        VBox.setVgrow(inLeftAnchorPane, Priority.NEVER);
+        left = (BorderPane) fxmlLoader.getNamespace().get("borderPane");
+        left.setCenter(root);
+        left.setTop(myRect);
 
         var scene = new Scene(parent);
         stage.setScene(scene);
@@ -62,7 +55,7 @@ public class App extends Application {
     }
 
     private static void setRoot(Group root) {
-        var children = inLeftAnchorPane.getChildren();
+        var children = left.getChildren();
         children.remove(App.root);
         children.add(root);
         App.root = root;
