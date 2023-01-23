@@ -9,6 +9,7 @@ import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.Helper;
 import org.quydusaigon.predatorsim.gameengine.util.Prefab;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
+import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
 import javafx.scene.Group;
@@ -17,11 +18,11 @@ public final class Level {
     private Level() {
     }
 
-    public static int numberOfPredator = 0;
-    public static int numberOfSmallPrey = 0;
-    public static int numberOfMediumPrey = 0;
-    public static int numberOfLargePrey = 0;
-
+    private static int numberOfPredator = 2;
+    private static int numberOfSmallPrey = 2;
+    private static int numberOfMediumPrey = 3;
+    private static int numberOfLargePrey = 3;
+    
     public static void main() {
         IntStream.range(0, numberOfPredator).forEach((i) -> {
             GameObject.instantiate(Prefabs.PREDATOR, TransformInit.getRandomTransformInit());
@@ -40,8 +41,10 @@ public final class Level {
         });
     };
 
-    public static void changeAnimalNumber(int predatorNumber, int preyNumber) {
+    public static void changeAnimalNumber(int predatorNumber, int smallPreyNumber, int mediumPreyNumber, int largePreyNumber) {
         numberOfPredator = predatorNumber;
-        numberOfLargePrey = preyNumber;
+        numberOfSmallPrey = smallPreyNumber;
+        numberOfMediumPrey = mediumPreyNumber;
+        numberOfLargePrey = largePreyNumber;
     }
 }
