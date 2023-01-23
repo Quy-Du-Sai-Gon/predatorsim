@@ -22,4 +22,8 @@ public class StateMachine extends Behaviour {
     public void update() {
         currentState.update();
     }
+
+    public State getCurrenState() {
+        return this.currentState;
+    }
 }
