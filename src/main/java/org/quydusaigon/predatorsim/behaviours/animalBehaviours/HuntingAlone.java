@@ -15,8 +15,6 @@ public class HuntingAlone extends Hunting {
                 var x = posX();
                 var y = posY();
 
-                Group thisObject = getGameObject();
-
                 double targetX = GameObject.getComponent(targetObject,
                                 Component.class).get().posX().get();
                 double targetY = GameObject.getComponent(targetObject,
