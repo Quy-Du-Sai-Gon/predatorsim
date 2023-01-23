@@ -18,10 +18,10 @@ public final class Level {
     private Level() {
     }
 
-    private static int numberOfPredator = 2;
-    private static int numberOfSmallPrey = 2;
-    private static int numberOfMediumPrey = 3;
-    private static int numberOfLargePrey = 3;
+    private static int numberOfPredator;
+    private static int numberOfSmallPrey;
+    private static int numberOfMediumPrey;
+    private static int numberOfLargePrey;
     
     public static void main() {
         IntStream.range(0, numberOfPredator).forEach((i) -> {
