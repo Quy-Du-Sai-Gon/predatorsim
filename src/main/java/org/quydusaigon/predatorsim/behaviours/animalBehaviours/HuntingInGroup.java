@@ -8,7 +8,8 @@ public class HuntingInGroup extends Hunting {
     private ArrayList<Group> alliesObjects;
 
     public void doSurvival() {
-        super.doSurvival();
+        var x = posX();
+        var y = posY();
     }
 
     @Override
