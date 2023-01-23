@@ -47,18 +47,18 @@ public class WanderBehaviour extends AnimalBehaviour {
             if (preyStat.size == PreySize.LARGE) {
                 seedX += 0.003;
             }
+            
+            double mapTendencyOffsetX = Math.abs(App.simulationWindowWidth - posX().get());
+            double mapTendencyOffsetY =  Math.abs(App.simulationWindowHeight - posY().get());
+    
+            seedX += 0.01 - mapTendencyOffsetX/45000;
+            seedY += 0.01 - mapTendencyOffsetY/45000;
         }
 
         else if (stat instanceof PredatorStat) {
             seedX += 0.01;
             seedY += 0.01;
         }
- 
-        double mapTendencyOffsetX = Math.abs(App.simulationWindowWidth - posX().get());
-        double mapTendencyOffsetY =  Math.abs(App.simulationWindowHeight - posY().get());
-
-        seedX += 0.01 - mapTendencyOffsetX/50000;
-        seedY += 0.01 - mapTendencyOffsetY/50000;
 
         x.set(Map.checkBoundX(posX().get() + randomX));
         y.set(Map.checkBoundY(posY().get() + randomY));
