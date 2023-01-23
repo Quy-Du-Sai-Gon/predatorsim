@@ -74,6 +74,7 @@ public final class Prefabs {
                 predatorGroupRadius
         );
         
+
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
@@ -88,6 +89,13 @@ public final class Prefabs {
 
         GameObject.create(TransformInit.DEFAULT, newPredator,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
+        if (showObjectStat) {
+            StatDisplay stat = new StatDisplay(predatorStat, newPredator);
+            var statNodeComp = new NodeComponent<>(stat.pane);
+            GameObject.create(TransformInit.DEFAULT, newPredator,
+                    statNodeComp);
+        }
 
         return newPredator;
     };
@@ -117,6 +125,13 @@ public final class Prefabs {
         GameObject.create(TransformInit.DEFAULT, newSmallPrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
+        if (showObjectStat) {
+            StatDisplay stat = new StatDisplay(smallPreyStat, newSmallPrey);
+            var statNodeComp = new NodeComponent<>(stat.pane);
+            GameObject.create(TransformInit.DEFAULT, newSmallPrey,
+                            statNodeComp);
+        }
+
         return newSmallPrey;
     };
 
@@ -144,6 +159,13 @@ public final class Prefabs {
         GameObject.create(TransformInit.DEFAULT, newMediumPrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
+        if (showObjectStat) {
+            StatDisplay stat = new StatDisplay(mediumPreyStat, newMediumPrey);
+            var statNodeComp = new NodeComponent<>(stat.pane);
+            GameObject.create(TransformInit.DEFAULT, newMediumPrey,
+                                    statNodeComp);
+        }
+
         return newMediumPrey;
     };
 
@@ -170,6 +192,13 @@ public final class Prefabs {
 
         GameObject.create(TransformInit.DEFAULT, newLargePrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
+        if (showObjectStat) {
+            StatDisplay stat = new StatDisplay(largePreyStat, newLargePrey);
+            var statNodeComp = new NodeComponent<>(stat.pane);
+            GameObject.create(TransformInit.DEFAULT, newLargePrey,
+                                    statNodeComp);
+        }
 
         return newLargePrey;
     };
