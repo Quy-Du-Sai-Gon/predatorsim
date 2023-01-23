@@ -37,7 +37,6 @@ public class Vision extends Behaviour {
             var particle = (Circle) other.getNode();
             particle.setStroke(Color.BLACK);
             particle.setStrokeWidth(5);
-
             detectedGameObject.add(otherGameObject);
             
             if ((GameObject.getComponent(thisGameObject, Predator.class).isPresent() &
