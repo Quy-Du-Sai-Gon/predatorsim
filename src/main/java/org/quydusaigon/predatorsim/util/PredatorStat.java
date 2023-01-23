@@ -1,15 +1,14 @@
 package org.quydusaigon.predatorsim.util;
 
 public class PredatorStat extends AnimalStat {
-    public double starvationResilience;
-    public double defenceChance;
+
+    public int starvationResilience;
     public double groupRadius;
 
-    public PredatorStat(double runSpeed, double visionRange, double starvationResilience, double defenceChance,
+    public PredatorStat(double runSpeed, double visionRange, int starvationResilience,
             double groupRadius) {
         super(runSpeed, visionRange);
         this.starvationResilience = starvationResilience;
-        this.defenceChance = defenceChance;
         this.groupRadius = groupRadius;
     }
 }
