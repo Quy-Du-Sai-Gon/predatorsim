@@ -1,6 +1,7 @@
 package org.quydusaigon.predatorsim.util;
 
 public class AnimalStat {
+    
     public double runSpeed;
     public double visionRange;
 
