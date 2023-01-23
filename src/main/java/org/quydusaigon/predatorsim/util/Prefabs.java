@@ -137,7 +137,7 @@ public final class Prefabs {
     };
 
     public static final Prefab MEDIUM_PREY = (tf, parent) -> {
-        var nodeComp = new NodeComponent<>(new Circle(10, Color.GREEN));
+        var nodeComp = new NodeComponent<>(new Circle(20, Color.GREEN));
         PreyStat mediumPreyStat = new PreyStat(                
                 random.nextDouble(mediumPreySpeedMin, mediumPreySpeedMax),
                 random.nextDouble(mediumPreyVisionRangeMin, mediumPreyVisionRangeMax),
@@ -171,7 +171,7 @@ public final class Prefabs {
     };
 
     public static final Prefab LARGE_PREY = (tf, parent) -> {
-        var nodeComp = new NodeComponent<>(new Circle(20, Color.GREEN));
+        var nodeComp = new NodeComponent<>(new Circle(30, Color.GREEN));
         PreyStat largePreyStat = new PreyStat(                
                 random.nextDouble(largePreySpeedMin, largePreySpeedMax),
                 random.nextDouble(largePreyVisionRangeMin, largePreyVisionRangeMax),
