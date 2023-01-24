@@ -25,11 +25,11 @@ public class StatDisplay extends Behaviour{
         gameObject = object;
         this.stat = stat;
         this.animal = GameObject.getComponent(object, Animal.class).get();
-        Rectangle box = new Rectangle(140, 80, Color.LIMEGREEN);        
+        Rectangle box = new Rectangle(130, 80, Color.LIMEGREEN);        
         box.setOpacity(0.4);
     
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.MEDIUM, FontPosture.REGULAR, 10));
+        text.setFont(Font.font("Consolas", FontWeight.MEDIUM, FontPosture.REGULAR, 10));
         if (this.stat instanceof PredatorStat) {
             PredatorStat predatorstat = (PredatorStat) this.stat;
             text.setText("Predator ID: " + this.gameObject.hashCode() + "\n" +
