@@ -1,12 +1,11 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
-import org.quydusaigon.predatorsim.behaviours.animals.Predator;
-import org.quydusaigon.predatorsim.behaviours.animals.Prey;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -20,18 +19,19 @@ public class Vision extends Behaviour {
 
     HashSet<Group> detectedGameObject;
     boolean showVision = false;
+    Group thisAnimalGameObject;
 
     @Override
     public void start() {
         detectedGameObject = new HashSet<>();
+        thisAnimalGameObject = GameObject.getParent(getGameObject()).orElseThrow();
     }
 
     @Override
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
-        Group thisGameObject = GameObject.getParent(getGameObject()).orElseThrow();
         Group otherGameObject = other.getGameObject();
 
-        if (thisGameObject != otherGameObject
+        if (thisAnimalGameObject != otherGameObject
                 && GameObject.getComponent(otherGameObject, Vision.class).isEmpty()) {
 
             var particle = (Circle) other.getNode();
@@ -51,37 +51,17 @@ public class Vision extends Behaviour {
         }
     }
 
-    public HashSet<Group> getAllDetectedObject(Class animal) {
-        HashSet<Group> detectedObject = new HashSet<Group>();
-        Iterator<Group> iter = detectedGameObject.iterator();
-
-        while (iter.hasNext()) {
-            Group current = iter.next();
-            if (GameObject.getComponent(current, animal).isPresent()) {
-                detectedObject.add(current);
-            }
-        }
-        return detectedObject;
+    public <T extends Animal> Set<Group> getAllDetectedObject(Class<T> animal) {
+        return detectedGameObject.stream()
+                .filter(go -> GameObject.getComponent(go, animal).isPresent())
+                .collect(Collectors.toSet());
     }
 
-    public Optional<Group> getClosestObject(Class animal) {
-        HashSet<Group> detectedObject = getAllDetectedObject(animal);
-        Iterator<Group> iter = detectedObject.iterator();
+    public <T extends Animal> Optional<Group> getClosestObject(Class<T> animal) {
+        return getAllDetectedObject(animal).stream()
+                .min((obj1, obj2) -> Double.compare(
+                        Distance.calculateDistance(obj1, thisAnimalGameObject),
+                        Distance.calculateDistance(obj2, thisAnimalGameObject)));
 
-        if (!detectedObject.isEmpty()) {
-            double closestDistance = 0;
-            Group closestObject = new Group();
-
-            while (iter.hasNext()) {
-                Group current = iter.next();
-                if (Distance.calculateDistance(current,
-                        GameObject.getParent(getGameObject()).get()) >= closestDistance) {
-                    closestObject = current;
-                    closestDistance = Distance.calculateDistance(current, GameObject.getParent(getGameObject()).get());
-                }
-            }
-            return Optional.of(closestObject);
-        }
-        return Optional.empty();
     }
 }
