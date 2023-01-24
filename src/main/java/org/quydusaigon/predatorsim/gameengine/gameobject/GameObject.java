@@ -490,16 +490,4 @@ public final class GameObject {
                     .forEach(Behaviour::update);
         }
     }
-
-    public static List<Component> getComponentsList(Group gameObject){
-        return getGameObjectData(gameObject).components;
-    }
-
-    public static void printComponents(Group gameObject){
-        var go = getGameObjectData(gameObject);
-
-        for (var c : go.components) {
-            System.out.println(c);
-        }
-    }
 }

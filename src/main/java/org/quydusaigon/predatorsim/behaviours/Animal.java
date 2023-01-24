@@ -56,7 +56,10 @@ public abstract class Animal extends StateMachine {
     protected HowlBehaviour howlBehaviour;
     protected SurvivalBehaviour survivalBehaviour;
     protected DeadBehaviour deadBehaviour;
-    public StateConstructor getStateConstructor(){return stateConstructor;}
+
+    public StateConstructor getStateConstructor() {
+        return stateConstructor;
+    }
 
     public Animal(AnimalStat animalStat) {
         this.animalStat = animalStat;
@@ -74,19 +77,10 @@ public abstract class Animal extends StateMachine {
 
         initialize(this.stateConstructor.getWanderState());
 
-
     }
 
-    private void setUp(){
-        List<Component> componentList = GameObject.getComponentsList(getGameObject());
-
-        for(int i = 0; i < componentList.size(); i++){
-            if(componentList.get(i) instanceof  AnimalBehaviour){
-                AnimalBehaviour temp = (AnimalBehaviour) componentList.get(i);
-                temp.setAnimalStat(animalStat);
-            }
-        }
+    private void setUp() {
+        getComponents(AnimalBehaviour.class).forEach(
+                animal -> animal.setAnimalStat(animalStat));
     }
 }
-
-
