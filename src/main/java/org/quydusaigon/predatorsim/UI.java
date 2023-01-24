@@ -363,6 +363,9 @@ public class UI implements Initializable {
             Prefabs.setLargePreyDefense(Double.parseDouble(largePreyDefenseMinTextField.getText()),
                 Double.parseDouble(largePreyDefenseMaxTextField.getText()));
 
+            Prefabs.setShowVision(isVisionShowed);
+            Prefabs.setShowStat(isStatusShowed);
+
             App.load(Level::main);
             startButton.setDisable(false);
             stopButton.setDisable(false);
@@ -377,5 +380,16 @@ public class UI implements Initializable {
     public void onClearButtonClicked(ActionEvent actionEvent) {
         App.load(() -> {
         });
+    }
+
+
+    private boolean isVisionShowed;
+    private boolean isStatusShowed;
+    public void onShowVisionCheckBoxClicked(ActionEvent actionEvent) {
+        isVisionShowed = showVisionCheckBox.isSelected();
+    }
+
+    public void onShowStatusCheckBoxClicked(ActionEvent actionEvent) {
+        isStatusShowed = showVisionCheckBox.isSelected();
     }
 }

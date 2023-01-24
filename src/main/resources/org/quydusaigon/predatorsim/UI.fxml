@@ -89,12 +89,12 @@
                                                                                 </Slider>
                                                                             </children>
                                                                         </HBox>
-                                                                        <CheckBox fx:id="showVisionCheckBox" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show Vision" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showVisionCheckBox" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show Vision" VBox.vgrow="ALWAYS" onAction="#onShowVisionCheckBoxClicked">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
                                                                         </CheckBox>
-                                                                        <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show Status" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show Status" VBox.vgrow="ALWAYS" onAction="#onShowStatusCheckBoxClicked">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
