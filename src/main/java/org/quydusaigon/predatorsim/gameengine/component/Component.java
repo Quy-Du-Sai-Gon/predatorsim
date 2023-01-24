@@ -20,7 +20,7 @@ import javafx.scene.Group;
  * @see <a href="https://en.wikipedia.org/wiki/Entity_component_system">Entity
  *      component system</a>
  */
-public class Component {
+public abstract class Component {
 
     private Group gameObject;
 
