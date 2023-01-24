@@ -11,9 +11,14 @@ public class DeadState extends State {
 
     @Override
     public void enter() {
-//        super.enter();
-//        System.out.println("Dead");
-//        System.out.println(animalSM.getGameObject());
-//        GameObject.destroy(animalSM.getGameObject());
+        // super.enter();
+        // System.out.println("Dead");
+        // System.out.println(animalSM.getGameObject());
+        // GameObject.destroy(animalSM.getGameObject());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Dead";
     }
 }

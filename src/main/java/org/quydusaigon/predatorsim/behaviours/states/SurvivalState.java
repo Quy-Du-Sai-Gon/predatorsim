@@ -23,8 +23,7 @@ public class SurvivalState extends State {
     public void update() {
         if (!noTarget) {
             survivalBehaviour.doSurvival();
-        }
-        else {
+        } else {
             animalSM.changeState(animalSM.getStateConstructor().getWanderState());
             return;
         }
@@ -32,5 +31,10 @@ public class SurvivalState extends State {
 
     public void setNoTarget(boolean value) {
         noTarget = value;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Survival";
     }
 }

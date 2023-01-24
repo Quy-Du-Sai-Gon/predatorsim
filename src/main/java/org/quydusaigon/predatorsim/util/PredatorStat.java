@@ -11,4 +11,10 @@ public class PredatorStat extends AnimalStat {
         this.starvationResilience = starvationResilience;
         this.groupRadius = groupRadius;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%sHunger Resilience: %d\nGroup radius: %f\n",
+                super.toString(), starvationResilience, groupRadius);
+    }
 }

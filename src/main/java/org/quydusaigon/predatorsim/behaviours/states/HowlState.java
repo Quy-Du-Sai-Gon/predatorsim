@@ -7,4 +7,9 @@ public class HowlState extends State {
     public HowlState(Animal animalSM) {
         super(animalSM);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Howl";
+    }
 }

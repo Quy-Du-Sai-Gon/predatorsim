@@ -73,4 +73,9 @@ public class WanderState extends State {
     public void setFoundObject(Group Object) {
         foundObject = Optional.of(Object);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Wander";
+    }
 }
