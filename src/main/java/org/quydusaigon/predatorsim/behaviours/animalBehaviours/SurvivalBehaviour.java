@@ -13,9 +13,7 @@ public abstract class SurvivalBehaviour extends AnimalBehaviour {
 
     public abstract void doSurvival();
 
-    public void setTargetObject(Group object) {
-    }
+    public void setUpReference(Group targetObject){};
+    public void setUpReference(){};
 
-    public void setAlliesObject(Group objects) {
-    }
 }

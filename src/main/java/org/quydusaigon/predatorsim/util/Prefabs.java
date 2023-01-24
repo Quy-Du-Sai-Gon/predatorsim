@@ -79,8 +79,8 @@ public final class Prefabs {
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
-                new HuntingAlone(),
                 new HuntingInGroup(),
+                new HuntingAlone(),
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);

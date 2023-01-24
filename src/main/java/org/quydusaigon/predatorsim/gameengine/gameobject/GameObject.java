@@ -290,6 +290,10 @@ public final class GameObject {
         }
     }
 
+    public static List<Component> getComponentsList(Group gameObject){
+        return getGameObjectData(gameObject).components;
+    }
+
     public static void printComponents(Group gameObject){
         var go = getGameObjectData(gameObject);
 

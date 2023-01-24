@@ -13,7 +13,6 @@ public class StateMachine extends Behaviour {
 
     public void changeState(State nextState) {
         currentState.exit();
-
         currentState = nextState;
         currentState.enter();
     }

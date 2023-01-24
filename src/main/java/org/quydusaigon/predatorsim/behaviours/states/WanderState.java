@@ -4,12 +4,8 @@ import java.util.Optional;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Evading;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Hunting;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingInGroup;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.SurvivalBehaviour;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Vision;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -36,43 +32,45 @@ public class WanderState extends State {
 
     @Override
     public void update() {
-        Group thisObject = animalSM.getGameObject();
-        var vision = GameObject.getComponent(GameObject.getChildren(thisObject).get(0), Vision.class).get();
+        if (animalSM instanceof Predator && detectTarget(Prey.class)) {
+            return;
+        }
+        else if (animalSM instanceof Prey && detectTarget(Predator.class)) {
+            return;
+        }
 
-        if (animalSM instanceof Predator) {
-            if (vision.getAllDetectedObject(Prey.class).size() != 0) {
-                setFoundObject(vision.getClosestObject(Prey.class).get());
-                animalSM.getStateConstructor().getSurvivalState().setNoTarget(false);
-                animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
-                return;
-            }
-        }
-        else if (animalSM instanceof Prey) {
-            if (vision.getAllDetectedObject(Predator.class).size() != 0) {
-                setFoundObject(vision.getClosestObject(Predator.class).get());
-                animalSM.getStateConstructor().getSurvivalState().setNoTarget(false);
-                animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
-                return;
-            }
-        }
         wanderBehaviour.doAction();
     }
 
     @Override
     public void exit() {
-        SurvivalBehaviour survivalBehavior = animalSM.getSurvivalBehaviour();
-        if (survivalBehavior instanceof Hunting) {
-            survivalBehavior.setTargetObject(foundObject.get());
-
+        if (animalSM instanceof Predator) {
             PreyStat preystat = (PreyStat) GameObject.getComponent(foundObject.get(), Prey.class).get().animalStat;
+
             if (preystat.size == PreySize.SMALL) {
-                animalSM.setSurvivalBehaviour(GameObject.getComponent(animalSM.getGameObject(), HuntingAlone.class).get());
+                animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingAlone.class).orElseThrow());
             }
             else if ((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) {
-                animalSM.setSurvivalBehaviour(GameObject.getComponent(animalSM.getGameObject(), HuntingInGroup.class).get());
+                animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingInGroup.class).orElseThrow());
             }
+
+            animalSM.getSurvivalBehaviour().setUpReference(foundObject.orElseThrow());
         }
+        else if(animalSM instanceof Prey){
+            animalSM.getSurvivalBehaviour().setUpReference();
+        }
+
         foundObject = Optional.empty();
+    }
+
+    private boolean detectTarget(Class animalType){
+        if (animalSM.getVision().getAllDetectedObject(animalType).size() != 0) {
+            setFoundObject(animalSM.getVision().getClosestObject(animalType).get());
+            animalSM.getStateConstructor().getSurvivalState().setNoTarget(false);
+            animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());
+            return true;
+        }
+        else return false;
     }
 
     public void setFoundObject(Group Object) {

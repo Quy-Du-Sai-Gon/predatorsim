@@ -1,6 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours.animals;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.util.PreyStat;
 
 /**
@@ -12,4 +13,11 @@ public class Prey extends Animal {
         super(stat);
     }
 
+    @Override
+    public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
+        super.onCollisionEnter(collider, other);
+        if(other.getComponent(Predator.class).isPresent()){
+            changeState(stateConstructor.getDeadState());
+        }
+    }
 }

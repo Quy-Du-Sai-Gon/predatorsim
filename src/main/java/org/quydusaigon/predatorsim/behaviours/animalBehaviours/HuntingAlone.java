@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
+import javafx.beans.property.DoubleProperty;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -11,31 +12,29 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 
 public class HuntingAlone extends Hunting {
+    DoubleProperty x, y;
+    double targetX, targetY;
+    Point2D targetDir;
+    public void doSurvival() {
+        x = posX();
+        y = posY();
 
-        public void doSurvival() {
-                var x = posX();
-                var y = posY();
-
-                Group thisObject = getGameObject();
-                Vision vision = GameObject.getComponent(GameObject.getChildren(thisObject).get(0), Vision.class).get();
-
-                if ((vision.getAllDetectedObject(Prey.class).size() == 0) || 
-                        (!vision.getAllDetectedObject(Prey.class).contains(targetObject))) {
-                                GameObject.getComponent(thisObject, Animal.class).get().getStateConstructor().getSurvivalState()
+        if ((vision.getAllDetectedObject(Prey.class).size() == 0) ||
+                (!vision.getAllDetectedObject(Prey.class).contains(targetObject)))
+        {
+            GameObject.getComponent(getGameObject(), Animal.class).get().getStateConstructor().getSurvivalState()
                                 .setNoTarget(true);
                                 return;
-                        }
-                        
-                double targetX = GameObject.getComponent(targetObject,
-                                Component.class).get().posX().get();
-                double targetY = GameObject.getComponent(targetObject,
-                                Component.class).get().posY().get();
+        }
 
-                Point2D Vector = new Point2D(targetX - x.get(), targetY - y.get());
+        targetX = targetComponent.posX().get();
+        targetY = targetComponent.posY().get();
 
-                Vector.normalize();
+        targetDir = new Point2D(targetX - x.get(), targetY - y.get());
 
-                x.set(x.get() + Vector.getX() * animalStat.runSpeed * Time.getDeltaTime());
-                y.set(y.get() + Vector.getY() * animalStat.runSpeed * Time.getDeltaTime());
+         targetDir.normalize();
+
+         x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime());
+         y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime());
         }
 }

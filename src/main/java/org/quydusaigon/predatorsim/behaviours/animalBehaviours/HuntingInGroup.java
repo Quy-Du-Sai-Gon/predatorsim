@@ -11,14 +11,14 @@ public class HuntingInGroup extends Hunting {
         var x = posX();
         var y = posY();
     }
-
-    @Override
-    public void setTargetObject(Group object) {
-        targetObject = object;
-    }
-
-    @Override
-    public void setAlliesObject(Group object) {
-        alliesObjects.add(object);
-    }
+//
+//    @Override
+//    public void setTargetObject(Group object) {
+//        targetObject = object;
+//    }
+//
+//    @Override
+//    public void setAlliesObject(Group object) {
+//        alliesObjects.add(object);
+//    }
 }

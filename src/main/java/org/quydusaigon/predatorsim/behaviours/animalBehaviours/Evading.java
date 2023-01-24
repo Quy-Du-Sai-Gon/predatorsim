@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.DoubleProperty;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.gameengine.Time;
@@ -13,33 +14,35 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 
 public class Evading extends SurvivalBehaviour {
-
+    DoubleProperty x,y;
+    Vision vision;
+    double targetX, targetY;
+    Point2D targetDir;
+    @Override
+    public void setUpReference(){
+        vision = getComponent(Animal.class).get().getVision();
+    }
     @Override
     public void doSurvival() {
-        var x = posX();
-        var y = posY();
-        
-        Group thisObject = getGameObject();
-        Vision vision = GameObject.getComponent(GameObject.getChildren(thisObject).get(0), Vision.class).get();
-
         if(vision.getClosestObject(Predator.class).isEmpty()) {
-            GameObject.getComponent(thisObject, Animal.class).get().getStateConstructor().getSurvivalState().setNoTarget(true);
+            GameObject.getComponent(getGameObject(), Animal.class).get().getStateConstructor().getSurvivalState().setNoTarget(true);
             return;
         }
-        else {
-            Group targetObject = vision.getClosestObject(Predator.class).get();
-            double targetX = GameObject.getComponent(targetObject,
-                                Component.class).get().posX().get();
-            double targetY = GameObject.getComponent(targetObject,
-                                Component.class).get().posY().get();
 
-            Point2D Vector = new Point2D(x.get() - targetX, y.get() - targetY);
+        Group targetObject = vision.getClosestObject(Predator.class).get();
 
-            Vector.normalize();
-                
-            x.set(Map.checkBoundX(x.get() + Vector.getX() * animalStat.runSpeed * Time.getDeltaTime()));
-            y.set(Map.checkBoundY(y.get() + Vector.getY() * animalStat.runSpeed * Time.getDeltaTime()));
-        }
+        x = posX();
+        y = posY();
+
+        targetX = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+        targetY = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+
+        targetDir = new Point2D(x.get() - targetX, y.get() - targetY);
+
+        targetDir.normalize();
+
+        x.set(Map.checkBoundX(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()));
+        y.set(Map.checkBoundY(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()));
         
     }
 }

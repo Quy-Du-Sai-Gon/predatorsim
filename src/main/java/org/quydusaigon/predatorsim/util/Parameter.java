@@ -45,3 +45,5 @@ public class Parameter {
     public static final int DEFAULT_PREDATOR_STARVATION_RESILLIENCE_MAXIMUM_RANGE = 50;
     public static final double DEFAULT_PREDATOR_GROUP_RADIUS = 100;
 }
+
+
