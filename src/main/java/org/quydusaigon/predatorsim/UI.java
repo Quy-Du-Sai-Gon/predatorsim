@@ -321,6 +321,41 @@ public class UI implements Initializable {
                     Integer.parseInt(largePreyCountTextField.getText())
             );
 
+            Prefabs.setPredatorSpeed(Double.parseDouble(predatorRunSpeedMinTextField.getText()),
+                Double.parseDouble(predatorRunSpeedMaxTextField.getText()));
+            Prefabs.setPredatorVisionRange(Double.parseDouble(predatorVisionMinTextField.getText()),
+                Double.parseDouble(predatorVisionMaxTextField.getText()));
+            Prefabs.setPredatorStarvationResilience(Integer.parseInt(predatorEnduranceMinTextField.getText()),
+                Integer.parseInt(predatorEnduranceMaxTextField.getText()));
+            Prefabs.setPredatorGroupRadius(Double.parseDouble(predatorGroupRadiusTextField.getText()));
+
+            Prefabs.setSmallPreySpeed(Double.parseDouble(smallPreyRunSpeedMinTextField.getText()),
+                Double.parseDouble(smallPreyRunSpeedMaxTextField.getText()));
+            Prefabs.setSmallPreyVisionRange(Double.parseDouble(smallPreyVisionMinTextField.getText()),
+                Double.parseDouble(smallPreyVisionMaxTextField.getText()));
+            Prefabs.setSmallPreyNutrition(Integer.parseInt(smallPreyNutritionMinTextField.getText()),
+                Integer.parseInt(smallPreyNutritionMaxTextField.getText()));
+            Prefabs.setSmallPreyDefense(Double.parseDouble(smallPreyDefenseMinTextField.getText()),
+                Double.parseDouble(smallPreyDefenseMaxTextField.getText()));
+
+            Prefabs.setMediumPreySpeed(Double.parseDouble(mediumPreyRunSpeedMinTextField.getText()),
+                Double.parseDouble(mediumPreyRunSpeedMaxTextField.getText()));
+            Prefabs.setMediumPreyVisionRange(Double.parseDouble(mediumPreyVisionMinTextField.getText()),
+                Double.parseDouble(mediumPreyVisionMaxTextField.getText()));
+            Prefabs.setMediumPreyNutrition(Integer.parseInt(mediumPreyNutritionMinTextField.getText()),
+                Integer.parseInt(mediumPreyNutritionMaxTextField.getText()));
+            Prefabs.setMediumPreyDefense(Double.parseDouble(mediumPreyDefenseMinTextField.getText()),
+                Double.parseDouble(mediumPreyDefenseMaxTextField.getText()));
+
+            Prefabs.setLargePreySpeed(Double.parseDouble(largePreyRunSpeedMinTextField.getText()),
+                Double.parseDouble(largePreyRunSpeedMaxTextField.getText()));
+            Prefabs.setLargePreyVisionRange(Double.parseDouble(largePreyVisionMinTextField.getText()),
+                Double.parseDouble(largePreyVisionMaxTextField.getText()));
+            Prefabs.setLargePreyNutrition(Integer.parseInt(largePreyNutritionMinTextField.getText()),
+                Integer.parseInt(largePreyNutritionMaxTextField.getText()));
+            Prefabs.setLargePreyDefense(Double.parseDouble(largePreyDefenseMinTextField.getText()),
+                Double.parseDouble(largePreyDefenseMaxTextField.getText()));
+
             App.load(Level::main);
             startButton.setDisable(false);
             stopButton.setDisable(false);

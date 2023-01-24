@@ -23,46 +23,46 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
-    public static boolean showVision = Parameter.DEFAULT_SHOW_VISION;
-    public static boolean showObjectStat = Parameter.DEFAULT_SHOW_OBJECT_STAT;
+    private static boolean showVision=true;
+    private static boolean showObjectStat=true;
 
-    public static double predatorSpeedMin = Parameter.DEFAULT_PREDATOR_SPEED_MINIMUM_RANGE;
-    public static double predatorSpeedMax = Parameter.DEFAULT_PREDATOR_SPEED_MAXIMUM_RANGE;
-    public static double smallPreySpeedMin = Parameter.DEFAULT_SMALL_PREY_SPEED_MINIMUM_RANGE;
-    public static double smallPreySpeedMax = Parameter.DEFAULT_SMALL_PREY_SPEED_MAXIMUM_RANGE;
-    public static double mediumPreySpeedMin = Parameter.DEFAULT_MEDIUM_PREY_SPEED_MINIMUM_RANGE;
-    public static double mediumPreySpeedMax = Parameter.DEFAULT_MEDIUM_PREY_SPEED_MAXIMUM_RANGE;
-    public static double largePreySpeedMin = Parameter.DEFAULT_LARGE_PREY_SPEED_MINIMUM_RANGE;
-    public static double largePreySpeedMax = Parameter.DEFAULT_LARGE_PREY_SPEED_MAXIMUM_RANGE;
+    private static double predatorSpeedMin;
+    private static double predatorSpeedMax;
+    private static double smallPreySpeedMin;
+    private static double smallPreySpeedMax;
+    private static double mediumPreySpeedMin;
+    private static double mediumPreySpeedMax;
+    private static double largePreySpeedMin;
+    private static double largePreySpeedMax;
 
-    public static double predatorVisionRangeMin = Parameter.DEFAULT_PREDATOR_VISION_MINIMUM_RANGE;
-    public static double predatorVisionRangeMax = Parameter.DEFAULT_PREDATOR_VISION_MAXIMUM_RANGE;
-    public static double smallPreyVisionRangeMin = Parameter.DEFAULT_SMALL_PREY_VISION_MINIMUM_RANGE;
-    public static double smallPreyVisionRangeMax = Parameter.DEFAULT_SMALL_PREY_VISION_MAXIMUM_RANGE;
-    public static double mediumPreyVisionRangeMin = Parameter.DEFAULT_MEDIUM_PREY_VISION_MINIMUM_RANGE;
-    public static double mediumPreyVisionRangeMax = Parameter.DEFAULT_MEDIUM_PREY_VISION_MAXIMUM_RANGE;
-    public static double largePreyVisionRangeMin = Parameter.DEFAULT_LARGE_PREY_VISION_MINIMUM_RANGE;
-    public static double largePreyVisionRangeMax = Parameter.DEFAULT_LARGE_PREY_VISION_MAXIMUM_RANGE;
+    private static double predatorVisionRangeMin;
+    private static double predatorVisionRangeMax;
+    private static double smallPreyVisionRangeMin;
+    private static double smallPreyVisionRangeMax;
+    private static double mediumPreyVisionRangeMin;
+    private static double mediumPreyVisionRangeMax;
+    private static double largePreyVisionRangeMin;
+    private static double largePreyVisionRangeMax;
 
-    public static int smallPreyNutritionMin = Parameter.DEFAULT_SMALL_PREY_NUTRITION_MINIMUM_RANGE;
-    public static int smallPreyNutritionMax = Parameter.DEFAULT_SMALL_PREY_NUTRITION_MAXIMUM_RANGE;
-    public static int mediumPreyNutritionMin = Parameter.DEFAULT_MEDIUM_PREY_NUTRITION_MINIMUM_RANGE;
-    public static int mediumPreyNutritionMax = Parameter.DEFAULT_MEDIUM_PREY_NUTRITION_MAXIMUM_RANGE;
-    public static int largePreyNutritionMin = Parameter.DEFAULT_LARGE_PREY_NUTRITION_MINIMUM_RANGE;
-    public static int largePreyNutritionMax = Parameter.DEFAULT_LARGE_PREY_NUTRITION_MAXIMUM_RANGE;
+    private static int smallPreyNutritionMin;
+    private static int smallPreyNutritionMax;
+    private static int mediumPreyNutritionMin;
+    private static int mediumPreyNutritionMax;
+    private static int largePreyNutritionMin;
+    private static int largePreyNutritionMax;
 
-    public static double smallPreyDefenseMin = Parameter.DEFAULT_SMALL_PREY_DEFENSE_MINIMUM_RANGE;
-    public static double smallPreyDefenseMax = Parameter.DEFAULT_SMALL_PREY_DEFENSE_MAXIMUM_RANGE;
-    public static double mediumPreyDefenseMin = Parameter.DEFAULT_MEDIUM_PREY_DEFENSE_MINIMUM_RANGE;
-    public static double mediumPreyDefenseMax = Parameter.DEFAULT_MEDIUM_PREY_DEFENSE_MAXIMUM_RANGE;
-    public static double largePreyDefenseMin = Parameter.DEFAULT_LARGE_PREY_DEFENSE_MINIMUM_RANGE;
-    public static double largePreyDefenseMax = Parameter.DEFAULT_LARGE_PREY_DEFENSE_MAXIMUM_RANGE;
+    private static double smallPreyDefenseMin;
+    private static double smallPreyDefenseMax;
+    private static double mediumPreyDefenseMin;
+    private static double mediumPreyDefenseMax;
+    private static double largePreyDefenseMin;
+    private static double largePreyDefenseMax;
 
-    public static int predatorStarvationResilienceMin = Parameter.DEFAULT_PREDATOR_STARVATION_RESILLIENCE_MINIMUM_RANGE;
-    public static int predatorStarvationResilienceMax = Parameter.DEFAULT_PREDATOR_STARVATION_RESILLIENCE_MAXIMUM_RANGE;
-    public static double predatorGroupRadius = Parameter.DEFAULT_PREDATOR_GROUP_RADIUS;
+    private static int predatorStarvationResilienceMin;
+    private static int predatorStarvationResilienceMax;
+    private static double predatorGroupRadius;
     
-    public static Random random = new Random();
+    private static Random random = new Random();
     private Prefabs() {
     }
     
