@@ -61,20 +61,19 @@ public final class Prefabs {
     private static int predatorStarvationResilienceMin;
     private static int predatorStarvationResilienceMax;
     private static double predatorGroupRadius;
-    
+
     private static Random random = new Random();
+
     private Prefabs() {
     }
-    
+
     public static final Prefab PREDATOR = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(10, Color.RED));
         PredatorStat predatorStat = new PredatorStat(
                 random.nextDouble(predatorSpeedMin, predatorSpeedMax),
                 random.nextDouble(predatorVisionRangeMin, predatorVisionRangeMax),
                 random.nextInt(predatorStarvationResilienceMin, predatorStarvationResilienceMax),
-                predatorGroupRadius
-        );
-        
+                predatorGroupRadius);
 
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
@@ -84,8 +83,10 @@ public final class Prefabs {
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
-        if (showVision) circle.setOpacity(0.4);
-        else circle.setOpacity(0);
+        if (showVision)
+            circle.setOpacity(0.4);
+        else
+            circle.setOpacity(0);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
@@ -95,7 +96,7 @@ public final class Prefabs {
         if (showObjectStat) {
             StatDisplay stat = new StatDisplay(predatorStat, newPredator);
             var statNodeComp = new NodeComponent<>(stat.pane);
-            GameObject.addComponent(newPredator, statNodeComp);
+            GameObject.create(TransformInit.DEFAULT, newPredator, statNodeComp, stat);
         }
 
         return newPredator;
@@ -108,8 +109,7 @@ public final class Prefabs {
                 random.nextDouble(smallPreyVisionRangeMin, smallPreyVisionRangeMax),
                 PreySize.SMALL,
                 random.nextInt(smallPreyNutritionMin, smallPreyNutritionMax),
-                random.nextDouble(smallPreyDefenseMin, smallPreyDefenseMax)
-        );
+                random.nextDouble(smallPreyDefenseMin, smallPreyDefenseMax));
 
         Group newSmallPrey = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
@@ -118,8 +118,10 @@ public final class Prefabs {
                 new Prey(smallPreyStat));
 
         var circle = new Circle(smallPreyStat.visionRange, Color.BLUEVIOLET);
-        if (showVision) circle.setOpacity(0.4);
-        else circle.setOpacity(0);
+        if (showVision)
+            circle.setOpacity(0.4);
+        else
+            circle.setOpacity(0);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
@@ -129,8 +131,7 @@ public final class Prefabs {
         if (showObjectStat) {
             StatDisplay stat = new StatDisplay(smallPreyStat, newSmallPrey);
             var statNodeComp = new NodeComponent<>(stat.pane);
-            GameObject.create(TransformInit.DEFAULT, newSmallPrey,
-                            statNodeComp);
+            GameObject.create(TransformInit.DEFAULT, newSmallPrey, statNodeComp, stat);
         }
 
         return newSmallPrey;
@@ -138,7 +139,7 @@ public final class Prefabs {
 
     public static final Prefab MEDIUM_PREY = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(20, Color.GREEN));
-        PreyStat mediumPreyStat = new PreyStat(                
+        PreyStat mediumPreyStat = new PreyStat(
                 random.nextDouble(mediumPreySpeedMin, mediumPreySpeedMax),
                 random.nextDouble(mediumPreyVisionRangeMin, mediumPreyVisionRangeMax),
                 PreySize.MEDIUM,
@@ -152,8 +153,10 @@ public final class Prefabs {
                 new Prey(mediumPreyStat));
 
         var circle = new Circle(mediumPreyStat.visionRange, Color.BLUEVIOLET);
-        if (showVision) circle.setOpacity(0.4);
-        else circle.setOpacity(0);
+        if (showVision)
+            circle.setOpacity(0.4);
+        else
+            circle.setOpacity(0);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
@@ -163,8 +166,7 @@ public final class Prefabs {
         if (showObjectStat) {
             StatDisplay stat = new StatDisplay(mediumPreyStat, newMediumPrey);
             var statNodeComp = new NodeComponent<>(stat.pane);
-            GameObject.create(TransformInit.DEFAULT, newMediumPrey,
-                                    statNodeComp);
+            GameObject.create(TransformInit.DEFAULT, newMediumPrey, statNodeComp, stat);
         }
 
         return newMediumPrey;
@@ -172,7 +174,7 @@ public final class Prefabs {
 
     public static final Prefab LARGE_PREY = (tf, parent) -> {
         var nodeComp = new NodeComponent<>(new Circle(30, Color.GREEN));
-        PreyStat largePreyStat = new PreyStat(                
+        PreyStat largePreyStat = new PreyStat(
                 random.nextDouble(largePreySpeedMin, largePreySpeedMax),
                 random.nextDouble(largePreyVisionRangeMin, largePreyVisionRangeMax),
                 PreySize.LARGE,
@@ -186,8 +188,10 @@ public final class Prefabs {
                 new Prey(largePreyStat));
 
         var circle = new Circle(largePreyStat.visionRange, Color.BLUEVIOLET);
-        if (showVision) circle.setOpacity(0.4);
-        else circle.setOpacity(0);
+        if (showVision)
+            circle.setOpacity(0.4);
+        else
+            circle.setOpacity(0);
 
         var visionNodeComp = new NodeComponent<>(circle);
 
@@ -197,8 +201,7 @@ public final class Prefabs {
         if (showObjectStat) {
             StatDisplay stat = new StatDisplay(largePreyStat, newLargePrey);
             var statNodeComp = new NodeComponent<>(stat.pane);
-            GameObject.create(TransformInit.DEFAULT, newLargePrey,
-                                    statNodeComp);
+            GameObject.create(TransformInit.DEFAULT, newLargePrey, statNodeComp, stat);
         }
 
         return newLargePrey;
@@ -229,17 +232,20 @@ public final class Prefabs {
         predatorVisionRangeMax = predatorVisionRangeMaxInput;
     }
 
-    public static void setSmallPreyVisionRange(double smallPreyVisionRangeMinInput, double smallPreyVisionRangeMaxInput) {
+    public static void setSmallPreyVisionRange(double smallPreyVisionRangeMinInput,
+            double smallPreyVisionRangeMaxInput) {
         smallPreyVisionRangeMin = smallPreyVisionRangeMinInput;
         smallPreyVisionRangeMax = smallPreyVisionRangeMaxInput;
     }
 
-    public static void setMediumPreyVisionRange(double mediumPreyVisionRangeMinInput, double mediumPreyVisionRangeMaxInput) {
+    public static void setMediumPreyVisionRange(double mediumPreyVisionRangeMinInput,
+            double mediumPreyVisionRangeMaxInput) {
         mediumPreyVisionRangeMin = mediumPreyVisionRangeMinInput;
         mediumPreyVisionRangeMax = mediumPreyVisionRangeMaxInput;
     }
 
-    public static void setLargePreyVisionRange(double largePreyVisionRangeMinInput, double largePreyVisionRangeMaxInput) {
+    public static void setLargePreyVisionRange(double largePreyVisionRangeMinInput,
+            double largePreyVisionRangeMaxInput) {
         largePreyVisionRangeMin = largePreyVisionRangeMinInput;
         largePreyVisionRangeMax = largePreyVisionRangeMaxInput;
     }
@@ -273,8 +279,9 @@ public final class Prefabs {
         largePreyDefenseMin = largePreyDefenseMinInput;
         largePreyDefenseMax = largePreyDefenseMaxInput;
     }
-    
-    public static void setPredatorStarvationResilience(int predatorStarvationResilienceMinInput, int predatorStarvationResilienceMaxInput) {
+
+    public static void setPredatorStarvationResilience(int predatorStarvationResilienceMinInput,
+            int predatorStarvationResilienceMaxInput) {
         predatorStarvationResilienceMin = predatorStarvationResilienceMinInput;
         predatorStarvationResilienceMax = predatorStarvationResilienceMaxInput;
     }
