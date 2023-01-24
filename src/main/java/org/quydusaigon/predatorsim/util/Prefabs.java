@@ -23,8 +23,8 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
-    private static boolean showVision;
-    private static boolean showObjectStat;
+    private static boolean showVision = false;
+    private static boolean showObjectStat = false;
 
     private static double predatorSpeedMin;
     private static double predatorSpeedMax;
@@ -289,43 +289,5 @@ public final class Prefabs {
 
     public static void setShowStat(boolean value) {
         showObjectStat = value;
-    }
-
-    public static void resetParameters() {
-        predatorSpeedMin = Parameter.DEFAULT_PREDATOR_SPEED_MINIMUM_RANGE;
-        predatorSpeedMax = Parameter.DEFAULT_PREDATOR_SPEED_MAXIMUM_RANGE;
-        smallPreySpeedMin = Parameter.DEFAULT_SMALL_PREY_SPEED_MINIMUM_RANGE;
-        smallPreySpeedMax = Parameter.DEFAULT_SMALL_PREY_SPEED_MAXIMUM_RANGE;
-        mediumPreySpeedMin = Parameter.DEFAULT_MEDIUM_PREY_SPEED_MINIMUM_RANGE;
-        mediumPreySpeedMax = Parameter.DEFAULT_MEDIUM_PREY_SPEED_MAXIMUM_RANGE;
-        largePreySpeedMin = Parameter.DEFAULT_LARGE_PREY_SPEED_MINIMUM_RANGE;
-        largePreySpeedMax = Parameter.DEFAULT_LARGE_PREY_SPEED_MINIMUM_RANGE;
-
-        predatorVisionRangeMin = Parameter.DEFAULT_PREDATOR_VISION_MINIMUM_RANGE;
-        predatorVisionRangeMax = Parameter.DEFAULT_PREDATOR_VISION_MAXIMUM_RANGE;
-        smallPreyVisionRangeMin = Parameter.DEFAULT_SMALL_PREY_VISION_MINIMUM_RANGE;
-        smallPreyVisionRangeMax = Parameter.DEFAULT_SMALL_PREY_VISION_MAXIMUM_RANGE;
-        mediumPreyVisionRangeMin = Parameter.DEFAULT_MEDIUM_PREY_VISION_MINIMUM_RANGE;
-        mediumPreyVisionRangeMax = Parameter.DEFAULT_MEDIUM_PREY_VISION_MAXIMUM_RANGE;
-        largePreyVisionRangeMin = Parameter.DEFAULT_LARGE_PREY_VISION_MINIMUM_RANGE;
-        largePreyVisionRangeMax = Parameter.DEFAULT_LARGE_PREY_VISION_MAXIMUM_RANGE;
-
-        smallPreyNutritionMin = Parameter.DEFAULT_SMALL_PREY_NUTRITION_MINIMUM_RANGE;
-        smallPreyNutritionMax = Parameter.DEFAULT_SMALL_PREY_NUTRITION_MAXIMUM_RANGE;
-        mediumPreyNutritionMin = Parameter.DEFAULT_MEDIUM_PREY_NUTRITION_MINIMUM_RANGE;
-        mediumPreyNutritionMax = Parameter.DEFAULT_MEDIUM_PREY_NUTRITION_MAXIMUM_RANGE;
-        largePreyNutritionMin = Parameter.DEFAULT_LARGE_PREY_NUTRITION_MINIMUM_RANGE;
-        largePreyNutritionMax = Parameter.DEFAULT_LARGE_PREY_NUTRITION_MAXIMUM_RANGE;
-
-        smallPreyDefenseMin = Parameter.DEFAULT_SMALL_PREY_DEFENSE_MAXIMUM_RANGE;
-        smallPreyDefenseMax = Parameter.DEFAULT_SMALL_PREY_DEFENSE_MAXIMUM_RANGE;
-        mediumPreyDefenseMin = Parameter.DEFAULT_MEDIUM_PREY_DEFENSE_MINIMUM_RANGE;
-        mediumPreyDefenseMax = Parameter.DEFAULT_MEDIUM_PREY_DEFENSE_MAXIMUM_RANGE;
-        largePreyDefenseMin = Parameter.DEFAULT_LARGE_PREY_DEFENSE_MINIMUM_RANGE;
-        largePreyDefenseMax = Parameter.DEFAULT_LARGE_PREY_DEFENSE_MAXIMUM_RANGE;
-
-        predatorStarvationResilienceMin = Parameter.DEFAULT_PREDATOR_STARVATION_RESILLIENCE_MINIMUM_RANGE;
-        predatorStarvationResilienceMax = Parameter.DEFAULT_PREDATOR_STARVATION_RESILLIENCE_MAXIMUM_RANGE;
-        predatorGroupRadius = Parameter.DEFAULT_PREDATOR_GROUP_RADIUS;
     }
 }
