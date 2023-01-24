@@ -158,6 +158,12 @@ public class UI implements Initializable {
     private TextField preyRebornTextField;
 
     @FXML
+    private CheckBox showVisionCheckBox;
+
+    @FXML
+    private CheckBox showStatusCheckBox;
+
+    @FXML
     private Button startButton;
 
     @FXML
@@ -171,6 +177,7 @@ public class UI implements Initializable {
 
     @FXML
     private Button clearButton;
+
 
     @FXML
     private BarChart<String, Double> barChart;
