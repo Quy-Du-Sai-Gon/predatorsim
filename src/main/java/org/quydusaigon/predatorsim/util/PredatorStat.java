@@ -14,7 +14,7 @@ public class PredatorStat extends AnimalStat {
 
     @Override
     public String toString() {
-        return String.format("%sHunger Resilience: %d\nGroup radius: %f\n",
+        return String.format("%sHunger Resilience: %d\nGroup radius: %.2f\n",
                 super.toString(), starvationResilience, groupRadius);
     }
 }

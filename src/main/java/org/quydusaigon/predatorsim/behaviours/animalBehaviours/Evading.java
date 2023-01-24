@@ -43,6 +43,5 @@ public class Evading extends SurvivalBehaviour {
 
         x.set(Map.checkBoundX(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
         y.set(Map.checkBoundY(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
-        
     }
 }
