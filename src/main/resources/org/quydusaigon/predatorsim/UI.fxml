@@ -256,7 +256,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Min. Prey">
+                                                <Tab text="Small Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
@@ -428,7 +428,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Med. Prey">
+                                                <Tab text="Medium Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
@@ -600,7 +600,7 @@
                                                         </VBox>
                                                     </content>
                                                 </Tab>
-                                                <Tab text="Max. Prey">
+                                                <Tab text="Large Prey">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
