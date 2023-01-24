@@ -39,10 +39,10 @@ public class Evading extends SurvivalBehaviour {
 
         targetDir = new Point2D(x.get() - targetX, y.get() - targetY);
 
-        targetDir.normalize();
+        targetDir = targetDir.normalize();
 
-        x.set(Map.checkBoundX(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()));
-        y.set(Map.checkBoundY(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()));
+        x.set(Map.checkBoundX(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
+        y.set(Map.checkBoundY(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
         
     }
 }

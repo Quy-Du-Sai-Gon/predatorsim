@@ -32,9 +32,9 @@ public class HuntingAlone extends Hunting {
 
         targetDir = new Point2D(targetX - x.get(), targetY - y.get());
 
-         targetDir.normalize();
+        targetDir = targetDir.normalize();
 
-         x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime());
-         y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime());
+         x.set(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime());
+         y.set(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime());
         }
 }
