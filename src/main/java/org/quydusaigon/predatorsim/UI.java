@@ -390,6 +390,6 @@ public class UI implements Initializable {
     }
 
     public void onShowStatusCheckBoxClicked(ActionEvent actionEvent) {
-        isStatusShowed = showVisionCheckBox.isSelected();
+        isStatusShowed = showStatusCheckBox.isSelected();
     }
 }
