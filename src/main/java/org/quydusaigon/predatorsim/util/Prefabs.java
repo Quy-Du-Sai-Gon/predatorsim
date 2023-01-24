@@ -23,8 +23,8 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
-    private static boolean showVision=true;
-    private static boolean showObjectStat=true;
+    private static boolean showVision;
+    private static boolean showObjectStat;
 
     private static double predatorSpeedMin;
     private static double predatorSpeedMax;
@@ -281,6 +281,14 @@ public final class Prefabs {
 
     public static void setPredatorGroupRadius(double predatorGroupRadiusInput) {
         predatorGroupRadius = predatorGroupRadiusInput;
+    }
+
+    public static void setShowVision(boolean value) {
+        showVision = value;
+    }
+
+    public static void setShowStat(boolean value) {
+        showObjectStat = value;
     }
 
     public static void resetParameters() {
