@@ -40,14 +40,8 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent parent = fxmlLoader.load();
 
-/*        Rectangle myRect = new Rectangle(simulationWindowWidth, simulationWindowHeight,Color.TRANSPARENT);
-        myRect.setX(0.0);
-        myRect.setY(0.0);
-        myRect.setStroke(Color.RED);*/
-
         left = (BorderPane) fxmlLoader.getNamespace().get("borderPane");
         left.setCenter(root);
-/*        left.setTop(myRect);*/
 
         var scene = new Scene(parent);
         stage.setScene(scene);
