@@ -40,14 +40,14 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent parent = fxmlLoader.load();
 
-        Rectangle myRect = new Rectangle(simulationWindowWidth, simulationWindowHeight,Color.TRANSPARENT);
+/*        Rectangle myRect = new Rectangle(simulationWindowWidth, simulationWindowHeight,Color.TRANSPARENT);
         myRect.setX(0.0);
         myRect.setY(0.0);
-        myRect.setStroke(Color.RED);
+        myRect.setStroke(Color.RED);*/
 
         left = (BorderPane) fxmlLoader.getNamespace().get("borderPane");
         left.setCenter(root);
-        left.setTop(myRect);
+/*        left.setTop(myRect);*/
 
         var scene = new Scene(parent);
         stage.setScene(scene);
@@ -55,8 +55,9 @@ public class App extends Application {
         load(Level::main);
         loop = new GameLoop();
         stage.setResizable(false);
-        stage.show();
         UI.updateSimulationWindowSize();
+        stage.show();
+
     }
 
     public static void setStageSize(double width, double height) {

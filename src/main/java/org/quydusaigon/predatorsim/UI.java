@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.util.Prefabs;
@@ -180,6 +181,8 @@ public class UI implements Initializable {
 
     private Control[] widgets;
 
+    Alert a = new Alert(Alert.AlertType.NONE);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         staticWidthTextField = widthTextField;
@@ -236,9 +239,14 @@ public class UI implements Initializable {
                         if (newValue.matches(".*[^\\d.]+.*")) {
                             field.setText(newValue.replaceAll("[^\\d.]", ""));
                         }
-                        if (field.getText().isEmpty()) {
-                            field.setText(defaultValue);
+
+
+                        if ((field.getText().isEmpty() && field.getId().equals("widthTextField")) || (field.getText().isEmpty() && field.getId().equals("heightTextField"))) {
+                            a.setAlertType(Alert.AlertType.WARNING);
+                            a.setContentText("IMPORTANT TEXTFIELD IS EMPTY");
+                            a.show();
                         }
+
                     }
             );
         }
@@ -266,7 +274,7 @@ public class UI implements Initializable {
 
     }
 
-    Alert a = new Alert(Alert.AlertType.NONE);
+
 
     public void onPredatorColorChanged(ActionEvent actionEvent) {
     }
@@ -298,7 +306,7 @@ public class UI implements Initializable {
         double height = Double.parseDouble(staticHeightTextField.getText());
 
         App.setSimulationWindowSize(width, height);
-        App.setStageSize(width + staticRightSplitPane.getWidth(), height);
+        App.setStageSize(width + staticRightSplitPane.getWidth() + 50, height + 50);
     }
 
     public void onApplyButtonClicked(ActionEvent actionEvent) {

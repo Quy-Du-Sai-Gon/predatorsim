@@ -18,14 +18,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="550.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="1200.0" minWidth="1200.0" minHeight="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
     <children>
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" />
                 <AnchorPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                     <children>
-                        <SplitPane dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="rightSplitPane">
+                        <SplitPane fx:id="rightSplitPane" dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
