@@ -18,24 +18,43 @@ public class Evading extends SurvivalBehaviour {
     Vision vision;
     double targetX, targetY;
     Point2D targetDir;
+    double coolDownTime = 1.5;
+    double currentCoolDownTime = 0;
+    boolean foundPredator = true;
+    Group targetObject;
     @Override
     public void setUpReference(){
         vision = getComponent(Animal.class).get().getVision();
+        foundPredator = true;
     }
     @Override
     public void doSurvival() {
-        if(vision.getClosestObject(Predator.class).isEmpty()) {
+        if(vision.getClosestObject(Predator.class).isEmpty() && foundPredator) {
+            currentCoolDownTime = coolDownTime;
+            foundPredator = false;
+        }
+        else if(vision.getClosestObject(Predator.class).isPresent() && !foundPredator){
+            foundPredator = true;
+            currentCoolDownTime = 0;
+        }
+
+        if(currentCoolDownTime > 0){
+            currentCoolDownTime -= Time.getDeltaTime();
+        }
+        else if(currentCoolDownTime <= 0 && !foundPredator){
             GameObject.getComponent(getGameObject(), Animal.class).get().getStateConstructor().getSurvivalState().setNoTarget(true);
             return;
         }
 
-        Group targetObject = vision.getClosestObject(Predator.class).get();
-
         x = posX();
         y = posY();
 
-        targetX = GameObject.getComponent(targetObject, Component.class).get().posX().get();
-        targetY = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+        if(foundPredator) {
+            targetObject = vision.getClosestObject(Predator.class).get();
+            targetX = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+            targetY = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+        }
+
 
         targetDir = new Point2D(x.get() - targetX, y.get() - targetY);
 
@@ -43,5 +62,9 @@ public class Evading extends SurvivalBehaviour {
 
         x.set(Map.checkBoundX(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
         y.set(Map.checkBoundY(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
+    }
+
+    private void escape(){
+
     }
 }
