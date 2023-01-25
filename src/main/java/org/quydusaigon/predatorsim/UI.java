@@ -267,7 +267,7 @@ public class UI implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean wasFocusedBefore, Boolean isNowFocused) {
                     if (!isNowFocused) {
-                        // update param on focus lost
+                        // update param on focus lost a
                         updateParameter(paramEntry);
                     }
                 }
