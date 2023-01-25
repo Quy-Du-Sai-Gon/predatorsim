@@ -2,16 +2,24 @@ package org.quydusaigon.predatorsim.util;
 
 public class Parameter {
 
-    public static String getWindowWidth() {
+    public static String getWindowWidthString() {
         return String.valueOf(windowWidth);
+    }
+
+    public static double getWindowWidth() {
+        return windowWidth;
     }
 
     public static void setWindowWidth(String windowWidth) {
         Parameter.windowWidth = Double.parseDouble(windowWidth);
     }
 
-    public static String getWindowHeight() {
+    public static String getWindowHeightString() {
         return String.valueOf(windowHeight);
+    }
+
+    public static double getWindowHeight() {
+        return windowHeight;
     }
 
     public static void setWindowHeight(String windowHeight) {
@@ -155,11 +163,13 @@ public class Parameter {
     }
 
     public static void setPredatorStarvationResillienceMinimumRange(String predatorStarvationResillienceMinimumRange) {
-        Parameter.predatorStarvationResillienceMinimumRange = Integer.parseInt(predatorStarvationResillienceMinimumRange);
+        Parameter.predatorStarvationResillienceMinimumRange = Integer
+                .parseInt(predatorStarvationResillienceMinimumRange);
     }
 
     public static void setPredatorStarvationResillienceMaximumRange(String predatorStarvationResillienceMaximumRange) {
-        Parameter.predatorStarvationResillienceMaximumRange = Integer.parseInt(predatorStarvationResillienceMaximumRange);
+        Parameter.predatorStarvationResillienceMaximumRange = Integer
+                .parseInt(predatorStarvationResillienceMaximumRange);
     }
 
     public static void setPredatorGroupRadius(String predatorGroupRadius) {
@@ -202,145 +212,283 @@ public class Parameter {
     private static int predatorStarvationResillienceMaximumRange = 50;
     private static double predatorGroupRadius = 100;
 
-    public static String getPredatorCount() {
+    public static String getPredatorCountString() {
         return String.valueOf(predatorCount);
     }
 
-    public static String getSmallPreyCount() {
+    public static int getPredatorCount() {
+        return predatorCount;
+    }
+
+    public static String getSmallPreyCountString() {
         return String.valueOf(smallPreyCount);
     }
 
-    public static String getMediumPreyCount() {
+    public static int getSmallPreyCount() {
+        return smallPreyCount;
+    }
+
+    public static String getMediumPreyCountString() {
         return String.valueOf(mediumPreyCount);
     }
 
-    public static String getLargePreyCount() {
+    public static int getMediumPreyCount() {
+        return mediumPreyCount;
+    }
+
+    public static String getLargePreyCountString() {
         return String.valueOf(largePreyCount);
     }
 
-    public static String getPredatorSpeedMinimumRange() {
+    public static int getLargePreyCount() {
+        return largePreyCount;
+    }
+
+    public static String getPredatorSpeedMinimumRangeString() {
         return String.valueOf(predatorSpeedMinimumRange);
     }
 
-    public static String getPredatorSpeedMaximumRange() {
+    public static double getPredatorSpeedMinimumRange() {
+        return predatorSpeedMinimumRange;
+    }
+
+    public static String getPredatorSpeedMaximumRangeString() {
         return String.valueOf(predatorSpeedMaximumRange);
     }
 
-    public static String getSmallPreySpeedMinimumRange() {
+    public static double getPredatorSpeedMaximumRange() {
+        return predatorSpeedMaximumRange;
+    }
+
+    public static String getSmallPreySpeedMinimumRangeString() {
         return String.valueOf(smallPreySpeedMinimumRange);
     }
 
-    public static String getSmallPreySpeedMaximumRange() {
+    public static double getSmallPreySpeedMinimumRange() {
+        return smallPreySpeedMinimumRange;
+    }
+
+    public static String getSmallPreySpeedMaximumRangeString() {
         return String.valueOf(smallPreySpeedMaximumRange);
     }
 
-    public static String getMediumPreySpeedMinimumRange() {
+    public static double getSmallPreySpeedMaximumRange() {
+        return smallPreySpeedMaximumRange;
+    }
+
+    public static String getMediumPreySpeedMinimumRangeString() {
         return String.valueOf(mediumPreySpeedMinimumRange);
     }
 
-    public static String getMediumPreySpeedMaximumRange() {
+    public static double getMediumPreySpeedMinimumRange() {
+        return mediumPreySpeedMinimumRange;
+    }
+
+    public static String getMediumPreySpeedMaximumRangeString() {
         return String.valueOf(mediumPreySpeedMaximumRange);
     }
 
-    public static String getLargePreySpeedMinimumRange() {
+    public static double getMediumPreySpeedMaximumRange() {
+        return mediumPreySpeedMaximumRange;
+    }
+
+    public static String getLargePreySpeedMinimumRangeString() {
         return String.valueOf(largePreySpeedMinimumRange);
     }
 
-    public static String getLargePreySpeedMaximumRange() {
+    public static double getLargePreySpeedMinimumRange() {
+        return largePreySpeedMinimumRange;
+    }
+
+    public static String getLargePreySpeedMaximumRangeString() {
         return String.valueOf(largePreySpeedMaximumRange);
     }
 
-    public static String getPredatorVisionMinimumRange() {
+    public static double getLargePreySpeedMaximumRange() {
+        return largePreySpeedMaximumRange;
+    }
+
+    public static String getPredatorVisionMinimumRangeString() {
         return String.valueOf(predatorVisionMinimumRange);
     }
 
-    public static String getPredatorVisionMaximumRange() {
+    public static double getPredatorVisionMinimumRange() {
+        return predatorVisionMinimumRange;
+    }
+
+    public static String getPredatorVisionMaximumRangeString() {
         return String.valueOf(predatorVisionMaximumRange);
     }
 
-    public static String getSmallPreyVisionMinimumRange() {
+    public static double getPredatorVisionMaximumRange() {
+        return predatorVisionMaximumRange;
+    }
+
+    public static String getSmallPreyVisionMinimumRangeString() {
         return String.valueOf(smallPreyVisionMinimumRange);
     }
 
-    public static String getSmallPreyVisionMaximumRange() {
+    public static double getSmallPreyVisionMinimumRange() {
+        return smallPreyVisionMinimumRange;
+    }
+
+    public static String getSmallPreyVisionMaximumRangeString() {
         return String.valueOf(smallPreyVisionMaximumRange);
     }
 
-    public static String getMediumPreyVisionMinimumRange() {
+    public static double getSmallPreyVisionMaximumRange() {
+        return smallPreyVisionMaximumRange;
+    }
+
+    public static String getMediumPreyVisionMinimumRangeString() {
         return String.valueOf(mediumPreyVisionMinimumRange);
     }
 
-    public static String getMediumPreyVisionMaximumRange() {
+    public static double getMediumPreyVisionMinimumRange() {
+        return mediumPreyVisionMinimumRange;
+    }
+
+    public static String getMediumPreyVisionMaximumRangeString() {
         return String.valueOf(mediumPreyVisionMaximumRange);
     }
 
-    public static String getLargePreyVisionMinimumRange() {
+    public static double getMediumPreyVisionMaximumRange() {
+        return mediumPreyVisionMaximumRange;
+    }
+
+    public static String getLargePreyVisionMinimumRangeString() {
         return String.valueOf(largePreyVisionMinimumRange);
     }
 
-    public static String getLargePreyVisionMaximumRange() {
+    public static double getLargePreyVisionMinimumRange() {
+        return largePreyVisionMinimumRange;
+    }
+
+    public static String getLargePreyVisionMaximumRangeString() {
         return String.valueOf(largePreyVisionMaximumRange);
     }
 
-    public static String getSmallPreyNutritionMinimumRange() {
+    public static double getLargePreyVisionMaximumRange() {
+        return largePreyVisionMaximumRange;
+    }
+
+    public static String getSmallPreyNutritionMinimumRangeString() {
         return String.valueOf(smallPreyNutritionMinimumRange);
     }
 
-    public static String getSmallPreyNutritionMaximumRange() {
+    public static int getSmallPreyNutritionMinimumRange() {
+        return smallPreyNutritionMinimumRange;
+    }
+
+    public static String getSmallPreyNutritionMaximumRangeString() {
         return String.valueOf(smallPreyNutritionMaximumRange);
     }
 
-    public static String getMediumPreyNutritionMinimumRange() {
+    public static int getSmallPreyNutritionMaximumRange() {
+        return smallPreyNutritionMaximumRange;
+    }
+
+    public static String getMediumPreyNutritionMinimumRangeString() {
         return String.valueOf(mediumPreyNutritionMinimumRange);
     }
 
-    public static String getMediumPreyNutritionMaximumRange() {
+    public static int getMediumPreyNutritionMinimumRange() {
+        return mediumPreyNutritionMinimumRange;
+    }
+
+    public static String getMediumPreyNutritionMaximumRangeString() {
         return String.valueOf(mediumPreyNutritionMaximumRange);
     }
 
-    public static String getLargePreyNutritionMinimumRange() {
+    public static int getMediumPreyNutritionMaximumRange() {
+        return mediumPreyNutritionMaximumRange;
+    }
+
+    public static String getLargePreyNutritionMinimumRangeString() {
         return String.valueOf(largePreyNutritionMinimumRange);
     }
 
-    public static String getLargePreyNutritionMaximumRange() {
+    public static int getLargePreyNutritionMinimumRange() {
+        return largePreyNutritionMinimumRange;
+    }
+
+    public static String getLargePreyNutritionMaximumRangeString() {
         return String.valueOf(largePreyNutritionMaximumRange);
     }
 
-    public static String getSmallPreyDefenseMinimumRange() {
+    public static int getLargePreyNutritionMaximumRange() {
+        return largePreyNutritionMaximumRange;
+    }
+
+    public static String getSmallPreyDefenseMinimumRangeString() {
         return String.valueOf(smallPreyDefenseMinimumRange);
     }
 
-    public static String getSmallPreyDefenseMaximumRange() {
+    public static double getSmallPreyDefenseMinimumRange() {
+        return smallPreyDefenseMinimumRange;
+    }
+
+    public static String getSmallPreyDefenseMaximumRangeString() {
         return String.valueOf(smallPreyDefenseMaximumRange);
     }
 
-    public static String getMediumPreyDefenseMinimumRange() {
+    public static double getSmallPreyDefenseMaximumRange() {
+        return smallPreyDefenseMaximumRange;
+    }
+
+    public static String getMediumPreyDefenseMinimumRangeString() {
         return String.valueOf(mediumPreyDefenseMinimumRange);
     }
 
-    public static String getMediumPreyDefenseMaximumRange() {
+    public static double getMediumPreyDefenseMinimumRange() {
+        return mediumPreyDefenseMinimumRange;
+    }
+
+    public static String getMediumPreyDefenseMaximumRangeString() {
         return String.valueOf(mediumPreyDefenseMaximumRange);
     }
 
-    public static String getLargePreyDefenseMinimumRange() {
+    public static double getMediumPreyDefenseMaximumRange() {
+        return mediumPreyDefenseMaximumRange;
+    }
+
+    public static String getLargePreyDefenseMinimumRangeString() {
         return String.valueOf(largePreyDefenseMinimumRange);
     }
 
-    public static String getLargePreyDefenseMaximumRange() {
+    public static double getLargePreyDefenseMinimumRange() {
+        return largePreyDefenseMinimumRange;
+    }
+
+    public static String getLargePreyDefenseMaximumRangeString() {
         return String.valueOf(largePreyDefenseMaximumRange);
     }
 
-    public static String getPredatorStarvationResillienceMinimumRange() {
+    public static double getLargePreyDefenseMaximumRange() {
+        return largePreyDefenseMaximumRange;
+    }
+
+    public static String getPredatorStarvationResillienceMinimumRangeString() {
         return String.valueOf(predatorStarvationResillienceMinimumRange);
     }
 
-    public static String getPredatorStarvationResillienceMaximumRange() {
+    public static int getPredatorStarvationResillienceMinimumRange() {
+        return predatorStarvationResillienceMinimumRange;
+    }
+
+    public static String getPredatorStarvationResillienceMaximumRangeString() {
         return String.valueOf(predatorStarvationResillienceMaximumRange);
     }
 
-    public static String getPredatorGroupRadius() {
+    public static int getPredatorStarvationResillienceMaximumRange() {
+        return predatorStarvationResillienceMaximumRange;
+    }
+
+    public static String getPredatorGroupRadiusString() {
         return String.valueOf(predatorGroupRadius);
     }
+
+    public static double getPredatorGroupRadius() {
+        return predatorGroupRadius;
+    }
 }
-
-

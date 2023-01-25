@@ -46,7 +46,6 @@ public class UI implements Initializable {
     @FXML
     private ColorPicker largePreyColorPicker;
 
-
     @FXML
     private ColorPicker predatorColorPicker;
 
@@ -185,7 +184,6 @@ public class UI implements Initializable {
     @FXML
     private Button clearButton;
 
-
     @FXML
     private BarChart<String, Double> barChart;
 
@@ -204,50 +202,122 @@ public class UI implements Initializable {
         staticHeightTextField = heightTextField;
         staticRightSplitPane = rightSplitPane;
 
-        final Map<TextField, Pair<Consumer<String>, Supplier<String>>> PARAMETER_MAP = Map.ofEntries(
-                Map.entry(widthTextField, new Pair<>(Parameter::setWindowWidth, Parameter::getWindowWidth)),
-                Map.entry(heightTextField, new Pair<>(Parameter::setWindowHeight, Parameter::getWindowHeight)),
+        final var PARAMETER_MAP = Map.ofEntries(
+                Map.entry(widthTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setWindowWidth,
+                        Parameter::getWindowWidthString)),
+                Map.entry(heightTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setWindowHeight,
+                        Parameter::getWindowHeightString)),
 
-                Map.entry(predatorCountTextField, new Pair<>(Parameter::setPredatorCount, Parameter::getPredatorCount)),
-                Map.entry(predatorRunSpeedMinTextField, new Pair<>(Parameter::setPredatorSpeedMinimumRange, Parameter::getPredatorSpeedMinimumRange)),
-                Map.entry(predatorRunSpeedMaxTextField, new Pair<>(Parameter::setPredatorSpeedMaximumRange, Parameter::getPredatorSpeedMaximumRange)),
-                Map.entry(predatorVisionMinTextField, new Pair<>(Parameter::setPredatorVisionMinimumRange, Parameter::getPredatorVisionMinimumRange)),
-                Map.entry(predatorVisionMaxTextField, new Pair<>(Parameter::setPredatorVisionMaximumRange, Parameter::getPredatorVisionMaximumRange)),
-                Map.entry(predatorEnduranceMinTextField, new Pair<>(Parameter::setPredatorStarvationResillienceMinimumRange, Parameter::getPredatorStarvationResillienceMinimumRange)),
-                Map.entry(predatorEnduranceMaxTextField, new Pair<>(Parameter::setPredatorStarvationResillienceMaximumRange, Parameter::getPredatorStarvationResillienceMaximumRange)),
-                Map.entry(predatorGroupRadiusTextField, new Pair<>(Parameter::setPredatorGroupRadius, Parameter::getPredatorGroupRadius)),
+                Map.entry(predatorCountTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorCount,
+                        Parameter::getPredatorCountString)),
+                Map.entry(predatorRunSpeedMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorSpeedMinimumRange,
+                        Parameter::getPredatorSpeedMinimumRangeString)),
+                Map.entry(predatorRunSpeedMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorSpeedMaximumRange,
+                        Parameter::getPredatorSpeedMaximumRangeString)),
+                Map.entry(predatorVisionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorVisionMinimumRange,
+                        Parameter::getPredatorVisionMinimumRangeString)),
+                Map.entry(predatorVisionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorVisionMaximumRange,
+                        Parameter::getPredatorVisionMaximumRangeString)),
+                Map.entry(predatorEnduranceMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorStarvationResillienceMinimumRange,
+                        Parameter::getPredatorStarvationResillienceMinimumRangeString)),
+                Map.entry(predatorEnduranceMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorStarvationResillienceMaximumRange,
+                        Parameter::getPredatorStarvationResillienceMaximumRangeString)),
+                Map.entry(predatorGroupRadiusTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setPredatorGroupRadius,
+                        Parameter::getPredatorGroupRadiusString)),
 
-                Map.entry(smallPreyCountTextField, new Pair<>(Parameter::setSmallPreyCount, Parameter::getSmallPreyCount)),
-                Map.entry(smallPreyRunSpeedMinTextField, new Pair<>(Parameter::setSmallPreySpeedMinimumRange, Parameter::getSmallPreyVisionMinimumRange)),
-                Map.entry(smallPreyRunSpeedMaxTextField, new Pair<>(Parameter::setSmallPreySpeedMaximumRange, Parameter::getSmallPreySpeedMaximumRange)),
-                Map.entry(smallPreyVisionMinTextField, new Pair<>(Parameter::setSmallPreyVisionMinimumRange, Parameter::getSmallPreyVisionMinimumRange)),
-                Map.entry(smallPreyVisionMaxTextField, new Pair<>(Parameter::setSmallPreyVisionMaximumRange, Parameter::getSmallPreyVisionMaximumRange)),
-                Map.entry(smallPreyNutritionMinTextField, new Pair<>(Parameter::setSmallPreyNutritionMinimumRange, Parameter::getSmallPreyNutritionMinimumRange)),
-                Map.entry(smallPreyNutritionMaxTextField, new Pair<>(Parameter::setSmallPreyNutritionMaximumRange, Parameter::getSmallPreyNutritionMaximumRange)),
-                Map.entry(smallPreyDefenseMinTextField, new Pair<>(Parameter::setSmallPreyDefenseMinimumRange, Parameter::getSmallPreyDefenseMinimumRange)),
-                Map.entry(smallPreyDefenseMaxTextField, new Pair<>(Parameter::setSmallPreyDefenseMaximumRange, Parameter::getSmallPreyDefenseMaximumRange)),
+                Map.entry(smallPreyCountTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyCount,
+                        Parameter::getSmallPreyCountString)),
+                Map.entry(smallPreyRunSpeedMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreySpeedMinimumRange,
+                        Parameter::getSmallPreyVisionMinimumRangeString)),
+                Map.entry(smallPreyRunSpeedMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreySpeedMaximumRange,
+                        Parameter::getSmallPreySpeedMaximumRangeString)),
+                Map.entry(smallPreyVisionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyVisionMinimumRange,
+                        Parameter::getSmallPreyVisionMinimumRangeString)),
+                Map.entry(smallPreyVisionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyVisionMaximumRange,
+                        Parameter::getSmallPreyVisionMaximumRangeString)),
+                Map.entry(smallPreyNutritionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyNutritionMinimumRange,
+                        Parameter::getSmallPreyNutritionMinimumRangeString)),
+                Map.entry(smallPreyNutritionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyNutritionMaximumRange,
+                        Parameter::getSmallPreyNutritionMaximumRangeString)),
+                Map.entry(smallPreyDefenseMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyDefenseMinimumRange,
+                        Parameter::getSmallPreyDefenseMinimumRangeString)),
+                Map.entry(smallPreyDefenseMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setSmallPreyDefenseMaximumRange,
+                        Parameter::getSmallPreyDefenseMaximumRangeString)),
 
-                Map.entry(mediumPreyCountTextField, new Pair<>(Parameter::setMediumPreyCount, Parameter::getMediumPreyCount)),
-                Map.entry(mediumPreyRunSpeedMinTextField, new Pair<>(Parameter::setMediumPreySpeedMinimumRange, Parameter::getMediumPreySpeedMinimumRange)),
-                Map.entry(mediumPreyRunSpeedMaxTextField, new Pair<>(Parameter::setMediumPreySpeedMaximumRange, Parameter::getMediumPreySpeedMaximumRange)),
-                Map.entry(mediumPreyVisionMinTextField, new Pair<>(Parameter::setMediumPreyVisionMinimumRange, Parameter::getMediumPreyVisionMinimumRange)),
-                Map.entry(mediumPreyVisionMaxTextField, new Pair<>(Parameter::setMediumPreyVisionMaximumRange, Parameter::getMediumPreyVisionMaximumRange)),
-                Map.entry(mediumPreyNutritionMinTextField, new Pair<>(Parameter::setMediumPreyNutritionMinimumRange, Parameter::getMediumPreyNutritionMinimumRange)),
-                Map.entry(mediumPreyNutritionMaxTextField, new Pair<>(Parameter::setMediumPreyNutritionMaximumRange, Parameter::getMediumPreyNutritionMaximumRange)),
-                Map.entry(mediumPreyDefenseMinTextField, new Pair<>(Parameter::setMediumPreyDefenseMinimumRange, Parameter::getMediumPreyDefenseMinimumRange)),
-                Map.entry(mediumPreyDefenseMaxTextField, new Pair<>(Parameter::setMediumPreyDefenseMaximumRange, Parameter::getMediumPreyDefenseMaximumRange)),
+                Map.entry(mediumPreyCountTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyCount,
+                        Parameter::getMediumPreyCountString)),
+                Map.entry(mediumPreyRunSpeedMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreySpeedMinimumRange,
+                        Parameter::getMediumPreySpeedMinimumRangeString)),
+                Map.entry(mediumPreyRunSpeedMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreySpeedMaximumRange,
+                        Parameter::getMediumPreySpeedMaximumRangeString)),
+                Map.entry(mediumPreyVisionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyVisionMinimumRange,
+                        Parameter::getMediumPreyVisionMinimumRangeString)),
+                Map.entry(mediumPreyVisionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyVisionMaximumRange,
+                        Parameter::getMediumPreyVisionMaximumRangeString)),
+                Map.entry(mediumPreyNutritionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyNutritionMinimumRange,
+                        Parameter::getMediumPreyNutritionMinimumRangeString)),
+                Map.entry(mediumPreyNutritionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyNutritionMaximumRange,
+                        Parameter::getMediumPreyNutritionMaximumRangeString)),
+                Map.entry(mediumPreyDefenseMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyDefenseMinimumRange,
+                        Parameter::getMediumPreyDefenseMinimumRangeString)),
+                Map.entry(mediumPreyDefenseMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setMediumPreyDefenseMaximumRange,
+                        Parameter::getMediumPreyDefenseMaximumRangeString)),
 
-                Map.entry(largePreyCountTextField, new Pair<>(Parameter::setLargePreyCount, Parameter::getLargePreyCount)),
-                Map.entry(largePreyRunSpeedMinTextField, new Pair<>(Parameter::setLargePreySpeedMinimumRange, Parameter::getLargePreySpeedMinimumRange)),
-                Map.entry(largePreyRunSpeedMaxTextField, new Pair<>(Parameter::setLargePreySpeedMaximumRange, Parameter::getLargePreySpeedMaximumRange)),
-                Map.entry(largePreyVisionMinTextField, new Pair<>(Parameter::setLargePreyVisionMinimumRange, Parameter::getLargePreyVisionMinimumRange)),
-                Map.entry(largePreyVisionMaxTextField, new Pair<>(Parameter::setLargePreyVisionMaximumRange, Parameter::getLargePreyVisionMaximumRange)),
-                Map.entry(largePreyNutritionMinTextField, new Pair<>(Parameter::setLargePreyNutritionMinimumRange, Parameter::getLargePreyNutritionMinimumRange)),
-                Map.entry(largePreyNutritionMaxTextField, new Pair<>(Parameter::setLargePreyNutritionMaximumRange, Parameter::getLargePreyNutritionMaximumRange)),
-                Map.entry(largePreyDefenseMinTextField, new Pair<>(Parameter::setLargePreyDefenseMinimumRange, Parameter::getLargePreyDefenseMinimumRange)),
-                Map.entry(largePreyDefenseMaxTextField, new Pair<>(Parameter::setLargePreyDefenseMaximumRange, Parameter::getLargePreyDefenseMaximumRange))
-        );
-
+                Map.entry(largePreyCountTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyCount,
+                        Parameter::getLargePreyCountString)),
+                Map.entry(largePreyRunSpeedMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreySpeedMinimumRange,
+                        Parameter::getLargePreySpeedMinimumRangeString)),
+                Map.entry(largePreyRunSpeedMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreySpeedMaximumRange,
+                        Parameter::getLargePreySpeedMaximumRangeString)),
+                Map.entry(largePreyVisionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyVisionMinimumRange,
+                        Parameter::getLargePreyVisionMinimumRangeString)),
+                Map.entry(largePreyVisionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyVisionMaximumRange,
+                        Parameter::getLargePreyVisionMaximumRangeString)),
+                Map.entry(largePreyNutritionMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyNutritionMinimumRange,
+                        Parameter::getLargePreyNutritionMinimumRangeString)),
+                Map.entry(largePreyNutritionMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyNutritionMaximumRange,
+                        Parameter::getLargePreyNutritionMaximumRangeString)),
+                Map.entry(largePreyDefenseMinTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyDefenseMinimumRange,
+                        Parameter::getLargePreyDefenseMinimumRangeString)),
+                Map.entry(largePreyDefenseMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setLargePreyDefenseMaximumRange,
+                        Parameter::getLargePreyDefenseMaximumRangeString)));
 
         for (var paramEntry : PARAMETER_MAP.entrySet()) {
             // update to default value
@@ -265,7 +335,8 @@ public class UI implements Initializable {
             });
             textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean wasFocusedBefore, Boolean isNowFocused) {
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean wasFocusedBefore,
+                        Boolean isNowFocused) {
                     if (!isNowFocused) {
                         // update param on focus lost a
                         updateParameter(paramEntry);
@@ -281,17 +352,26 @@ public class UI implements Initializable {
         stopButton.setDisable(true);
         nextButton.setDisable(true);
 
-        colorPickers = new ColorPicker[]{
+        colorPickers = new ColorPicker[] {
                 predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
         };
 
-        widgets = new Control[]{
+        widgets = new Control[] {
                 widthTextField, heightTextField,
-                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField, predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField, predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
-                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField, smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField, smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
-                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField, mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField, mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
-                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField, largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField, largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
-                simulationSpeedSlider, predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
+                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField,
+                predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField,
+                predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
+                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField,
+                smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField,
+                smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
+                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField,
+                mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField,
+                mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
+                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField,
+                largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField,
+                largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
+                simulationSpeedSlider, predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker,
+                largePreyColorPicker
         };
 
         simulationSpeedSlider.setValue(1);
@@ -349,68 +429,76 @@ public class UI implements Initializable {
     public void onApplyButtonClicked(ActionEvent actionEvent) {
         updateSimulationWindowSize();
 
-        try {
-            Level.changeAnimalNumber(
-                    Integer.parseInt(predatorCountTextField.getText()),
-                    Integer.parseInt(smallPreyCountTextField.getText()),
-                    Integer.parseInt(mediumPreyCountTextField.getText()),
-                    Integer.parseInt(largePreyCountTextField.getText())
-            );
+        Level.changeAnimalNumber(
+                Parameter.getPredatorCount(),
+                Parameter.getSmallPreyCount(),
+                Parameter.getMediumPreyCount(),
+                Parameter.getLargePreyCount());
 
-            Prefabs.setPredatorSpeed(Double.parseDouble(predatorRunSpeedMinTextField.getText()),
-                    Double.parseDouble(predatorRunSpeedMaxTextField.getText()));
-            Prefabs.setPredatorVisionRange(Double.parseDouble(predatorVisionMinTextField.getText()),
-                    Double.parseDouble(predatorVisionMaxTextField.getText()));
-            Prefabs.setPredatorStarvationResilience(Integer.parseInt(predatorEnduranceMinTextField.getText()),
-                    Integer.parseInt(predatorEnduranceMaxTextField.getText()));
-            Prefabs.setPredatorGroupRadius(Double.parseDouble(predatorGroupRadiusTextField.getText()));
+        Prefabs.setPredatorSpeed(
+                Parameter.getPredatorSpeedMinimumRange(),
+                Parameter.getPredatorSpeedMaximumRange());
+        Prefabs.setPredatorVisionRange(
+                Parameter.getPredatorVisionMinimumRange(),
+                Parameter.getPredatorVisionMaximumRange());
+        Prefabs.setPredatorStarvationResilience(
+                Parameter.getPredatorStarvationResillienceMinimumRange(),
+                Parameter.getPredatorStarvationResillienceMaximumRange());
+        Prefabs.setPredatorGroupRadius(
+                Parameter.getPredatorGroupRadius());
 
-            Prefabs.setSmallPreySpeed(Double.parseDouble(smallPreyRunSpeedMinTextField.getText()),
-                    Double.parseDouble(smallPreyRunSpeedMaxTextField.getText()));
-            Prefabs.setSmallPreyVisionRange(Double.parseDouble(smallPreyVisionMinTextField.getText()),
-                    Double.parseDouble(smallPreyVisionMaxTextField.getText()));
-            Prefabs.setSmallPreyNutrition(Integer.parseInt(smallPreyNutritionMinTextField.getText()),
-                    Integer.parseInt(smallPreyNutritionMaxTextField.getText()));
-            Prefabs.setSmallPreyDefense(Double.parseDouble(smallPreyDefenseMinTextField.getText()),
-                    Double.parseDouble(smallPreyDefenseMaxTextField.getText()));
+        Prefabs.setSmallPreySpeed(
+                Parameter.getSmallPreySpeedMinimumRange(),
+                Parameter.getSmallPreySpeedMaximumRange());
+        Prefabs.setSmallPreyVisionRange(
+                Parameter.getSmallPreyVisionMinimumRange(),
+                Parameter.getSmallPreyVisionMaximumRange());
+        Prefabs.setSmallPreyNutrition(
+                Parameter.getSmallPreyNutritionMinimumRange(),
+                Parameter.getSmallPreyNutritionMaximumRange());
+        Prefabs.setSmallPreyDefense(
+                Parameter.getSmallPreyDefenseMinimumRange(),
+                Parameter.getSmallPreyDefenseMaximumRange());
 
-            Prefabs.setMediumPreySpeed(Double.parseDouble(mediumPreyRunSpeedMinTextField.getText()),
-                    Double.parseDouble(mediumPreyRunSpeedMaxTextField.getText()));
-            Prefabs.setMediumPreyVisionRange(Double.parseDouble(mediumPreyVisionMinTextField.getText()),
-                    Double.parseDouble(mediumPreyVisionMaxTextField.getText()));
-            Prefabs.setMediumPreyNutrition(Integer.parseInt(mediumPreyNutritionMinTextField.getText()),
-                    Integer.parseInt(mediumPreyNutritionMaxTextField.getText()));
-            Prefabs.setMediumPreyDefense(Double.parseDouble(mediumPreyDefenseMinTextField.getText()),
-                    Double.parseDouble(mediumPreyDefenseMaxTextField.getText()));
+        Prefabs.setMediumPreySpeed(
+                Parameter.getMediumPreySpeedMinimumRange(),
+                Parameter.getMediumPreySpeedMaximumRange());
+        Prefabs.setMediumPreyVisionRange(
+                Parameter.getMediumPreyVisionMinimumRange(),
+                Parameter.getMediumPreyVisionMaximumRange());
+        Prefabs.setMediumPreyNutrition(
+                Parameter.getMediumPreyNutritionMinimumRange(),
+                Parameter.getMediumPreyNutritionMaximumRange());
+        Prefabs.setMediumPreyDefense(
+                Parameter.getMediumPreyDefenseMinimumRange(),
+                Parameter.getMediumPreyDefenseMaximumRange());
 
-            Prefabs.setLargePreySpeed(Double.parseDouble(largePreyRunSpeedMinTextField.getText()),
-                    Double.parseDouble(largePreyRunSpeedMaxTextField.getText()));
-            Prefabs.setLargePreyVisionRange(Double.parseDouble(largePreyVisionMinTextField.getText()),
-                    Double.parseDouble(largePreyVisionMaxTextField.getText()));
-            Prefabs.setLargePreyNutrition(Integer.parseInt(largePreyNutritionMinTextField.getText()),
-                    Integer.parseInt(largePreyNutritionMaxTextField.getText()));
-            Prefabs.setLargePreyDefense(Double.parseDouble(largePreyDefenseMinTextField.getText()),
-                    Double.parseDouble(largePreyDefenseMaxTextField.getText()));
+        Prefabs.setLargePreySpeed(
+                Parameter.getLargePreySpeedMinimumRange(),
+                Parameter.getLargePreySpeedMaximumRange());
+        Prefabs.setLargePreyVisionRange(
+                Parameter.getLargePreyVisionMinimumRange(),
+                Parameter.getLargePreyVisionMaximumRange());
+        Prefabs.setLargePreyNutrition(
+                Parameter.getLargePreyNutritionMinimumRange(),
+                Parameter.getLargePreyNutritionMaximumRange());
+        Prefabs.setLargePreyDefense(
+                Parameter.getLargePreyDefenseMinimumRange(),
+                Parameter.getLargePreyDefenseMaximumRange());
 
-            Prefabs.setShowVision(isVisionShowed);
-            Prefabs.setShowStat(isStatusShowed);
+        Prefabs.setShowVision(isVisionShowed);
+        Prefabs.setShowStat(isStatusShowed);
 
-            App.load(Level::main);
-            startButton.setDisable(false);
-            stopButton.setDisable(false);
-            nextButton.setDisable(true);
-        } catch (Exception e) {
-            a.setAlertType(Alert.AlertType.WARNING);
-            a.setContentText("ENTER INTEGER ONLY");
-            a.show();
-        }
+        App.load(Level::main);
+        startButton.setDisable(false);
+        stopButton.setDisable(false);
+        nextButton.setDisable(true);
     }
 
     public void onClearButtonClicked(ActionEvent actionEvent) {
         App.load(() -> {
         });
     }
-
 
     private boolean isVisionShowed;
     private boolean isStatusShowed;
