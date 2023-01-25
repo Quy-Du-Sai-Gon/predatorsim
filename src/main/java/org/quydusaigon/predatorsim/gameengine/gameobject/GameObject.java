@@ -120,11 +120,16 @@ public final class GameObject {
         var data = getGameObjectData(gameObject);
 
         // recursive call
-        data.children.forEach(GameObject::destroy);
+        //data.children.forEach(GameObject::destroy);
 
+        for(int i = data.children.size() - 1; i >= 0; i--){
+            destroy(data.children.get(i));
+        }
         // destroy components
-        data.components.forEach(GameObject::destroy);
-
+        //data.components.forEach(GameObject::destroy);
+        for(int i = data.components.size() - 1; i >= 0; i--){
+            destroy(data.components.get(i));
+        }
         // remove GameObject from parent
         getParent(gameObject).ifPresent(parent -> {
             parent.getChildren().remove(gameObject);

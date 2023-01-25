@@ -30,9 +30,9 @@ public class Parameter {
     private static double windowHeight = 700;
 
     private static int predatorCount = 1;
-    private static int smallPreyCount = 1;
-    private static int mediumPreyCount = 1;
-    private static int largePreyCount = 1;
+    private static int smallPreyCount = 12;
+    private static int mediumPreyCount = 0;
+    private static int largePreyCount = 0;
 
     public static void setPredatorCount(String predatorCount) {
         Parameter.predatorCount = Integer.parseInt(predatorCount);
@@ -194,12 +194,12 @@ public class Parameter {
     private static double largePreyVisionMinimumRange = 70;
     private static double largePreyVisionMaximumRange = 90;
 
-    private static int smallPreyNutritionMinimumRange = 15;
-    private static int smallPreyNutritionMaximumRange = 25;
-    private static int mediumPreyNutritionMinimumRange = 50;
-    private static int mediumPreyNutritionMaximumRange = 65;
-    private static int largePreyNutritionMinimumRange = 100;
-    private static int largePreyNutritionMaximumRange = 120;
+    private static int smallPreyNutritionMinimumRange = 150;
+    private static int smallPreyNutritionMaximumRange = 200;
+    private static int mediumPreyNutritionMinimumRange = 600;
+    private static int mediumPreyNutritionMaximumRange = 800;
+    private static int largePreyNutritionMinimumRange = 1000;
+    private static int largePreyNutritionMaximumRange = 1200;
 
     private static double smallPreyDefenseMinimumRange = 0;
     private static double smallPreyDefenseMaximumRange = 10;
@@ -208,8 +208,8 @@ public class Parameter {
     private static double largePreyDefenseMinimumRange = 75;
     private static double largePreyDefenseMaximumRange = 100;
 
-    private static int predatorStarvationResillienceMinimumRange = 30;
-    private static int predatorStarvationResillienceMaximumRange = 50;
+    private static int predatorStarvationResillienceMinimumRange = 750;
+    private static int predatorStarvationResillienceMaximumRange = 1000;
     private static double predatorGroupRadius = 100;
 
     public static String getPredatorCountString() {

@@ -10,5 +10,4 @@ public abstract class AnimalBehaviour extends Behaviour {
         this.animalStat = animalStat;
     }
 
-    abstract void doAction();
 }

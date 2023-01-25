@@ -18,6 +18,7 @@ import javafx.scene.Group;
 public class WanderState extends State {
     WanderBehaviour wanderBehaviour;
     private Optional<Group> foundObject;
+    boolean toSurvivalState = false;
 
     public WanderState(Animal animalSM) {
         super(animalSM);
@@ -38,30 +39,34 @@ public class WanderState extends State {
             return;
         }
 
-        wanderBehaviour.doAction();
+        wanderBehaviour.doWander();
     }
 
     @Override
     public void exit() {
-        if (animalSM instanceof Predator) {
-            PreyStat preystat = (PreyStat) GameObject.getComponent(foundObject.get(), Prey.class).get().animalStat;
+        if(toSurvivalState) {
+            if (animalSM instanceof Predator) {
+                PreyStat preystat = (PreyStat) GameObject.getComponent(foundObject.get(), Prey.class).get().animalStat;
 
-            if (preystat.size == PreySize.SMALL) {
-                animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingAlone.class).orElseThrow());
-            } else if ((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) {
-                animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingInGroup.class).orElseThrow());
+                if (preystat.size == PreySize.SMALL) {
+                    animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingAlone.class).orElseThrow());
+                } else if ((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) {
+                    animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingInGroup.class).orElseThrow());
+                }
+
+                animalSM.getSurvivalBehaviour().setUpReference(foundObject.orElseThrow());
             }
-
-            animalSM.getSurvivalBehaviour().setUpReference(foundObject.orElseThrow());
-        } else if (animalSM instanceof Prey) {
-            animalSM.getSurvivalBehaviour().setUpReference();
+            else if (animalSM instanceof Prey) {
+                animalSM.getSurvivalBehaviour().setUpReference();
+            }
+            toSurvivalState = false;
+            foundObject = Optional.empty();
         }
-
-        foundObject = Optional.empty();
     }
 
     private <T extends Animal> boolean detectTarget(Class<T> animalType) {
         if (animalSM.getVision().getAllDetectedObject(animalType).size() != 0) {
+            toSurvivalState = true;
             setFoundObject(animalSM.getVision().getClosestObject(animalType).get());
             animalSM.getStateConstructor().getSurvivalState().setNoTarget(false);
             animalSM.changeState(animalSM.getStateConstructor().getSurvivalState());

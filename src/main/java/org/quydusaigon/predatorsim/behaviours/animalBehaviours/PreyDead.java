@@ -1,8 +1,15 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
-public class PreyDead extends DeadBehaviour{
-    @Override
-    public void doDead() {
+import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.animals.Predator;
+import org.quydusaigon.predatorsim.util.PreyStat;
 
+public class PreyDead extends DeadBehaviour{
+    Predator killerPredator;
+    @Override
+    public void doDead(Animal killerAnimal) {
+        PreyStat preyStat = (PreyStat)animalStat;
+        killerPredator = (Predator)killerAnimal;
+        killerPredator.eat(preyStat.nutrition);
     }
 }

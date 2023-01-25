@@ -2,19 +2,26 @@ package org.quydusaigon.predatorsim.behaviours.states;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.DeadBehaviour;
+import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 
 public class DeadState extends State {
+    public void setKillerAnimal(Animal killerAnimal) {
+        this.killerAnimal = killerAnimal;
+    }
+
+    protected Animal killerAnimal;
     public DeadState(Animal animalSM) {
         super(animalSM);
     }
 
     @Override
     public void enter() {
-        // super.enter();
-        // System.out.println("Dead");
-        // System.out.println(animalSM.getGameObject());
-        // GameObject.destroy(animalSM.getGameObject());
+        super.enter();
+        System.out.println("Dead");
+        animalSM.getDeadBehaviour().doDead(killerAnimal);
+        GameLoop.objectsToDestroy.add(animalSM.getGameObject());
     }
 
     @Override

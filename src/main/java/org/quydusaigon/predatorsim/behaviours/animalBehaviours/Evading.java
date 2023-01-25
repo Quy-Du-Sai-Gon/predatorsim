@@ -18,7 +18,7 @@ public class Evading extends SurvivalBehaviour {
     Vision vision;
     double targetX, targetY;
     Point2D targetDir;
-    double coolDownTime = 1.5;
+    double coolDownTime = 1;
     double currentCoolDownTime = 0;
     boolean foundPredator = true;
     Group targetObject;

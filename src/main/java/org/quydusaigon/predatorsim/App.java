@@ -32,6 +32,7 @@ public class App extends Application {
     private static Stage stage;
 
     @Override
+    
     public void start(Stage mainStage) throws IOException {
         stage = mainStage;
 

@@ -73,6 +73,7 @@ public abstract class Animal extends StateMachine {
 
         wanderBehaviour = getComponent(WanderBehaviour.class).orElseThrow();
         survivalBehaviour = getComponent(SurvivalBehaviour.class).orElseThrow();
+        deadBehaviour = getComponent(DeadBehaviour.class).orElseThrow();
         setUp();
 
         initialize(this.stateConstructor.getWanderState());

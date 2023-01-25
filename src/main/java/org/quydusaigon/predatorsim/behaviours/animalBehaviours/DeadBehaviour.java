@@ -1,9 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
+import org.quydusaigon.predatorsim.behaviours.Animal;
+
 public abstract class DeadBehaviour extends AnimalBehaviour{
-    @Override
-    void doAction(){
-        doDead();
-    }
-    public abstract void doDead();
+    public abstract void doDead(Animal killerAnimal);
 }

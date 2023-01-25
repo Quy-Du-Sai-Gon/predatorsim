@@ -24,8 +24,7 @@ public class WanderBehaviour extends AnimalBehaviour {
         seedY = Math.random() * 100;
     }
 
-    @Override
-    public void doAction() {
+    public void doWander() {
         var x = posX();
         var y = posY();
 

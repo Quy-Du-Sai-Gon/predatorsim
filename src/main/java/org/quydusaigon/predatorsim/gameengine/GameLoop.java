@@ -1,9 +1,6 @@
 package org.quydusaigon.predatorsim.gameengine;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 import org.quydusaigon.predatorsim.App;
@@ -24,6 +21,8 @@ import javafx.util.Pair;
  * handle} methods to act as the game loop that updates our application.
  */
 public class GameLoop extends AnimationTimer {
+
+    public static List<Group> objectsToDestroy = new ArrayList<>();
 
     /**
      * Initializes and starts the game loop.
@@ -61,6 +60,11 @@ public class GameLoop extends AnimationTimer {
          * update scene
          */
         GameObject.update(App.root);
+
+        /*
+         * destroy
+         */
+        executeDestroy();
 
         /*
          * collision detection
@@ -140,5 +144,11 @@ public class GameLoop extends AnimationTimer {
 
         previousCollisions = currentCollisions;
     } // detectAndRaiseCollisionEvents
+
+    private void executeDestroy(){
+        for(int i = 0; i < objectsToDestroy.size(); i++){
+            GameObject.destroy(objectsToDestroy.get(i));
+        }
+    }
 
 } // GameLoop

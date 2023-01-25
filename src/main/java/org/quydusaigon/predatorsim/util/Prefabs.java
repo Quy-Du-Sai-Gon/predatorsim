@@ -6,11 +6,7 @@ import javafx.scene.shape.Circle;
 import java.util.Random;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Evading;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingInGroup;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.Vision;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.WanderBehaviour;
+import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
@@ -80,6 +76,7 @@ public final class Prefabs {
                 new WanderBehaviour(),
                 new HuntingInGroup(),
                 new HuntingAlone(),
+                new PredatorDead(),
                 new Predator(predatorStat));
 
         var circle = new Circle(predatorStat.visionRange, Color.AQUAMARINE);
@@ -115,6 +112,7 @@ public final class Prefabs {
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
+                new PreyDead(),
                 new Prey(smallPreyStat));
 
         var circle = new Circle(smallPreyStat.visionRange, Color.BLUEVIOLET);
@@ -150,6 +148,7 @@ public final class Prefabs {
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
+                new PreyDead(),
                 new Prey(mediumPreyStat));
 
         var circle = new Circle(mediumPreyStat.visionRange, Color.BLUEVIOLET);
@@ -185,6 +184,7 @@ public final class Prefabs {
                 nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
+                new PreyDead(),
                 new Prey(largePreyStat));
 
         var circle = new Circle(largePreyStat.visionRange, Color.BLUEVIOLET);

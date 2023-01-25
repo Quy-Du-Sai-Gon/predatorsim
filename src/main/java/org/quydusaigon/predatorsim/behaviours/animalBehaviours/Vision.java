@@ -44,7 +44,7 @@ public class Vision extends Behaviour {
     @Override
     public void onCollisionExit(Collider<?> collider, Collider<?> other) {
         if (GameObject.getParent(getGameObject()).get() != other.getGameObject()
-                && GameObject.getComponent(other.getGameObject(), Vision.class).isEmpty()) {
+                ) {
             var particle = (Circle) other.getNode();
             particle.setStroke(null);
             detectedGameObject.remove(other.getGameObject());
