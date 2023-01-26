@@ -176,6 +176,9 @@ public class Parameter {
         Parameter.predatorGroupRadius = Double.parseDouble(predatorGroupRadius);
     }
 
+    public static void setRelativeSimulationSpeed(String relativeSimulationSpeed) {
+        Parameter.relativeSimulationSpeed = Double.parseDouble(relativeSimulationSpeed);
+    }
     private static double predatorSpeedMinimumRange = 5;
     private static double predatorSpeedMaximumRange = 6;
     private static double smallPreySpeedMinimumRange = 4;
@@ -211,6 +214,7 @@ public class Parameter {
     private static int predatorStarvationResillienceMinimumRange = 750;
     private static int predatorStarvationResillienceMaximumRange = 1000;
     private static double predatorGroupRadius = 100;
+    private static double relativeSimulationSpeed = 50;
 
     public static String getPredatorCountString() {
         return String.valueOf(predatorCount);
@@ -491,4 +495,13 @@ public class Parameter {
     public static double getPredatorGroupRadius() {
         return predatorGroupRadius;
     }
+
+    public static String getRelativeSimulationSpeedString() {
+        return String.valueOf(relativeSimulationSpeed);
+    }
+
+    public static double getRelativeSimulationSpeed() {
+        return relativeSimulationSpeed;
+    }
 }
+
