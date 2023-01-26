@@ -240,7 +240,7 @@ public class UI implements Initializable {
                         Parameter::getSmallPreyCountString)),
                 Map.entry(smallPreyRunSpeedMinTextField, new Pair<Consumer<String>, Supplier<String>>(
                         Parameter::setSmallPreySpeedMinimumRange,
-                        Parameter::getSmallPreyVisionMinimumRangeString)),
+                        Parameter::getSmallPreySpeedMinimumRangeString)),
                 Map.entry(smallPreyRunSpeedMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
                         Parameter::setSmallPreySpeedMaximumRange,
                         Parameter::getSmallPreySpeedMaximumRangeString)),
