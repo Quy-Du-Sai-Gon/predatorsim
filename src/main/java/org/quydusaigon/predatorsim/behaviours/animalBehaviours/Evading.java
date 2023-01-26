@@ -12,6 +12,7 @@ import org.quydusaigon.predatorsim.util.Map;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 public class Evading extends SurvivalBehaviour {
     DoubleProperty x,y;
@@ -52,16 +53,14 @@ public class Evading extends SurvivalBehaviour {
         if(foundPredator) {
             targetObject = vision.getClosestObject(Predator.class).get();
             targetX = GameObject.getComponent(targetObject, Component.class).get().posX().get();
-            targetY = GameObject.getComponent(targetObject, Component.class).get().posX().get();
+            targetY = GameObject.getComponent(targetObject, Component.class).get().posY().get();
         }
 
-
         targetDir = new Point2D(x.get() - targetX, y.get() - targetY);
-
         targetDir = targetDir.normalize();
 
-        x.set(Map.checkBoundX(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
-        y.set(Map.checkBoundY(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime()));
+        x.set(Map.checkBoundX(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed()));
+        y.set(Map.checkBoundY(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed()));
     }
 
     private void escape(){
