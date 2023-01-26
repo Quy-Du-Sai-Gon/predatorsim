@@ -10,6 +10,7 @@ import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 public class HuntingAlone extends Hunting {
     DoubleProperty x, y;
@@ -34,7 +35,7 @@ public class HuntingAlone extends Hunting {
 
         targetDir = targetDir.normalize();
 
-         x.set(x.get() + targetDir.getX() * 50 * animalStat.runSpeed * Time.getDeltaTime());
-         y.set(y.get() + targetDir.getY() * 50 * animalStat.runSpeed * Time.getDeltaTime());
+         x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
+         y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
         }
 }

@@ -4,15 +4,9 @@ import org.quydusaigon.predatorsim.App;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
-import org.quydusaigon.predatorsim.util.PerlinNoise;
-import org.quydusaigon.predatorsim.util.PredatorStat;
-import org.quydusaigon.predatorsim.util.PreySize;
-import org.quydusaigon.predatorsim.util.PreyStat;
+import org.quydusaigon.predatorsim.util.*;
 
 import javafx.scene.Group;
-
-import org.quydusaigon.predatorsim.util.AnimalStat;
-import org.quydusaigon.predatorsim.util.Map;
 
 public class WanderBehaviour extends AnimalBehaviour {
 
@@ -35,8 +29,8 @@ public class WanderBehaviour extends AnimalBehaviour {
 
         AnimalStat stat = GameObject.getComponent(object, Animal.class).get().animalStat;
         if (stat instanceof PreyStat) {
-            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * 100;
-            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * 100;
+            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
 
             var preyStat = (PreyStat) stat;
             if (preyStat.size == PreySize.SMALL) {
@@ -57,8 +51,8 @@ public class WanderBehaviour extends AnimalBehaviour {
         }
 
         else if (stat instanceof PredatorStat) {
-            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * 100;
-            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * 100;
+            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
             seedX += 0.01;
             seedY += 0.01;
         }
