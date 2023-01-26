@@ -28,13 +28,16 @@ public class WanderBehaviour extends AnimalBehaviour {
         var x = posX();
         var y = posY();
 
-        double randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed/2 * Time.getDeltaTime() * 100;
-        double randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed/2 * Time.getDeltaTime() * 100;
+        double randomX = 0;
+        double randomY = 0;
 
         Group object = getGameObject();
 
         AnimalStat stat = GameObject.getComponent(object, Animal.class).get().animalStat;
         if (stat instanceof PreyStat) {
+            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * 100;
+            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * 100;
+
             var preyStat = (PreyStat) stat;
             if (preyStat.size == PreySize.SMALL) {
                 seedX += 0.007;
@@ -49,11 +52,13 @@ public class WanderBehaviour extends AnimalBehaviour {
             double mapTendencyOffsetX = Math.abs(App.simulationWindowWidth - posX().get());
             double mapTendencyOffsetY =  Math.abs(App.simulationWindowHeight - posY().get());
     
-            seedX += 0.005 - mapTendencyOffsetX/60000;
-            seedY += 0.005 - mapTendencyOffsetY/60000;
+            seedX += 0.005 - mapTendencyOffsetX/40000;
+            seedY += 0.005 - mapTendencyOffsetY/40000;
         }
 
         else if (stat instanceof PredatorStat) {
+            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * 100;
+            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * 100;
             seedX += 0.01;
             seedY += 0.01;
         }
