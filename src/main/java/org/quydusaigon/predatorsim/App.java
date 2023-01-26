@@ -44,21 +44,9 @@ public class App extends Application {
         left = (BorderPane) fxmlLoader.getNamespace().get("borderPane");
 
 
-        GridPane gridPane = new GridPane();
-        gridPane.setGridLinesVisible(true);
-        final int numCols = 50 ;
-        final int numRows = 50 ;
-        for (int i = 0; i < numCols; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCols);
-            gridPane.getColumnConstraints().add(colConst);
-        }
-        for (int i = 0; i < numRows; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / numRows);
-            gridPane.getRowConstraints().add(rowConst);
-        }
-        left.setCenter(gridPane);
+
+
+        left.setCenter(UI.getGridLines());
         left.setTop(root);
 
         var scene = new Scene(parent);

@@ -11,6 +11,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
@@ -509,5 +512,23 @@ public class UI implements Initializable {
 
     public void onShowStatusCheckBoxClicked(ActionEvent actionEvent) {
         isStatusShowed = showStatusCheckBox.isSelected();
+    }
+
+    private static GridPane gridPane = new GridPane();
+    public static GridPane getGridLines(){
+        gridPane.setGridLinesVisible(true);
+        final int numCols = 50 ;
+        final int numRows = 50 ;
+        for (int i = 0; i < numCols; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPercentWidth(100.0 / numCols);
+            gridPane.getColumnConstraints().add(colConst);
+        }
+        for (int i = 0; i < numRows; i++) {
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setPercentHeight(100.0 / numRows);
+            gridPane.getRowConstraints().add(rowConst);
+        }
+        return gridPane;
     }
 }
