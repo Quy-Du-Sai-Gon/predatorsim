@@ -202,6 +202,19 @@ public final class GameObject {
     }
 
     /**
+     * Instantiates a new game object under {@code parent} with
+     * {@link TransformInit#DEFAULT} using {@code prefab}.
+     * 
+     * @param prefab the prefab for instantiating the new game object.
+     * @param parent the parent of the game object to be created.
+     * @see Prefab
+     * @see TransformInit
+     */
+    public static void instantiate(Prefab prefab, Group parent) {
+        instantiate(prefab, TransformInit.DEFAULT, parent);
+    }
+
+    /**
      * Instantiates a new game object under {@link App#root} with
      * {@link TransformInit#DEFAULT} using {@code prefab}.
      * 

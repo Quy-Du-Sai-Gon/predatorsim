@@ -56,6 +56,20 @@ public abstract class Component {
     }
 
     /**
+     * Instantiates a new game object under {@code parent} with
+     * {@link TransformInit#DEFAULT} using {@code prefab}. Similar to
+     * {@link GameObject#instantiate(Prefab, Group)}.
+     * 
+     * @param prefab the prefab for instantiating the new game object.
+     * @param parent the parent of the game object to be created.
+     * @see Prefab
+     * @see TransformInit
+     */
+    public static void instantiate(Prefab prefab, Group parent) {
+        GameObject.instantiate(prefab, parent);
+    }
+
+    /**
      * Instantiates a new game object under {@link App#root} with
      * {@link TransformInit#DEFAULT} using {@code prefab}. Similar to
      * {@link GameObject#instantiate(Prefab)}.
