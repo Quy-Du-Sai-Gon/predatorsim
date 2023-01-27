@@ -2,10 +2,10 @@ package org.quydusaigon.predatorsim.util;
 
 public class PredatorStat extends AnimalStat {
 
-    public int starvationResilience;
+    public float starvationResilience;
     public double groupRadius;
 
-    public PredatorStat(double runSpeed, double visionRange, int starvationResilience,
+    public PredatorStat(double runSpeed, double visionRange, float starvationResilience,
             double groupRadius) {
         super(runSpeed, visionRange);
         this.starvationResilience = starvationResilience;
@@ -14,7 +14,7 @@ public class PredatorStat extends AnimalStat {
 
     @Override
     public String toString() {
-        return String.format("%sHunger Resilience: %d\nGroup radius: %.2f\n",
+        return String.format("%sHunger Resilience: %f\nGroup radius: %.2f\n",
                 super.toString(), starvationResilience, groupRadius);
     }
 }

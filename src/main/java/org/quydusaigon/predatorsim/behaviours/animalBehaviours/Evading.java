@@ -1,6 +1,8 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import javafx.beans.property.DoubleProperty;
 import org.quydusaigon.predatorsim.behaviours.Animal;
@@ -14,6 +16,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import org.quydusaigon.predatorsim.util.Parameter;
 
+import static java.lang.Math.sqrt;
+
 public class Evading extends SurvivalBehaviour {
     DoubleProperty x,y;
     Vision vision;
@@ -22,7 +26,7 @@ public class Evading extends SurvivalBehaviour {
     double coolDownTime = 1;
     double currentCoolDownTime = 0;
     boolean foundPredator = true;
-    Group targetObject;
+    List<Group> targetObjects = new ArrayList<Group>();
     @Override
     public void setUpReference(){
         vision = getComponent(Animal.class).get().getVision();
@@ -51,19 +55,31 @@ public class Evading extends SurvivalBehaviour {
         y = posY();
 
         if(foundPredator) {
-            targetObject = vision.getClosestObject(Predator.class).get();
-            targetX = GameObject.getComponent(targetObject, Component.class).get().posX().get();
-            targetY = GameObject.getComponent(targetObject, Component.class).get().posY().get();
-        }
+            targetObjects = vision.getAllDetectedObject(Predator.class).stream().toList();
+            Point2D res = Point2D.ZERO;
+            double minLen = Double.MAX_VALUE;
 
-        targetDir = new Point2D(x.get() - targetX, y.get() - targetY);
-        targetDir = targetDir.normalize();
+            for(int i = 0; i < targetObjects.size(); i++){
+                targetX = GameObject.getComponent(targetObjects.get(i), Component.class).get().posX().get();
+                targetY = GameObject.getComponent(targetObjects.get(i), Component.class).get().posY().get();
+
+                Point2D tempDir = new Point2D(x.get() - targetX, y.get() - targetY);
+
+                double len = tempDir.magnitude();
+                if(minLen > len){
+                    minLen = len;
+                }
+
+                res = res.add(tempDir.multiply(1/(len*len)));
+            }
+
+            res = res.multiply(minLen);
+
+            targetDir = res;
+            targetDir = targetDir.normalize();
+        }
 
         x.set(Map.checkBoundX(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed()));
         y.set(Map.checkBoundY(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed()));
-    }
-
-    private void escape(){
-
     }
 }

@@ -27,7 +27,7 @@ public class Predator extends Animal {
     public void update() {
         super.update();
 
-        predatorStat.starvationResilience -= Time.getDeltaTime();
+        predatorStat.starvationResilience -= hungryRate * Time.getDeltaTime();
 
         if(predatorStat.starvationResilience <= 0){
             changeState(stateConstructor.getDeadState());
