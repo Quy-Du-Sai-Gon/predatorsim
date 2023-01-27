@@ -6,8 +6,6 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
@@ -28,36 +26,34 @@ public class App extends Application {
 
     private static float timeStep = 0.5f;
 
-    private static BorderPane left;
+    private static BorderPane simulationWindow;
     private static Stage stage;
 
     @Override
     
     public void start(Stage mainStage) throws IOException {
         stage = mainStage;
-
         stage.setTitle("Predatorsim");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
-        Parent parent = fxmlLoader.load();
-
-        left = (BorderPane) fxmlLoader.getNamespace().get("borderPane");
-
-
-
-
-        left.setCenter(UI.getGridLines());
-        left.setTop(root);
-
-        var scene = new Scene(parent);
+        var scene = new Scene(loadFXML());
         stage.setScene(scene);
 
         load(Level::main);
         loop = new GameLoop();
         stage.setResizable(false);
         UI.updateSimulationWindowSize();
+
         stage.show();
 
+    }
+
+    private Parent loadFXML() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
+        Parent fxml = fxmlLoader.load();
+
+        simulationWindow = (BorderPane) fxmlLoader.getNamespace().get("simulationWindow");
+
+        return fxml;
     }
 
     public static void setStageSize(double width, double height) {
@@ -71,7 +67,7 @@ public class App extends Application {
     }
 
     private static void setRoot(Group root) {
-        var children = left.getChildren();
+        var children = simulationWindow.getChildren();
         children.remove(App.root);
         children.add(root);
         App.root = root;

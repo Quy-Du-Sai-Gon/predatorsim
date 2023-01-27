@@ -11,12 +11,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
-import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
@@ -25,14 +26,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class UI implements Initializable {
 
     @FXML
     private TextField widthTextField;
     private static TextField staticWidthTextField;
-
     @FXML
     private TextField heightTextField;
     private static TextField staticHeightTextField;
@@ -173,6 +172,9 @@ public class UI implements Initializable {
     private CheckBox showStatusCheckBox;
 
     @FXML
+    private CheckBox showGridLinesCheckBox;
+
+    @FXML
     private Button startButton;
 
     @FXML
@@ -188,16 +190,21 @@ public class UI implements Initializable {
     private Button clearButton;
 
     @FXML
-    private BarChart<String, Double> barChart;
+    private BarChart<String, Integer> barChart;
 
     @FXML
     private SplitPane rightSplitPane;
+
+    @FXML
+    private BorderPane simulationWindow;
     private static SplitPane staticRightSplitPane;
     ColorPicker[] colorPickers;
 
     private Control[] widgets;
 
-    Alert a = new Alert(Alert.AlertType.NONE);
+    Alert warningAlert = new Alert(Alert.AlertType.NONE);
+
+    private GridPane gridPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -339,7 +346,7 @@ public class UI implements Initializable {
             textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean wasFocusedBefore,
-                        Boolean isNowFocused) {
+                                    Boolean isNowFocused) {
                     if (!isNowFocused) {
                         // update param on focus lost a
                         updateParameter(paramEntry);
@@ -355,11 +362,11 @@ public class UI implements Initializable {
         stopButton.setDisable(true);
         nextButton.setDisable(true);
 
-        colorPickers = new ColorPicker[] {
+        colorPickers = new ColorPicker[]{
                 predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
         };
 
-        widgets = new Control[] {
+        widgets = new Control[]{
                 widthTextField, heightTextField,
                 predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField,
                 predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField,
@@ -378,7 +385,30 @@ public class UI implements Initializable {
         };
 
         simulationSpeedSlider.setValue(1);
+        barChart.getData().addAll(updateBarChart(updateCurrentAliveEntity));
 
+        // Grid
+        gridPane = getGridLines();
+        simulationWindow.setCenter(gridPane);
+    }
+
+    /*
+    @param: Pair<String, Integer> of predator, prey
+     */
+
+    Map<String, Integer> updateCurrentAliveEntity = Map.of(
+            "predator", 100,
+            "small prey", 200,
+            "medium prey", 150,
+            "large prey", 120
+    );
+
+    private XYChart.Series<String, Integer> updateBarChart(Map<String, Integer> animalMap) {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
+            series.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+        }
+        return series;
     }
 
     private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
@@ -514,11 +544,18 @@ public class UI implements Initializable {
         isStatusShowed = showStatusCheckBox.isSelected();
     }
 
-    private static GridPane gridPane = new GridPane();
-    public static GridPane getGridLines(){
+    public void onShowGridLinesCheckBoxClicked(ActionEvent actionEvent) {
+        gridPane.setVisible(showGridLinesCheckBox.isSelected());
+    }
+
+
+    private GridPane getGridLines() {
+        GridPane gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
-        final int numCols = 50 ;
-        final int numRows = 50 ;
+        gridPane.setVisible(showGridLinesCheckBox.isSelected());
+
+        final int numCols = 50;
+        final int numRows = 50;
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCols);
@@ -531,4 +568,5 @@ public class UI implements Initializable {
         }
         return gridPane;
     }
+
 }

@@ -10,7 +10,7 @@
     <children>
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" />
+                <BorderPane fx:id="simulationWindow" prefHeight="200.0" prefWidth="200.0" />
                 <AnchorPane maxWidth="250.0" minWidth="250.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                     <children>
                         <SplitPane fx:id="rightSplitPane" dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -82,6 +82,11 @@
                                                                             </padding>
                                                                         </CheckBox>
                                                                         <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowStatusCheckBoxClicked" text="Show Status" VBox.vgrow="ALWAYS">
+                                                                            <padding>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </padding>
+                                                                        </CheckBox>
+                                                                        <CheckBox fx:id="showGridLinesCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" text="Show Grid Lines" VBox.vgrow="ALWAYS">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
