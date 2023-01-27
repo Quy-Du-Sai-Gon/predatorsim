@@ -69,7 +69,9 @@ public final class Prefabs {
                 random.nextDouble(predatorSpeedMin, predatorSpeedMax),
                 random.nextDouble(predatorVisionRangeMin, predatorVisionRangeMax),
                 random.nextInt(predatorStarvationResilienceMin, predatorStarvationResilienceMax),
-                predatorGroupRadius);
+                predatorGroupRadius,
+                300
+                );
 
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),

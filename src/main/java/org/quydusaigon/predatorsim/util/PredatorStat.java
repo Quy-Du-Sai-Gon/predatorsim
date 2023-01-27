@@ -4,12 +4,14 @@ public class PredatorStat extends AnimalStat {
 
     public float starvationResilience;
     public double groupRadius;
+    public  double howlingRadius;
 
     public PredatorStat(double runSpeed, double visionRange, float starvationResilience,
-            double groupRadius) {
+            double groupRadius, double howlingRadius) {
         super(runSpeed, visionRange);
         this.starvationResilience = starvationResilience;
         this.groupRadius = groupRadius;
+        this.howlingRadius = howlingRadius;
     }
 
     @Override
