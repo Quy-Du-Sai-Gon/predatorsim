@@ -84,6 +84,6 @@ public class TransformInit {
      *         {@link App} window's size.
      */
     public static TransformInit getRandomTransformInit() {
-        return new TransformInit(Math.random() * App.simulationWindowHeight, Math.random() * App.simulationWindowHeight);
+        return new TransformInit(Math.random() * App.simulationWindowWidth, Math.random() * App.simulationWindowHeight);
     }
 }
