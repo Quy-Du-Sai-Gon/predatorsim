@@ -53,8 +53,8 @@ public class WanderBehaviour extends AnimalBehaviour {
         else if (stat instanceof PredatorStat) {
             randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
             randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
-            seedX += 0.01;
-            seedY += 0.01;
+            seedX += 0.005;
+            seedY += 0.005;
         }
 
         x.set(Map.checkBoundX(posX().get() + randomX));
