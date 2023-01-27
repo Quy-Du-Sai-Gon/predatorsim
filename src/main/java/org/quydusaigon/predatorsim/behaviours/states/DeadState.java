@@ -19,7 +19,6 @@ public class DeadState extends State {
     @Override
     public void enter() {
         super.enter();
-        System.out.println("Dead");
         animalSM.getDeadBehaviour().doDead(killerAnimal);
         GameLoop.objectsToDestroy.add(animalSM.getGameObject());
     }
