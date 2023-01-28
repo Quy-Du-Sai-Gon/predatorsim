@@ -14,6 +14,8 @@ import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
+import org.quydusaigon.predatorsim.util.Distance;
+import org.quydusaigon.predatorsim.util.Map;
 import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.PredatorStat;
 
@@ -33,9 +35,10 @@ public class HuntingInGroup extends Hunting {
     private Vision groupVision;
     private Vision howlVision;
 
+    private PredatorStat predatorStat;
     @Override
     public void start() {
-        var predatorStat = (PredatorStat) getComponent(Predator.class).orElseThrow().animalStat;
+        predatorStat = (PredatorStat) getComponent(Predator.class).orElseThrow().animalStat;
 
         var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
         var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
@@ -80,22 +83,11 @@ public class HuntingInGroup extends Hunting {
         }
     }
 
-    // private void startHowling() {
-    // this.isLeader = true;
-    // PredatorStat predatorStat = (PredatorStat) animalStat;
-
-    // var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
-    // circleHowling.setOpacity(0.4);
-    // var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
-    // Collider howlCollider = new Collider<>(howlingVisionNodeComp);
-
-    // var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
-    // circleGroup.setOpacity(0.4);
-    // var groupVisionNodeComp = new NodeComponent<>(circleGroup);
-    // Collider groupCollider = new Collider<>(groupVisionNodeComp);
-    // }
-
     private void howl() {
+        if (groupVision.getAllDetectedObject(Predator.class).size() >= numberOfAllies) {
+            groupFounded = true;
+            return;
+        }
         if (howlVision.getAllDetectedObject(Predator.class).size() >= numberOfAllies) {
             for (int i = 0; i < numberOfAllies; i++) {
                 alliesObjects.add(howlVision.getAllDetectedObject(Predator.class)
@@ -107,15 +99,21 @@ public class HuntingInGroup extends Hunting {
                 animal.setSurvivalBehaviour(animal.getComponent(HuntingInGroup.class).get());
                 ((HuntingInGroup) animal.getSurvivalBehaviour()).setUpHuntingInGroup(getGameObject());
                 animal.changeState(animal.getStateConstructor().getSurvivalState());
+                animal.getComponent(HuntingInGroup.class).orElseThrow().setUpReference(targetObject);
             }
-            groupFounded = true;
         }
+        stalk();
     }
 
     private void join() {
+        if (Distance.calculateDistance(leaderObject, getGameObject()) <= predatorStat.groupRadius) {
+            groupFounded = true;
+            return;
+        }
         double targetX, targetY;
         Point2D targetDir;
         Component component = GameObject.getComponent(leaderObject, Component.class).get();
+
 
         targetX = component.posX().get();
         targetY = component.posY().get();
@@ -131,10 +129,55 @@ public class HuntingInGroup extends Hunting {
     }
 
     private void leaderChase() {
+        double targetX, targetY;
+        Point2D targetDir;
+        Component component = GameObject.getComponent(targetObject, Component.class).get();
+
+
+        targetX = component.posX().get();
+        targetY = component.posY().get();
+
+        targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
+
+        targetDir = targetDir.normalize();
+
+        posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+        posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
 
     }
 
     private void memberChase() {
+        Animal animal = GameObject.getComponent(targetObject, Animal.class).orElseThrow();
+        WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).orElseThrow();
+        
+        double targetX, targetY;
+        Point2D targetDir;
+        Component component = GameObject.getComponent(targetObject, Component.class).orElseThrow();
 
+
+        targetX = component.posX().get();
+        targetY = component.posY().get();
+
+        targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
+
+        targetDir = targetDir.normalize();
+
+        posX().set(posX().get() + (targetMovement.noiseX + targetDir.getX()) * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+        posY().set(posY().get() + (targetMovement.noiseY + targetDir.getY()) * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+    }
+
+    private void stalk() {
+        Animal animal = GameObject.getComponent(targetObject, Animal.class).get();
+        WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).get();
+
+        
+        posX().set(Map.checkBoundX(posX().get() + targetMovement.noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed()));
+        posY().set(Map.checkBoundY(posY().get() + targetMovement.noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed()));
     }
 }
