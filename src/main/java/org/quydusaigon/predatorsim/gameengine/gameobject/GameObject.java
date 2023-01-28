@@ -126,12 +126,12 @@ public final class GameObject {
         scaleX(go).set(tf.scaleX);
         scaleY(go).set(tf.scaleY);
 
-        // set parent
-        _setParentNow(go, parent);
-
         // create GameObject data
         var data = new GameObject(components.length);
         go.setUserData(data);
+
+        // set parent
+        _setParentNow(go, parent);
 
         // add initial components
         for (var c : components) {
