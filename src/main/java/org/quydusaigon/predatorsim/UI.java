@@ -462,66 +462,6 @@ public class UI implements Initializable {
     public void onApplyButtonClicked(ActionEvent actionEvent) {
         updateSimulationWindowSize();
 
-        Level.changeAnimalNumber(
-                Parameter.getPredatorCount(),
-                Parameter.getSmallPreyCount(),
-                Parameter.getMediumPreyCount(),
-                Parameter.getLargePreyCount());
-
-        Prefabs.setPredatorSpeed(
-                Parameter.getPredatorSpeedMinimumRange(),
-                Parameter.getPredatorSpeedMaximumRange());
-        Prefabs.setPredatorVisionRange(
-                Parameter.getPredatorVisionMinimumRange(),
-                Parameter.getPredatorVisionMaximumRange());
-        Prefabs.setPredatorStarvationResilience(
-                Parameter.getPredatorStarvationResillienceMinimumRange(),
-                Parameter.getPredatorStarvationResillienceMaximumRange());
-        Prefabs.setPredatorGroupRadius(
-                Parameter.getPredatorGroupRadius());
-
-        Prefabs.setSmallPreySpeed(
-                Parameter.getSmallPreySpeedMinimumRange(),
-                Parameter.getSmallPreySpeedMaximumRange());
-        Prefabs.setSmallPreyVisionRange(
-                Parameter.getSmallPreyVisionMinimumRange(),
-                Parameter.getSmallPreyVisionMaximumRange());
-        Prefabs.setSmallPreyNutrition(
-                Parameter.getSmallPreyNutritionMinimumRange(),
-                Parameter.getSmallPreyNutritionMaximumRange());
-        Prefabs.setSmallPreyDefense(
-                Parameter.getSmallPreyDefenseMinimumRange(),
-                Parameter.getSmallPreyDefenseMaximumRange());
-
-        Prefabs.setMediumPreySpeed(
-                Parameter.getMediumPreySpeedMinimumRange(),
-                Parameter.getMediumPreySpeedMaximumRange());
-        Prefabs.setMediumPreyVisionRange(
-                Parameter.getMediumPreyVisionMinimumRange(),
-                Parameter.getMediumPreyVisionMaximumRange());
-        Prefabs.setMediumPreyNutrition(
-                Parameter.getMediumPreyNutritionMinimumRange(),
-                Parameter.getMediumPreyNutritionMaximumRange());
-        Prefabs.setMediumPreyDefense(
-                Parameter.getMediumPreyDefenseMinimumRange(),
-                Parameter.getMediumPreyDefenseMaximumRange());
-
-        Prefabs.setLargePreySpeed(
-                Parameter.getLargePreySpeedMinimumRange(),
-                Parameter.getLargePreySpeedMaximumRange());
-        Prefabs.setLargePreyVisionRange(
-                Parameter.getLargePreyVisionMinimumRange(),
-                Parameter.getLargePreyVisionMaximumRange());
-        Prefabs.setLargePreyNutrition(
-                Parameter.getLargePreyNutritionMinimumRange(),
-                Parameter.getLargePreyNutritionMaximumRange());
-        Prefabs.setLargePreyDefense(
-                Parameter.getLargePreyDefenseMinimumRange(),
-                Parameter.getLargePreyDefenseMaximumRange());
-
-        Prefabs.setShowVision(isVisionShowed);
-        Prefabs.setShowStat(isStatusShowed);
-
         App.load(Level::main);
         startButton.setDisable(false);
         stopButton.setDisable(false);
