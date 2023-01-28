@@ -12,10 +12,14 @@ public class WanderBehaviour extends AnimalBehaviour {
 
     private double seedX;
     private double seedY;
+    public double noiseX;
+    public double noiseY;
 
     public void setSeed() {
         seedX = Math.random() * 100;
         seedY = Math.random() * 100;
+        noiseX = 0;
+        noiseY = 0;
     }
 
     public void doWander() {
@@ -26,11 +30,14 @@ public class WanderBehaviour extends AnimalBehaviour {
         double randomY = 0;
 
         Group object = getGameObject();
-
         AnimalStat stat = GameObject.getComponent(object, Animal.class).get().animalStat;
+
+        noiseX = PerlinNoise.noise(Math.PI, Math.E, seedX);
+        noiseY = PerlinNoise.noise(Math.PI, Math.E, seedY);
+
         if (stat instanceof PreyStat) {
-            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
-            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomX = noiseX * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomY = noiseY * animalStat.runSpeed* 0.5 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
 
             var preyStat = (PreyStat) stat;
             if (preyStat.size == PreySize.SMALL) {
@@ -51,11 +58,12 @@ public class WanderBehaviour extends AnimalBehaviour {
         }
 
         else if (stat instanceof PredatorStat) {
-            randomX = PerlinNoise.noise(Math.PI, Math.E, seedX) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
-            randomY = PerlinNoise.noise(Math.PI, Math.E, seedY) * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomX = noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
+            randomY = noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed();
             seedX += 0.005;
             seedY += 0.005;
         }
+        
 
         x.set(Map.checkBoundX(posX().get() + randomX));
         y.set(Map.checkBoundY(posY().get() + randomY));
