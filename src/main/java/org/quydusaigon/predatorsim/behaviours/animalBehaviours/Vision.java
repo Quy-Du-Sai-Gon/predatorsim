@@ -5,12 +5,16 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
+import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.util.Distance;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -25,6 +29,37 @@ public class Vision extends Behaviour {
     public void start() {
         detectedGameObject = new HashSet<>();
         thisAnimalGameObject = GameObject.getParent(getGameObject()).orElseThrow();
+
+        initializeCircleNode();
+    }
+
+    private ChangeListener<? super Boolean> onShowsVisionChanged;
+
+    private void initializeCircleNode() {
+        var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
+        circle.setOpacity(0.2);
+
+        boolean isPredator = GameObject.getComponent(thisAnimalGameObject, Predator.class)
+                .isPresent();
+        circle.setFill(isPredator ? Color.AQUAMARINE : Color.BLUEVIOLET);
+
+        var animalStat = GameObject.getComponent(thisAnimalGameObject, Animal.class)
+                .orElseThrow().animalStat;
+        circle.setRadius(animalStat.visionRange);
+
+        // visibility
+        circle.setVisible(UI.getShowsVisionProperty().get()); // default
+
+        onShowsVisionChanged = (_observable, _oldValue, showsVision) -> {
+            circle.setVisible(showsVision);
+        };
+
+        UI.getShowsVisionProperty().addListener(onShowsVisionChanged);
+    }
+
+    @Override
+    public void onDestroy() {
+        UI.getShowsVisionProperty().removeListener(onShowsVisionChanged);
     }
 
     @Override
@@ -43,8 +78,7 @@ public class Vision extends Behaviour {
 
     @Override
     public void onCollisionExit(Collider<?> collider, Collider<?> other) {
-        if (GameObject.getParent(getGameObject()).get() != other.getGameObject()
-                ) {
+        if (GameObject.getParent(getGameObject()).get() != other.getGameObject()) {
             var particle = (Circle) other.getNode();
             particle.setStroke(null);
             detectedGameObject.remove(other.getGameObject());

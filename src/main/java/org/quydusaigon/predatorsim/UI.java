@@ -1,5 +1,7 @@
 package org.quydusaigon.predatorsim;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -15,11 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import org.quydusaigon.predatorsim.util.Parameter;
-import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.net.URL;
 import java.util.Map;
@@ -346,7 +345,7 @@ public class UI implements Initializable {
             textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean wasFocusedBefore,
-                                    Boolean isNowFocused) {
+                        Boolean isNowFocused) {
                     if (!isNowFocused) {
                         // update param on focus lost a
                         updateParameter(paramEntry);
@@ -362,11 +361,11 @@ public class UI implements Initializable {
         stopButton.setDisable(true);
         nextButton.setDisable(true);
 
-        colorPickers = new ColorPicker[]{
+        colorPickers = new ColorPicker[] {
                 predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
         };
 
-        widgets = new Control[]{
+        widgets = new Control[] {
                 widthTextField, heightTextField,
                 predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField,
                 predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField,
@@ -390,18 +389,19 @@ public class UI implements Initializable {
         // Grid
         gridPane = getGridLines();
         simulationWindow.setCenter(gridPane);
+
+        initProperties();
     }
 
     /*
-    @param: Pair<String, Integer> of predator, prey
+     * @param: Pair<String, Integer> of predator, prey
      */
 
     Map<String, Integer> updateCurrentAliveEntity = Map.of(
             "predator", 100,
             "small prey", 200,
             "medium prey", 150,
-            "large prey", 120
-    );
+            "large prey", 120);
 
     private XYChart.Series<String, Integer> updateBarChart(Map<String, Integer> animalMap) {
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
@@ -473,21 +473,37 @@ public class UI implements Initializable {
         });
     }
 
-    private boolean isVisionShowed;
-    private boolean isStatusShowed;
+    /*
+     * Rendering options
+     */
+
+    private static BooleanProperty showsVisionProperty;
+    private static BooleanProperty showsStatusProperty;
+
+    private void initProperties() {
+        showsVisionProperty = new SimpleBooleanProperty(showVisionCheckBox.isSelected());
+        showsStatusProperty = new SimpleBooleanProperty(showStatusCheckBox.isSelected());
+    }
+
+    public static BooleanProperty getShowsVisionProperty() {
+        return showsVisionProperty;
+    }
+
+    public static BooleanProperty getShowsStatusProperty() {
+        return showsStatusProperty;
+    }
 
     public void onShowVisionCheckBoxClicked(ActionEvent actionEvent) {
-        isVisionShowed = showVisionCheckBox.isSelected();
+        getShowsVisionProperty().set(showVisionCheckBox.isSelected());
     }
 
     public void onShowStatusCheckBoxClicked(ActionEvent actionEvent) {
-        isStatusShowed = showStatusCheckBox.isSelected();
+        getShowsStatusProperty().set(showStatusCheckBox.isSelected());
     }
 
     public void onShowGridLinesCheckBoxClicked(ActionEvent actionEvent) {
         gridPane.setVisible(showGridLinesCheckBox.isSelected());
     }
-
 
     private GridPane getGridLines() {
         GridPane gridPane = new GridPane();

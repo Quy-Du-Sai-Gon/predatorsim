@@ -1,10 +1,12 @@
 package org.quydusaigon.predatorsim.util;
 
+import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
-import org.quydusaigon.predatorsim.gameengine.component.Component;
+import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -16,16 +18,17 @@ import javafx.scene.text.Text;
 
 public class StatDisplay extends Behaviour {
 
-    public StackPane pane;
-    private Group gameObject;
     private Animal animal;
-    private AnimalStat stat;
     private Text text;
+    private Group thisAnimalGameObject;
 
-    public StatDisplay(AnimalStat stat, Group object) {
-        gameObject = object;
-        this.stat = stat;
-        this.animal = GameObject.getComponent(object, Animal.class).get();
+    private ChangeListener<? super Boolean> onShowsStatusChanged;
+
+    @Override
+    public void start() {
+        thisAnimalGameObject = GameObject.getParent(getGameObject()).orElseThrow();
+
+        animal = GameObject.getComponent(thisAnimalGameObject, Animal.class).get();
         Rectangle box = new Rectangle(130, 80, Color.LIMEGREEN);
         box.setOpacity(0.4);
 
@@ -33,15 +36,31 @@ public class StatDisplay extends Behaviour {
         text.setFont(Font.font("Consolas", FontWeight.MEDIUM, FontPosture.REGULAR, 10));
         updateText();
 
-        this.pane = new StackPane();
+        var pane = new StackPane();
         pane.getChildren().addAll(box, text);
+
+        addComponent(new NodeComponent<>(pane));
+
+        // visibility
+        pane.setVisible(UI.getShowsStatusProperty().get()); // default
+
+        onShowsStatusChanged = (_observable, _oldValue, showsStatus) -> {
+            pane.setVisible(showsStatus);
+        };
+
+        UI.getShowsStatusProperty().addListener(onShowsStatusChanged);
+    }
+
+    @Override
+    public void onDestroy() {
+        UI.getShowsStatusProperty().removeListener(onShowsStatusChanged);
     }
 
     public void updateText() {
         text.setText(String.format("%s ID: %d\n",
-                stat instanceof PredatorStat ? "Predator" : "Prey",
-                gameObject.hashCode())
-                + stat
+                animal.animalStat instanceof PredatorStat ? "Predator" : "Prey",
+                thisAnimalGameObject.hashCode())
+                + animal.animalStat
                 + animal.getCurrenState());
     }
 
