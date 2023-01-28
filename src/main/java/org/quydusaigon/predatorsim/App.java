@@ -30,7 +30,7 @@ public class App extends Application {
     private static Stage stage;
 
     @Override
-    
+
     public void start(Stage mainStage) throws IOException {
         stage = mainStage;
         stage.setTitle("Predatorsim");
@@ -77,6 +77,7 @@ public class App extends Application {
         var newRoot = GameObject.create(TransformInit.DEFAULT, null);
         setRoot(newRoot);
         levelInitializer.run();
+        GameLoop.reset();
     }
 
     public static GameLoop getLoop() {

@@ -2,12 +2,19 @@ package org.quydusaigon.predatorsim.gameengine.gameobject;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Group;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Stack;
+import java.util.Queue;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import org.quydusaigon.predatorsim.App;
@@ -34,14 +41,51 @@ import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
  */
 public final class GameObject {
 
+    /**
+     * For the mechanism to add newly created objects to the hierarchy.
+     * 
+     * @see #create(TransformInit, Group, Component...)
+     * @see #setParent(Group, Group)
+     * @see #_setParentNow(Group, Group)
+     */
+    private static final Queue<Pair<Group, Group>> gameObjectsToBeAdded = new LinkedList<>();
+    /**
+     * For the mechanism to add components to the hierarchy.
+     * 
+     * @see #addComponent(Group, Component)
+     * @see #_addComponentNow(Group, Component)
+     */
+    private static final Queue<Pair<Group, Component>> componentsToBeAdded = new LinkedList<>();
+    /**
+     * For the mechanism to destroy and remove objects from the hierarchy.
+     * 
+     * @see #destroy(Group)
+     * @see #_destroyNow(Group)
+     * @see #destroy(Component)
+     * @see #_destroyNow(Component)
+     */
+    private static final Queue<Object> objectsToBeDestroyed = new LinkedList<>();
+    /**
+     * For the mechanism to destroy and remove components from the hierarchy.
+     * 
+     * @see #destroy(Group)
+     * @see #_destroyNow(Group)
+     * @see #destroy(Component)
+     * @see #_destroyNow(Component)
+     */
+    private static final Set<Object> objectsDestroyed = new HashSet<>();
+
+    /*
+     * Game Object instance data
+     */
     private final List<Group> children;
     private final List<Component> components;
     private boolean started;
 
-    private GameObject(int initialComponentCount, boolean started) {
+    private GameObject(int initialComponentCount) {
         children = new ArrayList<>();
         components = new ArrayList<>(initialComponentCount);
-        this.started = started;
+        started = false;
     }
 
     private static GameObject getGameObjectData(Group group) {
@@ -82,24 +126,16 @@ public final class GameObject {
         scaleX(go).set(tf.scaleX);
         scaleY(go).set(tf.scaleY);
 
-        // whether the parent has been started
-        boolean started = false;
-        if (parent != null) {
-            var parentData = getGameObjectData(parent);
-            started = parentData.started;
-
-            // add the newly created GameObject to the parent
-            parentData.children.add(go);
-            parent.getChildren().add(go);
-        }
+        // set parent
+        _setParentNow(go, parent);
 
         // create GameObject data
-        var data = new GameObject(components.length, started);
+        var data = new GameObject(components.length);
         go.setUserData(data);
 
         // add initial components
         for (var c : components) {
-            _addComponent(go, data, c);
+            _addComponentNow(go, c);
         }
 
         return go;
@@ -115,30 +151,69 @@ public final class GameObject {
      *                                 {@link GameObject#create}.
      */
     public static void destroy(Group gameObject) {
-        if (gameObject == null)
+        destroy((Object) gameObject);
+    }
+
+    private static void _destroyNow(Group gameObject) {
+        // mark as destroyed
+        if (objectsDestroyed.add(gameObject) == false) {
+            // already destroyed
             return;
+        }
+
         var data = getGameObjectData(gameObject);
 
-        // recursive call
-        //data.children.forEach(GameObject::destroy);
+        // destroy children game objects
+        while (!data.children.isEmpty()) {
+            _destroyNow(data.children.get(0));
+        }
 
-        for(int i = data.children.size() - 1; i >= 0; i--){
-            destroy(data.children.get(i));
-        }
         // destroy components
-        //data.components.forEach(GameObject::destroy);
-        for(int i = data.components.size() - 1; i >= 0; i--){
-            destroy(data.components.get(i));
+        while (!data.components.isEmpty()) {
+            _destroyNow(data.components.get(0));
         }
+
         // remove GameObject from parent
-        getParent(gameObject).ifPresent(parent -> {
-            parent.getChildren().remove(gameObject);
-        });
+        _setParentNow(gameObject, null);
     }
 
     /*
      * GameObject hierarchy
      */
+
+    /**
+     * Sets the parent of a game object. Use this method to add a game object to a
+     * hierarchy.
+     * 
+     * @param gameObject the children game object to add to {@code parent}.
+     * @param parent     the parent game object to which to add {@code gameObject}.
+     *                   Can be {@code null}.
+     */
+    public static void setParent(Group gameObject, Group parent) {
+        gameObjectsToBeAdded.add(new Pair<>(gameObject, parent));
+    }
+
+    private static void _setParentNow(Group gameObject, Group parent) {
+        // remove game object from old parent
+        getParent(gameObject).ifPresent(p -> {
+            var parentData = getGameObjectData(p);
+            parentData.children.remove(gameObject);
+            p.getChildren().remove(gameObject);
+        });
+
+        if (parent == null) {
+            return;
+        }
+
+        // add game object to new parent
+        var parentData = getGameObjectData(parent);
+        parentData.children.add(gameObject);
+        parent.getChildren().add(gameObject);
+
+        if (parentData.started) {
+            start(gameObject);
+        }
+    }
 
     /**
      * Returns the parent game object of {@code gameObject} if any.
@@ -276,25 +351,6 @@ public final class GameObject {
                 .map(type::cast);
     }
 
-    private static <T extends Component> T _addComponent(Group gameObject, GameObject data, T component) {
-        // add component to data list
-        data.components.add(component);
-        // set component's GameObject
-        component.setGameObject(gameObject);
-
-        if (component instanceof NodeComponent) {
-            // add node to Group if is NodeComponent
-            var c = (NodeComponent<?>) component;
-            gameObject.getChildren().add(c.getNode());
-        } else if (component instanceof Behaviour) {
-            // start Behaviour if GameObject has been started
-            if (data.started)
-                ((Behaviour) component).start();
-        }
-
-        return component;
-    }
-
     /**
      * Adds the specified component to {@code gameObject}.
      * 
@@ -313,8 +369,31 @@ public final class GameObject {
      * @see #start(Group)
      */
     public static <T extends Component> T addComponent(Group gameObject, T component) {
+        componentsToBeAdded.add(new Pair<>(gameObject, component));
+        return component;
+    }
+
+    private static <T extends Component> void _addComponentNow(Group gameObject, T component) {
+        if (component.getGameObject() != null) {
+            throw new IllegalArgumentException("`component` already added to a game object.");
+        }
+
         var data = getGameObjectData(gameObject);
-        return _addComponent(gameObject, data, component);
+
+        // add component to data list
+        data.components.add(component);
+        // set component's GameObject
+        component.setGameObject(gameObject);
+
+        if (component instanceof NodeComponent) {
+            // add node to Group if is NodeComponent
+            var c = (NodeComponent<?>) component;
+            gameObject.getChildren().add(c.getNode());
+        } else if (component instanceof Behaviour) {
+            // start Behaviour if GameObject has been started
+            if (data.started)
+                ((Behaviour) component).start();
+        }
     }
 
     /**
@@ -325,9 +404,17 @@ public final class GameObject {
      * @see Component
      */
     public static void destroy(Component component) {
-        if (component == null)
+        destroy((Object) component);
+    }
+
+    private static void _destroyNow(Component component) {
+        // mark as destroyed
+        if (objectsDestroyed.add(component) == false) {
+            // already destroyed
             return;
-        // invoke onDestroy event
+        }
+
+        // invoke onDestroy event handler
         component.onDestroy();
 
         var go = component.getGameObject();
@@ -344,6 +431,56 @@ public final class GameObject {
         if (component instanceof NodeComponent) {
             var c = (NodeComponent<?>) component;
             go.getChildren().remove(c.getNode());
+        }
+    }
+
+    /*
+     * Hierarchy update
+     */
+
+    private static void destroy(Object obj) {
+        if (obj == null)
+            return;
+        objectsToBeDestroyed.add(obj);
+    }
+
+    private static void _destroyNow(Object obj) {
+        if (obj instanceof Group) {
+            _destroyNow((Group) obj);
+        } else if (obj instanceof Component) {
+            _destroyNow((Component) obj);
+        } else {
+            throw new IllegalArgumentException("`obj` is neither a `Group` nor a `Component`.");
+        }
+    }
+
+    /**
+     * Update the hierarchy of game objects and components, adding those that need
+     * to be added and destroying those that need to be destroyed.
+     * 
+     * @see #create(TransformInit, Group, Component...)
+     * @see #setParent(Group, Group)
+     * @see #addComponent(Group, Component)
+     * @see #destroy(Group)
+     * @see #destroy(Component)
+     */
+    private static void updateHierarchy() {
+        processQueue(gameObjectsToBeAdded, GameObject::_setParentNow);
+        processQueue(componentsToBeAdded, GameObject::_addComponentNow);
+        processQueue(objectsToBeDestroyed, GameObject::_destroyNow);
+    }
+
+    private static <T> void processQueue(Queue<T> queue, Consumer<T> callback) {
+        T element;
+        while ((element = queue.poll()) != null) {
+            callback.accept(element);
+        }
+    }
+
+    private static <T, U> void processQueue(Queue<Pair<T, U>> queue, BiConsumer<T, U> callback) {
+        Pair<T, U> element;
+        while ((element = queue.poll()) != null) {
+            callback.accept(element.getKey(), element.getValue());
         }
     }
 
@@ -417,22 +554,22 @@ public final class GameObject {
      */
     private static class Iterator implements java.util.Iterator<Group> {
 
-        private final Stack<Group> stack;
+        private final Deque<Group> stack;
 
         private Iterator(Group gameObject) {
-            stack = new Stack<>();
+            stack = new LinkedList<>();
             stack.push(gameObject);
         }
 
         @Override
         public boolean hasNext() {
-            return !stack.empty();
+            return !stack.isEmpty();
         }
 
         @Override
         public Group next() {
             var go = stack.pop();
-            stack.addAll(_getChildren(go));
+            _getChildren(go).forEach(stack::push);
             return go;
         }
 
@@ -469,43 +606,47 @@ public final class GameObject {
 
     /**
      * Call all of the {@linkplain Behaviour#start() starting scripts} of all
-     * {@link Behaviour} components, starting from the {@code root} game object down
-     * to its descendants (if {@code root} is not already started).
+     * {@link Behaviour} components, starting from the {@code gameObject} game
+     * object down to its descendants (if {@code gameObject} is not already
+     * started).
      * 
-     * @param root the game object to start.
-     * @throws NotAGameObjectException if {@code root} or any of its descendants are
-     *                                 not valid game objects created with
-     *                                 {@link GameObject#create}.
+     * @param gameObject the game object to start.
+     * @throws NotAGameObjectException if {@code gameObject} or any of its
+     *                                 descendants are not valid game objects
+     *                                 created with {@link GameObject#create}.
      * @see Behaviour
      */
-    public static void start(Group root) {
-        if (getGameObjectData(root).started)
+    public static void start(Group gameObject) {
+        if (getGameObjectData(gameObject).started)
             return;
 
-        for (var go : iter(root)) {
-            // start Behaviours
+        for (var go : iter(gameObject)) {
+            getGameObjectData(go).started = true;
             getComponents(go, Behaviour.class)
                     .forEach(Behaviour::start);
-            getGameObjectData(go).started = true;
         }
+
+        updateHierarchy();
     }
 
     /**
      * Call all of the {@linkplain Behaviour#update() updating scripts} of all
-     * {@link Behaviour} components, starting from the {@code root} game object down
-     * to its descendants.
+     * {@link Behaviour} components, starting from the {@code gameObject} game
+     * object down to its descendants.
      * 
-     * @param root the game object to update.
-     * @throws NotAGameObjectException if {@code root} or any of its descendants are
-     *                                 not valid game objects created with
-     *                                 {@link GameObject#create}.
+     * @param gameObject the game object to update.
+     * @throws NotAGameObjectException if {@code gameObject} or any of its
+     *                                 descendants are not valid game objects
+     *                                 created with {@link GameObject#create}.
      * @see Behaviour
      */
-    public static void update(Group root) {
-        for (var go : iter(root)) {
+    public static void update(Group gameObject) {
+        for (var go : iter(gameObject)) {
             // update Behaviours
             getComponents(go, Behaviour.class)
                     .forEach(Behaviour::update);
         }
+
+        updateHierarchy();
     }
 }

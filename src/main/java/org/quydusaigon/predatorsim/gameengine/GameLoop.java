@@ -22,7 +22,14 @@ import javafx.util.Pair;
  */
 public class GameLoop extends AnimationTimer {
 
-    public static List<Group> objectsToDestroy = new ArrayList<>();
+    /**
+     * Reset Time and start the scene again. To be called in
+     * {@link App#load(Runnable)}.
+     */
+    public static void reset() {
+        Time.reset();
+        GameObject.start(App.root);
+    }
 
     /**
      * Initializes and starts the game loop.
@@ -33,11 +40,6 @@ public class GameLoop extends AnimationTimer {
 
         // Reset the Time system when restarting
         Time.reset();
-
-        /*
-         * start scene
-         */
-        GameObject.start(App.root);
     }
 
     /**
@@ -60,11 +62,6 @@ public class GameLoop extends AnimationTimer {
          * update scene
          */
         GameObject.update(App.root);
-
-        /*
-         * destroy
-         */
-        executeDestroy();
 
         /*
          * collision detection
@@ -144,11 +141,5 @@ public class GameLoop extends AnimationTimer {
 
         previousCollisions = currentCollisions;
     } // detectAndRaiseCollisionEvents
-
-    private void executeDestroy(){
-        for(int i = 0; i < objectsToDestroy.size(); i++){
-            GameObject.destroy(objectsToDestroy.get(i));
-        }
-    }
 
 } // GameLoop

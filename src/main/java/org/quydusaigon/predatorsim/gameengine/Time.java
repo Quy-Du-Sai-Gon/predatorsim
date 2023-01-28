@@ -13,6 +13,10 @@ public class Time {
     private static float deltaTime;
     private static long prevTimeNs;
 
+    static {
+        reset();
+    }
+
     /**
      * Resets the internal state of the time information system to avoid the system
      * being left in a bad and stale state due to insufficient internal update by
