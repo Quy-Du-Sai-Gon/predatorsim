@@ -3,12 +3,14 @@ package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 import java.net.HttpURLConnection;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
+import org.quydusaigon.predatorsim.behaviours.states.WanderState;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
@@ -26,16 +28,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class HuntingInGroup extends Hunting {
-    private List<Group> alliesObjects = new ArrayList<Group>();
+    private List<Group> alliesObjects;
     private Group leaderObject;
     private int numberOfAllies;
     private boolean isLeader = false;
     private boolean groupFounded = false;
+    public boolean huntSuccessed = false;
+    public boolean listened = false;
 
     private Vision groupVision;
     private Vision howlVision;
 
     private PredatorStat predatorStat;
+
     @Override
     public void start() {
         predatorStat = (PredatorStat) getComponent(Predator.class).orElseThrow().animalStat;
@@ -51,34 +56,41 @@ public class HuntingInGroup extends Hunting {
         groupVision = new Vision();
         GameObject.create(TransformInit.DEFAULT, getGameObject(),
                 groupVisionNodeComp, new Collider<>(groupVisionNodeComp), groupVision);
-
     }
 
     public void setUpHuntingInGroup(int numberOfAllies) {
+        System.out.println("call1");
         isLeader = true;
+        huntSuccessed = false;
+        this.leaderObject = getGameObject();
         this.numberOfAllies = numberOfAllies;
     }
 
     public void setUpHuntingInGroup(Group leaderObject) {
+        System.out.println("call2");
+        listened = true;
         isLeader = false;
         groupFounded = false;
         this.leaderObject = leaderObject;
+        huntSuccessed = false;
     }
 
     public void doSurvival() {
-        if (groupFounded) {
-            if (isLeader) {
-                leaderChase();
-                return;
+        if (!huntSuccessed) {
+            if (groupFounded) {
+                if (isLeader) {
+                    leaderChase();
+                    return;
+                } else {
+                    memberChase();
+                    return;
+                }
             } else {
-                memberChase();
-                return;
-            }
-        } else {
-            if (isLeader) {
-                howl();
-            } else {
-                join();
+                if (isLeader) {
+                    howl();
+                } else {
+                    join();
+                }
             }
         }
     }
@@ -88,20 +100,24 @@ public class HuntingInGroup extends Hunting {
             groupFounded = true;
             return;
         }
-        if (howlVision.getAllDetectedObject(Predator.class).size() >= numberOfAllies) {
-            for (int i = 0; i < numberOfAllies; i++) {
-                alliesObjects.add(howlVision.getAllDetectedObject(Predator.class)
-                        .stream().toList().get(i));
-            }
 
-            for (int i = 0; i < numberOfAllies; i++) {
-                Animal animal = GameObject.getComponent(alliesObjects.get(i), Animal.class).get();
-                animal.setSurvivalBehaviour(animal.getComponent(HuntingInGroup.class).get());
-                ((HuntingInGroup) animal.getSurvivalBehaviour()).setUpHuntingInGroup(getGameObject());
-                animal.changeState(animal.getStateConstructor().getSurvivalState());
-                animal.getComponent(HuntingInGroup.class).orElseThrow().setUpReference(targetObject);
+        var predatorsInRange = howlVision.getAllDetectedObject(Predator.class);
+        if (!predatorsInRange.isEmpty()) {
+            alliesObjects = predatorsInRange.stream().limit(numberOfAllies).toList();
+
+            for (var ally : alliesObjects) {
+                Animal animal = GameObject.getComponent(ally, Animal.class).get();
+                HuntingInGroup temp = animal.getComponent(HuntingInGroup.class).get();
+                if (!temp.listened) {
+                    animal.setSurvivalBehaviour(temp);
+                    ((WanderState) animal.getCurrenState()).isJoiningGroup = true;
+                    temp.setUpHuntingInGroup(getGameObject());
+                    animal.changeState(animal.getStateConstructor().getSurvivalState());
+                    animal.getComponent(HuntingInGroup.class).orElseThrow().setUpReference(targetObject);
+                }
             }
         }
+
         stalk();
     }
 
@@ -113,7 +129,6 @@ public class HuntingInGroup extends Hunting {
         double targetX, targetY;
         Point2D targetDir;
         Component component = GameObject.getComponent(leaderObject, Component.class).get();
-
 
         targetX = component.posX().get();
         targetY = component.posY().get();
@@ -129,55 +144,103 @@ public class HuntingInGroup extends Hunting {
     }
 
     private void leaderChase() {
-        double targetX, targetY;
-        Point2D targetDir;
-        Component component = GameObject.getComponent(targetObject, Component.class).get();
+        System.out.println(isLeader);
+        if (!huntSuccessed) {
+            System.out.println("hunt was not yet succeed");
 
+            double targetX, targetY;
+            Point2D targetDir;
 
-        targetX = component.posX().get();
-        targetY = component.posY().get();
+            targetX = GameObject.posX(targetObject).get();
+            targetY = GameObject.posY(targetObject).get();
 
-        targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
+            targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
 
-        targetDir = targetDir.normalize();
+            targetDir = targetDir.normalize();
 
-        posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
-        posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
+            posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
+                    * Parameter.getRelativeSimulationSpeed());
+            posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
+                    * Parameter.getRelativeSimulationSpeed());
 
+        }
     }
 
     private void memberChase() {
-        Animal animal = GameObject.getComponent(targetObject, Animal.class).orElseThrow();
-        WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).orElseThrow();
-        
-        double targetX, targetY;
-        Point2D targetDir;
-        Component component = GameObject.getComponent(targetObject, Component.class).orElseThrow();
+        System.out.println("memberChase");
+        if (!huntSuccessed) {
 
+            Animal animal = GameObject.getComponent(targetObject, Animal.class).orElseThrow();
+            WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).orElseThrow();
 
-        targetX = component.posX().get();
-        targetY = component.posY().get();
+            double targetX, targetY;
+            Point2D targetDir;
+            Component component = GameObject.getComponent(targetObject, Component.class).orElseThrow();
 
-        targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
+            targetX = component.posX().get();
+            targetY = component.posY().get();
 
-        targetDir = targetDir.normalize();
+            targetDir = new Point2D(targetX - posX().get(), targetY - posY().get());
 
-        posX().set(posX().get() + (targetMovement.noiseX + targetDir.getX()) * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
-        posY().set(posY().get() + (targetMovement.noiseY + targetDir.getY()) * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
+            targetDir = targetDir.normalize();
+
+            posX().set(posX().get()
+                    + (targetMovement.noiseX + targetDir.getX()) * animalStat.runSpeed * Time.getDeltaTime()
+                            * Parameter.getRelativeSimulationSpeed());
+            posY().set(posY().get()
+                    + (targetMovement.noiseY + targetDir.getY()) * animalStat.runSpeed * Time.getDeltaTime()
+                            * Parameter.getRelativeSimulationSpeed());
+        }
     }
 
     private void stalk() {
         Animal animal = GameObject.getComponent(targetObject, Animal.class).get();
         WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).get();
 
-        
-        posX().set(Map.checkBoundX(posX().get() + targetMovement.noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed()));
-        posY().set(Map.checkBoundY(posY().get() + targetMovement.noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed()));
+        posX().set(
+                Map.checkBoundX(posX().get() + targetMovement.noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                        * Parameter.getRelativeSimulationSpeed()));
+        posY().set(
+                Map.checkBoundY(posY().get() + targetMovement.noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                        * Parameter.getRelativeSimulationSpeed()));
+    }
+
+    public int getNumOfAllies() {
+        return numberOfAllies;
+    }
+
+    public void divideFood(double nutrition) {
+        if (isLeader) {
+            huntSuccessed = true;
+            System.out.println(huntSuccessed + " set ==============");
+
+            Predator temp = getComponent(Predator.class).get();
+
+            for (Group ally : alliesObjects) {
+                System.out.println(getGameObject());
+                Animal allyAnimal = GameObject.getComponent(ally, Animal.class).get();
+                HuntingInGroup HIG = (HuntingInGroup) allyAnimal.getSurvivalBehaviour();
+                ((PredatorStat) allyAnimal.animalStat).starvationResilience += nutrition / (numberOfAllies + 1);
+                HIG.huntSuccessed = true;
+                HIG.listened = false;
+                allyAnimal.changeState(allyAnimal.getStateConstructor().getWanderState());
+
+            }
+
+            alliesObjects.clear();
+
+            temp.changeState(temp.getStateConstructor().getWanderState());
+        } else {
+            GameObject.getComponent(leaderObject, HuntingInGroup.class).get().divideFood(nutrition);
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return "Hunting in group\n"
+                + (isLeader
+                        ? "Is Leader (" + getGameObject() + ")"
+                        : "Leader: " + leaderObject);
     }
 }

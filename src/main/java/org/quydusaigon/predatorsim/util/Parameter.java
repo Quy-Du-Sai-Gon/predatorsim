@@ -29,9 +29,9 @@ public class Parameter {
     private static double windowWidth = 700;
     private static double windowHeight = 700;
 
-    private static int predatorCount = 12;
-    private static int smallPreyCount = 0;
-    private static int mediumPreyCount = 10;
+    private static int predatorCount = 1;
+    private static int smallPreyCount = 3;
+    private static int mediumPreyCount = 0;
     private static int largePreyCount = 0;
 
     public static void setPredatorCount(String predatorCount) {
@@ -179,6 +179,7 @@ public class Parameter {
     public static void setRelativeSimulationSpeed(String relativeSimulationSpeed) {
         Parameter.relativeSimulationSpeed = Double.parseDouble(relativeSimulationSpeed);
     }
+
     private static double predatorSpeedMinimumRange = 5;
     private static double predatorSpeedMaximumRange = 6;
     private static double smallPreySpeedMinimumRange = 4;
@@ -505,4 +506,3 @@ public class Parameter {
     }
 
 }
-

@@ -34,6 +34,6 @@ public class SurvivalState extends State {
 
     @Override
     public String toString() {
-        return super.toString() + "Survival";
+        return super.toString() + "Survival \"" + survivalBehaviour + "\"";
     }
 }

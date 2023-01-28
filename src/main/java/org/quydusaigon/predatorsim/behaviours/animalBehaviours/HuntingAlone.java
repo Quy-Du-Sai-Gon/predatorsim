@@ -16,16 +16,16 @@ public class HuntingAlone extends Hunting {
     DoubleProperty x, y;
     double targetX, targetY;
     Point2D targetDir;
+
     public void doSurvival() {
         x = posX();
         y = posY();
 
         if ((vision.getAllDetectedObject(Prey.class).size() == 0) ||
-                (!vision.getAllDetectedObject(Prey.class).contains(targetObject)))
-        {
+                (!vision.getAllDetectedObject(Prey.class).contains(targetObject))) {
             GameObject.getComponent(getGameObject(), Animal.class).get().getStateConstructor().getSurvivalState()
-                                .setNoTarget(true);
-                                return;
+                    .setNoTarget(true);
+            return;
         }
 
         targetX = targetComponent.posX().get();
@@ -35,7 +35,14 @@ public class HuntingAlone extends Hunting {
 
         targetDir = targetDir.normalize();
 
-         x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
-         y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
-        }
+        x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+        y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+    }
+
+    @Override
+    public String toString() {
+        return "Hunting alone";
+    }
 }

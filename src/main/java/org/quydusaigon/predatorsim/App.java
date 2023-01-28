@@ -24,7 +24,7 @@ public class App extends Application {
     public static double simulationWindowWidth;
     private static GameLoop loop;
 
-    private static float timeStep = 0.5f;
+    private static float timeStep = 0.05f;
 
     private static BorderPane simulationWindow;
     private static Stage stage;

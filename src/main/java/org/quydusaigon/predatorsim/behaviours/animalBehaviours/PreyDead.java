@@ -8,8 +8,5 @@ public class PreyDead extends DeadBehaviour{
     Predator killerPredator;
     @Override
     public void doDead(Animal killerAnimal) {
-        PreyStat preyStat = (PreyStat)animalStat;
-        killerPredator = (Predator)killerAnimal;
-        killerPredator.eat(preyStat.nutrition);
     }
 }

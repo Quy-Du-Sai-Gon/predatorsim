@@ -19,7 +19,7 @@ public class WanderState extends State {
     WanderBehaviour wanderBehaviour;
     private Optional<Group> foundObject;
     boolean toSurvivalState = false;
-    boolean isJoiningGroup = false;
+    public boolean isJoiningGroup = false;
 
     public WanderState(Animal animalSM) {
         super(animalSM);
@@ -27,9 +27,11 @@ public class WanderState extends State {
 
     @Override
     public void enter() {
+        System.out.println("enterWander");
         wanderBehaviour = animalSM.getWanderBehaviour();
         wanderBehaviour.setSeed();
         foundObject = Optional.empty();
+        isJoiningGroup = false;
     }
 
     @Override
@@ -69,6 +71,8 @@ public class WanderState extends State {
     }
 
     private <T extends Animal> boolean detectTarget(Class<T> animalType) {
+        System.out.println("Halloe");
+        System.out.println(animalSM.getVision().getAllDetectedObject(animalType));
         if (animalSM.getVision().getAllDetectedObject(animalType).size() != 0) {
             toSurvivalState = true;
             setFoundObject(animalSM.getVision().getClosestObject(animalType).get());
