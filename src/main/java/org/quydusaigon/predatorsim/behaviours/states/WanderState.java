@@ -55,7 +55,7 @@ public class WanderState extends State {
                 else if (((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) && isJoiningGroup == false) {
                     HuntingInGroup temp = animalSM.getComponent(HuntingInGroup.class).orElseThrow();
                     animalSM.setSurvivalBehaviour(temp);
-                    temp.setUpHuntingInGroup(3);
+                    temp.setUpHuntingInGroup(2);
                 }
 
                 animalSM.getSurvivalBehaviour().setUpReference(foundObject.orElseThrow());
