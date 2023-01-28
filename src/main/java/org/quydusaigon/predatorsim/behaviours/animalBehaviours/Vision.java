@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
-import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.states.WanderState;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
@@ -39,14 +38,6 @@ public class Vision extends Behaviour {
     private void initializeCircleNode() {
         var circle = (Circle) getComponent(NodeComponent.class).orElseThrow().getNode();
         circle.setOpacity(0.2);
-
-        boolean isPredator = GameObject.getComponent(thisAnimalGameObject, Predator.class)
-                .isPresent();
-        circle.setFill(isPredator ? Color.AQUAMARINE : Color.BLUEVIOLET);
-
-        var animalStat = GameObject.getComponent(thisAnimalGameObject, Animal.class)
-                .orElseThrow().animalStat;
-        circle.setRadius(animalStat.visionRange);
 
         // visibility
         circle.setVisible(UI.getShowsVisionProperty().get()); // default
