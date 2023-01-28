@@ -8,6 +8,7 @@ import java.util.Random;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
+import org.quydusaigon.predatorsim.behaviours.util.Draggable;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -48,7 +49,8 @@ public final class Prefabs {
                 new HuntingInGroup(),
                 new HuntingAlone(),
                 new PredatorDead(),
-                new Predator(predatorStat));
+                new Predator(predatorStat),
+                new Draggable());
 
         var visionNodeComp = new NodeComponent<>(new Circle(predatorStat.visionRange, Color.AQUAMARINE));
         GameObject.create(TransformInit.DEFAULT, newPredator,
@@ -81,7 +83,8 @@ public final class Prefabs {
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),
-                new Prey(smallPreyStat));
+                new Prey(smallPreyStat),
+                new Draggable());
 
         var visionNodeComp = new NodeComponent<>(new Circle(smallPreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newSmallPrey,
@@ -114,7 +117,8 @@ public final class Prefabs {
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),
-                new Prey(mediumPreyStat));
+                new Prey(mediumPreyStat),
+                new Draggable());
 
         var visionNodeComp = new NodeComponent<>(new Circle(mediumPreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newMediumPrey,
@@ -147,7 +151,8 @@ public final class Prefabs {
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),
-                new Prey(largePreyStat));
+                new Prey(largePreyStat),
+                new Draggable());
 
         var visionNodeComp = new NodeComponent<>(new Circle(largePreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newLargePrey,
