@@ -83,7 +83,7 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(smallPreyStat));
 
-        var visionNodeComp = new NodeComponent<>(new Circle(smallPreyStat.visionRange, Color.AQUAMARINE));
+        var visionNodeComp = new NodeComponent<>(new Circle(smallPreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newSmallPrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
@@ -116,7 +116,7 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(mediumPreyStat));
 
-        var visionNodeComp = new NodeComponent<>(new Circle(mediumPreyStat.visionRange, Color.AQUAMARINE));
+        var visionNodeComp = new NodeComponent<>(new Circle(mediumPreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newMediumPrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
@@ -149,7 +149,7 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(largePreyStat));
 
-        var visionNodeComp = new NodeComponent<>(new Circle(largePreyStat.visionRange, Color.AQUAMARINE));
+        var visionNodeComp = new NodeComponent<>(new Circle(largePreyStat.visionRange, Color.BLUEVIOLET));
         GameObject.create(TransformInit.DEFAULT, newLargePrey,
                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
