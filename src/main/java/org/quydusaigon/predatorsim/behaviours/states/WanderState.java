@@ -19,6 +19,7 @@ public class WanderState extends State {
     WanderBehaviour wanderBehaviour;
     private Optional<Group> foundObject;
     boolean toSurvivalState = false;
+    boolean isJoiningGroup = false;
 
     public WanderState(Animal animalSM) {
         super(animalSM);
@@ -50,8 +51,11 @@ public class WanderState extends State {
 
                 if (preystat.size == PreySize.SMALL) {
                     animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingAlone.class).orElseThrow());
-                } else if ((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) {
-                    animalSM.setSurvivalBehaviour(animalSM.getComponent(HuntingInGroup.class).orElseThrow());
+                } 
+                else if (((preystat.size == PreySize.MEDIUM) || (preystat.size == PreySize.LARGE)) && isJoiningGroup == false) {
+                    HuntingInGroup temp = animalSM.getComponent(HuntingInGroup.class).orElseThrow();
+                    animalSM.setSurvivalBehaviour(temp);
+                    temp.setUpHuntingInGroup(3);
                 }
 
                 animalSM.getSurvivalBehaviour().setUpReference(foundObject.orElseThrow());

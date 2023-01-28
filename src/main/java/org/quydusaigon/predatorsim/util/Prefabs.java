@@ -23,12 +23,6 @@ public final class Prefabs {
     private Prefabs() {
     }
 
-    public static final Prefab ANIMAL_VISION = (tf, parent) -> {
-        var visionNodeComp = new NodeComponent<>(new Circle());
-        return GameObject.create(TransformInit.DEFAULT, parent,
-                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
-    };
-
     public static final Prefab STATUS_DISPLAY = (tf, parent) -> {
         return GameObject.create(TransformInit.DEFAULT, parent, new StatDisplay());
     };
@@ -46,7 +40,7 @@ public final class Prefabs {
                         Parameter.getPredatorStarvationResillienceMinimumRange(),
                         Parameter.getPredatorStarvationResillienceMaximumRange()),
                 Parameter.getPredatorGroupRadius(),
-                300);
+                400);
 
         Group newPredator = GameObject.create(tf, parent,
                 nodeComp, new Collider<>(nodeComp),
@@ -56,8 +50,21 @@ public final class Prefabs {
                 new PredatorDead(),
                 new Predator(predatorStat));
 
-        GameObject.instantiate(ANIMAL_VISION, newPredator);
+        var visionNodeComp = new NodeComponent<>(new Circle(predatorStat.visionRange, Color.AQUAMARINE));
+        GameObject.create(TransformInit.DEFAULT, newPredator,
+                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
         GameObject.instantiate(STATUS_DISPLAY, newPredator);
+
+        var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
+        var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
+        GameObject.create(TransformInit.DEFAULT, newPredator,
+                howlingVisionNodeComp, new Collider<>(howlingVisionNodeComp), new Vision());
+
+        var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
+        var groupVisionNodeComp = new NodeComponent<>(circleGroup);
+        GameObject.create(TransformInit.DEFAULT, newPredator,
+                groupVisionNodeComp, new Collider<>(groupVisionNodeComp), new Vision());
 
         return newPredator;
     };
@@ -86,7 +93,10 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(smallPreyStat));
 
-        GameObject.instantiate(ANIMAL_VISION, newSmallPrey);
+        var visionNodeComp = new NodeComponent<>(new Circle(smallPreyStat.visionRange, Color.AQUAMARINE));
+        GameObject.create(TransformInit.DEFAULT, newSmallPrey,
+                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
         GameObject.instantiate(STATUS_DISPLAY, newSmallPrey);
 
         return newSmallPrey;
@@ -116,7 +126,10 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(mediumPreyStat));
 
-        GameObject.instantiate(ANIMAL_VISION, newMediumPrey);
+        var visionNodeComp = new NodeComponent<>(new Circle(mediumPreyStat.visionRange, Color.AQUAMARINE));
+        GameObject.create(TransformInit.DEFAULT, newMediumPrey,
+                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
         GameObject.instantiate(STATUS_DISPLAY, newMediumPrey);
 
         return newMediumPrey;
@@ -146,7 +159,10 @@ public final class Prefabs {
                 new PreyDead(),
                 new Prey(largePreyStat));
 
-        GameObject.instantiate(ANIMAL_VISION, newLargePrey);
+        var visionNodeComp = new NodeComponent<>(new Circle(largePreyStat.visionRange, Color.AQUAMARINE));
+        GameObject.create(TransformInit.DEFAULT, newLargePrey,
+                visionNodeComp, new Collider<>(visionNodeComp), new Vision());
+
         GameObject.instantiate(STATUS_DISPLAY, newLargePrey);
 
         return newLargePrey;

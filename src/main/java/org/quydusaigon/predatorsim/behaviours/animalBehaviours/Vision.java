@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
+import org.quydusaigon.predatorsim.behaviours.states.WanderState;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
@@ -90,6 +91,13 @@ public class Vision extends Behaviour {
                 .filter(go -> GameObject.getComponent(go, animal).isPresent())
                 .collect(Collectors.toSet());
     }
+
+    public <T extends Animal> Set<Group> getAllDetectedWanderingObject(Class<T> animal) {
+        return detectedGameObject.stream()
+                .filter(go -> GameObject.getComponent(go, animal).isPresent())
+                .collect(Collectors.toSet()).stream().filter(go -> GameObject.getComponent(go, Animal.class).orElseThrow().getCurrenState() instanceof WanderState).collect(Collectors.toSet());
+    }
+
 
     public <T extends Animal> Optional<Group> getClosestObject(Class<T> animal) {
         return getAllDetectedObject(animal).stream()
