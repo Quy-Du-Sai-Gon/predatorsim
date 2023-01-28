@@ -119,6 +119,10 @@ public final class GameObject {
         // create new Group
         var go = new Group();
 
+        // create GameObject data
+        var data = new GameObject(components.length);
+        go.setUserData(data);
+
         // set Transforms
         posX(go).set(tf.posX);
         posY(go).set(tf.posY);
@@ -126,17 +130,13 @@ public final class GameObject {
         scaleX(go).set(tf.scaleX);
         scaleY(go).set(tf.scaleY);
 
-        // create GameObject data
-        var data = new GameObject(components.length);
-        go.setUserData(data);
-
-        // set parent
-        _setParentNow(go, parent);
-
         // add initial components
         for (var c : components) {
             _addComponentNow(go, c);
         }
+
+        // set parent
+        _setParentNow(go, parent);
 
         return go;
     }
@@ -211,7 +211,7 @@ public final class GameObject {
         parent.getChildren().add(gameObject);
 
         if (parentData.started) {
-            start(gameObject);
+            _startWithoutUpdateHierarchy(gameObject);
         }
     }
 
@@ -465,9 +465,15 @@ public final class GameObject {
      * @see #destroy(Component)
      */
     private static void updateHierarchy() {
-        processQueue(gameObjectsToBeAdded, GameObject::_setParentNow);
-        processQueue(componentsToBeAdded, GameObject::_addComponentNow);
-        processQueue(objectsToBeDestroyed, GameObject::_destroyNow);
+        while (!(componentsToBeAdded.isEmpty()
+                && gameObjectsToBeAdded.isEmpty()
+                && objectsToBeDestroyed.isEmpty())) {
+
+            processQueue(componentsToBeAdded, GameObject::_addComponentNow);
+            processQueue(gameObjectsToBeAdded, GameObject::_setParentNow);
+            processQueue(objectsToBeDestroyed, GameObject::_destroyNow);
+        }
+        objectsDestroyed.clear();
     }
 
     private static <T> void processQueue(Queue<T> queue, Consumer<T> callback) {
@@ -617,6 +623,11 @@ public final class GameObject {
      * @see Behaviour
      */
     public static void start(Group gameObject) {
+        _startWithoutUpdateHierarchy(gameObject);
+        updateHierarchy();
+    }
+
+    private static void _startWithoutUpdateHierarchy(Group gameObject) {
         if (getGameObjectData(gameObject).started)
             return;
 
@@ -625,8 +636,6 @@ public final class GameObject {
             getComponents(go, Behaviour.class)
                     .forEach(Behaviour::start);
         }
-
-        updateHierarchy();
     }
 
     /**
