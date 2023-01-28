@@ -33,66 +33,79 @@ public class HuntingInGroup extends Hunting {
     private Vision groupVision;
     private Vision howlVision;
 
-   public void setUpHuntingInGroup(int numberOfAllies){
-        howlVision = GameObject.getComponent(GameObject.getChildren(getGameObject()).get(1), Vision.class).get();
-        groupVision = GameObject.getComponent(GameObject.getChildren(getGameObject()).get(2), Vision.class).get();
+    @Override
+    public void start() {
+        var predatorStat = (PredatorStat) getComponent(Predator.class).orElseThrow().animalStat;
+
+        var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
+        var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
+        howlVision = new Vision();
+        GameObject.create(TransformInit.DEFAULT, getGameObject(),
+                howlingVisionNodeComp, new Collider<>(howlingVisionNodeComp), howlVision);
+
+        var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
+        var groupVisionNodeComp = new NodeComponent<>(circleGroup);
+        groupVision = new Vision();
+        GameObject.create(TransformInit.DEFAULT, getGameObject(),
+                groupVisionNodeComp, new Collider<>(groupVisionNodeComp), groupVision);
+
+    }
+
+    public void setUpHuntingInGroup(int numberOfAllies) {
         isLeader = true;
         this.numberOfAllies = numberOfAllies;
-   }
+    }
 
-   public void setUpHuntingInGroup(Group leaderObject){
-    isLeader = false;
-    groupFounded = false;
-    this.leaderObject = leaderObject;
-}
+    public void setUpHuntingInGroup(Group leaderObject) {
+        isLeader = false;
+        groupFounded = false;
+        this.leaderObject = leaderObject;
+    }
 
     public void doSurvival() {
         if (groupFounded) {
             if (isLeader) {
                 leaderChase();
                 return;
-            }
-            else {
+            } else {
                 memberChase();
                 return;
             }
-        }
-        else {
+        } else {
             if (isLeader) {
                 howl();
-            }
-            else {
+            } else {
                 join();
             }
         }
     }
 
     // private void startHowling() {
-    //     this.isLeader = true;
-    //     PredatorStat predatorStat = (PredatorStat) animalStat;
+    // this.isLeader = true;
+    // PredatorStat predatorStat = (PredatorStat) animalStat;
 
-    //     var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
-    //     circleHowling.setOpacity(0.4);
-    //     var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
-    //     Collider howlCollider = new Collider<>(howlingVisionNodeComp);
+    // var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
+    // circleHowling.setOpacity(0.4);
+    // var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
+    // Collider howlCollider = new Collider<>(howlingVisionNodeComp);
 
-    //     var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
-    //     circleGroup.setOpacity(0.4);
-    //     var groupVisionNodeComp = new NodeComponent<>(circleGroup);
-    //     Collider groupCollider = new Collider<>(groupVisionNodeComp);
+    // var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
+    // circleGroup.setOpacity(0.4);
+    // var groupVisionNodeComp = new NodeComponent<>(circleGroup);
+    // Collider groupCollider = new Collider<>(groupVisionNodeComp);
     // }
 
     private void howl() {
-        if(howlVision.getAllDetectedObject(Predator.class).size() >= numberOfAllies){
-            for(int i = 0; i < numberOfAllies; i++){
+        if (howlVision.getAllDetectedObject(Predator.class).size() >= numberOfAllies) {
+            for (int i = 0; i < numberOfAllies; i++) {
                 alliesObjects.add(howlVision.getAllDetectedObject(Predator.class)
-                .stream().toList().get(i));
+                        .stream().toList().get(i));
             }
 
-            for(int i = 0; i < numberOfAllies; i++){
+            for (int i = 0; i < numberOfAllies; i++) {
                 Animal animal = GameObject.getComponent(alliesObjects.get(i), Animal.class).get();
                 animal.setSurvivalBehaviour(animal.getComponent(HuntingInGroup.class).get());
-                ((HuntingInGroup)animal.getSurvivalBehaviour()).setUpHuntingInGroup(getGameObject());
+                ((HuntingInGroup) animal.getSurvivalBehaviour()).setUpHuntingInGroup(getGameObject());
                 animal.changeState(animal.getStateConstructor().getSurvivalState());
             }
             groupFounded = true;
@@ -102,7 +115,7 @@ public class HuntingInGroup extends Hunting {
     private void join() {
         double targetX, targetY;
         Point2D targetDir;
-        Component component = GameObject.getComponent(leaderObject ,Component.class).get();
+        Component component = GameObject.getComponent(leaderObject, Component.class).get();
 
         targetX = component.posX().get();
         targetY = component.posY().get();
@@ -111,8 +124,10 @@ public class HuntingInGroup extends Hunting {
 
         targetDir = targetDir.normalize();
 
-         posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
-         posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime() * Parameter.getRelativeSimulationSpeed());
+        posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
+        posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed());
     }
 
     private void leaderChase() {

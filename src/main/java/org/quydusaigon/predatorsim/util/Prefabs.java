@@ -56,16 +56,6 @@ public final class Prefabs {
 
         GameObject.instantiate(STATUS_DISPLAY, newPredator);
 
-        var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
-        var howlingVisionNodeComp = new NodeComponent<>(circleHowling);
-        GameObject.create(TransformInit.DEFAULT, newPredator,
-                howlingVisionNodeComp, new Collider<>(howlingVisionNodeComp), new Vision());
-
-        var circleGroup = new Circle(predatorStat.groupRadius, Color.DARKRED);
-        var groupVisionNodeComp = new NodeComponent<>(circleGroup);
-        GameObject.create(TransformInit.DEFAULT, newPredator,
-                groupVisionNodeComp, new Collider<>(groupVisionNodeComp), new Vision());
-
         return newPredator;
     };
 
