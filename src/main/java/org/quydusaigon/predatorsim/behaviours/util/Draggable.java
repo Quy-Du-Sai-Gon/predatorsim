@@ -62,7 +62,7 @@ public class Draggable extends Behaviour {
     private void draggingEffect() {
         var go = getGameObject();
         go.getScene().setCursor(Cursor.MOVE);
-        go.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0), 7, 0.8, 0, 0);");
+        go.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(238, 130, 238), 10, 0, 0, 0);");
     }
 
     private void clearEffect() {
