@@ -7,10 +7,11 @@ import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 
 import javafx.beans.value.ChangeListener;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -23,37 +24,47 @@ public class StatDisplay extends Behaviour {
     private Group thisAnimalGameObject;
 
     private ChangeListener<? super Boolean> onShowsStatusChanged;
+    private EventHandler<MouseEvent> onMouseClicked;
 
     @Override
     public void start() {
         thisAnimalGameObject = GameObject.getParent(getGameObject()).orElseThrow();
 
         animal = GameObject.getComponent(thisAnimalGameObject, Animal.class).get();
-        Rectangle box = new Rectangle(130, 80, Color.LIMEGREEN);
-        box.setOpacity(0.4);
 
         text = new Text();
         text.setFont(Font.font("Consolas", FontWeight.MEDIUM, FontPosture.REGULAR, 10));
         updateText();
 
-        var pane = new StackPane();
-        pane.getChildren().addAll(box, text);
+        var pane = new StackPane(text);
+        pane.setStyle("-fx-background-color: rgba(50, 205, 50, 0.4);" +
+                "-fx-padding: 7px;" +
+                "-fx-background-radius: 7px;");
 
         addComponent(new NodeComponent<>(pane));
 
         // visibility
         pane.setVisible(UI.getShowsStatusProperty().get()); // default
 
+        // change visibility from settings UI
         onShowsStatusChanged = (_observable, _oldValue, showsStatus) -> {
             pane.setVisible(showsStatus);
         };
-
         UI.getShowsStatusProperty().addListener(onShowsStatusChanged);
+
+        // change by right-clicking
+        onMouseClicked = (event) -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                pane.setVisible(!pane.visibleProperty().get());
+            }
+        };
+        thisAnimalGameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, onMouseClicked);
     }
 
     @Override
     public void onDestroy() {
         UI.getShowsStatusProperty().removeListener(onShowsStatusChanged);
+        thisAnimalGameObject.removeEventHandler(MouseEvent.MOUSE_CLICKED, onMouseClicked);
     }
 
     public void updateText() {
