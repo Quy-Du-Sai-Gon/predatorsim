@@ -213,8 +213,7 @@ public class HuntingInGroup extends Hunting {
 
         double offset = 25;
         if (distanceToTarget <= animalStat.visionRange - offset) {
-            velocity.set(targetDir.multiply(-animalStat.runSpeed / 2 *
-                    Time.getDeltaTime()
+            velocity.set(targetDir.multiply(-animalStat.runSpeed / 2 * Time.getDeltaTime()
                     * Parameter.getRelativeSimulationSpeed()));
         } else if (distanceToTarget >= animalStat.visionRange + offset) {
             velocity.set(targetDir.multiply(animalStat.runSpeed / 2 * Time.getDeltaTime()
