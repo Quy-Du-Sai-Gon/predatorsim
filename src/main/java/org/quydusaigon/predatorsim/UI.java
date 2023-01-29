@@ -216,9 +216,6 @@ public class UI implements Initializable {
         staticHeightTextField = heightTextField;
         staticRightSplitPane = rightSplitPane;
 
-        simulationSpeedSlider.setMin(0);
-        simulationSpeedSlider.setValue(75);
-        simulationSpeedSlider.setMax(100);
 
         final var PARAMETER_MAP = Map.ofEntries(
                 Map.entry(widthTextField, new Pair<Consumer<String>, Supplier<String>>(
