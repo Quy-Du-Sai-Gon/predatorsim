@@ -464,7 +464,7 @@ public final class GameObject {
      * @see #destroy(Group)
      * @see #destroy(Component)
      */
-    private static void updateHierarchy() {
+    public static void updateHierarchy() {
         while (!(componentsToBeAdded.isEmpty()
                 && gameObjectsToBeAdded.isEmpty()
                 && objectsToBeDestroyed.isEmpty())) {
