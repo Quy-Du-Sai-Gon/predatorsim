@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim.gameengine;
 
 import org.quydusaigon.predatorsim.App;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 /**
  * This class provides static methods to access data about time. This is useful
@@ -12,6 +13,16 @@ public class Time {
 
     private static float deltaTime;
     private static long prevTimeNs;
+
+    private static float sliderValue = 1f;
+
+    public static void setSliderValue(float sliderValue) {
+        Time.sliderValue = sliderValue;
+    }
+
+
+
+
 
     static {
         reset();
@@ -37,7 +48,7 @@ public class Time {
     static void update(long nowNs) {
         if (nowNs == -1) {
             // for fixed time step
-            deltaTime = App.getTimeStep();
+            deltaTime = Parameter.getTimeStep();
             return;
         }
 
@@ -62,7 +73,7 @@ public class Time {
      * @see GameLoop
      */
     public static float getDeltaTime() {
-        return deltaTime;
+        return deltaTime * sliderValue;
     }
 
 }

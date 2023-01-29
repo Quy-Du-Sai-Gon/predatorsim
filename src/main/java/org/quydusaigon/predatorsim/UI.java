@@ -18,6 +18,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.util.Pair;
+import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.Parameter;
 
 import java.net.URL;
@@ -34,6 +35,9 @@ public class UI implements Initializable {
     @FXML
     private TextField heightTextField;
     private static TextField staticHeightTextField;
+
+    @FXML
+    private TextField timeStepTextField;
 
     @FXML
     private Slider simulationSpeedSlider;
@@ -205,11 +209,16 @@ public class UI implements Initializable {
 
     private GridPane gridPane;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         staticWidthTextField = widthTextField;
         staticHeightTextField = heightTextField;
         staticRightSplitPane = rightSplitPane;
+
+        simulationSpeedSlider.setMin(0);
+        simulationSpeedSlider.setValue(75);
+        simulationSpeedSlider.setMax(100);
 
         final var PARAMETER_MAP = Map.ofEntries(
                 Map.entry(widthTextField, new Pair<Consumer<String>, Supplier<String>>(
@@ -326,7 +335,11 @@ public class UI implements Initializable {
                         Parameter::getLargePreyDefenseMinimumRangeString)),
                 Map.entry(largePreyDefenseMaxTextField, new Pair<Consumer<String>, Supplier<String>>(
                         Parameter::setLargePreyDefenseMaximumRange,
-                        Parameter::getLargePreyDefenseMaximumRangeString)));
+                        Parameter::getLargePreyDefenseMaximumRangeString)),
+                Map.entry(timeStepTextField, new Pair<Consumer<String>, Supplier<String>>(
+                        Parameter::setTimeStep,
+                        Parameter::getTimeStepString))
+        );
 
         for (var paramEntry : PARAMETER_MAP.entrySet()) {
             // update to default value
@@ -353,6 +366,7 @@ public class UI implements Initializable {
                 }
             });
 
+
         }
 
         updateSimulationWindowSize();
@@ -365,25 +379,9 @@ public class UI implements Initializable {
                 predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
         };
 
-        widgets = new Control[] {
-                widthTextField, heightTextField,
-                predatorCountTextField, predatorRunSpeedMinTextField, predatorRunSpeedMaxTextField,
-                predatorVisionMinTextField, predatorVisionMaxTextField, predatorEnduranceMinTextField,
-                predatorEnduranceMaxTextField, predatorGroupRadiusTextField,
-                smallPreyCountTextField, smallPreyRunSpeedMinTextField, smallPreyRunSpeedMaxTextField,
-                smallPreyVisionMinTextField, smallPreyVisionMaxTextField, smallPreyNutritionMinTextField,
-                smallPreyNutritionMaxTextField, smallPreyDefenseMinTextField, smallPreyDefenseMaxTextField,
-                mediumPreyCountTextField, mediumPreyRunSpeedMinTextField, mediumPreyRunSpeedMaxTextField,
-                mediumPreyVisionMinTextField, mediumPreyVisionMaxTextField, mediumPreyNutritionMinTextField,
-                mediumPreyNutritionMaxTextField, mediumPreyDefenseMinTextField, mediumPreyDefenseMaxTextField,
-                largePreyCountTextField, largePreyRunSpeedMinTextField, largePreyRunSpeedMaxTextField,
-                largePreyVisionMinTextField, largePreyVisionMaxTextField, largePreyNutritionMinTextField,
-                largePreyNutritionMaxTextField, largePreyDefenseMinTextField, largePreyDefenseMaxTextField,
-                simulationSpeedSlider, predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker,
-                largePreyColorPicker
-        };
 
-        simulationSpeedSlider.setValue(1);
+
+        simulationSpeedSlider.setValue(2);
         barChart.getData().addAll(updateBarChart(updateCurrentAliveEntity));
 
         // Grid
@@ -391,6 +389,16 @@ public class UI implements Initializable {
         simulationWindow.setCenter(gridPane);
 
         initProperties();
+
+        simulationSpeedSlider.valueProperty().addListener(
+                new ChangeListener<Number>() {
+
+                    public void changed(ObservableValue <? extends Number >
+                                                observable, Number oldValue, Number newValue)
+                    {
+                        Time.setSliderValue((float) simulationSpeedSlider.getValue());
+                    }
+                });
     }
 
     /*

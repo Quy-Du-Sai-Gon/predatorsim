@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 import java.io.IOException;
 
@@ -23,8 +24,6 @@ public class App extends Application {
     public static double simulationWindowHeight;
     public static double simulationWindowWidth;
     private static GameLoop loop;
-
-    private static float timeStep = 0.05f;
 
     private static BorderPane simulationWindow;
     private static Stage stage;
@@ -82,10 +81,6 @@ public class App extends Application {
 
     public static GameLoop getLoop() {
         return loop;
-    }
-
-    public static float getTimeStep() {
-        return timeStep;
     }
 
     public static void main(String[] args) {

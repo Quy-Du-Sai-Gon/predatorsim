@@ -505,4 +505,18 @@ public class Parameter {
         return relativeSimulationSpeed;
     }
 
+    public static void setTimeStep(String timeStep) {
+        Parameter.timeStep = Float.parseFloat(timeStep);
+    }
+
+    private static float timeStep = 0.05f;
+
+    public static String getTimeStepString() {
+        return String.valueOf(timeStep);
+    }
+    public static float getTimeStep() {
+        return timeStep;
+    }
+
+
 }
