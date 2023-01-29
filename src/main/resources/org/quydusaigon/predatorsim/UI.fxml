@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
     <children>
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -84,7 +98,7 @@
                                                                                         <Font size="15.0" />
                                                                                     </font>
                                                                                 </Label>
-                                                                                <Slider fx:id="simulationSpeedSlider" blockIncrement="1.0" showTickLabels="true" showTickMarks="true" value="50.0" HBox.hgrow="ALWAYS">
+                                                                                <Slider fx:id="simulationSpeedSlider" blockIncrement="1.0" showTickLabels="true" showTickMarks="true" value="1.0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
@@ -262,6 +276,9 @@
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
+                                                                                    <value>
+                                                                                        <Color red="1.0" />
+                                                                                    </value>
                                                                                 </ColorPicker>
                                                                             </children>
                                                                             <VBox.margin>
@@ -430,10 +447,13 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <ColorPicker fx:id="smallPreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onPredatorColorChanged" HBox.hgrow="ALWAYS">
+                                                                                <ColorPicker fx:id="smallPreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onSmallPreyColorChanged" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
+                                                                                    <value>
+                                                                                        <Color green="0.501960813999176" />
+                                                                                    </value>
                                                                                 </ColorPicker>
                                                                             </children>
                                                                             <VBox.margin>
@@ -602,10 +622,13 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <ColorPicker fx:id="mediumPreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onPredatorColorChanged" HBox.hgrow="ALWAYS">
+                                                                                <ColorPicker fx:id="mediumPreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onMediumPreyColorChanged" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
+                                                                                    <value>
+                                                                                        <Color green="0.501960813999176" />
+                                                                                    </value>
                                                                                 </ColorPicker>
                                                                             </children>
                                                                             <VBox.margin>
@@ -774,10 +797,13 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <ColorPicker fx:id="largePreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onPredatorColorChanged" HBox.hgrow="ALWAYS">
+                                                                                <ColorPicker fx:id="largePreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onLargePreyColorChanged" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
+                                                                                    <value>
+                                                                                        <Color green="0.501960813999176" />
+                                                                                    </value>
                                                                                 </ColorPicker>
                                                                             </children>
                                                                             <VBox.margin>

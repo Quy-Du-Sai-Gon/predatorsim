@@ -20,6 +20,28 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
+
+        public static void setPredatorColor(Color predatorColor) {
+                Prefabs.predatorColor = predatorColor;
+        }
+
+        public static void setSmallPreyColor(Color smallPreyColor) {
+                Prefabs.smallPreyColor = smallPreyColor;
+        }
+
+        public static void setMediumPreyColor(Color mediumPreyColor) {
+                Prefabs.mediumPreyColor = mediumPreyColor;
+        }
+
+        public static void setLargePreyColor(Color largePreyColor) {
+                Prefabs.largePreyColor = largePreyColor;
+        }
+
+        private static Color predatorColor = Color.RED;
+        private static Color smallPreyColor = Color.GREEN;
+        private static Color mediumPreyColor = Color.GREEN;
+        private static Color largePreyColor = Color.GREEN;
+
         private static Random random = new Random();
 
         private Prefabs() {
@@ -30,7 +52,7 @@ public final class Prefabs {
         };
 
         public static final Prefab PREDATOR = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(10, Color.RED));
+                var nodeComp = new NodeComponent<>(new Circle(10, predatorColor));
                 PredatorStat predatorStat = new PredatorStat(
                                 (Parameter.getPredatorSpeedMaximumRange() - Parameter.getPredatorSpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getPredatorSpeedMinimumRange(),
@@ -62,7 +84,7 @@ public final class Prefabs {
         };
 
         public static final Prefab SMALL_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(10, Color.GREEN));
+                var nodeComp = new NodeComponent<>(new Circle(10, smallPreyColor));
                 PreyStat smallPreyStat = new PreyStat(
                                 (Parameter.getSmallPreySpeedMaximumRange() - Parameter.getSmallPreySpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getSmallPreySpeedMinimumRange(),
@@ -95,7 +117,7 @@ public final class Prefabs {
         };
 
         public static final Prefab MEDIUM_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(20, Color.GREEN));
+                var nodeComp = new NodeComponent<>(new Circle(20, mediumPreyColor));
                 PreyStat mediumPreyStat = new PreyStat(
                                 (Parameter.getMediumPreySpeedMaximumRange()
                                                 - Parameter.getMediumPreySpeedMinimumRange()) * random.nextDouble()
@@ -129,7 +151,7 @@ public final class Prefabs {
         };
 
         public static final Prefab LARGE_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(30, Color.GREEN));
+                var nodeComp = new NodeComponent<>(new Circle(30, largePreyColor));
                 PreyStat largePreyStat = new PreyStat(
                                 (Parameter.getLargePreySpeedMaximumRange() - Parameter.getLargePreySpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getLargePreySpeedMinimumRange(),

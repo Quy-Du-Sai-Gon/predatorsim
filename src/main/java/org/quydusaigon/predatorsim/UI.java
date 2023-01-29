@@ -20,6 +20,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.util.Pair;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.Parameter;
+import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.net.URL;
 import java.util.Map;
@@ -201,9 +202,6 @@ public class UI implements Initializable {
         @FXML
         private BorderPane simulationWindow;
         private static SplitPane staticRightSplitPane;
-        ColorPicker[] colorPickers;
-
-        private Control[] widgets;
 
         Alert warningAlert = new Alert(Alert.AlertType.NONE);
 
@@ -369,11 +367,8 @@ public class UI implements Initializable {
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
 
-                colorPickers = new ColorPicker[] {
-                                predatorColorPicker, smallPreyColorPicker, mediumPreyColorPicker, largePreyColorPicker
-                };
 
-                simulationSpeedSlider.setValue(2);
+
                 barChart.getData().addAll(updateBarChart(updateCurrentAliveEntity));
 
                 // Grid
@@ -425,11 +420,7 @@ public class UI implements Initializable {
                 }
         }
 
-        public void onPredatorColorChanged(ActionEvent actionEvent) {
-        }
 
-        public void onPreyColorChanged(ActionEvent actionEvent) {
-        }
 
         public void onStartButtonClicked(ActionEvent actionEvent) {
                 App.getLoop().start();
@@ -524,4 +515,20 @@ public class UI implements Initializable {
                 return gridPane;
         }
 
+
+        public void onSmallPreyColorChanged(ActionEvent actionEvent) {
+                Prefabs.setSmallPreyColor(smallPreyColorPicker.getValue());
+        }
+
+        public void onMediumPreyColorChanged(ActionEvent actionEvent) {
+                Prefabs.setMediumPreyColor(mediumPreyColorPicker.getValue());
+        }
+
+        public void onLargePreyColorChanged(ActionEvent actionEvent) {
+                Prefabs.setLargePreyColor(largePreyColorPicker.getValue());
+        }
+
+        public void onPredatorColorChanged(ActionEvent actionEvent) {
+                Prefabs.setPredatorColor(predatorColorPicker.getValue());
+        }
 }
