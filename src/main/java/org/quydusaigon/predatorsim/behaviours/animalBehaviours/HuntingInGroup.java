@@ -11,6 +11,7 @@ import java.util.Set;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.states.WanderState;
+import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
@@ -41,8 +42,12 @@ public class HuntingInGroup extends Hunting {
 
     private PredatorStat predatorStat;
 
+    private Velocity velocity;
+
     @Override
     public void start() {
+        velocity = getComponent(Velocity.class).orElseThrow();
+
         predatorStat = (PredatorStat) getComponent(Predator.class).orElseThrow().animalStat;
 
         var circleHowling = new Circle(predatorStat.howlingRadius, Color.DARKCYAN);
@@ -137,10 +142,8 @@ public class HuntingInGroup extends Hunting {
 
         targetDir = targetDir.normalize();
 
-        posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
-        posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
+        velocity.set(targetDir.multiply(animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed()));
     }
 
     private void leaderChase() {
@@ -158,11 +161,8 @@ public class HuntingInGroup extends Hunting {
 
             targetDir = targetDir.normalize();
 
-            posX().set(posX().get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
-                    * Parameter.getRelativeSimulationSpeed());
-            posY().set(posY().get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
-                    * Parameter.getRelativeSimulationSpeed());
-
+            velocity.set(targetDir.multiply(animalStat.runSpeed * Time.getDeltaTime()
+                    * Parameter.getRelativeSimulationSpeed()));
         }
     }
 
@@ -184,11 +184,10 @@ public class HuntingInGroup extends Hunting {
 
             targetDir = targetDir.normalize();
 
-            posX().set(posX().get()
-                    + (targetMovement.noiseX + targetDir.getX()) * animalStat.runSpeed * Time.getDeltaTime()
-                            * Parameter.getRelativeSimulationSpeed());
-            posY().set(posY().get()
-                    + (targetMovement.noiseY + targetDir.getY()) * animalStat.runSpeed * Time.getDeltaTime()
+            velocity.set(
+                    (targetMovement.noiseX + targetDir.getX()) * animalStat.runSpeed * Time.getDeltaTime()
+                            * Parameter.getRelativeSimulationSpeed(),
+                    (targetMovement.noiseY + targetDir.getY()) * animalStat.runSpeed * Time.getDeltaTime()
                             * Parameter.getRelativeSimulationSpeed());
         }
     }
@@ -197,12 +196,11 @@ public class HuntingInGroup extends Hunting {
         Animal animal = GameObject.getComponent(targetObject, Animal.class).get();
         WanderBehaviour targetMovement = animal.getComponent(WanderBehaviour.class).get();
 
-        posX().set(
-                Map.checkBoundX(posX().get() + targetMovement.noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
-                        * Parameter.getRelativeSimulationSpeed()));
-        posY().set(
-                Map.checkBoundY(posY().get() + targetMovement.noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
-                        * Parameter.getRelativeSimulationSpeed()));
+        velocity.set(
+                targetMovement.noiseX * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                        * Parameter.getRelativeSimulationSpeed(),
+                targetMovement.noiseY * animalStat.runSpeed * 0.75 * Time.getDeltaTime()
+                        * Parameter.getRelativeSimulationSpeed());
     }
 
     public int getNumOfAllies() {

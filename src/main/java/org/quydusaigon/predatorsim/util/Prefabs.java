@@ -9,6 +9,7 @@ import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
 import org.quydusaigon.predatorsim.behaviours.util.Draggable;
+import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -38,7 +39,7 @@ public final class Prefabs {
                 400);
 
         Group newPredator = GameObject.create(tf, parent,
-                nodeComp, new Collider<>(nodeComp),
+                new Velocity(), nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new HuntingInGroup(),
                 new HuntingAlone(),
@@ -65,7 +66,7 @@ public final class Prefabs {
                 (Parameter.getSmallPreyDefenseMaximumRange() - Parameter.getSmallPreyDefenseMinimumRange())*random.nextDouble() + Parameter.getSmallPreyDefenseMinimumRange());
 
         Group newSmallPrey = GameObject.create(tf, parent,
-                nodeComp, new Collider<>(nodeComp),
+                new Velocity(), nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),
@@ -91,7 +92,7 @@ public final class Prefabs {
                 (Parameter.getMediumPreyDefenseMaximumRange() - Parameter.getMediumPreyDefenseMinimumRange())*random.nextDouble() + Parameter.getMediumPreyDefenseMinimumRange());
 
         Group newMediumPrey = GameObject.create(tf, parent,
-                nodeComp, new Collider<>(nodeComp),
+                new Velocity(), nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),
@@ -117,7 +118,7 @@ public final class Prefabs {
                 (Parameter.getLargePreyDefenseMaximumRange() - Parameter.getLargePreyDefenseMinimumRange())*random.nextDouble() + Parameter.getLargePreyDefenseMinimumRange());
 
         Group newLargePrey = GameObject.create(tf, parent,
-                nodeComp, new Collider<>(nodeComp),
+                new Velocity(), nodeComp, new Collider<>(nodeComp),
                 new WanderBehaviour(),
                 new Evading(),
                 new PreyDead(),

@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
+import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -16,6 +17,13 @@ public class HuntingAlone extends Hunting {
     DoubleProperty x, y;
     double targetX, targetY;
     Point2D targetDir;
+
+    private Velocity velocity;
+
+    @Override
+    public void start() {
+        velocity = getComponent(Velocity.class).orElseThrow();
+    }
 
     public void doSurvival() {
         x = posX();
@@ -35,10 +43,8 @@ public class HuntingAlone extends Hunting {
 
         targetDir = targetDir.normalize();
 
-        x.set(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
-        y.set(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed());
+        velocity.set(targetDir.multiply(animalStat.runSpeed * Time.getDeltaTime()
+                * Parameter.getRelativeSimulationSpeed()));
     }
 
     @Override

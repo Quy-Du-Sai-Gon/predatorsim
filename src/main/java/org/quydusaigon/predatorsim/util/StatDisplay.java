@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim.util;
 
 import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -26,11 +27,14 @@ public class StatDisplay extends Behaviour {
     private ChangeListener<? super Boolean> onShowsStatusChanged;
     private EventHandler<MouseEvent> onMouseClicked;
 
+    private Velocity velocity;
+
     @Override
     public void start() {
         thisAnimalGameObject = GameObject.getParent(getGameObject()).orElseThrow();
 
-        animal = GameObject.getComponent(thisAnimalGameObject, Animal.class).get();
+        velocity = GameObject.getComponent(thisAnimalGameObject, Velocity.class).orElseThrow();
+        animal = GameObject.getComponent(thisAnimalGameObject, Animal.class).orElseThrow();
 
         text = new Text();
         text.setFont(Font.font("Consolas", FontWeight.MEDIUM, FontPosture.REGULAR, 10));
@@ -71,6 +75,7 @@ public class StatDisplay extends Behaviour {
         text.setText(String.format("%s ID: %d\n",
                 animal.animalStat instanceof PredatorStat ? "Predator" : "Prey",
                 thisAnimalGameObject.hashCode())
+                + velocity + '\n'
                 + animal.animalStat
                 + animal.getCurrenState());
     }

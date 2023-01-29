@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.property.DoubleProperty;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
+import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.component.Component;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
@@ -25,6 +26,13 @@ public class Evading extends SurvivalBehaviour {
     double currentCoolDownTime = 0;
     boolean foundPredator = true;
     List<Group> targetObjects = new ArrayList<Group>();
+
+    private Velocity velocity;
+
+    @Override
+    public void start() {
+        velocity = getComponent(Velocity.class).orElseThrow();
+    }
 
     @Override
     public void setUpReference() {
@@ -80,9 +88,7 @@ public class Evading extends SurvivalBehaviour {
 
         }
 
-        x.set(Map.checkBoundX(x.get() + targetDir.getX() * animalStat.runSpeed * Time.getDeltaTime()
-                * Parameter.getRelativeSimulationSpeed()));
-        y.set(Map.checkBoundY(y.get() + targetDir.getY() * animalStat.runSpeed * Time.getDeltaTime()
+        velocity.set(targetDir.multiply(animalStat.runSpeed * Time.getDeltaTime()
                 * Parameter.getRelativeSimulationSpeed()));
     }
 
