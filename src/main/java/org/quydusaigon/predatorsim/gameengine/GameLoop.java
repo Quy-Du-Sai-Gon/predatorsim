@@ -67,6 +67,7 @@ public class GameLoop extends AnimationTimer {
          * collision detection
          */
         detectAndRaiseCollisionEvents(App.root);
+        GameObject.updateHierarchy();
     }
 
     private Map<Group, Set<Pair<Collider<?>, Collider<?>>>> previousCollisions = Map.of();
