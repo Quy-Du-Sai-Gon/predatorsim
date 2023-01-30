@@ -20,7 +20,6 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
-
         public static void setPredatorColor(Color predatorColor) {
                 Prefabs.predatorColor = predatorColor;
         }
@@ -67,10 +66,6 @@ public final class Prefabs {
 
                 Group newPredator = GameObject.create(tf, parent,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
-                                new WanderBehaviour(),
-                                new HuntingInGroup(),
-                                new HuntingAlone(),
-                                new PredatorDead(),
                                 new Predator(predatorStat),
                                 new Draggable());
 
@@ -101,9 +96,6 @@ public final class Prefabs {
 
                 Group newSmallPrey = GameObject.create(tf, parent,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
-                                new WanderBehaviour(),
-                                new Evading(),
-                                new PreyDead(),
                                 new Prey(smallPreyStat),
                                 new Draggable());
 
@@ -135,9 +127,6 @@ public final class Prefabs {
 
                 Group newMediumPrey = GameObject.create(tf, parent,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
-                                new WanderBehaviour(),
-                                new Evading(),
-                                new PreyDead(),
                                 new Prey(mediumPreyStat),
                                 new Draggable());
 
@@ -168,9 +157,6 @@ public final class Prefabs {
 
                 Group newLargePrey = GameObject.create(tf, parent,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
-                                new WanderBehaviour(),
-                                new Evading(),
-                                new PreyDead(),
                                 new Prey(largePreyStat),
                                 new Draggable());
 

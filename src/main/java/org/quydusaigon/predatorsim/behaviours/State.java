@@ -1,25 +1,17 @@
 package org.quydusaigon.predatorsim.behaviours;
 
-import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
-
 public abstract class State {
-    protected Animal animalSM;
+    protected Animal animal;
 
-    public State(Animal animalSM) {
-        this.animalSM = animalSM;
+    public State(Animal animal) {
+        this.animal = animal;
     }
 
-    public void enter() {
+    abstract public void enter();
 
-    }
+    abstract public void update();
 
-    public void update() {
-
-    }
-
-    public void exit() {
-
-    }
+    abstract public void exit();
 
     @Override
     public String toString() {

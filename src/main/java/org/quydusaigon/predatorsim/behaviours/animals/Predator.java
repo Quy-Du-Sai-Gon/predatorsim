@@ -1,21 +1,30 @@
 package org.quydusaigon.predatorsim.behaviours.animals;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingAlone;
-import org.quydusaigon.predatorsim.behaviours.animalBehaviours.HuntingInGroup;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
+import org.quydusaigon.predatorsim.states.DeadState;
+import org.quydusaigon.predatorsim.states.HowlState;
+import org.quydusaigon.predatorsim.states.HuntAloneState;
+import org.quydusaigon.predatorsim.states.HuntInGroupState;
+import org.quydusaigon.predatorsim.states.JoinState;
+import org.quydusaigon.predatorsim.states.PredatorWanderState;
 import org.quydusaigon.predatorsim.util.PredatorStat;
-import org.quydusaigon.predatorsim.util.PreyStat;
 
 /**
  * Predator
  */
 public class Predator extends Animal {
-    PredatorStat predatorStat;
+    public PredatorStat predatorStat = (PredatorStat) animalStat;
+
     public int hungryRate = 1;
 
-    public boolean isJoiningGroup = false;
+    private PredatorWanderState predatorWanderState;
+    private HuntAloneState huntAloneState;
+    private HowlState howlState;
+    private JoinState joinState;
+    private HuntInGroupState huntInGroupState;
+    private DeadState deadState;
 
     public Predator(PredatorStat stat) {
         super(stat);
@@ -24,7 +33,15 @@ public class Predator extends Animal {
     @Override
     public void start() {
         super.start();
-        predatorStat = (PredatorStat) animalStat;
+
+        predatorWanderState = new PredatorWanderState(this);
+        huntAloneState = new HuntAloneState(this);
+        howlState = new HowlState(this);
+        joinState = new JoinState(this);
+        huntInGroupState = new HuntInGroupState(this);
+        deadState = new DeadState(this);
+
+        initialize(predatorWanderState);
     }
 
     @Override
@@ -34,7 +51,7 @@ public class Predator extends Animal {
         predatorStat.starvationResilience -= hungryRate * Time.getDeltaTime();
 
         if (predatorStat.starvationResilience <= 0) {
-            changeState(stateConstructor.getDeadState());
+            changeState(deadState);
         }
     }
 
@@ -43,18 +60,39 @@ public class Predator extends Animal {
         super.onCollisionEnter(collider, other);
 
         if (other.getComponent(Prey.class).isPresent()) {
-            if (survivalBehaviour instanceof HuntingAlone) {
-                predatorStat.starvationResilience += ((PreyStat) other.getComponent(Prey.class)
-                        .get().animalStat).nutrition;
-            } else if (survivalBehaviour instanceof HuntingInGroup) {
-                PreyStat temp = (PreyStat) other.getComponent(Prey.class).get().animalStat;
-                predatorStat.starvationResilience += temp.nutrition
-                        / (((HuntingInGroup) survivalBehaviour).getNumOfAllies() + 1);
-                stateConstructor.getSurvivalState().setNoTarget(true);
-                ((HuntingInGroup) survivalBehaviour).divideFood(temp.nutrition);
+            if (getCurrenState() instanceof HuntAloneState) {
+                getHuntAloneState().getFood();
+            } else if (getCurrenState() instanceof HuntInGroupState) {
+                getHuntInGroupState().getFood();
+            } else if (getCurrenState() instanceof JoinState) {
+
             }
 
             System.out.println("collided");
         }
+    }
+
+    public PredatorWanderState getPredatorWanderState() {
+        return predatorWanderState;
+    }
+
+    public HuntAloneState getHuntAloneState() {
+        return huntAloneState;
+    }
+
+    public HowlState getHowlState() {
+        return howlState;
+    }
+
+    public JoinState getJoinState() {
+        return joinState;
+    }
+
+    public HuntInGroupState getHuntInGroupState() {
+        return huntInGroupState;
+    }
+
+    public DeadState getDeadState() {
+        return deadState;
     }
 }
