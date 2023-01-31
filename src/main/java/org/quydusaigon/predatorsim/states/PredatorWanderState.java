@@ -3,6 +3,7 @@ package org.quydusaigon.predatorsim.states;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -20,8 +21,8 @@ public class PredatorWanderState extends WanderState {
     double coolDownTime = 10;
     double currentCoolDownTime = 0;
 
-    public PredatorWanderState(Animal animalSM) {
-        super(animalSM);
+    public PredatorWanderState(Animal animal) {
+        super(animal);
     }
 
     @Override
@@ -85,6 +86,20 @@ public class PredatorWanderState extends WanderState {
     public void getFailedPrey(Prey prey) {
         failedPreyCall.add(prey);
         currentCoolDownTime = coolDownTime;
+    }
+
+    // gain food luckily while wandering but with higher chance to die
+    public void getFood(Prey prey) {
+        // does not count food gained if killed by prey defense
+        double preyDefenseChance = 25 + Math.random() * 100;
+
+        if (preyDefenseChance <= prey.preyStat.defense) {
+            animal.changeState(((Predator) animal).getDeadState());
+            return;
+        }
+
+        ((Predator) animal).predatorStat.starvationResilience += prey.preyStat.nutrition;
+        Output.getInstance().nutritionGained += prey.preyStat.nutrition;
     }
 
     @Override

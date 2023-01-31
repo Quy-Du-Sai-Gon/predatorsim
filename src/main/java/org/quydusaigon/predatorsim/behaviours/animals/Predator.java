@@ -18,6 +18,7 @@ public class Predator extends Animal {
     public PredatorStat predatorStat = (PredatorStat) animalStat;
 
     public int hungryRate = 1;
+    public boolean killed = false;
 
     private PredatorWanderState predatorWanderState;
     private HuntAloneState huntAloneState;
@@ -59,15 +60,15 @@ public class Predator extends Animal {
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
         super.onCollisionEnter(collider, other);
 
-        if (other.getComponent(Prey.class).isPresent()) {
+        other.getComponent(Prey.class).ifPresent(otherPrey -> {
             if (getCurrentState() instanceof HuntAloneState) {
                 getHuntAloneState().getFood();
             } else if (getCurrentState() instanceof HuntInGroupState) {
                 getHuntInGroupState().getFood();
-            } else if (getCurrentState() instanceof JoinState) {
-
+            } else if (getCurrentState() instanceof PredatorWanderState) {
+                getPredatorWanderState().getFood(otherPrey);
             }
-        }
+        });
     }
 
     public PredatorWanderState getPredatorWanderState() {

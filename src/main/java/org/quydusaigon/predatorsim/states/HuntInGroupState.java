@@ -45,10 +45,21 @@ public class HuntInGroupState extends State {
     }
 
     public void getFood() {
+        double preyDefenseChance = Math.random() * 100;
+
+        if (preyDefenseChance <= targetPrey.preyStat.defense) {
+            alliesPredators.remove(animal);
+        }
+
         double nutrition = ((PreyStat) targetPrey.animalStat).nutrition / alliesPredators.size();
         for (Predator allyPredator : alliesPredators) {
+            System.out.println(nutrition);
             allyPredator.predatorStat.starvationResilience += nutrition;
             Output.getInstance().nutritionGained += nutrition;
+        }
+
+        if (preyDefenseChance <= targetPrey.preyStat.defense) {
+            animal.changeState(((Predator) animal).getDeadState());
         }
     }
 

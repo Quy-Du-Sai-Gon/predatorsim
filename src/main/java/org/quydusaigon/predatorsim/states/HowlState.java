@@ -107,6 +107,10 @@ public class HowlState extends State {
         currentCoolDownTime -= Time.getDeltaTime();
         if (currentCoolDownTime <= 0) {
             ((Predator) animal).getPredatorWanderState().getFailedPrey(targetPrey);
+            for (var allyPredator : alliesPredators) {
+                ((Predator) allyPredator).getPredatorWanderState().getFailedPrey(targetPrey);
+                allyPredator.changeState(((Predator) allyPredator).getPredatorWanderState());
+            }
             animal.changeState(((Predator) animal).getPredatorWanderState());
         }
     }

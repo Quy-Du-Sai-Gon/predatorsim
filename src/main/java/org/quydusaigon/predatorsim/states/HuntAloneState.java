@@ -37,7 +37,6 @@ public class HuntAloneState extends State {
     public void update() {
         if ((animal.getVision().getAllDetectedObject(Prey.class).size() == 0) ||
                 (!animal.getVision().getAllDetectedObject(Prey.class).contains(targetPrey.getGameObject()))) {
-            System.out.println("Preint");
             animal.changeState(((Predator) animal).getPredatorWanderState());
             return;
         }
@@ -51,6 +50,14 @@ public class HuntAloneState extends State {
     }
 
     public void getFood() {
+        // does not count food gained if killed by prey defense
+        double preyDefenseChance = Math.random() * 100;
+
+        if (preyDefenseChance <= targetPrey.preyStat.defense) {
+            animal.changeState(((Predator) animal).getDeadState());
+            return;
+        }
+
         Double nutrition = ((PreyStat) targetPrey.animalStat).nutrition;
         ((PredatorStat) animal.animalStat).starvationResilience += nutrition;
         Output.getInstance().nutritionGained += nutrition;
