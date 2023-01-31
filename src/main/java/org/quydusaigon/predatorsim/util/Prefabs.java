@@ -1,5 +1,7 @@
 package org.quydusaigon.predatorsim.util;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -20,6 +22,11 @@ import javafx.scene.Group;
 
 public final class Prefabs {
 
+        private static Color predatorColor = Color.RED;
+        private static Color smallPreyColor = Color.GREEN;
+        private static Color mediumPreyColor = Color.GREEN;
+        private static Color largePreyColor = Color.GREEN;
+
         public static void setPredatorColor(Color predatorColor) {
                 Prefabs.predatorColor = predatorColor;
         }
@@ -36,10 +43,27 @@ public final class Prefabs {
                 Prefabs.largePreyColor = largePreyColor;
         }
 
-        private static Color predatorColor = Color.RED;
-        private static Color smallPreyColor = Color.GREEN;
-        private static Color mediumPreyColor = Color.GREEN;
-        private static Color largePreyColor = Color.GREEN;
+
+        private static String predatorImageURL;
+        private static String smallPreyImageURL;
+        private static String mediumPreyImageURL;
+        private static String largePreyImageURL;
+
+        public static void setPredatorImageURL(String predatorImageURL) {
+                Prefabs.predatorImageURL = predatorImageURL;
+        }
+
+        public static void setSmallPreyImageURL(String smallPreyImageURL) {
+                Prefabs.smallPreyImageURL = smallPreyImageURL;
+        }
+
+        public static void setMediumPreyImageURL(String mediumPreyImageURL) {
+                Prefabs.mediumPreyImageURL = mediumPreyImageURL;
+        }
+
+        public static void setLargePreyImageURL(String largePreyImageURL) {
+                Prefabs.largePreyImageURL = largePreyImageURL;
+        }
 
         private static Random random = new Random();
 
@@ -51,7 +75,8 @@ public final class Prefabs {
         };
 
         public static final Prefab PREDATOR = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(10, predatorColor));
+                var circle = new Circle(10, predatorColor);
+                var nodeComp = new NodeComponent<>(circle);
                 PredatorStat predatorStat = new PredatorStat(
                                 (Parameter.getPredatorSpeedMaximumRange() - Parameter.getPredatorSpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getPredatorSpeedMinimumRange(),
@@ -75,11 +100,19 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newPredator);
 
+                if (predatorImageURL != null) {
+                        GameObject.addComponent(newPredator, new NodeComponent<>(
+                                new ImageView(new Image(predatorImageURL, 20, 20, false, false))
+                        ));
+                        circle.setVisible(false);
+                }
+
                 return newPredator;
         };
 
         public static final Prefab SMALL_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(10, smallPreyColor));
+                var circle = new Circle(10, smallPreyColor);
+                var nodeComp = new NodeComponent<>(circle);
                 PreyStat smallPreyStat = new PreyStat(
                                 (Parameter.getSmallPreySpeedMaximumRange() - Parameter.getSmallPreySpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getSmallPreySpeedMinimumRange(),
@@ -105,11 +138,19 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newSmallPrey);
 
+                if (smallPreyImageURL != null) {
+                        GameObject.addComponent(newSmallPrey, new NodeComponent<>(
+                                new ImageView(new Image(smallPreyImageURL, 20, 20, false, false))
+                        ));
+                        circle.setVisible(false);
+                }
+
                 return newSmallPrey;
         };
 
         public static final Prefab MEDIUM_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(20, mediumPreyColor));
+                var circle = new Circle(20, mediumPreyColor);
+                var nodeComp = new NodeComponent<>(circle);
                 PreyStat mediumPreyStat = new PreyStat(
                                 (Parameter.getMediumPreySpeedMaximumRange()
                                                 - Parameter.getMediumPreySpeedMinimumRange()) * random.nextDouble()
@@ -136,11 +177,18 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newMediumPrey);
 
+                if (mediumPreyImageURL != null) {
+                        GameObject.addComponent(newMediumPrey, new NodeComponent<>(
+                                new ImageView(new Image(mediumPreyImageURL, 40, 40, false, false))
+                        ));
+                        circle.setVisible(false);
+                }
                 return newMediumPrey;
         };
 
         public static final Prefab LARGE_PREY = (tf, parent) -> {
-                var nodeComp = new NodeComponent<>(new Circle(30, largePreyColor));
+                var circle = new Circle(30, largePreyColor);
+                var nodeComp = new NodeComponent<>(circle);
                 PreyStat largePreyStat = new PreyStat(
                                 (Parameter.getLargePreySpeedMaximumRange() - Parameter.getLargePreySpeedMinimumRange())
                                                 * random.nextDouble() + Parameter.getLargePreySpeedMinimumRange(),
@@ -165,6 +213,13 @@ public final class Prefabs {
                                 visionNodeComp, new Collider<>(visionNodeComp), new Vision());
 
                 GameObject.instantiate(STATUS_DISPLAY, newLargePrey);
+
+                if (largePreyImageURL != null) {
+                        GameObject.addComponent(newLargePrey, new NodeComponent<>(
+                                new ImageView(new Image(largePreyImageURL, 60, 60, false, false))
+                        ));
+                        circle.setVisible(false);
+                }
 
                 return newLargePrey;
         };

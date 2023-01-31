@@ -1,124 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
     <children>
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <BorderPane fx:id="simulationWindow" prefHeight="200.0" prefWidth="200.0" />
                 <AnchorPane maxWidth="250.0" minWidth="250.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
                     <children>
-                        <SplitPane fx:id="rightSplitPane" dividerPositions="0.62, 0.3" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f5ebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="rightSplitPane" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                     <children>
-                                        <TabPane layoutX="23.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <TabPane maxHeight="1.7976931348623157E308" stylesheets="@css/tab_css.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                             <tabs>
                                                 <Tab fx:id="layoutTab" text="Layout">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                                                                             <children>
-                                                                                <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Width" textAlignment="CENTER">
+                                                                                <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Width" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font size="15.0" />
+                                                                                        <Font name="Impact" size="18.0" />
                                                                                     </font>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="widthTextField" maxWidth="1.7976931348623157E308" promptText="Enter the width of grid" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="widthTextField" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" promptText="Enter the width of grid" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
+                                                               <font>
+                                                                  <Font name="Impact" size="18.0" />
+                                                               </font>
                                                                                 </TextField>
                                                                             </children>
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Height">
+                                                                                <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Height" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <font>
-                                                                                        <Font size="15.0" />
+                                                                                        <Font name="Impact" size="18.0" />
                                                                                     </font>
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="heightTextField" maxWidth="1.7976931348623157E308" promptText="Enter the height of grid" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="heightTextField" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" promptText="Enter the height of grid" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
+                                                               <font>
+                                                                  <Font name="Impact" size="18.0" />
+                                                               </font>
                                                                                 </TextField>
                                                                             </children>
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Time Step">
+                                                                                <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Time Step" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font size="15.0" />
-                                                                                    </font></Label>
-                                                                                <TextField fx:id="timeStepTextField" maxWidth="1.7976931348623157E308" promptText="Enter Time Step" HBox.hgrow="ALWAYS">
+                                                                                        <Font name="Impact" size="18.0" />
+                                                                                    </font>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
+                                                                                </Label>
+                                                                                <TextField fx:id="timeStepTextField" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" promptText="Enter Time Step" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                                                    </HBox.margin></TextField>
+                                                                                    </HBox.margin>
+                                                               <font>
+                                                                  <Font name="Impact" size="18.0" />
+                                                               </font>
+                                                                                </TextField>
                                                                             </children>
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Speed">
+                                                                                <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Speed" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font size="15.0" />
+                                                                                        <Font name="Impact" size="18.0" />
                                                                                     </font>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
                                                                                 </Label>
-                                                                                <Slider fx:id="simulationSpeedSlider" blockIncrement="1.0" showTickLabels="true" showTickMarks="true" value="1.0" HBox.hgrow="ALWAYS">
+                                                                                <Slider fx:id="simulationSpeedSlider" blockIncrement="1.0" showTickLabels="true" showTickMarks="true" stylesheets="@css/slider.css" translateY="12.0" value="1.0" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                                     </HBox.margin>
                                                                                 </Slider>
                                                                             </children>
                                                                         </HBox>
-                                                                        <CheckBox fx:id="showVisionCheckBox" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowVisionCheckBoxClicked" text="Show Vision" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showVisionCheckBox" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowVisionCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Vision" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
+                                                         <font>
+                                                            <Font name="Impact" size="14.0" />
+                                                         </font>
                                                                         </CheckBox>
-                                                                        <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowStatusCheckBoxClicked" text="Show Status" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowStatusCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Status" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
+                                                         <font>
+                                                            <Font name="Impact" size="14.0" />
+                                                         </font>
                                                                         </CheckBox>
-                                                                        <CheckBox fx:id="showGridLinesCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" text="Show Grid Lines" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showGridLinesCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Grid Lines" textFill="WHITE" VBox.vgrow="ALWAYS">
                                                                             <padding>
                                                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                                             </padding>
+                                                         <font>
+                                                            <Font name="Impact" size="14.0" />
+                                                         </font>
                                                                         </CheckBox>
                                                                     </children>
                                                                 </VBox>
@@ -130,19 +149,22 @@
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Initial Count">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorCountTextField" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorCountTextField" prefWidth="100.0" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -154,13 +176,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Run Speed">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Run Speed" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="predatorRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -184,13 +209,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Vision">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Vision" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="predatorVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -212,15 +240,18 @@
                                                                                 <Insets left="10.0" right="10.0" />
                                                                             </VBox.margin>
                                                                         </HBox>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Endurance">
+                                                                                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Endurance" textFill="WHITE">
                                                                                     <HBox.margin>
-                                                                                        <Insets />
+                                                                                        <Insets right="10.0" />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="predatorEnduranceMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -228,9 +259,12 @@
                                                                                     </HBox.margin>
                                                                                 </TextField>
                                                                                 <Label alignment="CENTER" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="to" HBox.hgrow="ALWAYS">
-                                                                                    <padding>
-                                                                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                                                                    </padding>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                               <padding>
+                                                                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                               </padding>
                                                                                 </Label>
                                                                                 <TextField fx:id="predatorEnduranceMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -244,15 +278,18 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Group Radius">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Group Radius" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
-                                                                                <TextField fx:id="predatorGroupRadiusTextField" promptText="Enter the group radius of predators" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="predatorGroupRadiusTextField" prefWidth="100.0" promptText="Enter the group radius of predators" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -264,13 +301,32 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #f77f00; -fx-background-radius: 25;" text="Color">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
+                                                                                    <padding>
+                                                                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                                                    </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
+                                                                                </Label>
+                                                                                <Button fx:id="choosePredatorImageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPredatorImageButtonClicked" text="Predator Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                                                                            </children>
+                                                                            <VBox.margin>
+                                                                                <Insets left="10.0" right="10.0" />
+                                                                            </VBox.margin>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                                                            <children>
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <ColorPicker fx:id="predatorColorPicker" maxWidth="1.7976931348623157E308" onAction="#onPredatorColorChanged" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -295,19 +351,22 @@
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Initial Count">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
-                                                                                <TextField fx:id="smallPreyCountTextField" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="smallPreyCountTextField" prefWidth="100.0" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -319,13 +378,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Run Speed">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Run Speed" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="smallPreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -349,13 +411,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Vision">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Vision" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="smallPreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -379,13 +444,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Nutrition">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Nutrition" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="smallPreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -409,13 +477,16 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Defence">
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Defence" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <TextField fx:id="smallPreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -439,13 +510,32 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #f77f00; -fx-background-radius: 25;" text="Color">
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textFill="WHITE">
+                                                                                    <padding>
+                                                                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                                                    </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
+                                                                                </Label>
+                                                                                <Button fx:id="chooseSmallPreyImageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSmallPreyImageButtonClicked" text="Small Prey Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                                                                            </children>
+                                                                            <VBox.margin>
+                                                                                <Insets left="10.0" right="10.0" />
+                                                                            </VBox.margin>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                                                            <children>
+                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
+                                                               <font>
+                                                                  <Font name="Impact" size="13.0" />
+                                                               </font>
                                                                                 </Label>
                                                                                 <ColorPicker fx:id="smallPreyColorPicker" maxWidth="1.7976931348623157E308" onAction="#onSmallPreyColorChanged" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
@@ -470,7 +560,7 @@
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
@@ -614,6 +704,19 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Choose Image">
+                                                                                    <padding>
+                                                                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Button fx:id="chooseMediumPreyImageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMediumPreyImageButtonClicked" text="Medium Prey Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                                                                            </children>
+                                                                            <VBox.margin>
+                                                                                <Insets left="10.0" right="10.0" />
+                                                                            </VBox.margin>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                                                            <children>
                                                                                 <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #f77f00; -fx-background-radius: 25;" text="Color">
                                                                                     <HBox.margin>
                                                                                         <Insets />
@@ -645,7 +748,7 @@
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
@@ -657,7 +760,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyCountTextField" promptText="Enter the number of predators" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyCountTextField" promptText="Enter the number of predators" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -677,7 +780,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyRunSpeedMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -687,7 +790,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyRunSpeedMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -707,7 +810,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyVisionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -717,7 +820,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyVisionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -737,7 +840,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyNutritionMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -747,7 +850,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyNutritionMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -767,7 +870,7 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyDefenseMinTextField" prefHeight="26.0" prefWidth="58.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -777,11 +880,24 @@
                                                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                                                     </padding>
                                                                                 </Label>
-                                                                                <TextField fx:id="largePreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" text="0" HBox.hgrow="ALWAYS">
+                                                                                <TextField fx:id="largePreyDefenseMaxTextField" prefHeight="26.0" prefWidth="53.0" promptText="Enter the speed of predator" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
                                                                                 </TextField>
+                                                                            </children>
+                                                                            <VBox.margin>
+                                                                                <Insets left="10.0" right="10.0" />
+                                                                            </VBox.margin>
+                                                                        </HBox>
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                                            <children>
+                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #e9c46a; -fx-background-radius: 25;" text="Choose Image">
+                                                                                    <padding>
+                                                                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                                                    </padding>
+                                                                                </Label>
+                                                                                <Button fx:id="chooseLargePreyImageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLargePreyImageButtonClicked" text="Large Prey Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
                                                                             </children>
                                                                             <VBox.margin>
                                                                                 <Insets left="10.0" right="10.0" />
@@ -818,27 +934,23 @@
                                                 </Tab>
                                             </tabs>
                                         </TabPane>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <VBox maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 15;">
                                             <children>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartButtonClicked" text="START" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10 0 0 0;" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                <Font name="Impact" size="19.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="stopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStopButtonClicked" text="STOP" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="stopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStopButtonClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="STOP" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                <Font name="Impact" size="19.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="nextButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNextButtonClicked" text="NEXT" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="nextButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNextButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 10 0 0;" text="NEXT" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                <Font name="Impact" size="19.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -846,16 +958,16 @@
                                                         <Insets left="5.0" right="5.0" top="5.0" />
                                                     </padding>
                                                 </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                                <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="applyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onApplyButtonClicked" text="APPLY" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="applyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onApplyButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 10;" text="APPLY" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                <Font name="Impact" size="19.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="clearButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClicked" text="CLEAR" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="clearButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 0;" text="CLEAR" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold Italic" size="12.0" />
+                                                                <Font name="Impact" size="19.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -865,11 +977,7 @@
                                                 </HBox>
                                             </children>
                                         </VBox>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                    <children>
-                                        <BarChart fx:id="barChart" layoutX="-95.0" layoutY="-117.0" legendSide="TOP" title="Result" titleSide="BOTTOM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <BarChart fx:id="barChart" legendSide="TOP" maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25;" titleSide="BOTTOM" VBox.vgrow="ALWAYS">
                                             <xAxis>
                                                 <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -881,7 +989,10 @@
                                             </padding>
                                         </BarChart>
                                     </children>
-                                </AnchorPane>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                                </VBox>
                             </items>
                         </SplitPane>
                     </children>

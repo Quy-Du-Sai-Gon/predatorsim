@@ -17,11 +17,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -177,6 +180,18 @@ public class UI implements Initializable {
 
         @FXML
         private CheckBox showGridLinesCheckBox;
+
+        @FXML
+        private Button choosePredatorImageButton;
+
+        @FXML
+        private Button chooseSmallPreyImageButton;
+
+        @FXML
+        private Button chooseMediumPreyImageButton;
+
+        @FXML
+        private Button chooseLargePreyImageButton;
 
         @FXML
         private Button startButton;
@@ -390,10 +405,10 @@ public class UI implements Initializable {
          */
 
         Map<String, Integer> updateCurrentAliveEntity = Map.of(
-                        "predator", 100,
-                        "small prey", 200,
-                        "medium prey", 150,
-                        "large prey", 120);
+                        "p", 100,
+                        "s", 200,
+                        "m", 150,
+                        "l", 120);
 
         private XYChart.Series<String, Integer> updateBarChart(Map<String, Integer> animalMap) {
                 XYChart.Series<String, Integer> series = new XYChart.Series<>();
@@ -525,5 +540,48 @@ public class UI implements Initializable {
 
         public void onPredatorColorChanged(ActionEvent actionEvent) {
                 Prefabs.setPredatorColor(predatorColorPicker.getValue());
+        }
+
+        private static Stage stage;
+        FileChooser fileChooser = new FileChooser();
+
+        public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
+                choosePredatorImageButton.setOnAction(e -> {
+                        File selectedFile = fileChooser.showOpenDialog(stage);
+                        Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+                });
+        }
+
+        public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
+                chooseSmallPreyImageButton.setOnAction(e -> {
+                        File selectedFile = fileChooser.showOpenDialog(stage);
+                        Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+                });
+        }
+
+        public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
+                chooseMediumPreyImageButton.setOnAction(e -> {
+                        File selectedFile = fileChooser.showOpenDialog(stage);
+                        Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+                });
+        }
+
+        public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
+                chooseLargePreyImageButton.setOnAction(e -> {
+                        File selectedFile = fileChooser.showOpenDialog(stage);
+                        Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+                });
         }
 }
