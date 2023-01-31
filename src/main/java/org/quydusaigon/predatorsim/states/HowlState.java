@@ -1,8 +1,6 @@
 package org.quydusaigon.predatorsim.states;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
@@ -65,13 +63,13 @@ public class HowlState extends State {
 
     @Override
     public void update() {
-        if (targetPrey != null || targetPrey.getGameObject() == null) {
+        if (targetPrey == null || targetPrey.getGameObject() == null) {
             // change back to Wander when the target is dead
             animal.changeState(((Predator) animal).getPredatorWanderState());
             return;
         }
 
-        if (alliesPredators.size() >= numberOfAllies) {
+        if (groupVision.getAllDetectedObject(Predator.class).size() + 1 >= numberOfAllies) {
             var predator = (Predator) animal;
             predator.getJoinState().groupFounded = true;
             predator.getHuntInGroupState().setTargetPrey(targetPrey, alliesPredators);
@@ -147,6 +145,6 @@ public class HowlState extends State {
     @Override
     public String toString() {
         return super.toString() + "Howl " + alliesPredators.size() + " "
-                + groupVision.getAllDetectedObject(Predator.class).size();
+                + groupVision.getAllDetectedObject(Predator.class).size() + currentCoolDownTime;
     }
 }

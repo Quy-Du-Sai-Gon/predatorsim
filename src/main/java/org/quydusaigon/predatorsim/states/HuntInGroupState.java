@@ -31,7 +31,7 @@ public class HuntInGroupState extends State {
 
     @Override
     public void update() {
-        if (targetPrey != null || targetPrey.getGameObject() == null) {
+        if (targetPrey == null || targetPrey.getGameObject() == null) {
             animal.changeState(((Predator) animal).getPredatorWanderState());
             return;
         }
