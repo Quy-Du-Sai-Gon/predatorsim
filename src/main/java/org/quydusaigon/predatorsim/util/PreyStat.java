@@ -15,6 +15,6 @@ public class PreyStat extends AnimalStat {
 
     @Override
     public String toString() {
-        return String.format("%sNutrition: %d\nDefense: %.3f\n", super.toString(), nutrition, defense);
+        return String.format("%sNutrition: %f\nDefense: %.3f\n", super.toString(), nutrition, defense);
     }
 }
