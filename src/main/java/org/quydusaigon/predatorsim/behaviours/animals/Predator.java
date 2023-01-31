@@ -60,15 +60,13 @@ public class Predator extends Animal {
         super.onCollisionEnter(collider, other);
 
         if (other.getComponent(Prey.class).isPresent()) {
-            if (getCurrenState() instanceof HuntAloneState) {
+            if (getCurrentState() instanceof HuntAloneState) {
                 getHuntAloneState().getFood();
-            } else if (getCurrenState() instanceof HuntInGroupState) {
+            } else if (getCurrentState() instanceof HuntInGroupState) {
                 getHuntInGroupState().getFood();
-            } else if (getCurrenState() instanceof JoinState) {
+            } else if (getCurrentState() instanceof JoinState) {
 
             }
-
-            System.out.println("collided");
         }
     }
 

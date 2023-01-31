@@ -367,8 +367,6 @@ public class UI implements Initializable {
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
 
-
-
                 barChart.getData().addAll(updateBarChart(updateCurrentAliveEntity));
 
                 // Grid
@@ -419,8 +417,6 @@ public class UI implements Initializable {
                         textField.setText(getter.get());
                 }
         }
-
-
 
         public void onStartButtonClicked(ActionEvent actionEvent) {
                 App.getLoop().start();
@@ -514,7 +510,6 @@ public class UI implements Initializable {
                 }
                 return gridPane;
         }
-
 
         public void onSmallPreyColorChanged(ActionEvent actionEvent) {
                 Prefabs.setSmallPreyColor(smallPreyColorPicker.getValue());

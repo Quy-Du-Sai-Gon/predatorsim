@@ -1,7 +1,8 @@
 package org.quydusaigon.predatorsim.states;
 
-import java.util.List;
+import java.util.Set;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
@@ -9,7 +10,6 @@ import org.quydusaigon.predatorsim.behaviours.animals.Prey;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.util.Parameter;
-import org.quydusaigon.predatorsim.util.PredatorStat;
 import org.quydusaigon.predatorsim.util.PreyStat;
 
 import javafx.geometry.Point2D;
@@ -19,7 +19,7 @@ public class HuntInGroupState extends State {
     Point2D targetDir;
     Prey targetPrey;
 
-    List<Predator> alliesPredators;
+    Set<Predator> alliesPredators;
 
     public HuntInGroupState(Animal animal) {
         super(animal);
@@ -31,7 +31,7 @@ public class HuntInGroupState extends State {
 
     @Override
     public void update() {
-        if (targetPrey.getGameObject() == null) {
+        if (targetPrey != null || targetPrey.getGameObject() == null) {
             animal.changeState(((Predator) animal).getPredatorWanderState());
             return;
         }
@@ -45,15 +45,14 @@ public class HuntInGroupState extends State {
     }
 
     public void getFood() {
+        double nutrition = ((PreyStat) targetPrey.animalStat).nutrition / alliesPredators.size();
         for (Predator allyPredator : alliesPredators) {
-            allyPredator.predatorStat.starvationResilience += ((PreyStat) targetPrey.animalStat).nutrition
-                    / alliesPredators.size();
+            allyPredator.predatorStat.starvationResilience += nutrition;
+            Output.getInstance().nutritionGained += nutrition;
         }
-        ((PredatorStat) animal.animalStat).starvationResilience += ((PreyStat) targetPrey.animalStat).nutrition
-                / alliesPredators.size();
     }
 
-    public void setTargetPrey(Prey prey, List<Predator> alliesPredators) {
+    public void setTargetPrey(Prey prey, Set<Predator> alliesPredators) {
         targetPrey = prey;
         this.alliesPredators = alliesPredators;
     }

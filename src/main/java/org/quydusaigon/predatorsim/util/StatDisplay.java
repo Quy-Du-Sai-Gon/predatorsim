@@ -77,7 +77,7 @@ public class StatDisplay extends Behaviour {
                 thisAnimalGameObject.hashCode())
                 + velocity + '\n'
                 + animal.animalStat
-                + animal.getCurrenState());
+                + animal.getCurrentState());
     }
 
     @Override

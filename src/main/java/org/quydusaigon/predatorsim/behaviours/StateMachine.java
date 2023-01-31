@@ -22,7 +22,7 @@ public class StateMachine extends Behaviour {
         currentState.update();
     }
 
-    public State getCurrenState() {
+    public State getCurrentState() {
         return this.currentState;
     }
 }

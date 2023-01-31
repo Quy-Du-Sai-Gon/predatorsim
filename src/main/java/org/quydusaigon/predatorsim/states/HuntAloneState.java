@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim.states;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
@@ -46,13 +47,13 @@ public class HuntAloneState extends State {
 
     @Override
     public void exit() {
-        System.out.println("Preint3");
         targetPrey = null;
     }
 
     public void getFood() {
-        System.out.println("Preint2");
-        ((PredatorStat) animal.animalStat).starvationResilience += ((PreyStat) targetPrey.animalStat).nutrition;
+        Double nutrition = ((PreyStat) targetPrey.animalStat).nutrition;
+        ((PredatorStat) animal.animalStat).starvationResilience += nutrition;
+        Output.getInstance().nutritionGained += nutrition;
     }
 
     private void doHuntAlone() {

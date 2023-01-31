@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
-import org.quydusaigon.predatorsim.util.Parameter;
 
 import java.io.IOException;
 

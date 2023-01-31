@@ -1,7 +1,9 @@
 package org.quydusaigon.predatorsim.states;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.State;
@@ -30,7 +32,12 @@ public class HowlState extends State {
     Group howlObject, groupObject;
 
     int numberOfAllies;
-    List<Predator> alliesPredators;
+    Set<Predator> alliesPredators;
+
+    double coolDownTime = 10;
+    double currentCoolDownTime = 0;
+
+    Predator animal;
 
     public HowlState(Animal animalSM) {
         super(animalSM);
@@ -38,6 +45,8 @@ public class HowlState extends State {
 
     @Override
     public void enter() {
+        animal = (Predator) super.animal;
+
         var howlNodeComp = new NodeComponent<>(
                 new Circle(((PredatorStat) (animal.animalStat)).howlingRadius, Color.YELLOW));
         howlObject = GameObject.create(TransformInit.DEFAULT, animal.getGameObject(),
@@ -49,21 +58,23 @@ public class HowlState extends State {
                 groupNodeComp, new Collider<>(groupNodeComp), groupVision = new Vision());
 
         howlVision.SetUpHowlVision((Predator) animal);
-        alliesPredators = new ArrayList<>();
+        alliesPredators = new HashSet<>();
         alliesPredators.add(((Predator) animal));
+        currentCoolDownTime = coolDownTime;
     }
 
     @Override
     public void update() {
-
-        if (targetPrey.getGameObject() == null) {
+        if (targetPrey != null || targetPrey.getGameObject() == null) {
+            // change back to Wander when the target is dead
             animal.changeState(((Predator) animal).getPredatorWanderState());
             return;
-        } else if (groupVision.getAllDetectedObject(Predator.class).size() + 1 >= numberOfAllies) {
-            for (Predator allyPredator : alliesPredators) {
-                allyPredator.getJoinState().groupFounded = true;
-                allyPredator.getHuntInGroupState().setTargetPrey(targetPrey, alliesPredators);
-            }
+        }
+
+        if (alliesPredators.size() >= numberOfAllies) {
+            var predator = (Predator) animal;
+            predator.getJoinState().groupFounded = true;
+            predator.getHuntInGroupState().setTargetPrey(targetPrey, alliesPredators);
 
             animal.changeState(((Predator) animal).getHuntInGroupState());
             return;
@@ -95,7 +106,10 @@ public class HowlState extends State {
     }
 
     void howl() {
-
+        currentCoolDownTime -= Time.getDeltaTime();
+        if (currentCoolDownTime <= 0) {
+            animal.changeState(((Predator) animal).getPredatorWanderState());
+        }
     }
 
     public void addAlly(Predator allyPredator) {

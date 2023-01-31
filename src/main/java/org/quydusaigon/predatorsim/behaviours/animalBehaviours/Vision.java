@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim.behaviours.animalBehaviours;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -7,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
+import org.quydusaigon.predatorsim.behaviours.State;
+import org.quydusaigon.predatorsim.behaviours.StateMachine;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
@@ -84,20 +87,16 @@ public class Vision extends Behaviour {
                 .collect(Collectors.toSet());
     }
 
-    public <T extends Animal> Set<Group> getAllDetectedWanderingObject(Class<T> animal) {
+    public <T extends Animal, L extends State> Optional<T> getClosestDetectedAnimalInState(Class<T> animalClass,
+            Class<L> stateClass) {
         return detectedGameObject.stream()
-                .filter(go -> GameObject.getComponent(go, animal).isPresent())
-                .collect(Collectors.toSet()).stream()
-                .filter(go -> GameObject.getComponent(go, Animal.class).orElseThrow()
-                        .getCurrenState() instanceof WanderState)
-                .collect(Collectors.toSet());
-    }
-
-    public <T extends Animal> Optional<Group> getClosestWanderingObject(Class<T> animal) {
-        return getAllDetectedWanderingObject(animal).stream()
+                .map(go -> GameObject.getComponent(go, animalClass))
+                .filter(Optional::isPresent)
+                .map(Optional::orElseThrow)
+                .filter(animal -> stateClass.isInstance(animal.getCurrentState()))
                 .min((obj1, obj2) -> Double.compare(
-                        Distance.calculateDistance(obj1, thisAnimalGameObject),
-                        Distance.calculateDistance(obj2, thisAnimalGameObject)));
+                        Distance.calculateDistance(obj1.getGameObject(), thisAnimalGameObject),
+                        Distance.calculateDistance(obj2.getGameObject(), thisAnimalGameObject)));
     }
 
     public <T extends Animal> Optional<Group> getClosestObject(Class<T> animal) {
