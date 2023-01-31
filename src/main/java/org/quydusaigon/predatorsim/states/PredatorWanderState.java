@@ -1,5 +1,8 @@
 package org.quydusaigon.predatorsim.states;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -12,6 +15,11 @@ import org.quydusaigon.predatorsim.util.PreySize;
 import javafx.scene.Group;
 
 public class PredatorWanderState extends WanderState {
+
+    Set<Prey> failedPreyCall = new HashSet<>();
+    double coolDownTime = 10;
+    double currentCoolDownTime = 0;
+
     public PredatorWanderState(Animal animalSM) {
         super(animalSM);
     }
@@ -29,6 +37,10 @@ public class PredatorWanderState extends WanderState {
             Group target = animal.getVision().getClosestObject(Prey.class).get();
             Prey preyComp = GameObject.getComponent(target, Prey.class).get();
 
+            // avoid catch the same medium/large prey again;
+            if (failedPreyCall.contains(preyComp))
+                return;
+
             if (preyComp.preyStat.size == PreySize.SMALL) {
                 ((Predator) animal).getHuntAloneState().setTargetPrey(preyComp);
                 animal.changeState(((Predator) animal).getHuntAloneState());
@@ -39,6 +51,11 @@ public class PredatorWanderState extends WanderState {
                 ((Predator) animal).getHowlState().setTargetPrey(preyComp, 5);
                 animal.changeState(((Predator) animal).getHowlState());
             }
+        }
+
+        currentCoolDownTime -= Time.getDeltaTime();
+        if (currentCoolDownTime <= 0) {
+            failedPreyCall.clear();
         }
     }
 
@@ -62,6 +79,12 @@ public class PredatorWanderState extends WanderState {
         seedY += 0.005;
 
         animal.velocity.set(randomX, randomY);
+    }
+
+    // add new prey that this predator failed to howl for allies and reset timer
+    public void getFailedPrey(Prey prey) {
+        failedPreyCall.add(prey);
+        currentCoolDownTime = coolDownTime;
     }
 
     @Override

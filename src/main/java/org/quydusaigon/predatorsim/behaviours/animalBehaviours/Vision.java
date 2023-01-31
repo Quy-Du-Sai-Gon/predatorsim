@@ -99,14 +99,15 @@ public class Vision extends Behaviour {
                         Distance.calculateDistance(obj2.getGameObject(), thisAnimalGameObject)));
     }
 
-    public <T extends Animal, L extends State> Optional<T> getAllDetectedAnimalsInState(Class<T> animalClass,
-            Class<L> stateClass) {
-        return detectedGameObject.stream()
-                .map(go -> GameObject.getComponent(go, animalClass))
-                .filter(Optional::isPresent)
-                .map(Optional::orElseThrow)
-                .filter(animal -> stateClass.isInstance(animal.getCurrentState()))
-            }
+    // public <T extends Animal, L extends State> Optional<T>
+    // getAllDetectedAnimalsInState(Class<T> animalClass,
+    // Class<L> stateClass) {
+    // return detectedGameObject.stream()
+    // .map(go -> GameObject.getComponent(go, animalClass))
+    // .filter(Optional::isPresent)
+    // .map(Optional::orElseThrow)
+    // .filter(animal -> stateClass.isInstance(animal.getCurrentState();))
+    // }
 
     public <T extends Animal> Optional<Group> getClosestObject(Class<T> animal) {
         return getAllDetectedObject(animal).stream()
