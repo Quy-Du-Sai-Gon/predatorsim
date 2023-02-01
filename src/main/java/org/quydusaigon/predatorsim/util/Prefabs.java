@@ -187,7 +187,7 @@ public final class Prefabs {
                 GameObject.instantiate(STATUS_DISPLAY, newMediumPrey);
 
                 if (mediumPreyImageURL != null && UI.isMediumPreyCheckBoxEnable()) {
-                        ImageView imageView = new ImageView(new Image(largePreyImageURL, 40, 40, false, false));
+                        ImageView imageView = new ImageView(new Image(mediumPreyImageURL, 40, 40, false, false));
                         imageView.setTranslateX(-20);
                         imageView.setTranslateY(-20);
                         GameObject.addComponent(newMediumPrey, new NodeComponent<>(imageView));
@@ -234,7 +234,6 @@ public final class Prefabs {
                         ));
                         circle.setVisible(false);
                 }
-
                 return newLargePrey;
         };
 
