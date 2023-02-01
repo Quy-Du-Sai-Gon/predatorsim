@@ -24,11 +24,11 @@
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: #828282;
-    -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-font: 15px"Impact";
 }
 
 .tab:selected .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #96b946;
+    -fx-text-fill: #31a05f;
 }
