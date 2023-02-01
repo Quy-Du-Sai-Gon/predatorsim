@@ -32,7 +32,7 @@ public class EvadeState extends State {
 
     @Override
     public void enter() {
-
+        targetDir = new Point2D(0, 0);
     }
 
     @Override
