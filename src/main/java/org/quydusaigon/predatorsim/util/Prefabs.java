@@ -101,8 +101,12 @@ public final class Prefabs {
                 GameObject.instantiate(STATUS_DISPLAY, newPredator);
 
                 if (predatorImageURL != null) {
+                        ImageView imageView = new ImageView(new Image(predatorImageURL, 20, 20, false, false));
+                        imageView.setTranslateX(-10);
+                        imageView.setTranslateY(-10);
                         GameObject.addComponent(newPredator, new NodeComponent<>(
-                                new ImageView(new Image(predatorImageURL, 20, 20, false, false))
+                                imageView
+
                         ));
                         circle.setVisible(false);
                 }
@@ -139,8 +143,12 @@ public final class Prefabs {
                 GameObject.instantiate(STATUS_DISPLAY, newSmallPrey);
 
                 if (smallPreyImageURL != null) {
+                        ImageView imageView = new ImageView(new Image(smallPreyImageURL, 20, 20, false, false));
+                        imageView.setTranslateX(-10);
+                        imageView.setTranslateY(-10);
                         GameObject.addComponent(newSmallPrey, new NodeComponent<>(
-                                new ImageView(new Image(smallPreyImageURL, 20, 20, false, false))
+                                imageView
+
                         ));
                         circle.setVisible(false);
                 }
@@ -178,9 +186,10 @@ public final class Prefabs {
                 GameObject.instantiate(STATUS_DISPLAY, newMediumPrey);
 
                 if (mediumPreyImageURL != null) {
-                        GameObject.addComponent(newMediumPrey, new NodeComponent<>(
-                                new ImageView(new Image(mediumPreyImageURL, 40, 40, false, false))
-                        ));
+                        ImageView imageView = new ImageView(new Image(largePreyImageURL, 40, 40, false, false));
+                        imageView.setTranslateX(-20);
+                        imageView.setTranslateY(-20);
+                        GameObject.addComponent(newMediumPrey, new NodeComponent<>(imageView));
                         circle.setVisible(false);
                 }
                 return newMediumPrey;
@@ -215,8 +224,12 @@ public final class Prefabs {
                 GameObject.instantiate(STATUS_DISPLAY, newLargePrey);
 
                 if (largePreyImageURL != null) {
+                        ImageView imageView = new ImageView(new Image(largePreyImageURL, 60, 60, false, false));
+                        imageView.setTranslateX(-30);
+                        imageView.setTranslateY(-30);
                         GameObject.addComponent(newLargePrey, new NodeComponent<>(
-                                new ImageView(new Image(largePreyImageURL, 60, 60, false, false))
+                                imageView
+
                         ));
                         circle.setVisible(false);
                 }
