@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim;
 
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -8,8 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -20,14 +20,22 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.io.File;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -221,7 +229,7 @@ public class UI implements Initializable {
         private Button clearButton;
 
         @FXML
-        private BarChart<String, Integer> barChart;
+        private LineChart<String,Number> lineChart;
 
         @FXML
         private SplitPane rightSplitPane;
@@ -233,6 +241,7 @@ public class UI implements Initializable {
         Alert warningAlert = new Alert(Alert.AlertType.NONE);
 
         private GridPane gridPane;
+        private ScheduledExecutorService scheduledExecutorService;
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
@@ -388,13 +397,15 @@ public class UI implements Initializable {
 
                 }
 
+
+
+
                 updateSimulationWindowSize();
 
                 startButton.setDisable(true);
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
 
-                barChart.getData().addAll(updateBarChart(updateCurrentAliveEntity));
 
                 // Grid
                 gridPane = getGridLines();
@@ -412,23 +423,63 @@ public class UI implements Initializable {
                                 });
         }
 
-        /*
-         * @param: Pair<String, Integer> of predator, prey
-         */
 
-        Map<String, Integer> updateCurrentAliveEntity = Map.of(
-                        "p", 100,
-                        "s", 200,
-                        "m", 150,
-                        "l", 120);
 
-        private XYChart.Series<String, Integer> updateBarChart(Map<String, Integer> animalMap) {
-                XYChart.Series<String, Integer> series = new XYChart.Series<>();
-                for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
-                        series.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-                }
-                return series;
+        public void playLineChart(){
+                final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
+                final NumberAxis yAxis = new NumberAxis();
+                xAxis.setAnimated(false); // axis animations are removed
+                yAxis.setAnimated(false); // axis animations are removed
+
+                //defining a series to display data
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+                XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+                XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+
+                // add series to chart
+                lineChart.getData().add(series);
+                lineChart.getData().add(series1);
+                lineChart.getData().add(series2);
+                lineChart.getData().add(series3);
+
+                // this is used to display time in HH:mm:ss format
+                final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+
+                // setup a scheduled executor to periodically put data into the chart
+                scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+                // put dummy data onto graph per second
+                scheduledExecutorService.scheduleAtFixedRate(() -> {
+                        // get a random integer between 0-10
+                        Integer random = ThreadLocalRandom.current().nextInt(100);
+                        Integer random1 = ThreadLocalRandom.current().nextInt(100);
+                        Integer random2 = ThreadLocalRandom.current().nextInt(100);
+                        Integer random3 = ThreadLocalRandom.current().nextInt(100);
+                        // Update the chart
+                        Platform.runLater(() -> {
+                                // get current time
+                                Date now = new Date();
+                                // put random number with current time
+                                System.out.println("0: -> " + random);
+                                System.out.println("1: -> " + random1);
+                                System.out.println("2: -> " + random2);
+                                System.out.println("3: -> " + random3);
+
+                                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
+                                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
+                                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
+                                series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random3));
+                                if (series.getData().size() > 5) {
+                                        series.getData().remove(0);
+                                        series1.getData().remove(0);
+                                        series2.getData().remove(0);
+                                        series3.getData().remove(0);
+                                }
+                        });
+                }, 0, 3, TimeUnit.SECONDS);
         }
+
 
         private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
                 var textField = paramEntry.getKey();
@@ -446,6 +497,7 @@ public class UI implements Initializable {
         }
 
         public void onStartButtonClicked(ActionEvent actionEvent) {
+                playLineChart();
                 App.getLoop().start();
                 applyButton.setDisable(true);
                 nextButton.setDisable(true);
@@ -453,6 +505,7 @@ public class UI implements Initializable {
         }
 
         public void onStopButtonClicked(ActionEvent actionEvent) {
+                scheduledExecutorService.shutdownNow();
                 App.getLoop().stop();
                 applyButton.setDisable(false);
                 nextButton.setDisable(false);
@@ -474,7 +527,7 @@ public class UI implements Initializable {
 
         public void onApplyButtonClicked(ActionEvent actionEvent) {
                 updateSimulationWindowSize();
-
+                lineChart.getData().clear();
                 App.load(Level::main);
                 startButton.setDisable(false);
                 stopButton.setDisable(false);
@@ -482,6 +535,7 @@ public class UI implements Initializable {
         }
 
         public void onClearButtonClicked(ActionEvent actionEvent) {
+                lineChart.getData().clear();
                 App.load(() -> {
                 });
         }
