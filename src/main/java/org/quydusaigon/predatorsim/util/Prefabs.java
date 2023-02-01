@@ -7,6 +7,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
+import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
 import org.quydusaigon.predatorsim.behaviours.animals.Predator;
 import org.quydusaigon.predatorsim.behaviours.animals.Prey;
@@ -100,7 +101,7 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newPredator);
 
-                if (predatorImageURL != null) {
+                if (predatorImageURL != null && UI.isPredatorCheckBoxEnable()) {
                         ImageView imageView = new ImageView(new Image(predatorImageURL, 20, 20, false, false));
                         imageView.setTranslateX(-10);
                         imageView.setTranslateY(-10);
@@ -142,7 +143,7 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newSmallPrey);
 
-                if (smallPreyImageURL != null) {
+                if (smallPreyImageURL != null && UI.isSmallPreyCheckBoxEnable()) {
                         ImageView imageView = new ImageView(new Image(smallPreyImageURL, 20, 20, false, false));
                         imageView.setTranslateX(-10);
                         imageView.setTranslateY(-10);
@@ -185,7 +186,7 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newMediumPrey);
 
-                if (mediumPreyImageURL != null) {
+                if (mediumPreyImageURL != null && UI.isMediumPreyCheckBoxEnable()) {
                         ImageView imageView = new ImageView(new Image(largePreyImageURL, 40, 40, false, false));
                         imageView.setTranslateX(-20);
                         imageView.setTranslateY(-20);
@@ -223,7 +224,7 @@ public final class Prefabs {
 
                 GameObject.instantiate(STATUS_DISPLAY, newLargePrey);
 
-                if (largePreyImageURL != null) {
+                if (largePreyImageURL != null && UI.isLargePreyCheckBoxEnable()) {
                         ImageView imageView = new ImageView(new Image(largePreyImageURL, 60, 60, false, false));
                         imageView.setTranslateX(-30);
                         imageView.setTranslateY(-30);

@@ -182,6 +182,18 @@ public class UI implements Initializable {
         private CheckBox showGridLinesCheckBox;
 
         @FXML
+        private CheckBox predatorImageCheckBox;
+
+        @FXML
+        private CheckBox smallPreyImageCheckBox;
+
+        @FXML
+        private CheckBox mediumPreyImageCheckBox;
+
+        @FXML
+        private CheckBox largePreyImageCheckBox;
+
+        @FXML
         private Button choosePredatorImageButton;
 
         @FXML
@@ -583,5 +595,44 @@ public class UI implements Initializable {
                         File selectedFile = fileChooser.showOpenDialog(stage);
                         Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
                 });
+        }
+
+
+        private static boolean isPredatorImageEnable;
+        private static boolean isSmallPreyImageEnable;
+        private static boolean isMediumPreyImageEnable;
+        private static boolean isLargePreyImageEnable;
+
+
+        public static boolean isPredatorCheckBoxEnable() {
+                return isPredatorImageEnable;
+        }
+
+        public static boolean isSmallPreyCheckBoxEnable() {
+                return isSmallPreyImageEnable;
+        }
+
+        public static boolean isMediumPreyCheckBoxEnable() {
+                return isMediumPreyImageEnable;
+        }
+
+        public static boolean isLargePreyCheckBoxEnable() {
+                return isLargePreyImageEnable;
+        }
+
+        public void onPredatorImageCheckBoxClicked(ActionEvent actionEvent) {
+                isPredatorImageEnable = predatorImageCheckBox.isSelected();
+        }
+
+        public void onSmallPreyImageCheckBoxClicked(ActionEvent actionEvent) {
+                isSmallPreyImageEnable = smallPreyImageCheckBox.isSelected();
+        }
+
+        public void onMediumPreyImageCheckBoxClicked(ActionEvent actionEvent) {
+                isMediumPreyImageEnable = mediumPreyImageCheckBox.isSelected();
+        }
+
+        public void onLargePreyImageCheckBoxClicked(ActionEvent actionEvent) {
+                isLargePreyImageEnable = largePreyImageCheckBox.isSelected();
         }
 }
