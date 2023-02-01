@@ -1,5 +1,6 @@
 package org.quydusaigon.predatorsim.behaviours.animals;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
@@ -49,7 +50,9 @@ public class Predator extends Animal {
     public void update() {
         super.update();
 
-        predatorStat.starvationResilience -= hungryRate * Time.getDeltaTime();
+        double nutritionConsumed = hungryRate * Time.getDeltaTime();
+        predatorStat.starvationResilience -= nutritionConsumed;
+        Output.getInstance().nutritionConsumed += nutritionConsumed;
 
         if (predatorStat.starvationResilience <= 0) {
             changeState(deadState);
