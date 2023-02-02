@@ -14,6 +14,7 @@ import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
 /**
  * JavaFX App
@@ -85,5 +86,15 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        try{
+            UI.scheduledExecutorService.shutdownNow();
+        } catch (Exception e){
+            System.out.println("App Exited without any operations");
+        }
+        super.stop();
     }
 }

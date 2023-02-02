@@ -231,7 +231,7 @@ public class UI implements Initializable {
         private Button clearButton;
 
         @FXML
-        private LineChart<String, Number> lineChart;
+        private LineChart<String,Number> lineChart;
 
         @FXML
         private SplitPane rightSplitPane;
@@ -243,7 +243,7 @@ public class UI implements Initializable {
         Alert warningAlert = new Alert(Alert.AlertType.NONE);
 
         private GridPane gridPane;
-        private ScheduledExecutorService scheduledExecutorService;
+        public static ScheduledExecutorService scheduledExecutorService;
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
@@ -399,11 +399,15 @@ public class UI implements Initializable {
 
                 }
 
+
+
+
                 updateSimulationWindowSize();
 
                 startButton.setDisable(true);
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
+
 
                 // Grid
                 gridPane = getGridLines();
@@ -421,17 +425,22 @@ public class UI implements Initializable {
                                 });
         }
 
-        public void playLineChart() {
+
+
+        public void playLineChart(){
                 final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
                 final NumberAxis yAxis = new NumberAxis();
                 xAxis.setAnimated(false); // axis animations are removed
                 yAxis.setAnimated(false); // axis animations are removed
 
-                // defining a series to display data
+                //defining a series to display data
                 XYChart.Series<String, Number> series = new XYChart.Series<>();
                 XYChart.Series<String, Number> series1 = new XYChart.Series<>();
                 XYChart.Series<String, Number> series2 = new XYChart.Series<>();
                 XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+
+
+
 
                 // add series to chart
                 lineChart.getData().add(series);
@@ -447,25 +456,18 @@ public class UI implements Initializable {
 
                 // put dummy data onto graph per second
                 scheduledExecutorService.scheduleAtFixedRate(() -> {
-
-                        Double nutritionGained = Output.getInstance().nutritionGained;
-                        Double nutritionConsumed = Output.getInstance().nutritionConsumed;
-                        Integer predatorCount = Output.getInstance().predatorCount;
+                        // get a random integer between 0-100
+                        Integer random = ThreadLocalRandom.current().nextInt(100);
+                        Integer random1 = ThreadLocalRandom.current().nextInt(100);
+                        Integer random2 = ThreadLocalRandom.current().nextInt(100);
                         Integer random3 = ThreadLocalRandom.current().nextInt(100);
                         // Update the chart
                         Platform.runLater(() -> {
                                 // get current time
                                 Date now = new Date();
-
-                                System.out.println("Nutrition Gained: -> " + nutritionGained);
-                                System.out.println("Nutrition Consumed: -> " + nutritionConsumed);
-                                System.out.println("Predator Count: -> " + predatorCount);
-                                System.out.println("3: -> " + random3);
-
-                                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), nutritionGained));
-                                series1.getData().add(
-                                                new XYChart.Data<>(simpleDateFormat.format(now), nutritionConsumed));
-                                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), predatorCount));
+                                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
+                                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
+                                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
                                 series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random3));
                                 if (series.getData().size() > 5) {
                                         series.getData().remove(0);
@@ -476,6 +478,7 @@ public class UI implements Initializable {
                         });
                 }, 0, 3, TimeUnit.SECONDS);
         }
+
 
         private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
                 var textField = paramEntry.getKey();
@@ -524,7 +527,6 @@ public class UI implements Initializable {
         public void onApplyButtonClicked(ActionEvent actionEvent) {
                 updateSimulationWindowSize();
                 lineChart.getData().clear();
-                Output.getInstance().ResetData();
                 App.load(Level::main);
                 startButton.setDisable(false);
                 stopButton.setDisable(false);
@@ -611,12 +613,13 @@ public class UI implements Initializable {
 
         public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 choosePredatorImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -625,12 +628,13 @@ public class UI implements Initializable {
 
         public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseSmallPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -639,12 +643,13 @@ public class UI implements Initializable {
 
         public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseMediumPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -655,22 +660,25 @@ public class UI implements Initializable {
 
         public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseLargePreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
                 });
         }
 
+
         private static boolean isPredatorImageEnable;
         private static boolean isSmallPreyImageEnable;
         private static boolean isMediumPreyImageEnable;
         private static boolean isLargePreyImageEnable;
+
 
         public static boolean isPredatorCheckBoxEnable() {
                 return isPredatorImageEnable;
