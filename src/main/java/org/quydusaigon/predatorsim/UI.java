@@ -17,6 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -437,7 +439,7 @@ public class UI implements Initializable {
                 lineChart.getData().add(series2);
                 lineChart.getData().add(series3);
 
-                // this is used to display time in HH:mm:ss format
+                // this is used to display time in format
                 final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
 
                 // setup a scheduled executor to periodically put data into the chart
@@ -605,13 +607,19 @@ public class UI implements Initializable {
 
         private static Stage stage;
         FileChooser fileChooser = new FileChooser();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
 
         public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
                                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 choosePredatorImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+                        try {
+                                Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a) {
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
@@ -620,7 +628,12 @@ public class UI implements Initializable {
                                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseSmallPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+                        try {
+                                Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a) {
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
@@ -629,8 +642,15 @@ public class UI implements Initializable {
                                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseMediumPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+                        try {
+                                Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a) {
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
+
                 });
+
         }
 
         public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
@@ -638,7 +658,12 @@ public class UI implements Initializable {
                                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseLargePreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+                        try {
+                                Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a) {
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
