@@ -1,7 +1,7 @@
 package org.quydusaigon;
 
-public class Output {
-    public static Output instance;
+public final class Output {
+    private static Output instance;
 
     private Output() {
     }
@@ -21,9 +21,25 @@ public class Output {
 
     public static Output getInstance() {
         if (instance == null) {
-            return new Output();
-        } else
-            return instance;
+            instance = new Output();
+        }
+
+        return instance;
+    }
+
+    public void ResetData() {
+        nutritionGained = 0;
+        nutritionConsumed = 0;
+
+        predatorCount = 0;
+        smallPreyCount = 0;
+        mediumPreyCount = 0;
+        largePreyCount = 0;
+
+        predatorDeadCount = 0;
+        smallPreyDeadCount = 0;
+        mediumPreyDeadCount = 0;
+        largePreyDeadCount = 0;
     }
 
 }

@@ -53,7 +53,6 @@ public class HuntInGroupState extends State {
 
         double nutrition = ((PreyStat) targetPrey.animalStat).nutrition / alliesPredators.size();
         for (Predator allyPredator : alliesPredators) {
-            System.out.println(nutrition);
             allyPredator.predatorStat.starvationResilience += nutrition;
             Output.getInstance().nutritionGained += nutrition;
         }

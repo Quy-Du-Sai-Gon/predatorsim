@@ -1,10 +1,12 @@
 package org.quydusaigon.predatorsim.behaviours.animals;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.component.Collider;
 import org.quydusaigon.predatorsim.states.DeadState;
 import org.quydusaigon.predatorsim.states.EvadeState;
 import org.quydusaigon.predatorsim.states.PreyWanderState;
+import org.quydusaigon.predatorsim.util.PreySize;
 import org.quydusaigon.predatorsim.util.PreyStat;
 
 public class Prey extends Animal {
@@ -32,6 +34,16 @@ public class Prey extends Animal {
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
         super.onCollisionEnter(collider, other);
         if (other.getComponent(Predator.class).isPresent()) {
+            if (preyStat.size == PreySize.SMALL) {
+                Output.getInstance().smallPreyCount--;
+                Output.getInstance().smallPreyDeadCount++;
+            } else if (preyStat.size == PreySize.MEDIUM) {
+                Output.getInstance().mediumPreyCount--;
+                Output.getInstance().mediumPreyDeadCount++;
+            } else if (preyStat.size == PreySize.LARGE) {
+                Output.getInstance().largePreyCount--;
+                Output.getInstance().largePreyDeadCount++;
+            }
             changeState(deadState);
         }
     }
