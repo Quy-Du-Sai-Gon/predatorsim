@@ -451,7 +451,7 @@ public class UI implements Initializable {
 
                 // put dummy data onto graph per second
                 scheduledExecutorService.scheduleAtFixedRate(() -> {
-                        // get a random integer between 0-10
+                        // get a random integer between 0-100
                         Integer random = ThreadLocalRandom.current().nextInt(100);
                         Integer random1 = ThreadLocalRandom.current().nextInt(100);
                         Integer random2 = ThreadLocalRandom.current().nextInt(100);
@@ -610,6 +610,7 @@ public class UI implements Initializable {
 
         private static Stage stage;
         FileChooser fileChooser = new FileChooser();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
 
         public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
@@ -617,7 +618,12 @@ public class UI implements Initializable {
                 );
                 choosePredatorImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+                        try{
+                                Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a){
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
@@ -627,7 +633,12 @@ public class UI implements Initializable {
                 );
                 chooseSmallPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+                        try{
+                                Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a){
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
@@ -637,8 +648,15 @@ public class UI implements Initializable {
                 );
                 chooseMediumPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+                        try{
+                                Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a){
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
+
                 });
+
         }
 
         public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
@@ -647,7 +665,12 @@ public class UI implements Initializable {
                 );
                 chooseLargePreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+                        try{
+                                Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+                        } catch (Exception a){
+                                alert.setContentText("No image has been chose");
+                                alert.show();
+                        }
                 });
         }
 
