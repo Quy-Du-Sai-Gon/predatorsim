@@ -7,15 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -44,6 +41,8 @@ public class App extends Application {
         loop = new GameLoop();
         stage.setResizable(false);
         UI.updateSimulationWindowSize();
+
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/sus.png")));
         stage.show();
     }
 
