@@ -17,6 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -437,13 +439,16 @@ public class UI implements Initializable {
                 XYChart.Series<String, Number> series2 = new XYChart.Series<>();
                 XYChart.Series<String, Number> series3 = new XYChart.Series<>();
 
+
+
+
                 // add series to chart
                 lineChart.getData().add(series);
                 lineChart.getData().add(series1);
                 lineChart.getData().add(series2);
                 lineChart.getData().add(series3);
 
-                // this is used to display time in HH:mm:ss format
+                // this is used to display time in format
                 final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
 
                 // setup a scheduled executor to periodically put data into the chart

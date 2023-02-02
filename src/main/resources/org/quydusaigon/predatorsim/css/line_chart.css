@@ -1,0 +1,11 @@
+.chart-legend {
+   -fx-background-color:  white;
+}
+
+.axis-label {
+  -fx-text-fill: white;
+}
+
+.chart-legend-item{
+    -fx-text-fill: white;
+}
