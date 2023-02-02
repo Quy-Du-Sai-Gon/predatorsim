@@ -465,12 +465,6 @@ public class UI implements Initializable {
                         Platform.runLater(() -> {
                                 // get current time
                                 Date now = new Date();
-                                // put random number with current time
-                                System.out.println("0: -> " + random);
-                                System.out.println("1: -> " + random1);
-                                System.out.println("2: -> " + random2);
-                                System.out.println("3: -> " + random3);
-
                                 series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
                                 series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
                                 series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
