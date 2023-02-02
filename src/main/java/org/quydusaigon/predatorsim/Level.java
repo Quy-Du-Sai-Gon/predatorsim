@@ -14,22 +14,22 @@ public final class Level {
 
     public static void main() {
         IntStream.range(0, Parameter.getPredatorCount()).forEach((i) -> {
-            Output.getInstance().predatorCount += Parameter.getPredatorCount();
+            Output.getInstance().predatorCount++;
             GameObject.instantiate(Prefabs.PREDATOR, TransformInit.getRandomTransformInit());
         });
 
         IntStream.range(0, Parameter.getSmallPreyCount()).forEach((i) -> {
-            Output.getInstance().smallPreyCount += Parameter.getSmallPreyCount();
+            Output.getInstance().smallPreyCount++;
             GameObject.instantiate(Prefabs.SMALL_PREY, TransformInit.getRandomTransformInit());
         });
 
         IntStream.range(0, Parameter.getMediumPreyCount()).forEach((i) -> {
-            Output.getInstance().mediumPreyCount += Parameter.getMediumPreyCount();
+            Output.getInstance().mediumPreyCount++;
             GameObject.instantiate(Prefabs.MEDIUM_PREY, TransformInit.getRandomTransformInit());
         });
 
         IntStream.range(0, Parameter.getLargePreyCount()).forEach((i) -> {
-            Output.getInstance().largePreyCount += Parameter.getLargePreyCount();
+            Output.getInstance().largePreyCount++;
             GameObject.instantiate(Prefabs.LARGE_PREY, TransformInit.getRandomTransformInit());
         });
     };
