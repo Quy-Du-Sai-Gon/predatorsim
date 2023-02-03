@@ -231,7 +231,7 @@ public class UI implements Initializable {
         private Button clearButton;
 
         @FXML
-        private LineChart<String,Number> lineChart;
+        private LineChart<String, Number> lineChart;
 
         @FXML
         private SplitPane rightSplitPane;
@@ -399,15 +399,11 @@ public class UI implements Initializable {
 
                 }
 
-
-
-
                 updateSimulationWindowSize();
 
                 startButton.setDisable(true);
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
-
 
                 // Grid
                 gridPane = getGridLines();
@@ -425,22 +421,17 @@ public class UI implements Initializable {
                                 });
         }
 
-
-
-        public void playLineChart(){
+        public void playLineChart() {
                 final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
                 final NumberAxis yAxis = new NumberAxis();
                 xAxis.setAnimated(false); // axis animations are removed
                 yAxis.setAnimated(false); // axis animations are removed
 
-                //defining a series to display data
+                // defining a series to display data
                 XYChart.Series<String, Number> series = new XYChart.Series<>();
                 XYChart.Series<String, Number> series1 = new XYChart.Series<>();
                 XYChart.Series<String, Number> series2 = new XYChart.Series<>();
                 XYChart.Series<String, Number> series3 = new XYChart.Series<>();
-
-
-
 
                 // add series to chart
                 lineChart.getData().add(series);
@@ -461,6 +452,7 @@ public class UI implements Initializable {
                         Integer random1 = ThreadLocalRandom.current().nextInt(100);
                         Integer random2 = ThreadLocalRandom.current().nextInt(100);
                         Integer random3 = ThreadLocalRandom.current().nextInt(100);
+
                         // Update the chart
                         Platform.runLater(() -> {
                                 // get current time
@@ -478,7 +470,6 @@ public class UI implements Initializable {
                         });
                 }, 0, 3, TimeUnit.SECONDS);
         }
-
 
         private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
                 var textField = paramEntry.getKey();
@@ -613,13 +604,12 @@ public class UI implements Initializable {
 
         public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-                );
+                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 choosePredatorImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try{
+                        try {
                                 Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a){
+                        } catch (Exception a) {
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -628,13 +618,12 @@ public class UI implements Initializable {
 
         public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-                );
+                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseSmallPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try{
+                        try {
                                 Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a){
+                        } catch (Exception a) {
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -643,13 +632,12 @@ public class UI implements Initializable {
 
         public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-                );
+                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseMediumPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try{
+                        try {
                                 Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a){
+                        } catch (Exception a) {
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -660,25 +648,22 @@ public class UI implements Initializable {
 
         public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
                 fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-                );
+                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
                 chooseLargePreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try{
+                        try {
                                 Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a){
+                        } catch (Exception a) {
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
                 });
         }
 
-
         private static boolean isPredatorImageEnable;
         private static boolean isSmallPreyImageEnable;
         private static boolean isMediumPreyImageEnable;
         private static boolean isLargePreyImageEnable;
-
 
         public static boolean isPredatorCheckBoxEnable() {
                 return isPredatorImageEnable;

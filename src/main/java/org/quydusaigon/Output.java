@@ -42,4 +42,13 @@ public final class Output {
         largePreyDeadCount = 0;
     }
 
+    public void printOutputData() {
+        System.out.println("=======================================================================");
+        System.out.println("nutrition gained : " + nutritionGained);
+        System.out.println("nutrition consumed : " + nutritionConsumed);
+        System.out.println("predator count : " + predatorCount);
+        System.out.println("small prey count : " + smallPreyCount);
+        System.out.println("medium prey count : " + mediumPreyCount);
+        System.out.println("large prey count : " + largePreyCount);
+    }
 }

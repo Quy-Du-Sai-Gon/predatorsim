@@ -16,6 +16,8 @@ public class Prey extends Animal {
     private EvadeState evadeState;
     private DeadState deadState;
 
+    private boolean canCollide = true;
+
     public Prey(PreyStat stat) {
         super(stat);
     }
@@ -33,7 +35,7 @@ public class Prey extends Animal {
     @Override
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
         super.onCollisionEnter(collider, other);
-        if (other.getComponent(Predator.class).isPresent()) {
+        if (other.getComponent(Predator.class).isPresent() && canCollide) {
             if (preyStat.size == PreySize.SMALL) {
                 Output.getInstance().smallPreyCount--;
                 Output.getInstance().smallPreyDeadCount++;
@@ -44,6 +46,7 @@ public class Prey extends Animal {
                 Output.getInstance().largePreyCount--;
                 Output.getInstance().largePreyDeadCount++;
             }
+            canCollide = false;
             changeState(deadState);
         }
     }
