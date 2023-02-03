@@ -64,10 +64,6 @@ public class Vision extends Behaviour {
 
         if (thisAnimalGameObject != otherGameObject
                 && GameObject.getComponent(otherGameObject, Vision.class).isEmpty()) {
-
-            var particle = (Circle) other.getNode();
-            particle.setStroke(Color.BLACK);
-            particle.setStrokeWidth(5);
             detectedGameObject.add(otherGameObject);
         }
     }
@@ -75,8 +71,6 @@ public class Vision extends Behaviour {
     @Override
     public void onCollisionExit(Collider<?> collider, Collider<?> other) {
         if (GameObject.getParent(getGameObject()).get() != other.getGameObject()) {
-            var particle = (Circle) other.getNode();
-            particle.setStroke(null);
             detectedGameObject.remove(other.getGameObject());
         }
     }
