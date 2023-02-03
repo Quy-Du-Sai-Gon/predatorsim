@@ -27,7 +27,7 @@ public final class Output {
         return instance;
     }
 
-    public void ResetData() {
+    public void resetData() {
         nutritionGained = 0;
         nutritionConsumed = 0;
 

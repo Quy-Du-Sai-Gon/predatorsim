@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
@@ -71,6 +72,7 @@ public class App extends Application {
         children.remove(App.root);
         children.add(root);
         App.root = root;
+        Output.getInstance().resetData();
     }
 
     public static void load(Runnable levelInitializer) {
