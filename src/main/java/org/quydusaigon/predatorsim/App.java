@@ -15,7 +15,7 @@ import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
+import java.util.Objects;
 
 /**
  * JavaFX App
@@ -44,7 +44,7 @@ public class App extends Application {
         stage.setResizable(false);
         UI.updateSimulationWindowSize();
 
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("/sus.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/sus.png"))));
         stage.show();
     }
 
