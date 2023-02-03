@@ -3,22 +3,15 @@ package org.quydusaigon.predatorsim;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -33,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
@@ -170,17 +162,9 @@ public class UI implements Initializable {
         @FXML
         private TextField largePreyDefenseMaxTextField;
 
-        @FXML
-        private TextField predatorStarvationEduranceMinTextField;
-
-        @FXML
-        private TextField predatorStarvationEduranceMaxTextField;
 
         @FXML
         private TextField predatorGroupRadiusTextField;
-
-        @FXML
-        private TextField preyRebornTextField;
 
         @FXML
         private CheckBox showVisionCheckBox;
@@ -231,7 +215,7 @@ public class UI implements Initializable {
         private Button clearButton;
 
         @FXML
-        private LineChart<String, Number> lineChart;
+        private LineChart<String,Number> lineChart;
 
         @FXML
         private SplitPane rightSplitPane;
@@ -240,10 +224,9 @@ public class UI implements Initializable {
         private BorderPane simulationWindow;
         private static SplitPane staticRightSplitPane;
 
-        Alert warningAlert = new Alert(Alert.AlertType.NONE);
-
         private GridPane gridPane;
         public static ScheduledExecutorService scheduledExecutorService;
+
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
@@ -376,34 +359,30 @@ public class UI implements Initializable {
                         updateParameter(paramEntry);
 
                         var textField = paramEntry.getKey();
-                        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                                @Override
-                                public void handle(KeyEvent event) {
-                                        if (event.getCode().equals(KeyCode.ENTER)) {
-                                                // update param on enter key pressed
-                                                updateParameter(paramEntry);
-                                        }
+                        textField.setOnKeyPressed(event -> {
+                                if (event.getCode().equals(KeyCode.ENTER)) {
+                                        // update param on enter key pressed
+                                        updateParameter(paramEntry);
                                 }
                         });
-                        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-                                @Override
-                                public void changed(ObservableValue<? extends Boolean> observable,
-                                                Boolean wasFocusedBefore,
-                                                Boolean isNowFocused) {
-                                        if (!isNowFocused) {
-                                                // update param on focus lost a
-                                                updateParameter(paramEntry);
-                                        }
+                        textField.focusedProperty().addListener((observable, wasFocusedBefore, isNowFocused) -> {
+                                if (!isNowFocused) {
+                                        // update param on focus lost a
+                                        updateParameter(paramEntry);
                                 }
                         });
 
                 }
+
+
+
 
                 updateSimulationWindowSize();
 
                 startButton.setDisable(true);
                 stopButton.setDisable(true);
                 nextButton.setDisable(false);
+
 
                 // Grid
                 gridPane = getGridLines();
@@ -412,26 +391,25 @@ public class UI implements Initializable {
                 initProperties();
 
                 simulationSpeedSlider.valueProperty().addListener(
-                                new ChangeListener<Number>() {
-
-                                        public void changed(ObservableValue<? extends Number> observable,
-                                                        Number oldValue, Number newValue) {
-                                                Time.setSliderValue((float) simulationSpeedSlider.getValue());
-                                        }
-                                });
+                        (observable, oldValue, newValue) -> Time.setSliderValue((float) simulationSpeedSlider.getValue()));
         }
 
-        public void playLineChart() {
-                final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
-                final NumberAxis yAxis = new NumberAxis();
-                xAxis.setAnimated(false); // axis animations are removed
-                yAxis.setAnimated(false); // axis animations are removed
 
-                // defining a series to display data
-                XYChart.Series<String, Number> series = new XYChart.Series<>();
-                XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-                XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-                XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+
+        public void playLineChart(){
+                final CategoryAxis xAxis = new CategoryAxis();
+                final NumberAxis yAxis = new NumberAxis();
+                xAxis.setAnimated(false);
+                yAxis.setAnimated(false);
+
+                //defining a series to display data
+                XYChart.Series<String, Number> series = new XYChart.Series<>(); series.setName("P");
+                XYChart.Series<String, Number> series1 = new XYChart.Series<>(); series1.setName("S");
+                XYChart.Series<String, Number> series2 = new XYChart.Series<>(); series2.setName("M");
+                XYChart.Series<String, Number> series3 = new XYChart.Series<>(); series3.setName("L");
+
+
+
 
                 // add series to chart
                 lineChart.getData().add(series);
@@ -447,20 +425,25 @@ public class UI implements Initializable {
 
                 // put dummy data onto graph per second
                 scheduledExecutorService.scheduleAtFixedRate(() -> {
-                        // get a random integer between 0-100
-                        Integer random = ThreadLocalRandom.current().nextInt(100);
-                        Integer random1 = ThreadLocalRandom.current().nextInt(100);
-                        Integer random2 = ThreadLocalRandom.current().nextInt(100);
-                        Integer random3 = ThreadLocalRandom.current().nextInt(100);
+                        // get number of predator, small, medium and large
+                        Integer predator = Output.getInstance().predatorCount - Output.getInstance().predatorDeadCount;
+                        Integer smallPrey = Output.getInstance().smallPreyCount/* - Output.getInstance().smallPreyDeadCount*/;
+                        Integer mediumPrey = Output.getInstance().mediumPreyCount /*- Output.getInstance().mediumPreyDeadCount*/;
+                        Integer largePrey = Output.getInstance().largePreyCount /*- Output.getInstance().largePreyDeadCount*/;
 
+                        System.out.println("predator Count: " + Output.getInstance().predatorCount + "| dead predator: " + Output.getInstance().predatorDeadCount);
+                        System.out.println("small prey Count: " + Output.getInstance().smallPreyCount + "| dead small prey: " + Output.getInstance().smallPreyDeadCount);
+                        System.out.println("medium prey Count: " + Output.getInstance().mediumPreyCount + "| dead medium prey: " + Output.getInstance().mediumPreyDeadCount);
+                        System.out.println("large prey Count: " + Output.getInstance().largePreyCount + "| dead large prey: " + Output.getInstance().largePreyDeadCount);
+                        System.out.println("\n");
                         // Update the chart
                         Platform.runLater(() -> {
                                 // get current time
                                 Date now = new Date();
-                                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
-                                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
-                                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
-                                series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random3));
+                                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), predator));
+                                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), smallPrey));
+                                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), mediumPrey));
+                                series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), largePrey));
                                 if (series.getData().size() > 5) {
                                         series.getData().remove(0);
                                         series1.getData().remove(0);
@@ -470,6 +453,7 @@ public class UI implements Initializable {
                         });
                 }, 0, 3, TimeUnit.SECONDS);
         }
+
 
         private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
                 var textField = paramEntry.getKey();
@@ -486,7 +470,7 @@ public class UI implements Initializable {
                 }
         }
 
-        public void onStartButtonClicked(ActionEvent actionEvent) {
+        public void onStartButtonClicked() {
                 playLineChart();
                 App.getLoop().start();
                 applyButton.setDisable(true);
@@ -494,7 +478,7 @@ public class UI implements Initializable {
                 clearButton.setDisable(true);
         }
 
-        public void onStopButtonClicked(ActionEvent actionEvent) {
+        public void onStopButtonClicked() {
                 scheduledExecutorService.shutdownNow();
                 App.getLoop().stop();
                 applyButton.setDisable(false);
@@ -503,7 +487,7 @@ public class UI implements Initializable {
 
         }
 
-        public void onNextButtonClicked(ActionEvent actionEvent) {
+        public void onNextButtonClicked() {
                 App.getLoop().handle(-1);
         }
 
@@ -515,7 +499,7 @@ public class UI implements Initializable {
                 App.setStageSize(width + staticRightSplitPane.getWidth() + 50, height + 50);
         }
 
-        public void onApplyButtonClicked(ActionEvent actionEvent) {
+        public void onApplyButtonClicked() {
                 updateSimulationWindowSize();
                 lineChart.getData().clear();
                 App.load(Level::main);
@@ -524,7 +508,7 @@ public class UI implements Initializable {
                 nextButton.setDisable(false);
         }
 
-        public void onClearButtonClicked(ActionEvent actionEvent) {
+        public void onClearButtonClicked() {
                 lineChart.getData().clear();
                 App.load(() -> {
                 });
@@ -550,15 +534,15 @@ public class UI implements Initializable {
                 return showsStatusProperty;
         }
 
-        public void onShowVisionCheckBoxClicked(ActionEvent actionEvent) {
+        public void onShowVisionCheckBoxClicked() {
                 getShowsVisionProperty().set(showVisionCheckBox.isSelected());
         }
 
-        public void onShowStatusCheckBoxClicked(ActionEvent actionEvent) {
+        public void onShowStatusCheckBoxClicked() {
                 getShowsStatusProperty().set(showStatusCheckBox.isSelected());
         }
 
-        public void onShowGridLinesCheckBoxClicked(ActionEvent actionEvent) {
+        public void onShowGridLinesCheckBoxClicked() {
                 gridPane.setVisible(showGridLinesCheckBox.isSelected());
         }
 
@@ -582,62 +566,66 @@ public class UI implements Initializable {
                 return gridPane;
         }
 
-        public void onSmallPreyColorChanged(ActionEvent actionEvent) {
+        public void onSmallPreyColorChanged() {
                 Prefabs.setSmallPreyColor(smallPreyColorPicker.getValue());
         }
 
-        public void onMediumPreyColorChanged(ActionEvent actionEvent) {
+        public void onMediumPreyColorChanged() {
                 Prefabs.setMediumPreyColor(mediumPreyColorPicker.getValue());
         }
 
-        public void onLargePreyColorChanged(ActionEvent actionEvent) {
+        public void onLargePreyColorChanged() {
                 Prefabs.setLargePreyColor(largePreyColorPicker.getValue());
         }
 
-        public void onPredatorColorChanged(ActionEvent actionEvent) {
+        public void onPredatorColorChanged() {
                 Prefabs.setPredatorColor(predatorColorPicker.getValue());
         }
 
         private static Stage stage;
+
         FileChooser fileChooser = new FileChooser();
         Alert alert = new Alert(Alert.AlertType.WARNING);
 
-        public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
+        public void onPredatorImageButtonClicked() {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 choosePredatorImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
                 });
         }
 
-        public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
+        public void onSmallPreyImageButtonClicked() {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseSmallPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
                 });
         }
 
-        public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
+        public void onMediumPreyImageButtonClicked() {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseMediumPreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
@@ -646,24 +634,27 @@ public class UI implements Initializable {
 
         }
 
-        public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
+        public void onLargePreyImageButtonClicked() {
                 fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+                        new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+                );
                 chooseLargePreyImageButton.setOnAction(e -> {
                         File selectedFile = fileChooser.showOpenDialog(stage);
-                        try {
+                        try{
                                 Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
-                        } catch (Exception a) {
+                        } catch (Exception a){
                                 alert.setContentText("No image has been chose");
                                 alert.show();
                         }
                 });
         }
+
 
         private static boolean isPredatorImageEnable;
         private static boolean isSmallPreyImageEnable;
         private static boolean isMediumPreyImageEnable;
         private static boolean isLargePreyImageEnable;
+
 
         public static boolean isPredatorCheckBoxEnable() {
                 return isPredatorImageEnable;
@@ -681,19 +672,19 @@ public class UI implements Initializable {
                 return isLargePreyImageEnable;
         }
 
-        public void onPredatorImageCheckBoxClicked(ActionEvent actionEvent) {
+        public void onPredatorImageCheckBoxClicked() {
                 isPredatorImageEnable = predatorImageCheckBox.isSelected();
         }
 
-        public void onSmallPreyImageCheckBoxClicked(ActionEvent actionEvent) {
+        public void onSmallPreyImageCheckBoxClicked() {
                 isSmallPreyImageEnable = smallPreyImageCheckBox.isSelected();
         }
 
-        public void onMediumPreyImageCheckBoxClicked(ActionEvent actionEvent) {
+        public void onMediumPreyImageCheckBoxClicked() {
                 isMediumPreyImageEnable = mediumPreyImageCheckBox.isSelected();
         }
 
-        public void onLargePreyImageCheckBoxClicked(ActionEvent actionEvent) {
+        public void onLargePreyImageCheckBoxClicked() {
                 isLargePreyImageEnable = largePreyImageCheckBox.isSelected();
         }
 }
