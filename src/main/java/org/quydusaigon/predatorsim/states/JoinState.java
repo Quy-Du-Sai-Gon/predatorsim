@@ -25,8 +25,12 @@ public class JoinState extends State {
     Predator targetPredator;
     Prey targetPrey;
 
+    // Indicates if this member has found its group - collides with an other predator object's howling radius
     public boolean groupFounded;
+    
+    // Indicates if all members are present in the group radius
     private boolean huntStarted;
+
     // Position type indicates its position in the formation
     private int positionType = 0;
 
@@ -35,6 +39,7 @@ public class JoinState extends State {
 
     }
 
+    // Initialize all fields to false or defaul values
     @Override
     public void enter() {
         groupFounded = false;
@@ -60,10 +65,12 @@ public class JoinState extends State {
         targetPrey = null;
     }
 
+    // Set leader predator object and the targetted prey
     public void setTargetJoin(Predator predator, Prey prey) {
         targetPredator = predator;
         targetPrey = prey;
     }
+
 
     void doJoin() {
         // If the huntStarted is set true by the leader, then the member will call corner() function
@@ -112,6 +119,8 @@ public class JoinState extends State {
             
             // Perform a vector addition between the perpendicularVector and the targetVector to get the final vector
             targetDir = perpendicularVector.add(targetVector);
+
+            // Normalize vector before move
             targetDir = targetDir.normalize();    
         }
         
@@ -137,15 +146,18 @@ public class JoinState extends State {
             // Initialize a vector
             var perpendicularVector = Point2D.ZERO;
     
-            // 
+            // Get the vector that is perpendicular to the newPredatorToTarget and based on its position type and the member to follow,
+            // it will be in the same position relatively to the followed member's position to the leader             
             perpendicularVector = new Point2D(Math.pow(-1, 1 + positionType) * newPredatorToTargetVector.getY(), Math.pow(-1, positionType) * newPredatorToTargetVector.getX());
         
+            // Perform a vector addition between the perpendicularVector and the targetVector to get the final vector
             targetDir = perpendicularVector.add(targetVector);
+
+            // Normalize vector before move
             targetDir = targetDir.normalize();    
         }
 
-        // Get the vector that is perpendicular to the newPredatorToTarget and based on its position type and the member to follow,
-        // it will be in the same position relatively to the followed member's position to the leader
+        // Set velocity towards the final target direction
         animal.velocity.set(targetDir.multiply(animal.animalStat.runSpeed * Time.getDeltaTime()
                 * Parameter.getRelativeSimulationSpeed()));
 

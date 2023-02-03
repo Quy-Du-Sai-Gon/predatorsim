@@ -1,6 +1,13 @@
 package org.quydusaigon.predatorsim.util;
-
+// source code for Perlin Noise https://rosettacode.org/w/index.php?title=Perlin_noise&oldid=333902
 public final class PerlinNoise {
+    /**
+     * Return a pseudo-random generated number mapped from 3 given parameter numbers
+     * @param x
+     * @param y
+     * @param z
+     * @return a pseudo-random generated number of type {@code double}
+     */
     static public double noise(double x, double y, double z) {
        int X = (int)Math.floor(x) & 255,                  // FIND UNIT CUBE THAT
            Y = (int)Math.floor(y) & 255,                  // CONTAINS POINT.
