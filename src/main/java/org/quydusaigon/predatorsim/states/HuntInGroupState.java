@@ -19,7 +19,7 @@ public class HuntInGroupState extends State {
     Point2D targetDir;
     Prey targetPrey;
 
-    Set<Predator> alliesPredators;
+    private Set<Predator> alliesPredators;
 
     public HuntInGroupState(Animal animal) {
         super(animal);
@@ -79,8 +79,12 @@ public class HuntInGroupState extends State {
                 * Parameter.getRelativeSimulationSpeed()));
     }
 
+    public Set<Predator> getAlliesPredator() {
+        return this.alliesPredators;
+    }
+    
     @Override
     public String toString() {
-        return super.toString() + "Hunt In Group - " + alliesPredators.size();
+        return super.toString() + "Leader - Hunt In Group of " + alliesPredators.size();
     }
 }

@@ -32,6 +32,7 @@ public class HowlState extends State {
     int numberOfAllies;
     Set<Predator> alliesPredators;
 
+    public int positionTypeGiven = 0;
     double coolDownTime = 10;
     double currentCoolDownTime = 0;
 
@@ -69,17 +70,22 @@ public class HowlState extends State {
             return;
         }
 
-        if (groupVision.getAllDetectedObject(Predator.class).size() + 1 >= numberOfAllies) {
+        if (groupVision.getAllDetectedObject(Predator.class).size() + 1 == numberOfAllies) {
             var predator = (Predator) animal;
-            predator.getJoinState().groupFounded = true;
             predator.getHuntInGroupState().setTargetPrey(targetPrey, alliesPredators);
-
             animal.changeState(((Predator) animal).getHuntInGroupState());
+            alliesPredators.stream()
+                .forEach(go -> {
+                    go.getJoinState().setHuntStarted(true);
+                    go.getJoinState().setPositionType(this.positionTypeGiven);
+                    if (go != animal) {
+                        this.positionTypeGiven = this.positionTypeGiven + 1;
+                    }
+                });
             return;
         }
-
+        
         howl();
-
         stalk();
     }
 
@@ -88,6 +94,7 @@ public class HowlState extends State {
         targetPrey = null;
         GameObject.destroy(howlObject);
         GameObject.destroy(groupObject);
+        this.positionTypeGiven = 0;
     }
 
     public void setTargetPrey(Prey targetPrey, int numberOfAllies) {
