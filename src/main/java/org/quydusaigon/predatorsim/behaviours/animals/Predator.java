@@ -55,8 +55,6 @@ public class Predator extends Animal {
         Output.getInstance().nutritionConsumed += nutritionConsumed;
 
         if (predatorStat.starvationResilience <= 0) {
-            Output.getInstance().predatorCount--;
-            Output.getInstance().predatorDeadCount++;
             changeState(deadState);
         }
     }
