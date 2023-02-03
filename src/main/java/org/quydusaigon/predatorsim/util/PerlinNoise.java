@@ -6,7 +6,7 @@ public final class PerlinNoise {
      * @param x
      * @param y
      * @param z
-     * @return a pseudo-random generated number of type {@code double}
+     * @return a pseudo-random generated number of type {@link double}
      */
     static public double noise(double x, double y, double z) {
        int X = (int)Math.floor(x) & 255,                  // FIND UNIT CUBE THAT
