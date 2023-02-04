@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
     <children>
         <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -147,9 +160,9 @@
                                                 </Tab>
                                                 <Tab text="Predator">
                                                     <content>
-                                                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+                                                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
@@ -1085,12 +1098,7 @@
                                             <children>
                                                 <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10 0 0 0;" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
-                                                            <font>
-                                                                <Font name="Impact" size="19.0" />
-                                                            </font>
-                                                        </Button>
-                                                        <Button fx:id="stopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStopButtonClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="STOP" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="startStopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartStopButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10 0 0 0;" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
                                                                 <Font name="Impact" size="19.0" />
                                                             </font>
@@ -1107,14 +1115,19 @@
                                                 </HBox>
                                                 <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
-                                                        <Button fx:id="applyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onApplyButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 10;" text="APPLY" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                        <Button fx:id="applyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onApplyButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 10;" text="APPLY ALL" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="19.0" />
+                                                                <Font name="Impact" size="13.0" />
+                                                            </font>
+                                                        </Button>
+                                                        <Button fx:id="spawnButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSpawnButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 0;" text="SPAWN" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Impact" size="13.0" />
                                                             </font>
                                                         </Button>
                                                         <Button fx:id="clearButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 0;" text="CLEAR" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="19.0" />
+                                                                <Font name="Impact" size="13.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -1124,23 +1137,23 @@
                                                 </HBox>
                                             </children>
                                         </VBox>
-                              <LineChart fx:id="lineChart" maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25;" stylesheets="@css/line_chart.css">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
-                                       <tickLabelFont>
-                                          <Font name="Impact" size="7.0" />
-                                       </tickLabelFont></CategoryAxis>
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" tickLabelFill="WHITE">
-                                       <tickLabelFont>
-                                          <Font name="Impact" size="7.0" />
-                                       </tickLabelFont></NumberAxis>
-                                </yAxis>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </LineChart>
+                                        <LineChart fx:id="lineChart" maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25;" stylesheets="@css/line_chart.css">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
+                                                    <tickLabelFont>
+                                                        <Font name="Impact" size="7.0" />
+                                                    </tickLabelFont></CategoryAxis>
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis side="LEFT" tickLabelFill="WHITE">
+                                                    <tickLabelFont>
+                                                        <Font name="Impact" size="7.0" />
+                                                    </tickLabelFont></NumberAxis>
+                                            </yAxis>
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </LineChart>
                                     </children>
                                     <padding>
                                         <Insets bottom="10.0" left="10.0" right="10.0" />
