@@ -2,6 +2,7 @@ package org.quydusaigon.predatorsim.gameengine.util;
 
 import org.quydusaigon.predatorsim.App;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 /**
  * This class is for creating object that stores data for initializing the
@@ -84,6 +85,6 @@ public class TransformInit {
      *         {@link App} window's size.
      */
     public static TransformInit getRandomTransformInit() {
-        return new TransformInit(Math.random() * App.simulationWindowWidth, Math.random() * App.simulationWindowHeight);
+        return new TransformInit(Math.random() * Parameter.getWindowWidth(), Math.random() * Parameter.getWindowHeight());
     }
 }

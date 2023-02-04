@@ -9,15 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Side;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -42,17 +38,16 @@ public class UI implements Initializable {
 
     @FXML
     private TextField widthTextField;
-    private static TextField staticWidthTextField;
     @FXML
     private TextField heightTextField;
-    private static TextField staticHeightTextField;
 
     @FXML
     private TextField timeStepTextField;
 
     @FXML
     private Slider simulationSpeedSlider;
-
+    @FXML
+    private Label speedLabel;
     @FXML
     private ColorPicker smallPreyColorPicker;
 
@@ -225,7 +220,7 @@ public class UI implements Initializable {
     private LineChart<String, Number> lineChart;
 
     @FXML
-    private SplitPane rightSplitPane;
+    private VBox rightSplitPane;
 
     @FXML
     private Label predatorOutputLabel;
@@ -251,8 +246,7 @@ public class UI implements Initializable {
     private Label nutritionConsumedOutputLabel;
 
     @FXML
-    private BorderPane simulationWindow;
-    private static SplitPane staticRightSplitPane;
+    private Pane simulationWindow;
 
     Alert warningAlert = new Alert(Alert.AlertType.NONE);
 
@@ -261,10 +255,6 @@ public class UI implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        staticWidthTextField = widthTextField;
-        staticHeightTextField = heightTextField;
-        staticRightSplitPane = rightSplitPane;
-
         final var PARAMETER_MAP = Map.ofEntries(
                 Map.entry(widthTextField, new Pair<Consumer<String>, Supplier<String>>(
                         Parameter::setWindowWidth,
@@ -410,29 +400,26 @@ public class UI implements Initializable {
                     }
                 }
             });
-
         }
-
-
-        updateSimulationWindowSize();
 
         nextButton.setDisable(false);
 
-
         // Grid
         gridPane = getGridLines();
-        simulationWindow.setCenter(gridPane);
+        simulationWindow.getChildren().add(gridPane);
 
         initProperties();
 
         simulationSpeedSlider.valueProperty().addListener(
                 new ChangeListener<Number>() {
-
                     public void changed(ObservableValue<? extends Number> observable,
                                         Number oldValue, Number newValue) {
                         Time.setSliderValue((float) simulationSpeedSlider.getValue());
+                        speedLabel.setText("Speed: " + simulationSpeedSlider.getValue());
                     }
                 });
+
+        updateSimulationWindowSize();
     }
 
 
@@ -517,6 +504,7 @@ public class UI implements Initializable {
             applyButton.setDisable(true);
             nextButton.setDisable(true);
             clearButton.setDisable(true);
+            startStopButton.setStyle("-fx-background-color: red; -fx-background-radius: 10 0 0 0;");
         } else {
             scheduledExecutorService.shutdownNow();
             App.getLoop().stop();
@@ -524,6 +512,7 @@ public class UI implements Initializable {
             applyButton.setDisable(false);
             nextButton.setDisable(false);
             clearButton.setDisable(false);
+            startStopButton.setStyle("-fx-background-color: orange; -fx-background-radius: 10 0 0 0;");
         }
     }
 
@@ -535,12 +524,10 @@ public class UI implements Initializable {
         App.getLoop().handle(-1);
     }
 
-    public static void updateSimulationWindowSize() {
-        double width = Double.parseDouble(staticWidthTextField.getText());
-        double height = Double.parseDouble(staticHeightTextField.getText());
-
-        App.setSimulationWindowSize(width, height);
-        App.setStageSize(width + staticRightSplitPane.getWidth() + 50, height + 50);
+    public void updateSimulationWindowSize() {
+        simulationWindow.setMinSize(Parameter.getWindowWidth(), Parameter.getWindowHeight());
+        simulationWindow.setMaxSize(Parameter.getWindowWidth(), Parameter.getWindowHeight());
+        App.getStage().sizeToScene();
     }
 
     public void onApplyButtonClicked(ActionEvent actionEvent) {
@@ -726,5 +713,17 @@ public class UI implements Initializable {
 
     public void onLargePreyImageCheckBoxClicked(ActionEvent actionEvent) {
         isLargePreyImageEnable = largePreyImageCheckBox.isSelected();
+    }
+
+    public void onPredatorSpawnCheckBoxClicked(ActionEvent actionEvent) {
+    }
+
+    public void onSmallPreySpawnCheckBoxClicked(ActionEvent actionEvent) {
+    }
+
+    public void onMediumPreySpawnCheckBoxClicked(ActionEvent actionEvent) {
+    }
+
+    public void onLargePreySpawnCheckBoxClicked(ActionEvent actionEvent) {
     }
 }

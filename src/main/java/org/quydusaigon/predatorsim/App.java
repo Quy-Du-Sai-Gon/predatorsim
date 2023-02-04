@@ -23,11 +23,14 @@ import java.util.Objects;
 public class App extends Application {
 
     public static Group root;
-    public static double simulationWindowHeight;
-    public static double simulationWindowWidth;
     private static GameLoop loop;
 
-    private static BorderPane simulationWindow;
+    private static Pane simulationWindow;
+
+    public static Stage getStage() {
+        return stage;
+    }
+
     private static Stage stage;
 
     @Override
@@ -42,7 +45,6 @@ public class App extends Application {
         load(Level::main);
         loop = new GameLoop();
         stage.setResizable(false);
-        UI.updateSimulationWindowSize();
 
         stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/sus.png"))));
         stage.show();
@@ -52,7 +54,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("UI.fxml"));
         Parent fxml = fxmlLoader.load();
 
-        simulationWindow = (BorderPane) fxmlLoader.getNamespace().get("simulationWindow");
+        simulationWindow = (Pane) fxmlLoader.getNamespace().get("simulationWindow");
 
         return fxml;
     }
@@ -60,11 +62,6 @@ public class App extends Application {
     public static void setStageSize(double width, double height) {
         stage.setWidth(width);
         stage.setHeight(height);
-    }
-
-    public static void setSimulationWindowSize(double width, double height) {
-        simulationWindowWidth = width;
-        simulationWindowHeight = height;
     }
 
     private static void setRoot(Group root) {

@@ -10,8 +10,8 @@ public class Map {
       * @return the approriate {@code x} position after being bounded.
       */
     public static double checkBoundX(double x) {
-       if (x > App.simulationWindowWidth) {
-            x = App.simulationWindowWidth;
+       if (x > Parameter.getWindowWidth()) {
+            x = Parameter.getWindowWidth();
        }
        else if (x < 0) {
             x = 0;
@@ -26,8 +26,8 @@ public class Map {
       * @return the approriate {@code y} position after being bounded.
       */
     public static double checkBoundY(double y) {
-        if (y > App.simulationWindowHeight) {
-            y = App.simulationWindowHeight;
+        if (y > Parameter.getWindowHeight()) {
+            y = Parameter.getWindowHeight();
        }
        else if (y < 0) {
             y = 0;

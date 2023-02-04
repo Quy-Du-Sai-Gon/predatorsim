@@ -54,8 +54,8 @@ public class PreyWanderState extends WanderState {
             seedX += 0.003;
         }
 
-        double mapTendencyOffsetX = Math.abs(App.simulationWindowWidth - animal.posX().get());
-        double mapTendencyOffsetY = Math.abs(App.simulationWindowHeight - animal.posY().get());
+        double mapTendencyOffsetX = Math.abs(Parameter.getWindowWidth() - animal.posX().get());
+        double mapTendencyOffsetY = Math.abs(Parameter.getWindowHeight() - animal.posY().get());
 
         seedX += 0.005 - mapTendencyOffsetX / 40000;
         seedY += 0.005 - mapTendencyOffsetY / 40000;
