@@ -528,8 +528,7 @@ public class UI implements Initializable {
 
     public void onClearButtonClicked(ActionEvent actionEvent) {
         lineChart.getData().clear();
-        App.load(() -> {
-        });
+        App.clearLevel();
     }
 
     /*

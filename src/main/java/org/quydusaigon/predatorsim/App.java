@@ -75,11 +75,34 @@ public class App extends Application {
         Output.getInstance().resetData();
     }
 
-    public static void load(Runnable levelInitializer) {
+    /**
+     * Reset the level to a blank scene.
+     */
+    public static void clearLevel() {
         var newRoot = GameObject.create(TransformInit.DEFAULT, null);
         setRoot(newRoot);
-        levelInitializer.run();
+    }
+
+    /**
+     * Run the level initializer code.
+     * 
+     * @param levelInit level initializer code.
+     */
+    public static void initLevel(Runnable levelInit) {
+        levelInit.run();
         GameLoop.reset();
+    }
+
+    /**
+     * Clear and run the new level initializer code.
+     * 
+     * @param levelInit level initializer code.
+     * @see #clearLevel()
+     * @see #initLevel(Runnable)
+     */
+    public static void load(Runnable levelInit) {
+        clearLevel();
+        initLevel(levelInit);
     }
 
     public static GameLoop getLoop() {
