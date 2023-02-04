@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -168,12 +167,6 @@ public class UI implements Initializable {
     private TextField largePreyDefenseMaxTextField;
 
     @FXML
-    private TextField predatorStarvationEduranceMinTextField;
-
-    @FXML
-    private TextField predatorStarvationEduranceMaxTextField;
-
-    @FXML
     private TextField predatorGroupRadiusTextField;
 
     @FXML
@@ -232,6 +225,27 @@ public class UI implements Initializable {
 
     @FXML
     private SplitPane rightSplitPane;
+
+    @FXML
+    private Label predatorOutputLabel;
+
+    @FXML
+    private Label predatorDeadOutputLabel;
+
+    @FXML
+    private Label smallPreyOutputLabel;
+    @FXML
+    private Label smallPreyDeadOutputLabel;
+    @FXML
+    private Label mediumPreyOutputLabel;
+    @FXML
+    private Label mediumPreyDeadOutputLabel;
+    @FXML
+    private Label largePreyOutputLabel;
+    @FXML
+    private Label largePreyDeadOutputLabel;
+
+
 
     @FXML
     private BorderPane simulationWindow;
@@ -419,17 +433,17 @@ public class UI implements Initializable {
     }
 
 
-    public void playLineChart() {
+    public void playOutputAndLineChart() {
         final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setAnimated(false); // axis animations are removed
         yAxis.setAnimated(false); // axis animations are removed
 
         //defining a series to display data
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+        XYChart.Series<String, Number> series = new XYChart.Series<>(); series.setName("Predator");
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>(); series1.setName("Small");
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>(); series2.setName("Medium");
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>(); series3.setName("Large");
 
 
         // add series to chart
@@ -447,26 +461,32 @@ public class UI implements Initializable {
         // put dummy data onto graph per second
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // get a random integer between 0-100
-            Integer random = ThreadLocalRandom.current().nextInt(100);
-            Integer random1 = ThreadLocalRandom.current().nextInt(100);
-            Integer random2 = ThreadLocalRandom.current().nextInt(100);
-            Integer random3 = ThreadLocalRandom.current().nextInt(100);
+            Integer random = Output.getInstance().predatorCount - Output.getInstance().predatorDeadCount;
+            Integer random1 = Output.getInstance().smallPreyCount - Output.getInstance().smallPreyDeadCount;
+            Integer random2 = Output.getInstance().mediumPreyCount - Output.getInstance().mediumPreyDeadCount;
+            Integer random3 = Output.getInstance().largePreyCount - Output.getInstance().largePreyDeadCount;
+
             // Update the chart
             Platform.runLater(() -> {
+                predatorOutputLabel.setText("Predator: " + Output.getInstance().predatorCount); predatorDeadOutputLabel.setText("Dead Predator: " + Output.getInstance().predatorDeadCount);
+                smallPreyOutputLabel.setText("Small Prey: " + Output.getInstance().smallPreyCount); smallPreyDeadOutputLabel.setText("Dead Small Prey: " + Output.getInstance().smallPreyDeadCount);
+                mediumPreyOutputLabel.setText("Medium Prey: " + Output.getInstance().mediumPreyCount); mediumPreyDeadOutputLabel.setText("Dead Medium Prey : " + Output.getInstance().mediumPreyDeadCount);
+                largePreyOutputLabel.setText("Large Prey: " + Output.getInstance().largePreyCount); largePreyDeadOutputLabel.setText("Dead Large Prey: " + Output.getInstance().largePreyDeadCount);
+
                 // get current time
                 Date now = new Date();
                 series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
                 series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
                 series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
                 series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random3));
-                if (series.getData().size() > 5) {
+                if (series.getData().size() > 8) {
                     series.getData().remove(0);
                     series1.getData().remove(0);
                     series2.getData().remove(0);
                     series3.getData().remove(0);
                 }
             });
-        }, 0, 3, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
 
@@ -487,7 +507,7 @@ public class UI implements Initializable {
 
     public void onStartStopButtonClicked(ActionEvent actionEvent) {
         if (startStopButton.getText().equals("START")) {
-            playLineChart();
+            playOutputAndLineChart();
             App.getLoop().start();
             startStopButton.setText("STOP");
             applyButton.setDisable(true);

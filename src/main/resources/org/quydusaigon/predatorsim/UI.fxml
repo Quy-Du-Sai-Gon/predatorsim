@@ -22,31 +22,31 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.quydusaigon.predatorsim.UI">
     <children>
-        <SplitPane dividerPositions="0.7" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane cacheShape="false" centerShape="false" dividerPositions="0.65" focusTraversable="false" layoutX="170.0" layoutY="71.0" prefHeight="160.0" prefWidth="200.0" scaleShape="false" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <BorderPane fx:id="simulationWindow" prefHeight="200.0" prefWidth="200.0" />
-                <AnchorPane maxWidth="250.0" minWidth="250.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
+                <BorderPane fx:id="simulationWindow" prefHeight="799.0" prefWidth="854.0" />
+                <AnchorPane maxWidth="300.0" prefWidth="300.0">
                     <children>
-                        <SplitPane fx:id="rightSplitPane" layoutX="78.0" layoutY="146.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane fx:id="rightSplitPane" layoutX="60.0" layoutY="146.0" orientation="VERTICAL" prefHeight="799.0" prefWidth="190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                                     <children>
-                                        <TabPane maxHeight="1.7976931348623157E308" stylesheets="@css/tab_css.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                        <TabPane maxHeight="500.0" rotateGraphic="true" stylesheets="@css/tab_css.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                             <tabs>
                                                 <Tab fx:id="layoutTab" text="Layout">
                                                     <content>
                                                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
+                                                                <VBox maxHeight="1.7976931348623157E308" prefHeight="360.0" prefWidth="228.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 0 25 25;" VBox.vgrow="ALWAYS">
                                                                     <children>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                                             <children>
                                                                                 <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Width" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
-                                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                        <Insets left="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font name="Impact" size="18.0" />
+                                                                                        <Font name="Impact" size="17.0" />
                                                                                     </font>
                                                                                     <padding>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -62,14 +62,14 @@
                                                                                 </TextField>
                                                                             </children>
                                                                         </HBox>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                                             <children>
                                                                                 <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Height" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <font>
-                                                                                        <Font name="Impact" size="18.0" />
+                                                                                        <Font name="Impact" size="17.0" />
                                                                                     </font>
                                                                                     <HBox.margin>
-                                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                        <Insets left="10.0" />
                                                                                     </HBox.margin>
                                                                                     <padding>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -85,14 +85,14 @@
                                                                                 </TextField>
                                                                             </children>
                                                                         </HBox>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                                             <children>
                                                                                 <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Time Step" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
-                                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                        <Insets left="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font name="Impact" size="18.0" />
+                                                                                        <Font name="Impact" size="17.0" />
                                                                                     </font>
                                                                                     <padding>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -108,14 +108,14 @@
                                                                                 </TextField>
                                                                             </children>
                                                                         </HBox>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                                                        <HBox alignment="CENTER_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                                             <children>
                                                                                 <Label alignment="CENTER" maxWidth="200.0" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Speed" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                                                     <HBox.margin>
-                                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                        <Insets left="10.0" />
                                                                                     </HBox.margin>
                                                                                     <font>
-                                                                                        <Font name="Impact" size="18.0" />
+                                                                                        <Font name="Impact" size="17.0" />
                                                                                     </font>
                                                                                     <padding>
                                                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -128,28 +128,28 @@
                                                                                 </Slider>
                                                                             </children>
                                                                         </HBox>
-                                                                        <CheckBox fx:id="showVisionCheckBox" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowVisionCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Vision" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showVisionCheckBox" alignment="BOTTOM_LEFT" contentDisplay="TOP" graphicTextGap="10.0" lineSpacing="5.0" maxHeight="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowVisionCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10 10 0 0;" text="Show Vision" textFill="WHITE" underline="true" VBox.vgrow="ALWAYS">
                                                                             <padding>
-                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                                                             </padding>
                                                                             <font>
-                                                                                <Font name="Impact" size="14.0" />
+                                                                                <Font name="Impact" size="12.0" />
                                                                             </font>
                                                                         </CheckBox>
-                                                                        <CheckBox fx:id="showStatusCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowStatusCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Status" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showStatusCheckBox" alignment="BOTTOM_LEFT" contentDisplay="TOP" graphicTextGap="10.0" lineSpacing="5.0" maxHeight="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowStatusCheckBoxClicked" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Status" textFill="WHITE" underline="true" VBox.vgrow="ALWAYS">
                                                                             <padding>
-                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                                                             </padding>
                                                                             <font>
-                                                                                <Font name="Impact" size="14.0" />
+                                                                                <Font name="Impact" size="12.0" />
                                                                             </font>
                                                                         </CheckBox>
-                                                                        <CheckBox fx:id="showGridLinesCheckBox" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" style="-fx-background-color: rgb(49, 160, 95 );" text="Show Grid Lines" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                                                        <CheckBox fx:id="showGridLinesCheckBox" alignment="BOTTOM_LEFT" contentDisplay="TOP" graphicTextGap="10.0" lineSpacing="5.0" maxHeight="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 10;" text="Show Grid Lines" textFill="WHITE" underline="true" VBox.vgrow="ALWAYS">
                                                                             <padding>
-                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                                                             </padding>
                                                                             <font>
-                                                                                <Font name="Impact" size="14.0" />
+                                                                                <Font name="Impact" size="12.0" />
                                                                             </font>
                                                                         </CheckBox>
                                                                     </children>
@@ -166,7 +166,7 @@
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -312,7 +312,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Group Radius" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Group Radius" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -338,7 +338,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <CheckBox fx:id="predatorImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onPredatorImageCheckBoxClicked" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
+                                                                                <CheckBox fx:id="predatorImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onPredatorImageCheckBoxClicked" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
                                                                                     <font>
                                                                                         <Font name="Impact" size="13.0" />
                                                                                     </font>
@@ -346,7 +346,7 @@
                                                                                         <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
                                                                                     </padding>
                                                                                 </CheckBox>
-                                                                                <Button fx:id="choosePredatorImageButton" mnemonicParsing="false" onAction="#onPredatorImageButtonClicked" prefWidth="100.0" text="Predator Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                                                                                <Button fx:id="choosePredatorImageButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPredatorImageButtonClicked" text="Predator Image" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
                                                                             </children>
                                                                             <VBox.margin>
                                                                                 <Insets left="10.0" right="10.0" />
@@ -354,7 +354,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -392,7 +392,7 @@
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -574,7 +574,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <CheckBox fx:id="smallPreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onSmallPreyImageCheckBoxClicked" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
+                                                                                <CheckBox fx:id="smallPreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onSmallPreyImageCheckBoxClicked" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
                                                                                     <font>
                                                                                         <Font name="Impact" size="13.0" />
                                                                                     </font>
@@ -590,7 +590,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="125.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -628,7 +628,7 @@
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -810,7 +810,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <CheckBox fx:id="mediumPreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onMediumPreyImageCheckBoxClicked" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
+                                                                                <CheckBox fx:id="mediumPreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onMediumPreyImageCheckBoxClicked" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
                                                                                     <font>
                                                                                         <Font name="Impact" size="13.0" />
                                                                                     </font>
@@ -826,7 +826,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -864,7 +864,7 @@
                                                                     <children>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Initial Count" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -1046,7 +1046,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                             <children>
-                                                                                <CheckBox fx:id="largePreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onLargePreyImageCheckBoxClicked" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
+                                                                                <CheckBox fx:id="largePreyImageCheckBox" alignment="CENTER" mnemonicParsing="false" onAction="#onLargePreyImageCheckBoxClicked" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Image" textAlignment="CENTER" textFill="WHITE">
                                                                                     <font>
                                                                                         <Font name="Impact" size="13.0" />
                                                                                     </font>
@@ -1062,7 +1062,7 @@
                                                                         </HBox>
                                                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                             <children>
-                                                                                <Label alignment="CENTER" prefWidth="100.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
+                                                                                <Label alignment="CENTER" prefWidth="110.0" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10;" text="Color" textFill="WHITE">
                                                                                     <HBox.margin>
                                                                                         <Insets />
                                                                                     </HBox.margin>
@@ -1094,18 +1094,18 @@
                                                 </Tab>
                                             </tabs>
                                         </TabPane>
-                                        <VBox maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 15;">
+                                        <VBox maxHeight="114.0" prefHeight="97.0" prefWidth="228.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 15;">
                                             <children>
                                                 <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                                     <children>
                                                         <Button fx:id="startStopButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartStopButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 10 0 0 0;" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="19.0" />
+                                                                <Font name="Impact" size="16.0" />
                                                             </font>
                                                         </Button>
                                                         <Button fx:id="nextButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNextButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 10 0 0;" text="NEXT" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="19.0" />
+                                                                <Font name="Impact" size="16.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -1117,17 +1117,17 @@
                                                     <children>
                                                         <Button fx:id="applyButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onApplyButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 10;" text="APPLY ALL" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="13.0" />
+                                                                <Font name="Impact" size="16.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="spawnButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSpawnButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 0;" text="APPLY SPAWN" textFill="WHITE">
+                                                        <Button fx:id="spawnButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSpawnButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 0;" text="SPAWN" textFill="WHITE">
                                                             <font>
-                                                                <Font name="Impact" size="13.0" />
+                                                                <Font name="Impact" size="16.0" />
                                                             </font>
                                                         </Button>
                                                         <Button fx:id="clearButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 0;" text="CLEAR" textFill="WHITE" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="Impact" size="13.0" />
+                                                                <Font name="Impact" size="16.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -1137,23 +1137,86 @@
                                                 </HBox>
                                             </children>
                                         </VBox>
-                                        <LineChart fx:id="lineChart" maxHeight="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25;" stylesheets="@css/line_chart.css">
-                                            <xAxis>
-                                                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
-                                                    <tickLabelFont>
-                                                        <Font name="Impact" size="7.0" />
-                                                    </tickLabelFont></CategoryAxis>
-                                            </xAxis>
-                                            <yAxis>
-                                                <NumberAxis side="LEFT" tickLabelFill="WHITE">
-                                                    <tickLabelFont>
-                                                        <Font name="Impact" size="7.0" />
-                                                    </tickLabelFont></NumberAxis>
-                                            </yAxis>
-                                            <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                            </padding>
-                                        </LineChart>
+                                        <SplitPane dividerPositions="0.95" prefHeight="160.0" prefWidth="200.0" style="-fx-background-radius: 25;">
+                                            <items>
+                                                <AnchorPane minHeight="0.0" minWidth="20.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25 0 0 25;">
+                                                    <children>
+                                                        <VBox layoutX="-10.0" layoutY="-56.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                                                    <children>
+                                                                        <Label fx:id="predatorOutputLabel" prefWidth="90.0" text="Predator:" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="predatorDeadOutputLabel" prefWidth="140.0" text="Dead Predator:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                                    <children>
+                                                                        <Label fx:id="smallPreyOutputLabel" prefWidth="90.0" text="Small Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="smallPreyDeadOutputLabel" prefWidth="140.0" text="Dead Small Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                                    <children>
+                                                                        <Label fx:id="mediumPreyOutputLabel" prefWidth="90.0" text="Medium Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="mediumPreyDeadOutputLabel" prefWidth="140.0" text="Dead Medium Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                                    <children>
+                                                                        <Label fx:id="largePreyOutputLabel" prefWidth="90.0" text="Large Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="largePreyDeadOutputLabel" prefWidth="140.0" text="Dead Large Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </HBox>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                                    <children>
+                                                                        <Label fx:id="predatorOutputLabel4" prefWidth="90.0" text="Predator:" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="predatorDeadOutputLabel4" prefWidth="140.0" text="Dead Predator:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="10.0" />
+                                                                    </padding>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="10.0" prefHeight="160.0" prefWidth="100.0">
+                                                    <children>
+                                                        <LineChart fx:id="lineChart" maxHeight="202.0" prefHeight="202.0" prefWidth="228.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 25 25 0;" stylesheets="@css/line_chart.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <xAxis>
+                                                                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
+                                                                    <tickLabelFont>
+                                                                        <Font name="Impact" size="7.0" />
+                                                                    </tickLabelFont>
+                                                                </CategoryAxis>
+                                                            </xAxis>
+                                                            <yAxis>
+                                                                <NumberAxis side="LEFT" tickLabelFill="WHITE">
+                                                                    <tickLabelFont>
+                                                                        <Font name="Impact" size="7.0" />
+                                                                    </tickLabelFont>
+                                                                </NumberAxis>
+                                                            </yAxis>
+                                                            <padding>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                            </padding>
+                                                        </LineChart>
+                                                    </children>
+                                                </AnchorPane>
+                                            </items>
+                                        </SplitPane>
                                     </children>
                                     <padding>
                                         <Insets bottom="10.0" left="10.0" right="10.0" />
