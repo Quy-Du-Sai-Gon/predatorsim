@@ -1120,7 +1120,7 @@
                                                                 <Font name="Impact" size="13.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="spawnButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSpawnButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 0;" text="SPAWN" textFill="WHITE">
+                                                        <Button fx:id="spawnButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSpawnButtonClicked" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 0 0;" text="APPLY SPAWN" textFill="WHITE">
                                                             <font>
                                                                 <Font name="Impact" size="13.0" />
                                                             </font>
