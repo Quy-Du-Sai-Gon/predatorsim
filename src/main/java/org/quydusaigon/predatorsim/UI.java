@@ -504,7 +504,7 @@ public class UI implements Initializable {
     }
 
     public void onSpawnButtonClicked(ActionEvent actionEvent) {
-
+        App.initLevel(Level::main);
     }
 
     public void onNextButtonClicked(ActionEvent actionEvent) {
