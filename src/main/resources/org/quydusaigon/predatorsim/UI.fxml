@@ -1145,8 +1145,14 @@
                                                             <children>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                                     <children>
-                                                                        <Label fx:id="predatorOutputLabel" prefWidth="90.0" text="Predator:" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                                                                        <Label fx:id="predatorDeadOutputLabel" prefWidth="140.0" text="Dead Predator:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="predatorOutputLabel" prefWidth="120.0" text="Predator:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
+                                                                        <Label fx:id="predatorDeadOutputLabel" prefWidth="140.0" text="Dead Predator:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
                                                                     </children>
                                                                     <padding>
                                                                         <Insets left="10.0" />
@@ -1154,8 +1160,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                     <children>
-                                                                        <Label fx:id="smallPreyOutputLabel" prefWidth="90.0" text="Small Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                                                                        <Label fx:id="smallPreyDeadOutputLabel" prefWidth="140.0" text="Dead Small Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="smallPreyOutputLabel" prefWidth="120.0" text="Small Prey:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
+                                                                        <Label fx:id="smallPreyDeadOutputLabel" prefWidth="140.0" text="Dead Small Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
                                                                     </children>
                                                                     <padding>
                                                                         <Insets left="10.0" />
@@ -1163,8 +1175,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                     <children>
-                                                                        <Label fx:id="mediumPreyOutputLabel" prefWidth="90.0" text="Medium Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                                                                        <Label fx:id="mediumPreyDeadOutputLabel" prefWidth="140.0" text="Dead Medium Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="mediumPreyOutputLabel" prefWidth="120.0" text="Medium Prey:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
+                                                                        <Label fx:id="mediumPreyDeadOutputLabel" prefWidth="140.0" text="Dead Medium Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
                                                                     </children>
                                                                     <padding>
                                                                         <Insets left="10.0" />
@@ -1172,8 +1190,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                     <children>
-                                                                        <Label fx:id="largePreyOutputLabel" prefWidth="90.0" text="Large Prey:" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                                                                        <Label fx:id="largePreyDeadOutputLabel" prefWidth="140.0" text="Dead Large Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="largePreyOutputLabel" prefWidth="120.0" text="Large Prey:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
+                                                                        <Label fx:id="largePreyDeadOutputLabel" prefWidth="140.0" text="Dead Large Prey:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
                                                                     </children>
                                                                     <padding>
                                                                         <Insets left="10.0" />
@@ -1181,8 +1205,14 @@
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                     <children>
-                                                                        <Label fx:id="predatorOutputLabel4" prefWidth="90.0" text="Predator:" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                                                                        <Label fx:id="predatorDeadOutputLabel4" prefWidth="140.0" text="Dead Predator:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="nutritionGainedOutputLabel" prefWidth="120.0" text="Gained:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
+                                                                        <Label fx:id="nutritionConsumedOutputLabel" prefWidth="140.0" text="Consumed:" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                                                            <font>
+                                                                                <Font name="Impact" size="12.0" />
+                                                                            </font></Label>
                                                                     </children>
                                                                     <padding>
                                                                         <Insets left="10.0" />

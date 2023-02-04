@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -244,8 +245,10 @@ public class UI implements Initializable {
     private Label largePreyOutputLabel;
     @FXML
     private Label largePreyDeadOutputLabel;
-
-
+    @FXML
+    private Label nutritionGainedOutputLabel;
+    @FXML
+    private Label nutritionConsumedOutputLabel;
 
     @FXML
     private BorderPane simulationWindow;
@@ -440,10 +443,10 @@ public class UI implements Initializable {
         yAxis.setAnimated(false); // axis animations are removed
 
         //defining a series to display data
-        XYChart.Series<String, Number> series = new XYChart.Series<>(); series.setName("Predator");
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>(); series1.setName("Small");
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>(); series2.setName("Medium");
-        XYChart.Series<String, Number> series3 = new XYChart.Series<>(); series3.setName("Large");
+        XYChart.Series<String, Number> series = new XYChart.Series<>(); series.setName("P");
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>(); series1.setName("S");
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>(); series2.setName("M");
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>(); series3.setName("L");
 
 
         // add series to chart
@@ -451,6 +454,7 @@ public class UI implements Initializable {
         lineChart.getData().add(series1);
         lineChart.getData().add(series2);
         lineChart.getData().add(series3);
+
 
         // this is used to display time in format
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
@@ -461,10 +465,10 @@ public class UI implements Initializable {
         // put dummy data onto graph per second
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // get a random integer between 0-100
-            Integer random = Output.getInstance().predatorCount - Output.getInstance().predatorDeadCount;
-            Integer random1 = Output.getInstance().smallPreyCount - Output.getInstance().smallPreyDeadCount;
-            Integer random2 = Output.getInstance().mediumPreyCount - Output.getInstance().mediumPreyDeadCount;
-            Integer random3 = Output.getInstance().largePreyCount - Output.getInstance().largePreyDeadCount;
+            Integer predatorNum = Output.getInstance().predatorCount - Output.getInstance().predatorDeadCount;
+            Integer smallPreyNum = Output.getInstance().smallPreyCount - Output.getInstance().smallPreyDeadCount;
+            Integer mediumPreyNum = Output.getInstance().mediumPreyCount - Output.getInstance().mediumPreyDeadCount;
+            Integer largePreyNum = Output.getInstance().largePreyCount - Output.getInstance().largePreyDeadCount;
 
             // Update the chart
             Platform.runLater(() -> {
@@ -472,13 +476,13 @@ public class UI implements Initializable {
                 smallPreyOutputLabel.setText("Small Prey: " + Output.getInstance().smallPreyCount); smallPreyDeadOutputLabel.setText("Dead Small Prey: " + Output.getInstance().smallPreyDeadCount);
                 mediumPreyOutputLabel.setText("Medium Prey: " + Output.getInstance().mediumPreyCount); mediumPreyDeadOutputLabel.setText("Dead Medium Prey : " + Output.getInstance().mediumPreyDeadCount);
                 largePreyOutputLabel.setText("Large Prey: " + Output.getInstance().largePreyCount); largePreyDeadOutputLabel.setText("Dead Large Prey: " + Output.getInstance().largePreyDeadCount);
-
+                nutritionGainedOutputLabel.setText("Gained: " + Output.getInstance().nutritionGained); nutritionConsumedOutputLabel.setText("Consumed: " + Output.getInstance().nutritionConsumed);
                 // get current time
                 Date now = new Date();
-                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random));
-                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random1));
-                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random2));
-                series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), random3));
+                series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), predatorNum));
+                series1.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), smallPreyNum));
+                series2.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), mediumPreyNum));
+                series3.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), largePreyNum));
                 if (series.getData().size() > 8) {
                     series.getData().remove(0);
                     series1.getData().remove(0);
