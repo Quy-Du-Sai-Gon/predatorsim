@@ -90,7 +90,7 @@ public final class Prefabs {
                                 Parameter.getPredatorGroupRadius(),
                                 400);
 
-                Group newPredator = GameObject.create(tf, parent,
+                Group newPredator = GameObject.create(tf, null,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
                                 new Predator(predatorStat),
                                 new Draggable());
@@ -111,6 +111,8 @@ public final class Prefabs {
                         ));
                         circle.setVisible(false);
                 }
+                
+                GameObject.setParent(newPredator, parent);
 
                 return newPredator;
         };
@@ -132,7 +134,7 @@ public final class Prefabs {
                                                 - Parameter.getSmallPreyDefenseMinimumRange()) * random.nextDouble()
                                                 + Parameter.getSmallPreyDefenseMinimumRange());
 
-                Group newSmallPrey = GameObject.create(tf, parent,
+                Group newSmallPrey = GameObject.create(tf, null,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
                                 new Prey(smallPreyStat),
                                 new Draggable());
@@ -153,6 +155,8 @@ public final class Prefabs {
                         ));
                         circle.setVisible(false);
                 }
+
+                GameObject.setParent(newSmallPrey, parent);
 
                 return newSmallPrey;
         };
@@ -175,7 +179,7 @@ public final class Prefabs {
                                                 - Parameter.getMediumPreyDefenseMinimumRange()) * random.nextDouble()
                                                 + Parameter.getMediumPreyDefenseMinimumRange());
 
-                Group newMediumPrey = GameObject.create(tf, parent,
+                Group newMediumPrey = GameObject.create(tf, null,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
                                 new Prey(mediumPreyStat),
                                 new Draggable());
@@ -193,6 +197,9 @@ public final class Prefabs {
                         GameObject.addComponent(newMediumPrey, new NodeComponent<>(imageView));
                         circle.setVisible(false);
                 }
+
+                GameObject.setParent(newMediumPrey, parent);
+
                 return newMediumPrey;
         };
 
@@ -213,7 +220,7 @@ public final class Prefabs {
                                                 - Parameter.getLargePreyDefenseMinimumRange()) * random.nextDouble()
                                                 + Parameter.getLargePreyDefenseMinimumRange());
 
-                Group newLargePrey = GameObject.create(tf, parent,
+                Group newLargePrey = GameObject.create(tf, null,
                                 new Velocity(), nodeComp, new Collider<>(nodeComp),
                                 new Prey(largePreyStat),
                                 new Draggable());
@@ -234,6 +241,9 @@ public final class Prefabs {
                         ));
                         circle.setVisible(false);
                 }
+
+                GameObject.setParent(newLargePrey, parent);
+
                 return newLargePrey;
         };
 
