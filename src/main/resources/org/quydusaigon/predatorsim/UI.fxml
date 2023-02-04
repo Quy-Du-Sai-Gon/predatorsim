@@ -1139,7 +1139,7 @@
                                         </VBox>
                                         <SplitPane dividerPositions="0.95" prefHeight="160.0" prefWidth="200.0" style="-fx-background-radius: 25;">
                                             <items>
-                                                <AnchorPane minHeight="0.0" minWidth="20.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25 0 0 25;">
+                                                <AnchorPane minHeight="0.0" minWidth="10.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 25 0 0 25;">
                                                     <children>
                                                         <VBox layoutX="-10.0" layoutY="-56.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <children>
@@ -1224,16 +1224,16 @@
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="10.0" prefHeight="160.0" prefWidth="100.0">
                                                     <children>
-                                                        <LineChart fx:id="lineChart" maxHeight="202.0" prefHeight="202.0" prefWidth="228.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 25 25 0;" stylesheets="@css/line_chart.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <LineChart fx:id="lineChart" alternativeRowFillVisible="false" layoutX="236.0" legendSide="LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="158.0" prefWidth="14.0" style="-fx-background-color: rgb(0, 112, 52 ); -fx-background-radius: 0 25 25 0;" stylesheets="@css/line_chart.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <xAxis>
-                                                                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE">
+                                                                <CategoryAxis maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="BOTTOM" tickLabelFill="WHITE">
                                                                     <tickLabelFont>
                                                                         <Font name="Impact" size="7.0" />
                                                                     </tickLabelFont>
                                                                 </CategoryAxis>
                                                             </xAxis>
                                                             <yAxis>
-                                                                <NumberAxis side="LEFT" tickLabelFill="WHITE">
+                                                                <NumberAxis maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tickLabelFill="WHITE">
                                                                     <tickLabelFont>
                                                                         <Font name="Impact" size="7.0" />
                                                                     </tickLabelFont>
