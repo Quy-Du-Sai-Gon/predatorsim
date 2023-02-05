@@ -6,6 +6,7 @@ import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
 import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
+import org.quydusaigon.predatorsim.util.Parameter;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
@@ -82,7 +83,10 @@ public class GridDisplay extends Behaviour {
 
         gridDisplayNode.setTranslateX(0);
         var scenePos = gridDisplayNode.localToScene(-halfSize, 0);
-        var snappedScenePosX = Math.round(scenePos.getX() / UI.GRID_SIZE) * UI.GRID_SIZE;
+        var snappedScenePosX = customRound(
+                scenePos.getX() / UI.GRID_SIZE,
+                scenePos.getX() < Parameter.getWindowWidth() / 2)
+                * UI.GRID_SIZE;
         var snappedLocalPos = gridDisplayNode.sceneToLocal(snappedScenePosX, 0);
         gridDisplayNode.setTranslateX(snappedLocalPos.getX());
     }
@@ -96,8 +100,17 @@ public class GridDisplay extends Behaviour {
 
         gridDisplayNode.setTranslateY(0);
         var scenePos = gridDisplayNode.localToScene(0, -halfSize);
-        var snappedScenePosY = Math.round(scenePos.getY() / UI.GRID_SIZE) * UI.GRID_SIZE;
+        var snappedScenePosY = customRound(
+                scenePos.getY() / UI.GRID_SIZE,
+                scenePos.getY() < Parameter.getWindowHeight() / 2)
+                * UI.GRID_SIZE;
         var snappedLocalPos = gridDisplayNode.sceneToLocal(0, snappedScenePosY);
         gridDisplayNode.setTranslateY(snappedLocalPos.getY());
+    }
+
+    private double customRound(double x, boolean normalRound) {
+        return normalRound
+                ? Math.round(x)
+                : Math.abs(x - Math.floor(x)) <= 0.5 ? Math.floor(x) : Math.ceil(x);
     }
 }
