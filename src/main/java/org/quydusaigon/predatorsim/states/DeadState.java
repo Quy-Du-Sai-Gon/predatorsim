@@ -22,19 +22,24 @@ public class DeadState extends State {
         GameObject.destroy(animal.getGameObject());
         // Check if the animal instance is a Prey
         if (animal instanceof Prey) {
-            // Check the size of the prey and increase the corresponding dead count in the
-            // Output class
+            // Check the size of the prey and increase the corresponding dead count
+            // and decrease the corresponding prey count in the Output class
             if (((Prey) animal).preyStat.size == PreySize.SMALL) {
+                Output.getInstance().smallPreyCount--;
                 Output.getInstance().smallPreyDeadCount++;
             } else if (((Prey) animal).preyStat.size == PreySize.MEDIUM) {
+                Output.getInstance().mediumPreyCount--;
                 Output.getInstance().mediumPreyDeadCount++;
             } else if (((Prey) animal).preyStat.size == PreySize.LARGE) {
+                Output.getInstance().largePreyCount--;
                 Output.getInstance().largePreyDeadCount++;
             }
         }
         // If the animal instance is a Predator
         else if (animal instanceof Predator) {
-            // Increase the predator dead count in the Output class
+            Output.getInstance().predatorCount--;
+            // Increase the predator dead count and decrease the predator count in the
+            // Output class
             Output.getInstance().predatorDeadCount++;
         }
     }

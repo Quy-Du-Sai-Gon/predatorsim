@@ -13,6 +13,8 @@ public final class Level {
     }
 
     public static void main() {
+        GameObject.instantiate(Prefabs.AUTO_SPAWN, TransformInit.DEFAULT);
+
         IntStream.range(0, Parameter.getPredatorCount()).forEach((i) -> {
             Output.getInstance().predatorCount++;
             GameObject.instantiate(Prefabs.PREDATOR, TransformInit.getRandomTransformInit());

@@ -104,6 +104,13 @@ public final class Prefabs {
         normalDisplayNodeComp.getNode().setVisible(false);
     }
 
+    private static boolean isAutoSpawnInstantiated = false;
+    private static Group autoSpawnObject;
+
+    public static void setAutoSpawnInstantiated(boolean isAutoSpawnInstantiated) {
+        Prefabs.isAutoSpawnInstantiated = isAutoSpawnInstantiated;
+    }
+
     public static final Prefab PREDATOR = (tf, parent) -> {
         var circle = new Circle(10, predatorColor);
         var nodeComp = new NodeComponent<>(circle);
@@ -249,6 +256,15 @@ public final class Prefabs {
         GameObject.setParent(newLargePrey, parent);
 
         return newLargePrey;
+    };
+
+    public static final Prefab AUTO_SPAWN = (tf, parent) -> {
+        if (!isAutoSpawnInstantiated) {
+            isAutoSpawnInstantiated = true;
+            autoSpawnObject = GameObject.create(tf, null, new AutoSpawn());
+            GameObject.setParent(autoSpawnObject, parent);
+        }
+        return autoSpawnObject;
     };
 
 }

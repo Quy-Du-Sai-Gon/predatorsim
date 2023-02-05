@@ -20,6 +20,7 @@ import javafx.util.Pair;
 
 import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.gameengine.Time;
+import org.quydusaigon.predatorsim.util.AutoSpawn;
 import org.quydusaigon.predatorsim.util.Parameter;
 import org.quydusaigon.predatorsim.util.Prefabs;
 
@@ -202,6 +203,18 @@ public class UI implements Initializable {
 
     @FXML
     private Button chooseLargePreyImageButton;
+
+    @FXML
+    private CheckBox predatorSpawnCheckBox;
+
+    @FXML
+    private CheckBox smallPreySpawnCheckBox;
+
+    @FXML
+    private CheckBox mediumPreySpawnCheckBox;
+
+    @FXML
+    private CheckBox largePreySpawnCheckBox;
 
     @FXML
     private Button startStopButton;
@@ -726,14 +739,18 @@ public class UI implements Initializable {
     }
 
     public void onPredatorSpawnCheckBoxClicked(ActionEvent actionEvent) {
+        AutoSpawn.setPredatorAutoSpawnEnable(predatorSpawnCheckBox.isSelected());
     }
 
     public void onSmallPreySpawnCheckBoxClicked(ActionEvent actionEvent) {
+        AutoSpawn.setSmallPreyAutoSpawnEnable(smallPreySpawnCheckBox.isSelected());
     }
 
     public void onMediumPreySpawnCheckBoxClicked(ActionEvent actionEvent) {
+        AutoSpawn.setMediumPreyAutoSpawnEnable(mediumPreySpawnCheckBox.isSelected());
     }
 
     public void onLargePreySpawnCheckBoxClicked(ActionEvent actionEvent) {
+        AutoSpawn.setLargePreyAutoSpawnEnable(largePreySpawnCheckBox.isSelected());
     }
 }

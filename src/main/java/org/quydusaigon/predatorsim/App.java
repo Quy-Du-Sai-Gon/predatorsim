@@ -13,6 +13,7 @@ import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.gameengine.GameLoop;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.gameengine.util.TransformInit;
+import org.quydusaigon.predatorsim.util.Prefabs;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -78,6 +79,7 @@ public class App extends Application {
     public static void clearLevel() {
         var newRoot = GameObject.create(TransformInit.DEFAULT, null);
         setRoot(newRoot);
+        Prefabs.setAutoSpawnInstantiated(false);
     }
 
     /**
@@ -112,9 +114,9 @@ public class App extends Application {
 
     @Override
     public void stop() throws Exception {
-        try{
+        try {
             UI.scheduledExecutorService.shutdownNow();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("App Exited without any operations");
         }
         super.stop();
