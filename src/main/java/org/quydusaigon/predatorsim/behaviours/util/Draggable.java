@@ -9,6 +9,9 @@ import javafx.event.EventType;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Makes the game object this component gets added to draggable.
+ */
 public class Draggable extends Behaviour {
 
     private static class MutablePoint2D {

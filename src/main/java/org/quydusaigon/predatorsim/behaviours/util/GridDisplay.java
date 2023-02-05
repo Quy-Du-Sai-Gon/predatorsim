@@ -108,6 +108,10 @@ public class GridDisplay extends Behaviour {
         gridDisplayNode.setTranslateY(snappedLocalPos.getY());
     }
 
+    /**
+     * Used to avoid the grid cell snapping to the outside of the simulation window
+     * bounds due to rounding.
+     */
     private double customRound(double x, boolean normalRound) {
         return normalRound
                 ? Math.round(x)
