@@ -142,7 +142,7 @@
                                                                       <Font name="Impact" size="12.0" />
                                                                   </font>
                                                               </CheckBox>
-                                                              <CheckBox fx:id="showGridLinesCheckBox" alignment="BOTTOM_LEFT" contentDisplay="TOP" graphicTextGap="10.0" lineSpacing="5.0" maxHeight="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 10;" text="Show Grid Lines" textFill="WHITE" underline="true" VBox.vgrow="ALWAYS">
+                                                              <CheckBox fx:id="showGridLinesCheckBox" alignment="BOTTOM_LEFT" contentDisplay="TOP" graphicTextGap="10.0" lineSpacing="5.0" maxHeight="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onShowGridLinesCheckBoxClicked" selected="true" style="-fx-background-color: rgb(49, 160, 95 ); -fx-background-radius: 0 0 10 10;" text="Show Grid Display" textFill="WHITE" underline="true" VBox.vgrow="ALWAYS">
                                                                   <padding>
                                                                       <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                                                   </padding>

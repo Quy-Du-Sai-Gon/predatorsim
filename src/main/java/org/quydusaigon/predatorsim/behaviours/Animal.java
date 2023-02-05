@@ -1,6 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours;
 
 import org.quydusaigon.predatorsim.behaviours.animalBehaviours.*;
+import org.quydusaigon.predatorsim.behaviours.util.GridDisplay;
 import org.quydusaigon.predatorsim.behaviours.util.Velocity;
 import org.quydusaigon.predatorsim.gameengine.gameobject.GameObject;
 import org.quydusaigon.predatorsim.util.AnimalStat;
@@ -22,5 +23,7 @@ public abstract class Animal extends StateMachine {
     public void start() {
         vision = GameObject.getComponent(GameObject.getChildren(getGameObject()).get(0), Vision.class).orElseThrow();
         velocity = GameObject.getComponent(getGameObject(), Velocity.class).get();
+
+        addComponent(new GridDisplay());
     }
 }

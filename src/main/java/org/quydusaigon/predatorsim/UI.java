@@ -33,6 +33,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 public class UI implements Initializable {
 
@@ -392,8 +393,8 @@ public class UI implements Initializable {
             textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable,
-                                    Boolean wasFocusedBefore,
-                                    Boolean isNowFocused) {
+                        Boolean wasFocusedBefore,
+                        Boolean isNowFocused) {
                     if (!isNowFocused) {
                         // update param on focus lost a
                         updateParameter(paramEntry);
@@ -404,24 +405,24 @@ public class UI implements Initializable {
 
         nextButton.setDisable(false);
 
+        initProperties();
+
         // Grid
         gridPane = getGridLines();
         simulationWindow.getChildren().add(gridPane);
 
-        initProperties();
-
         simulationSpeedSlider.valueProperty().addListener(
                 new ChangeListener<Number>() {
                     public void changed(ObservableValue<? extends Number> observable,
-                                        Number oldValue, Number newValue) {
+                            Number oldValue, Number newValue) {
                         Time.setSliderValue((float) simulationSpeedSlider.getValue());
                         speedLabel.setText("Speed: " + simulationSpeedSlider.getValue());
                     }
+
                 });
 
         updateSimulationWindowSize();
     }
-
 
     public void playOutputAndLineChart() {
         final CategoryAxis xAxis = new CategoryAxis(); // we are gonna plot against time
@@ -429,19 +430,21 @@ public class UI implements Initializable {
         xAxis.setAnimated(false); // axis animations are removed
         yAxis.setAnimated(false); // axis animations are removed
 
-        //defining a series to display data
-        XYChart.Series<String, Number> series = new XYChart.Series<>(); series.setName("P");
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>(); series1.setName("S");
-        XYChart.Series<String, Number> series2 = new XYChart.Series<>(); series2.setName("M");
-        XYChart.Series<String, Number> series3 = new XYChart.Series<>(); series3.setName("L");
-
+        // defining a series to display data
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("P");
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName("S");
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series2.setName("M");
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+        series3.setName("L");
 
         // add series to chart
         lineChart.getData().add(series);
         lineChart.getData().add(series1);
         lineChart.getData().add(series2);
         lineChart.getData().add(series3);
-
 
         // this is used to display time in format
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
@@ -459,11 +462,16 @@ public class UI implements Initializable {
 
             // Update the chart
             Platform.runLater(() -> {
-                predatorOutputLabel.setText("Predator: " + Output.getInstance().predatorCount); predatorDeadOutputLabel.setText("Dead Predator: " + Output.getInstance().predatorDeadCount);
-                smallPreyOutputLabel.setText("Small Prey: " + Output.getInstance().smallPreyCount); smallPreyDeadOutputLabel.setText("Dead Small Prey: " + Output.getInstance().smallPreyDeadCount);
-                mediumPreyOutputLabel.setText("Medium Prey: " + Output.getInstance().mediumPreyCount); mediumPreyDeadOutputLabel.setText("Dead Medium Prey : " + Output.getInstance().mediumPreyDeadCount);
-                largePreyOutputLabel.setText("Large Prey: " + Output.getInstance().largePreyCount); largePreyDeadOutputLabel.setText("Dead Large Prey: " + Output.getInstance().largePreyDeadCount);
-                nutritionGainedOutputLabel.setText("Gained: " + Output.getInstance().nutritionGained); nutritionConsumedOutputLabel.setText("Consumed: " + Output.getInstance().nutritionConsumed);
+                predatorOutputLabel.setText("Predator: " + Output.getInstance().predatorCount);
+                predatorDeadOutputLabel.setText("Dead Predator: " + Output.getInstance().predatorDeadCount);
+                smallPreyOutputLabel.setText("Small Prey: " + Output.getInstance().smallPreyCount);
+                smallPreyDeadOutputLabel.setText("Dead Small Prey: " + Output.getInstance().smallPreyDeadCount);
+                mediumPreyOutputLabel.setText("Medium Prey: " + Output.getInstance().mediumPreyCount);
+                mediumPreyDeadOutputLabel.setText("Dead Medium Prey : " + Output.getInstance().mediumPreyDeadCount);
+                largePreyOutputLabel.setText("Large Prey: " + Output.getInstance().largePreyCount);
+                largePreyDeadOutputLabel.setText("Dead Large Prey: " + Output.getInstance().largePreyDeadCount);
+                nutritionGainedOutputLabel.setText("Gained: " + Output.getInstance().nutritionGained);
+                nutritionConsumedOutputLabel.setText("Consumed: " + Output.getInstance().nutritionConsumed);
                 // get current time
                 Date now = new Date();
                 series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), predatorNum));
@@ -479,7 +487,6 @@ public class UI implements Initializable {
             });
         }, 0, 1, TimeUnit.SECONDS);
     }
-
 
     private void updateParameter(Map.Entry<TextField, Pair<Consumer<String>, Supplier<String>>> paramEntry) {
         var textField = paramEntry.getKey();
@@ -525,8 +532,24 @@ public class UI implements Initializable {
     }
 
     public void updateSimulationWindowSize() {
+        // resize simulation window
         simulationWindow.setMinSize(Parameter.getWindowWidth(), Parameter.getWindowHeight());
         simulationWindow.setMaxSize(Parameter.getWindowWidth(), Parameter.getWindowHeight());
+
+        // resize grid
+        gridPane.setPrefSize(Parameter.getWindowWidth(), Parameter.getWindowHeight());
+
+        gridPane.getColumnConstraints().clear();
+        IntStream.range(0, (int) Math.ceil(Parameter.getWindowWidth() / GRID_SIZE))
+                .mapToObj(i -> new ColumnConstraints(GRID_SIZE))
+                .forEach(gridPane.getColumnConstraints()::add);
+
+        gridPane.getRowConstraints().clear();
+        IntStream.range(0, (int) Math.ceil(Parameter.getWindowHeight() / GRID_SIZE))
+                .mapToObj(i -> new RowConstraints(GRID_SIZE))
+                .forEach(gridPane.getRowConstraints()::add);
+
+        // resize app window
         App.getStage().sizeToScene();
     }
 
@@ -548,10 +571,12 @@ public class UI implements Initializable {
 
     private static BooleanProperty showsVisionProperty;
     private static BooleanProperty showsStatusProperty;
+    private static BooleanProperty showsGridProperty;
 
     private void initProperties() {
         showsVisionProperty = new SimpleBooleanProperty(showVisionCheckBox.isSelected());
         showsStatusProperty = new SimpleBooleanProperty(showStatusCheckBox.isSelected());
+        showsGridProperty = new SimpleBooleanProperty(showGridLinesCheckBox.isSelected());
     }
 
     public static BooleanProperty getShowsVisionProperty() {
@@ -560,6 +585,10 @@ public class UI implements Initializable {
 
     public static BooleanProperty getShowsStatusProperty() {
         return showsStatusProperty;
+    }
+
+    public static BooleanProperty getShowsGridProperty() {
+        return showsGridProperty;
     }
 
     public void onShowVisionCheckBoxClicked(ActionEvent actionEvent) {
@@ -571,26 +600,19 @@ public class UI implements Initializable {
     }
 
     public void onShowGridLinesCheckBoxClicked(ActionEvent actionEvent) {
-        gridPane.setVisible(showGridLinesCheckBox.isSelected());
+        getShowsGridProperty().set(showGridLinesCheckBox.isSelected());
     }
+
+    public static final int GRID_SIZE = 20;
 
     private GridPane getGridLines() {
         GridPane gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
         gridPane.setVisible(showGridLinesCheckBox.isSelected());
+        getShowsGridProperty().addListener((obs, oldVal, newVal) -> {
+            gridPane.setVisible(newVal);
+        });
 
-        final int numCols = 50;
-        final int numRows = 50;
-        for (int i = 0; i < numCols; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCols);
-            gridPane.getColumnConstraints().add(colConst);
-        }
-        for (int i = 0; i < numRows; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / numRows);
-            gridPane.getRowConstraints().add(rowConst);
-        }
         return gridPane;
     }
 
@@ -616,8 +638,7 @@ public class UI implements Initializable {
 
     public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-        );
+                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
         choosePredatorImageButton.setOnAction(e -> {
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
@@ -631,8 +652,7 @@ public class UI implements Initializable {
 
     public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-        );
+                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
         chooseSmallPreyImageButton.setOnAction(e -> {
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
@@ -646,8 +666,7 @@ public class UI implements Initializable {
 
     public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-        );
+                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
         chooseMediumPreyImageButton.setOnAction(e -> {
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
@@ -663,8 +682,7 @@ public class UI implements Initializable {
 
     public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-        );
+                new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
         chooseLargePreyImageButton.setOnAction(e -> {
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
@@ -676,12 +694,10 @@ public class UI implements Initializable {
         });
     }
 
-
     private static boolean isPredatorImageEnable;
     private static boolean isSmallPreyImageEnable;
     private static boolean isMediumPreyImageEnable;
     private static boolean isLargePreyImageEnable;
-
 
     public static boolean isPredatorCheckBoxEnable() {
         return isPredatorImageEnable;
