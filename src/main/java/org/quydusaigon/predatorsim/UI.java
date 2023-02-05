@@ -639,59 +639,53 @@ public class UI implements Initializable {
     public void onPredatorImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
-        choosePredatorImageButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            try {
-                Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
-            } catch (Exception a) {
-                alert.setContentText("No image has been chose");
-                alert.show();
-            }
-        });
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        try {
+            Prefabs.setPredatorImageURL(selectedFile.getAbsolutePath());
+        } catch (Exception a) {
+            alert.setContentText("No image has been chose");
+            alert.show();
+        }
     }
 
     public void onSmallPreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
-        chooseSmallPreyImageButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            try {
-                Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
-            } catch (Exception a) {
-                alert.setContentText("No image has been chose");
-                alert.show();
-            }
-        });
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        try {
+            Prefabs.setSmallPreyImageURL(selectedFile.getAbsolutePath());
+        } catch (Exception a) {
+            alert.setContentText("No image has been chose");
+            alert.show();
+        }
     }
 
     public void onMediumPreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
-        chooseMediumPreyImageButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            try {
-                Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
-            } catch (Exception a) {
-                alert.setContentText("No image has been chose");
-                alert.show();
-            }
 
-        });
-
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        try {
+            Prefabs.setMediumPreyImageURL(selectedFile.getAbsolutePath());
+        } catch (Exception a) {
+            alert.setContentText("No image has been chose");
+            alert.show();
+        }
     }
 
     public void onLargePreyImageButtonClicked(ActionEvent actionEvent) {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
-        chooseLargePreyImageButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            try {
-                Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
-            } catch (Exception a) {
-                alert.setContentText("No image has been chose");
-                alert.show();
-            }
-        });
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        try {
+            Prefabs.setLargePreyImageURL(selectedFile.getAbsolutePath());
+        } catch (Exception a) {
+            alert.setContentText("No image has been chose");
+            alert.show();
+        }
     }
 
     private static boolean isPredatorImageEnable;
