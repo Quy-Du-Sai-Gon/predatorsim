@@ -468,10 +468,10 @@ public class UI implements Initializable {
         // put dummy data onto graph per second
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // get a random integer between 0-100
-            Integer predatorNum = Output.getInstance().predatorCount - Output.getInstance().predatorDeadCount;
-            Integer smallPreyNum = Output.getInstance().smallPreyCount - Output.getInstance().smallPreyDeadCount;
-            Integer mediumPreyNum = Output.getInstance().mediumPreyCount - Output.getInstance().mediumPreyDeadCount;
-            Integer largePreyNum = Output.getInstance().largePreyCount - Output.getInstance().largePreyDeadCount;
+            Integer predatorNum = Output.getInstance().predatorCount;
+            Integer smallPreyNum = Output.getInstance().smallPreyCount;
+            Integer mediumPreyNum = Output.getInstance().mediumPreyCount;
+            Integer largePreyNum = Output.getInstance().largePreyCount;
 
             // Update the chart
             Platform.runLater(() -> {
