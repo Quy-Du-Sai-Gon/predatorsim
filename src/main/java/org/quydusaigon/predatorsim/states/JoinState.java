@@ -1,7 +1,6 @@
 package org.quydusaigon.predatorsim.states;
 
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.quydusaigon.predatorsim.behaviours.Animal;
