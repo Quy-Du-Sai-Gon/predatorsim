@@ -1,5 +1,7 @@
 package org.quydusaigon.predatorsim.behaviours.util;
 
+import java.util.List;
+
 import org.quydusaigon.predatorsim.UI;
 import org.quydusaigon.predatorsim.behaviours.Animal;
 import org.quydusaigon.predatorsim.gameengine.component.Behaviour;
@@ -7,26 +9,30 @@ import org.quydusaigon.predatorsim.gameengine.component.NodeComponent;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 /**
  * Handles the grid display logic for {@link Animal}.
  */
 public class GridDisplay extends Behaviour {
 
-    private Node normalDisplayNode;
-    private Rectangle gridDisplayNode;
+    private List<Node> normalDisplayNodes;
+    private final Node gridDisplayNode;
     private NodeComponent<?> gridDisplayNodeComp;
     private ChangeListener<? super Boolean> onShowsGridChanged;
     private ChangeListener<? super Number> onPosXChanged;
     private ChangeListener<? super Number> onPosYChanged;
 
+    public GridDisplay(Node gridDisplayNode, double nodeSize) {
+        this.gridDisplayNode = gridDisplayNode;
+        halfSize = nodeSize / 2;
+    }
+
     @Override
     public void start() {
-        normalDisplayNode = getComponent(NodeComponent.class).orElseThrow().getNode();
-        gridDisplayNode = createGridDisplayNode();
+        normalDisplayNodes = getComponents(NodeComponent.class)
+                .map(NodeComponent::getNode)
+                .filter(Node::isVisible)
+                .toList();
         gridDisplayNodeComp = addComponent(new NodeComponent<>(gridDisplayNode));
 
         // default show
@@ -47,19 +53,6 @@ public class GridDisplay extends Behaviour {
         });
     }
 
-    public Rectangle createGridDisplayNode() {
-        var circle = (Circle) normalDisplayNode;
-
-        var size = Math.ceil(circle.getRadius() * 2 / UI.GRID_SIZE) * UI.GRID_SIZE;
-        var res = new Rectangle(size, size, circle.getFill());
-        res.setStroke(Color.BLACK);
-        res.setStrokeWidth(2);
-
-        halfSize = size / 2;
-
-        return res;
-    }
-
     @Override
     public void onDestroy() {
         UI.getShowsGridProperty().removeListener(onShowsGridChanged);
@@ -70,7 +63,7 @@ public class GridDisplay extends Behaviour {
     }
 
     private void setGridDisplay(boolean isDisplayingGrid) {
-        normalDisplayNode.setVisible(!isDisplayingGrid);
+        normalDisplayNodes.forEach(node -> node.setVisible(!isDisplayingGrid));
         gridDisplayNode.setVisible(isDisplayingGrid);
         if (isDisplayingGrid) {
             snapGridX();
@@ -78,31 +71,33 @@ public class GridDisplay extends Behaviour {
         }
     };
 
-    private double halfSize;
+    private final double halfSize;
 
     /**
      * Update the x coordinate of {@link #gridDisplayNode} to snap to grid cell.
      */
     private void snapGridX() {
-        if (!UI.getShowsGridProperty().get())
+        if (!gridDisplayNode.isVisible())
             return;
 
+        gridDisplayNode.setTranslateX(0);
         var scenePos = gridDisplayNode.localToScene(-halfSize, 0);
         var snappedScenePosX = Math.round(scenePos.getX() / UI.GRID_SIZE) * UI.GRID_SIZE;
         var snappedLocalPos = gridDisplayNode.sceneToLocal(snappedScenePosX, 0);
-        gridDisplayNode.setX(snappedLocalPos.getX());
+        gridDisplayNode.setTranslateX(snappedLocalPos.getX());
     }
 
     /**
      * Update the y coordinate of {@link #gridDisplayNode} to snap to grid cell.
      */
     private void snapGridY() {
-        if (!UI.getShowsGridProperty().get())
+        if (!gridDisplayNode.isVisible())
             return;
 
+        gridDisplayNode.setTranslateY(0);
         var scenePos = gridDisplayNode.localToScene(0, -halfSize);
         var snappedScenePosY = Math.round(scenePos.getY() / UI.GRID_SIZE) * UI.GRID_SIZE;
         var snappedLocalPos = gridDisplayNode.sceneToLocal(0, snappedScenePosY);
-        gridDisplayNode.setY(snappedLocalPos.getY());
+        gridDisplayNode.setTranslateY(snappedLocalPos.getY());
     }
 }
