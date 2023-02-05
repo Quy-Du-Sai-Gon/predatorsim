@@ -66,44 +66,58 @@ public class PredatorWanderState extends WanderState {
     }
 
     private void doWander() {
+        // Initialize the variables to store the random values
         double randomX = 0;
         double randomY = 0;
 
+        // Generate the random values using Perlin noise
         noiseX = PerlinNoise.noise(Math.PI, Math.E, seedX);
         noiseY = PerlinNoise.noise(Math.PI, Math.E, seedY);
 
+        // Calculate the randomX and randomY values based on the noise values and the
+        // reduced animal's speed
         randomX = noiseX * animal.animalStat.runSpeed * 0.75 * Time.getDeltaTime()
                 * Parameter.getRelativeSimulationSpeed();
         randomY = noiseY * animal.animalStat.runSpeed * 0.75 * Time.getDeltaTime()
                 * Parameter.getRelativeSimulationSpeed();
+
+        // Adjust the seed values with an small offset
         seedX += 0.005;
         seedY += 0.005;
 
+        // Update the velocity of the animal with the calculated random values
         animal.velocity.set(randomX, randomY);
     }
 
-    // add new prey that this predator failed to howl for allies and reset timer
+    // Method to add new prey that this predator failed to howl for allies and reset
+    // timer
     public void getFailedPrey(Prey prey) {
         failedPreyCall.add(prey);
         currentCoolDownTime = coolDownTime;
     }
 
-    // gain food luckily while wandering but with higher chance to die
+    // Method to get food by chance while wandering but with higher chance to die
     public void getFood(Prey prey) {
         // does not count food gained if killed by prey defense
         double preyDefenseChance = 25 + Math.random() * 100;
 
         if (preyDefenseChance <= prey.preyStat.defense) {
+            // if the prey defends itself successfully, change state of predator to dead
+            // state
             animal.changeState(((Predator) animal).getDeadState());
             return;
         }
 
+        // else increase the predator's starvation
+        // resilience by the prey's nutrition value
         ((Predator) animal).predatorStat.starvationResilience += prey.preyStat.nutrition;
         Output.getInstance().nutritionGained += prey.preyStat.nutrition;
     }
 
+    // toString method is called when this state is printed
     @Override
     public String toString() {
+        // Return the string representation of this state
         return super.toString() + "Predator Wander";
     }
 }

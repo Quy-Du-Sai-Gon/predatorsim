@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+
 import org.quydusaigon.Output;
 import org.quydusaigon.predatorsim.gameengine.Time;
 import org.quydusaigon.predatorsim.util.Parameter;
@@ -406,7 +407,6 @@ public class UI implements Initializable {
         nextButton.setDisable(false);
 
         initProperties();
-
         // Grid
         gridPane = getGridLines();
         simulationWindow.getChildren().add(gridPane);

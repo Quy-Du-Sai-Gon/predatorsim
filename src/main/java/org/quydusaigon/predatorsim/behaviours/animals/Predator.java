@@ -13,14 +13,22 @@ import org.quydusaigon.predatorsim.states.PredatorWanderState;
 import org.quydusaigon.predatorsim.util.PredatorStat;
 
 /**
- * Predator
+ * The `Predator` class is a subclass of the `Animal` class.
+ * It represents the predator character in the simulation.
+ * This class defines the specific behavior of the predator, such as hunger,
+ * wandering, hunting, and howling.
  */
 public class Predator extends Animal {
+    // The instance variable for the `PredatorStat` object, which stores
+    // the stat of the predator.
     public PredatorStat predatorStat = (PredatorStat) animalStat;
 
+    // The rate of hunger that the predator experiences over time.
     public int hungryRate = 1;
-    public boolean killed = false;
 
+    // The state instances that represent the different states that the predator
+    // can be in, such as wandering, hunting alone, howling, joining, hunting
+    // in group, and dead.
     private PredatorWanderState predatorWanderState;
     private HuntAloneState huntAloneState;
     private HowlState howlState;
@@ -28,10 +36,22 @@ public class Predator extends Animal {
     private HuntInGroupState huntInGroupState;
     private DeadState deadState;
 
+    /**
+     * The constructor for the `Predator` class that takes in a `PredatorStat`
+     * object
+     * as its argument.
+     *
+     * @param stat The `PredatorStat` object representing the stat of the predator.
+     */
     public Predator(PredatorStat stat) {
         super(stat);
     }
 
+    /**
+     * The `start` method that is called when the predator is instantiated.
+     * This method sets up the state instances for the predator and initializes
+     * the predator with the `PredatorWanderState`.
+     */
     @Override
     public void start() {
         super.start();
@@ -46,6 +66,13 @@ public class Predator extends Animal {
         initialize(predatorWanderState);
     }
 
+    /**
+     * The `update` method that is called once per frame.
+     * This method updates the stat of the predator, such as its starvation
+     * resilience,
+     * and checks if the predator is dead. If it is dead, the state changes to the
+     * `DeadState`.
+     */
     @Override
     public void update() {
         super.update();
@@ -59,6 +86,16 @@ public class Predator extends Animal {
         }
     }
 
+    /**
+     * The `onCollisionEnter` method that is called when the predator collides
+     * with another collider.
+     * This method checks if the collider that the predator collided with is a prey.
+     * If it is, the predator gets food depending on its current state.
+     *
+     * @param collider The collider of the predator.
+     * @param other    The collider of the other object that the predator collided
+     *                 with.
+     **/
     @Override
     public void onCollisionEnter(Collider<?> collider, Collider<?> other) {
         super.onCollisionEnter(collider, other);
@@ -74,27 +111,34 @@ public class Predator extends Animal {
         });
     }
 
+    // Get method for PredatorWanderState
     public PredatorWanderState getPredatorWanderState() {
         return predatorWanderState;
     }
 
+    // Get method for HuntAloneState
     public HuntAloneState getHuntAloneState() {
         return huntAloneState;
     }
 
+    // Get method for HowlState
     public HowlState getHowlState() {
         return howlState;
     }
 
+    // Get method for JoinState
     public JoinState getJoinState() {
         return joinState;
     }
 
+    // Get method for HuntInGroupState
     public HuntInGroupState getHuntInGroupState() {
         return huntInGroupState;
     }
 
+    // Get method for DeadState
     public DeadState getDeadState() {
         return deadState;
     }
+
 }

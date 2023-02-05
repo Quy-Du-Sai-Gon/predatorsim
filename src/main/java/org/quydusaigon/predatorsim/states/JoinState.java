@@ -17,11 +17,17 @@ import javafx.geometry.Point2D;
 
 public class JoinState extends State {
 
+    // variable to store the x and y position of the target prey
     double targetX, targetY;
+
+    // variable to store the direction vector towards the target prey
     Point2D targetDir;
 
-    Predator targetPredator;
+    // variable to store the target prey for hunting
     Prey targetPrey;
+
+    // variable to store the target predator for following
+    Predator targetPredator;
 
     // Indicates if this member has found its group - collides with an other
     // predator object's howling radius
@@ -179,7 +185,7 @@ public class JoinState extends State {
         targetX = targetPredator.posX().get();
         targetY = targetPredator.posY().get();
 
-        // Get the vector from the member to the leadder
+        // Get the vector from the member to the leader
         targetDir = new Point2D(targetX - animal.posX().get(), targetY - animal.posY().get());
 
         // Normalize the vector
