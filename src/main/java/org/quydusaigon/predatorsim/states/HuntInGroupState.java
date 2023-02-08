@@ -49,7 +49,7 @@ public class HuntInGroupState extends State {
             return;
         }
 
-        // Call the doHuntInGroup method to update the predator's behavior
+        // Do the hunting in group’s behavivors
         doHuntInGroup();
     }
 

@@ -24,17 +24,28 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class HowlState extends State {
+    // variable to store the target prey for hunting
     Prey targetPrey;
+    // variable to store howl vision reference
     HowlVision howlVision;
+    // variable to store group vision reference
     Vision groupVision;
-    Group howlObject, groupObject;
+    // variable to store the game object holding howl vision component
+    Group howlObject
+    // variable to store the game object holding group vision component
+    Group groupObject;
 
+    // the required number of other predators to form a group
     int numberOfAllies;
+    // stores a set of allied predators in the hunt
     Set<Predator> alliesPredators;
 
-    public int positionTypeGiven = 0;
+    // cool down time for howling duration
     double coolDownTime = 10;
+    // the current cool down time of howling duration, decreased over time
     double currentCoolDownTime = 0;
+
+    public int positionTypeGiven = 0;
 
     Predator animal;
 
@@ -81,13 +92,15 @@ public class HowlState extends State {
             return;
         }
 
-        // If the number of predators within the group hunting radius equals the number
-        // of allies,
-        // start the group hunt
+        // If the number of predators within the group hunting radius equals the number of allies
         if (groupVision.getAllDetectedObject(Predator.class).size() + 1 == numberOfAllies) {
+            // Get the predator component of this game object
             var predator = (Predator) animal;
+            // Set target prey and ally predators for HuntInGroup state
             predator.getHuntInGroupState().setTargetPrey(targetPrey, alliesPredators);
+            // Change the current state of this predator into HuntInGroupState
             animal.changeState(((Predator) animal).getHuntInGroupState());
+            // Set up join state for each ally predator
             alliesPredators.stream()
                     .forEach(go -> {
                         go.getJoinState().setHuntStarted(true);
